@@ -1,0 +1,216 @@
+generator zod {
+  provider                         = "zod-prisma-types"
+  output                           = "../src/generated"
+  useMultipleFiles                 = true
+  writeNullishInModelTypes         = true
+  createModelTypes                 = true
+  // default is true
+  writeBarrelFiles                 = false
+  // default is true
+  createInputTypes                 = false
+  // default is true
+  addInputTypeValidation           = false
+  // default is true
+  addIncludeType                   = false
+  // default is true
+  addSelectType                    = false
+  // default is true
+  validateWhereUniqueInput         = false
+  // default is true
+  createOptionalDefaultValuesTypes = false
+  // default is false
+  createRelationValuesTypes        = false
+  // default is false
+  createPartialTypes               = false
+  // default is false
+  useDefaultValidators             = false
+  // default is true
+  coerceDate                       = false
+  // default is true
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  // output   = "./src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique // <--- THIS IS THE CRITICAL LINE
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
+}
+
+model User {
+  id              String          @id @default(cuid())
+  name            String?
+  email           String          @unique
+  emailVerified   DateTime?
+  image           String?
+  role            Role            @default(USER)
+  accounts        Account[]
+  sessions        Session[]
+  Authenticator   Authenticator[]
+  personalId      String?
+  primaryMobile   String?         @unique
+  secondaryMobile String?
+  country         String?
+  state           String?
+  city            String?
+  detailedAddress String?
+  orders          Order[]
+  favorites       Favorite[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model Product {
+  id            String      @id @default(cuid())
+  // الحقول الجديدة لتمكين الذكاء الاصطناعي من الفلترة بدقة
+  type          String? // مثال: بقري، ضأن [تطابق meatType في البوت]
+  cut           String? // مثال: موزة، ريش [تطابق cutName في البوت]
+  preparation   String? // مثال: مفروم، مكعبات [تطابق preparation في البوت]
+  title         String      @unique
+  slug          String      @unique // روابط صديقة لمحركات البحث
+  description   String
+  increaseByOne Boolean     @default(true)
+  specialCut    Boolean?    @default(false)
+  category      Category
+  mainImage     String
+  images        String[]
+  price         Int         @default(0)
+  discount      Int?        @default(0)
+  unit          Unit?       @default(KG)
+  quantity      Int         @default(0)
+  lowQuantity   Int?        @default(0)
+  orderItems    OrderItem[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  favorites     Favorite[]
+  isActive      Boolean?    @default(false) // لإخفاء منتج مؤقتاً دون حذفه.
+}
+
+model Order {
+  id            String        @id @default(cuid())
+  orderNumber   Int           @unique @default(autoincrement()) // العميل يحب التعامل مع الارقام العادية، وايضا لتحسين محركات البحث.
+  total         Int
+  status        OrderStatus   @default(PENDING)
+  paymentMethod PaymentMethod @default(VISA)
+  paymentStatus PaymentStatus @default(PENDING)
+  items         OrderItem[]
+  orderStatus   OrderStatus   @default(PENDING)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  user          User?         @relation(fields: [userId], references: [id])
+  userId        String?
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  quantity  Int
+  // نصيحة أمنية: لاتعتمد على سعر النتج الحالي في جدول المنتجات عند عرض المنتجات القديمة
+  // لأنك لو غيرت السعر غدا ستتغير قيمة الطلبات التي تمت سابقا، يجب تخزين السعر وقت الشراء.
+  price     Int // تم اضافة حقل السعر هنا ليكون محدث لآخر سعر للمنتج، 
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+// يفضل استخدام "Explicit Many-to-Many" (جدول وسيط صريح).
+// لماذا؟ لتتمكن من معرفة "متى" قام العميل بإضافة المنتج للمفضلة، ولضمان أداء أفضل عند الاستعلام.
+model Favorite {
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade) // إذا حُذف الطلب، تُحذف عناصره تلقائياً
+  productId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // إذا حُذف الطلب، تُحذف عناصره تلقائياً
+  userId    String
+  createdAt DateTime @default(now())
+
+  @@id([userId, productId]) // منع تكرار نفس المنتج لنفس العميل
+}
+
+enum Role {
+  ADMIN
+  USER
+  CLIENT
+  SUPPLIER
+}
+
+enum Category {
+  MEAT
+  PROCESSED
+  CHICKEN
+}
+
+enum Unit {
+  KG
+  PIECE
+}
+
+enum OrderStatus {
+  PENDING
+  SHIPPED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  VISA
+  CASH
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
