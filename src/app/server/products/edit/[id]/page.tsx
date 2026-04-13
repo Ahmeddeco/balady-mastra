@@ -1,15 +1,14 @@
 import EmptyCard from "@/components/shared/EmptyCard"
 import ServerPageCard from "@/components/shared/ServerPageCard"
-import { getOneProduct } from "@/dl/products.data"
+import { getOneProduct, getOneProductById } from "@/dl/products.data"
 import EditProductForm from "@/forms/EditProductForm"
 import { isAdmin } from "@/logic/isAdmin"
 import { CircleChevronLeft, PlusCircle } from "lucide-react"
 
-export default async function EditProductPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
 	await isAdmin()
-
-	const slug = (await params).slug
-	const product = await getOneProduct(slug)
+	const id = (await params).id
+	const product = await getOneProductById(id)
 
 	return !product ? (
 		<EmptyCard href={"/server/products/add"} linkTitle={"أضف منتج"} linkIcon={PlusCircle} />

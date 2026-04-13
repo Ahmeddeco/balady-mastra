@@ -1,30 +1,28 @@
-import { handleChatStream } from '@mastra/ai-sdk'
-import { createUIMessageStreamResponse } from 'ai'
-import { mastra } from '@/mastra'
+import { butcherWorkflow } from "@/mastra/workflows/butcher-workflow"
+import { NextResponse } from "next/server";
 
-// Allow streaming responses up to 30 seconds
-export const maxDuration = 30
+export async function GET() {
+  try {
+   const run = await butcherWorkflow.createRun()
 
-export async function POST(req: Request) {
-  const { prompt }: { prompt: string } = await req.json()
+const stream = run.stream({
+  inputData: {
+    message: 'Hello world',
+  },
+})
 
-  const stream = await handleChatStream({
-    mastra,
-    agentId: 'butcherAgent',
-    params: {
-      messages: [
-        {
-          id: '1',
-          role: 'user',
-          parts: [
-            {
-              type: 'text',
-              text: prompt,
-            },
-          ],
-        },
-      ],
-    },
-  })
-  return createUIMessageStreamResponse({ stream })
+for await (const chunk of stream.fullStream) {
+  console.log(chunk)
 }
+
+// Get the final result (same type as run.start())
+const result = await stream.result
+
+if (result.status === 'success') {
+  console.log(result.result)
+}
+    return NextResponse.json({ message: "OK", result }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: "Error", error }, { status: 500 });
+  }
+} 

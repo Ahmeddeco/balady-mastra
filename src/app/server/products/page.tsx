@@ -118,7 +118,7 @@ export default async function ProductsServerPage({
 											<DropdownMenuContent align="start" className="space-y-2 p-2">
 												<DropdownMenuItem asChild>
 													<Button variant={"accent"} size={"full"} asChild>
-														<Link href={`/server/products/edit/${slug}`}>تعديل</Link>
+														<Link href={`/server/products/edit/${id}`}>تعديل</Link>
 													</Button>
 												</DropdownMenuItem>
 												{/* ---------------------------- delete --------------------------- */}

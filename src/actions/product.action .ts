@@ -3,7 +3,6 @@
 import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import UserSchema from "@/schemas/UserSchema"
 import ProductSchema from "@/schemas/ProductSchema"
 
 /* ------------------------------ addUserAction ----------------------------- */

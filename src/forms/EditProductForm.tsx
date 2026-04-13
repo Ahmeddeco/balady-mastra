@@ -10,24 +10,11 @@ import { UploadManyImagesDropZone, UploadOneImagesDropZone } from "@/components/
 import SubmitButton from "@/components/shared/SubmitButton"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import Phone from "@/components/shared/Phone"
-import CountryInput from "@/components/shared/CountryInput"
-import { Category, Role, Unit } from "@/generated/prisma/enums"
-import { addUserAction } from "@/actions/user.action"
-import UserSchema from "@/schemas/UserSchema"
-import { addProductAction, editProductAction } from "@/actions/product.action "
-import ProductSchema, { Product } from "@/schemas/ProductSchema"
+import { Category, Unit } from "@/generated/prisma/enums"
+import { editProductAction } from "@/actions/product.action "
+import ProductSchema from "@/schemas/ProductSchema"
 import { createSlug } from "@/logic/slug"
-import {
-	Item,
-	ItemActions,
-	ItemContent,
-	ItemDescription,
-	ItemFooter,
-	ItemHeader,
-	ItemMedia,
-	ItemTitle,
-} from "@/components/ui/item"
+
 import { Switch } from "@/components/ui/switch"
 
 type Props = {

@@ -1,21 +1,24 @@
+import { mastra } from "@/mastra"
+import { butcherWorkflow } from "@/mastra/workflows/butcher-workflow"
 
-// import { mastra } from "@/mastra" // تأكد من المسار الصحيح لملف الماسترا الرئيسي
+export const getButcherWorkflow = async () => {
+  const workflow = mastra.getWorkflow('butcherWorkflow')
+  const run = await workflow.createRun()
 
-// export async function getButcherRecommendation(limit: number = 5) {
-//   const workflow = mastra.getWorkflowById("butcher-workflow")
-//   const start = workflow.createRun()
-//   const result = await (await start).start({ inputData: { limit } })
-//   return result
-// }
-
-export const getWorkflowStream = async (limit: number = 5) => {
-  const response = await fetch("http://localhost:3000/api/workflow", {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const stream = run.stream({
+    inputData: {
+      limit: 3,
     },
-    body: JSON.stringify({ limit })
   })
 
-  return response
+  // for await (const chunk of stream.fullStream) {
+  //   return chunk
+  // }
+
+  // Get the final result (same type as run.start())
+  const result = await stream.result
+
+  if (result.status === 'success') {
+    return result.result.finalAnswer
+  }
 }

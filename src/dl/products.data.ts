@@ -42,6 +42,17 @@ export const getOneProduct = async (slug: string) => {
   }
 }
 
+
+/* ---------------------------- getOneProductById --------------------------- */
+export const getOneProductById = async (id: string) => {
+  try {
+    const data = await prisma.product.findUnique({ where: { id } })
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 /* ------------------- getAllProductsForProductsServerPage ------------------ */
 export const getAllProductsForProductsServerPage = async (size: number, page: number, activeCategory?: Category) => {
   try {
@@ -62,10 +73,11 @@ export const getAllProductsForProductsServerPage = async (size: number, page: nu
 }
 
 /* ------------------------- getNonTrendingProducts ------------------------- */
-export const getNonTrendingProducts = async (limit: number = 5) => {
+export const getNonTrendingProducts = async (limit: number = 3) => {
   try {
     const data = await prisma.product.findMany({
       where: { isActive: true, specialCut: false, quantity: { gt: 0 } },
+      orderBy: { quantity: "desc" },
       select: { id: true, title: true, price: true, unit: true, slug: true, quantity: true, description: true },
       take: limit
     })
