@@ -1,5 +1,4 @@
 import { mastra } from "@/mastra"
-import { butcherWorkflow } from "@/mastra/workflows/butcher-workflow"
 
 export const getButcherWorkflow = async () => {
   const workflow = mastra.getWorkflow('butcherWorkflow')
@@ -10,10 +9,6 @@ export const getButcherWorkflow = async () => {
       limit: 3,
     },
   })
-
-  // for await (const chunk of stream.fullStream) {
-  //   return chunk
-  // }
 
   // Get the final result (same type as run.start())
   const result = await stream.result
