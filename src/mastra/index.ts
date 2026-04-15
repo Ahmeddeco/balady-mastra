@@ -9,11 +9,11 @@ import { butcherAgent } from './agents/butcher-agent'
 import { workflowRoute } from '@mastra/ai-sdk'
 
 export const mastra = new Mastra({
-  server: {
-    apiRoutes: [
-      workflowRoute({ path: "/workflow", workflow: "butcherWorkflow" }),
-    ]
-  },
+  // server: {
+  //   apiRoutes: [
+  //     workflowRoute({ path: "/workflow", workflow: "butcherWorkflow" }),
+  //   ]
+  // },
   workflows: { weatherWorkflow, butcherWorkflow },
   agents: { weatherAgent, butcherAgent },
   storage: new MastraCompositeStore({

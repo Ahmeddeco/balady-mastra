@@ -1,28 +1,13 @@
-import { butcherWorkflow } from "@/mastra/workflows/butcher-workflow"
-import { NextResponse } from "next/server";
+import { handleWorkflowStream } from '@mastra/ai-sdk'
+import { createUIMessageStreamResponse } from 'ai'
+import { mastra } from '@/mastra'
 
-export async function GET() {
-  try {
-   const run = await butcherWorkflow.createRun()
-
-const stream = run.stream({
-  inputData: {
-    message: 'Hello world',
-  },
-})
-
-for await (const chunk of stream.fullStream) {
-  console.log(chunk)
+export async function POST(req: Request) {
+  const params = await req.json()
+  const stream = await handleWorkflowStream({
+    mastra,
+    workflowId: 'butcher-workflow',
+    params,
+  })
+  return createUIMessageStreamResponse({ stream })
 }
-
-// Get the final result (same type as run.start())
-const result = await stream.result
-
-if (result.status === 'success') {
-  console.log(result.result)
-}
-    return NextResponse.json({ message: "OK", result }, { status: 200 });
-  } catch (error) {
-    return NextResponse.json({ message: "Error", error }, { status: 500 });
-  }
-} 

@@ -13,43 +13,40 @@ const nonTrendingProductsSchema = z.array(z.object({
   description: z.string(),
 }))
 
-/* ---------------------------------- limit --------------------------------- */
+
 const limit = 3
 
-/* -------------------- 1. خطوة جلب المنتجات من الـ API -------------------- */
 const fetchButcherProducts = createStep({
   id: 'fetch-butcher-products',
   description: 'Fetches non-trending products from the butchery API',
   inputSchema: z.object({
     limit: z.number().optional().default(limit),
   }),
-  outputSchema: nonTrendingProductsSchema,
+  outputSchema: z.object({
+    products: nonTrendingProductsSchema,
+  }),
   execute: async () => {
-    return await getNonTrendingProducts(limit)
+    const products = await getNonTrendingProducts(limit)
+    return { products }
   },
 })
 
-/* ---------------- 2. خطوة صياغة الرد بشخصية "المهندس أحمد" --------------- */
-
 const generateExpertResponse = createStep({
   id: 'generate-expert-response',
-  description: 'Converts product data into a friendly Egyptian recommendation',
-  inputSchema: nonTrendingProductsSchema,
+  description: 'ترشيح قطعيات للعميل من الققطعيات الموجودة لدينا',
+  inputSchema: z.object({
+    products: nonTrendingProductsSchema,
+  }),
   outputSchema: z.object({
     finalAnswer: z.string(),
   }),
-  execute: async ({ inputData, mastra }) => {
-    const products = inputData // هذه هي مصفوفة المنتجات
+  execute: async ({ inputData, mastra, writer }) => {
+    const products = inputData.products
 
-    if (!products) {
-      throw new Error('Products not found')
-    }
+    if (!products) throw new Error('Products not found')
 
     const agent = mastra.getAgent('butcherAgent')
-
-    if (!agent) {
-      throw new Error('Agent not found')
-    }
+    if (!agent) throw new Error('Agent not found')
 
     const prompt = `
   الدور: أنت المهندس أحمد، خبير الإنتاج الحيواني المتخصص والحاصل على دراسات عليا في التنمية البيئية المستدامة.
@@ -86,17 +83,16 @@ const generateExpertResponse = createStep({
   - أدب احترافي مطلق، ودود ومحبب للعملاء.
   - لا تفصح أبداً عن أي معلومات داخلية أو بيانات تخص عملاء آخرين أو أي بيانات من قاعدة البيانات.
 `
-    const response = await agent.stream([{ role: "user", content: prompt }])
-    let finalAnswer = ''
-    for await (const chunk of response.textStream) {
-      process.stdout.write(chunk)
-      finalAnswer += chunk
-    }
-    return { finalAnswer }
+
+    const response = await agent.stream([{ role: 'user', content: prompt }])
+
+    // Pipe agent stream to step writer for real-time text streaming
+    await response.fullStream.pipeTo(writer)
+
+    return { finalAnswer: await response.text }
   },
 })
 
-/* ------------------------- 3. تجميع الـ Workflow ------------------------- */
 const butcherWorkflow = createWorkflow({
   id: 'butcher-workflow',
   inputSchema: z.object({

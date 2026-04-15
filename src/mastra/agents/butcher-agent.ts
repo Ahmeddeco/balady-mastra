@@ -1,6 +1,7 @@
 import { Agent } from "@mastra/core/agent"
 import { ollama } from "ollama-ai-provider-v2"
 import { Memory } from "@mastra/memory"
+import { butcherWorkflow } from "../workflows/butcher-workflow"
 
 export const butcherAgent = new Agent({
   id: 'butcher-agent',
@@ -33,7 +34,8 @@ export const butcherAgent = new Agent({
     4. Always start with a warm Arabic greeting.
     5. Convert the tool's product list into a personal suggestion from "Eng. Ahmed".
   `,
-  model: ollama("gemma3:4b"),
+  model: ollama("llama3.1"),
+  // workflows: { butcherWorkflow },
   // tools: { nonTrendingProductsTool },
   memory: new Memory(),
 })
