@@ -17,6 +17,8 @@
 /.next/
 /.mastra/
 /.agents/
+/.continue/
+/.vscode/
 /out/
 
 # production

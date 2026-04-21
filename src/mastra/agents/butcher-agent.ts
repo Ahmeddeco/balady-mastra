@@ -1,10 +1,9 @@
-import { Agent } from "@mastra/core/agent"
-import { ollama } from "ollama-ai-provider-v2"
-import { Memory } from "@mastra/memory"
-import { butcherWorkflow } from "../workflows/butcher-workflow"
+import {Agent} from "@mastra/core/agent"
+import {ollama} from "ollama-ai-provider-v2"
+import {Memory} from "@mastra/memory"
 
 export const butcherAgent = new Agent({
-  id: 'butcher-agent',
+  id: "butcher-agent",
   name: "Butcher Agent",
   instructions: `
     ## ROLES
@@ -37,5 +36,5 @@ export const butcherAgent = new Agent({
   model: ollama("llama3.1"),
   // workflows: { butcherWorkflow },
   // tools: { nonTrendingProductsTool },
-  memory: new Memory(),
+  memory: new Memory()
 })

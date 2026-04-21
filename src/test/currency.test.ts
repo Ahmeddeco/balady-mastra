@@ -1,4 +1,4 @@
-import { finalPrice, Currency } from "../logic/currency"
+import { finalPrice, Currency } from "@/logic/currency"
 import { expect, test, describe } from "vitest"
 
 describe("finalPrice ", () => {

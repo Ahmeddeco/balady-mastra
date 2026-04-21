@@ -1,41 +1,29 @@
 import { createStep, createWorkflow } from '@mastra/core/workflows'
 import { z } from 'zod'
 import { getNonTrendingProducts } from '@/dl/products.data'
+import { stagnantProductsSchema } from '@/schemas/stagnantProducts.schema'
 
-/* ------------------------ nonTrendingProductsSchema ----------------------- */
-const nonTrendingProductsSchema = z.array(z.object({
-  id: z.string(),
-  title: z.string(),
-  price: z.number(),
-  unit: z.string().nullable(),
-  slug: z.string(),
-  quantity: z.number(),
-  description: z.string(),
-}))
-
-
-const limit = 3
 
 const fetchButcherProducts = createStep({
   id: 'fetch-butcher-products',
   description: 'Fetches non-trending products from the butchery API',
   inputSchema: z.object({
-    limit: z.number().optional().default(limit),
+    limit: z.number().optional().default(3),
   }),
   outputSchema: z.object({
-    products: nonTrendingProductsSchema,
+    products: stagnantProductsSchema,
   }),
-  execute: async () => {
-    const products = await getNonTrendingProducts(limit)
+  execute: async ({ inputData }) => {
+    const products = await getNonTrendingProducts(inputData.limit)
     return { products }
   },
 })
 
 const generateExpertResponse = createStep({
   id: 'generate-expert-response',
-  description: 'ترشيح قطعيات للعميل من الققطعيات الموجودة لدينا',
+  description: 'ترشيح قطعيات للعميل من القطعيات الموجودة لدينا',
   inputSchema: z.object({
-    products: nonTrendingProductsSchema,
+    products: stagnantProductsSchema,
   }),
   outputSchema: z.object({
     finalAnswer: z.string(),
@@ -84,7 +72,7 @@ const generateExpertResponse = createStep({
   - لا تفصح أبداً عن أي معلومات داخلية أو بيانات تخص عملاء آخرين أو أي بيانات من قاعدة البيانات.
 `
 
-    const response = await agent.stream([{ role: 'user', content: prompt }])
+    const response = await agent.stream([{ role: 'user', content: prompt },])
 
     // Pipe agent stream to step writer for real-time text streaming
     await response.fullStream.pipeTo(writer)
@@ -99,7 +87,10 @@ const butcherWorkflow = createWorkflow({
     limit: z.number().optional().default(5),
   }),
   outputSchema: z.object({
-    finalAnswer: z.string(),
+    greating: z.string(),
+    product: z.string(),
+    response: z.string(),
+    closing: z.string(),
   }),
 })
   .then(fetchButcherProducts)
