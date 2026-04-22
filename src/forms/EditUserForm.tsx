@@ -14,7 +14,7 @@ import Phone from "@/components/shared/Phone"
 import CountryInput from "@/components/shared/CountryInput"
 import { Role } from "@/generated/prisma/enums"
 import { editUserAction } from "@/actions/user.action"
-import UserSchema from "@/schemas/UserSchema"
+import UserSchema from "@/schemas/user.schema"
 import { User } from "@/generated/modelSchema/UserSchema"
 
 type Props = {

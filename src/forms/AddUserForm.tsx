@@ -14,7 +14,7 @@ import Phone from "@/components/shared/Phone"
 import CountryInput from "@/components/shared/CountryInput"
 import { Role } from "@/generated/prisma/enums"
 import { addUserAction } from "@/actions/user.action"
-import UserSchema from "@/schemas/UserSchema"
+import UserSchema from "@/schemas/user.schema"
 
 export default function AddUserForm({ authImage }: { authImage?: string }) {
 	const [lastResult, action] = useActionState(addUserAction, undefined)

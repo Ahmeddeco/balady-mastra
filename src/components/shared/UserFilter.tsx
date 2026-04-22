@@ -3,7 +3,7 @@ import { ButtonGroup } from "../ui/button-group"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { Category, Role } from "@/generated/prisma/enums"
-import { User } from "@/schemas/UserSchema"
+import { User } from "@/schemas/user.schema"
 
 type Props = {
 	activeRole: Role | undefined

@@ -14,9 +14,9 @@ import Phone from "@/components/shared/Phone"
 import CountryInput from "@/components/shared/CountryInput"
 import { Category, Role, Unit } from "@/generated/prisma/enums"
 import { addUserAction } from "@/actions/user.action"
-import UserSchema from "@/schemas/UserSchema"
+import UserSchema from "@/schemas/user.schema"
 import { addProductAction } from "@/actions/product.action "
-import ProductSchema from "@/schemas/ProductSchema"
+import ProductSchema from "@/schemas/product.schema"
 import { createSlug } from "@/logic/slug"
 import {
 	Item,

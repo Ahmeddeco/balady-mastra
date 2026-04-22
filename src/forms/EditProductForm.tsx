@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Category, Unit } from "@/generated/prisma/enums"
 import { editProductAction } from "@/actions/product.action "
-import ProductSchema from "@/schemas/ProductSchema"
+import ProductSchema from "@/schemas/product.schema"
 import { createSlug } from "@/logic/slug"
 
 import { Switch } from "@/components/ui/switch"
