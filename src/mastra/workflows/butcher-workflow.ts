@@ -3,7 +3,7 @@
 import { createStep, createWorkflow } from '@mastra/core/workflows'
 import { z } from 'zod'
 import { getNonTrendingProducts } from '@/dl/products.data'
-import { embedder } from '../rag/embedder.model'
+import { embedder } from '@/mastra/rag/embedder.model'
 import { embed } from 'ai'
 import { LanceVectorStore } from '@mastra/lance'
 
