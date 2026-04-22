@@ -1,4 +1,4 @@
-import { Product } from "@/generated/prisma/client"
+import { ProductCardType } from "@/types/Product.type"
 import { toast } from "sonner"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
@@ -14,7 +14,7 @@ export type CartItem = {
 
 type CartState = {
   items: CartItem[]
-  addToCart: (product: Product) => void
+  addToCart: (product: ProductCardType) => void
   removeFromCart: (id: string) => void
   updateQuantityByHalf: (type: 'increment' | 'decrement', id: string) => void
   updateQuantityByOnes: (type: 'increment' | 'decrement', id: string) => void
@@ -25,8 +25,7 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
 
-      /* -------------------------------- addToCart ------------------------------- */
-      addToCart: (product) => {
+      addToCart: (product: ProductCardType) => {
         const existingProduct = get().items.find((item) => item.id === product!.id)
         set({
           items: existingProduct
@@ -35,10 +34,10 @@ export const useCartStore = create<CartState>()(
               ...get().items,
               {
                 quantity: 1,
-                id: product?.id,
-                title: product?.title,
-                price: product?.price,
-                image: product?.mainImage,
+                id: product!.id,
+                title: product!.title,
+                price: product!.price,
+                image: product!.mainImage,
                 increaseByOne: product?.increaseByOne ?? false
               },
             ],

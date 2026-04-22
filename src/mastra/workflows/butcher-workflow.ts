@@ -81,7 +81,7 @@ const getRecepieFromWeb = createStep({
   outputSchema: z.object({
     recepie: z.string().array(),
   }),
-  execute: async ({ inputData, mastra }) => {
+  execute: async ({ mastra }) => {
     const agent = mastra.getAgent('butcherAgent')
     if (!agent) throw new Error('Agent not found')
 

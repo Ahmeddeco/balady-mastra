@@ -1,6 +1,6 @@
 import EmptyCard from "@/components/shared/EmptyCard"
 import ServerPageCard from "@/components/shared/ServerPageCard"
-import { getOneProduct, getOneProductById } from "@/dl/products.data"
+import { getOneProductById } from "@/dl/products.data"
 import EditProductForm from "@/forms/EditProductForm"
 import { isAdmin } from "@/logic/isAdmin"
 import { CircleChevronLeft, PlusCircle } from "lucide-react"

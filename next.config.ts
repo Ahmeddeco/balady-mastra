@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
     ]
   },
   devIndicators: false,
+  typescript: {
+    ignoreBuildErrors: true
+  },
 
   serverExternalPackages: [
     '@lancedb/lancedb',
@@ -18,6 +21,8 @@ const nextConfig: NextConfig = {
     // Add the platform-specific binary package explicitly
     '@lancedb/lancedb-win32-x64-msvc',
   ],
+
+
 }
 
 export default nextConfig

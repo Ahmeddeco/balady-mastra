@@ -1,4 +1,4 @@
-import { ChartNoAxesCombined, Ham, Server, UserCog, Users } from "lucide-react"
+import { ChartNoAxesCombined, Ham, Server, Users } from "lucide-react"
 
 export const serverNav = [
   {

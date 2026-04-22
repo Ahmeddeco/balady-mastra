@@ -6,7 +6,7 @@ import { Loader2, ShoppingBag, X } from "lucide-react"
 import { useCartStore } from "@/store/cartStore"
 import { useSession } from "next-auth/react"
 import { IoBagCheckOutline } from "react-icons/io5"
-import { Product } from "@/generated/prisma/client"
+import { ProductCardType } from "@/types/Product.type"
 
 type SubmitButtonType = {
 	title: string
@@ -38,12 +38,13 @@ export function SubmitButton({ title, type = "submit", size = "full", variant }:
 
 /* -------------------------------- AddToCart ------------------------------- */
 
-export function AddToCart({ product }: { product: Product }) {
+export function AddToCart({ product }: { product: ProductCardType }) {
 	const session = useSession()
 	const { pending } = useFormStatus()
 	const addToCart = useCartStore((state) => state.addToCart)
 
-	!session ? null : (
+	if (!session) return null
+	return (
 		<>
 			{pending ? (
 				<Button disabled>

@@ -6,12 +6,11 @@ import { Badge } from "../ui/badge"
 import { Currency, finalPrice } from "@/logic/currency"
 import Link from "next/link"
 import { AddToCart } from "./CustomButtons"
-import { ProductCardProps } from "@/types/Product.type"
+import { ProductCardType } from "@/types/Product.type"
 import FavoriteButton from "./FavoriteButton"
-import { Product } from "@/generated/prisma/client"
 
 type Props = {
-	product: ProductCardProps
+	product: ProductCardType
 	authId: string | null
 }
 

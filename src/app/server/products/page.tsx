@@ -75,86 +75,84 @@ export default async function ProductsServerPage({
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{products?.data.map(
-							({ id, category, discount, mainImage, price, slug, title, unit, isActive, quantity }) => (
-								<TableRow key={id}>
-									<TableCell>
-										{mainImage ? (
-											<Image
-												src={mainImage}
-												alt={"user"}
-												width={50}
-												height={50}
-												className="rounded-lg object-cover aspect-square"
-											/>
-										) : (
-											React.createElement(ImageOff)
-										)}
-									</TableCell>
-									<TableCell>{title}</TableCell>
-									<TableCell>{price}</TableCell>
-									<TableCell>{discount}</TableCell>
-									<TableCell>{quantity}</TableCell>
-									<TableCell>
-										{isActive === true ? (
-											<Badge variant={"accent"}>{"نعم"}</Badge>
-										) : (
-											<Badge variant={"default"}>{"لا"}</Badge>
-										)}
-									</TableCell>
-									<TableCell className="flex items-center gap-2">
-										<Badge>{category} </Badge>
-										<Badge>{unit} </Badge>
-									</TableCell>
+						{products?.data.map(({ id, category, discount, mainImage, price, title, unit, isActive, quantity }) => (
+							<TableRow key={id}>
+								<TableCell>
+									{mainImage ? (
+										<Image
+											src={mainImage}
+											alt={"user"}
+											width={50}
+											height={50}
+											className="rounded-lg object-cover aspect-square"
+										/>
+									) : (
+										React.createElement(ImageOff)
+									)}
+								</TableCell>
+								<TableCell>{title}</TableCell>
+								<TableCell>{price}</TableCell>
+								<TableCell>{discount}</TableCell>
+								<TableCell>{quantity}</TableCell>
+								<TableCell>
+									{isActive === true ? (
+										<Badge variant={"accent"}>{"نعم"}</Badge>
+									) : (
+										<Badge variant={"default"}>{"لا"}</Badge>
+									)}
+								</TableCell>
+								<TableCell className="flex items-center gap-2">
+									<Badge>{category} </Badge>
+									<Badge>{unit} </Badge>
+								</TableCell>
 
-									{/* -------------------------------- settings -------------------------------- */}
-									<TableCell className="text-left col-span-1">
-										<DropdownMenu>
-											<DropdownMenuTrigger asChild>
-												<Button variant={"outline"} size={"icon"} suppressHydrationWarning>
-													<MoreVertical />
+								{/* -------------------------------- settings -------------------------------- */}
+								<TableCell className="text-left col-span-1">
+									<DropdownMenu>
+										<DropdownMenuTrigger asChild>
+											<Button variant={"outline"} size={"icon"} suppressHydrationWarning>
+												<MoreVertical />
+											</Button>
+										</DropdownMenuTrigger>
+										<DropdownMenuContent align="start" className="space-y-2 p-2">
+											<DropdownMenuItem asChild>
+												<Button variant={"accent"} size={"full"} asChild>
+													<Link href={`/server/products/edit/${id}`}>تعديل</Link>
 												</Button>
-											</DropdownMenuTrigger>
-											<DropdownMenuContent align="start" className="space-y-2 p-2">
-												<DropdownMenuItem asChild>
-													<Button variant={"accent"} size={"full"} asChild>
-														<Link href={`/server/products/edit/${id}`}>تعديل</Link>
-													</Button>
-												</DropdownMenuItem>
-												{/* ---------------------------- delete --------------------------- */}
-												<DropdownMenuItem asChild>
-													<Dialog>
-														<DialogTrigger asChild>
-															<Button variant={"default"} size={"full"}>
-																حذف
+											</DropdownMenuItem>
+											{/* ---------------------------- delete --------------------------- */}
+											<DropdownMenuItem asChild>
+												<Dialog>
+													<DialogTrigger asChild>
+														<Button variant={"default"} size={"full"}>
+															حذف
+														</Button>
+													</DialogTrigger>
+													<DialogContent>
+														<DialogHeader>
+															<DialogTitle>هل أنت متأكد من رغبتك في حذف هذا المنتج؟</DialogTitle>
+															<DialogDescription>
+																لا يمكن التراجع عن هذا الإجراء. سيؤدي ذلك إلى حذف هذا المنتج نهائيًا وإزالة بياناته من
+																خوادمنا.
+															</DialogDescription>
+														</DialogHeader>
+														<div className="flex items-center justify-between ">
+															<Button asChild variant={"outline"}>
+																<DialogClose>الغاء الحذف</DialogClose>
 															</Button>
-														</DialogTrigger>
-														<DialogContent>
-															<DialogHeader>
-																<DialogTitle>هل أنت متأكد من رغبتك في حذف هذا المنتج؟</DialogTitle>
-																<DialogDescription>
-																	لا يمكن التراجع عن هذا الإجراء. سيؤدي ذلك إلى حذف هذا المنتج نهائيًا وإزالة بياناته من
-																	خوادمنا.
-																</DialogDescription>
-															</DialogHeader>
-															<div className="flex items-center justify-between ">
-																<Button asChild variant={"outline"}>
-																	<DialogClose>الغاء الحذف</DialogClose>
-																</Button>
-																<Form action={deleteUserAction}>
-																	<Input type="hidden" name="id" value={id} />
-																	<Button type="submit">الحذف نهائيا</Button>
-																</Form>
-															</div>
-														</DialogContent>
-													</Dialog>
-												</DropdownMenuItem>
-											</DropdownMenuContent>
-										</DropdownMenu>
-									</TableCell>
-								</TableRow>
-							),
-						)}
+															<Form action={deleteUserAction}>
+																<Input type="hidden" name="id" value={id} />
+																<Button type="submit">الحذف نهائيا</Button>
+															</Form>
+														</div>
+													</DialogContent>
+												</Dialog>
+											</DropdownMenuItem>
+										</DropdownMenuContent>
+									</DropdownMenu>
+								</TableCell>
+							</TableRow>
+						))}
 					</TableBody>
 					{/* ---------------------------- Pagination ---------------------------- */}
 					<TableCaption>

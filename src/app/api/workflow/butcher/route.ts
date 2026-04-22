@@ -1,4 +1,3 @@
-
 import { handleWorkflowStream } from '@mastra/ai-sdk'
 import { createUIMessageStreamResponse } from 'ai'
 import { mastra } from '@/mastra'
@@ -9,6 +8,7 @@ export async function POST(req: Request) {
     mastra,
     workflowId: 'butcher-workflow',
     params,
+    version: "v6"
   })
   return createUIMessageStreamResponse({ stream })
 }

@@ -1,19 +1,19 @@
 import { Category, Unit } from "@/generated/prisma/enums"
 
-/* ---------------------------- ProductCardProps ---------------------------- */
-export type ProductCardProps = {
+/* ---------------------------- ProductCardType ---------------------------- */
+export type ProductCardType = {
   id: string
   title: string
-  increaseByOne: boolean
   slug: string
   description: string
   specialCut: boolean | null
-  category: "MEAT" | "PROCESSED" | "CHICKEN"
+  category: Category
   mainImage: string
   images: string[]
   price: number
+  increaseByOne?: boolean
   discount: number | null
-  unit: ("KG" | "PIECE") | null
+  unit: Unit | null
   favorites: {
     productId: string
     userId: string

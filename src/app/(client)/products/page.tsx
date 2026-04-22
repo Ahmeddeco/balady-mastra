@@ -1,7 +1,6 @@
 import { auth } from "../../../../auth"
 import ProductCard from "@/components/shared/ProductCard"
 import ProductFilter from "@/components/shared/ProductFilter"
-import { getWorkflowStream } from "@/dl/mastra.data"
 import { getAllProductsForProductsPage } from "@/dl/products.data"
 import { Category } from "@/generated/prisma/enums"
 
@@ -16,9 +15,6 @@ export default async function ProductsPage({
 	const pageSize = (await searchParams).size || 12
 	const activeCategory = (await searchParams).category
 	const products = await getAllProductsForProductsPage(+pageSize, +pageNumber, activeCategory as Category)
-
-	const WorkflowStream = await getWorkflowStream()
-	console.log("WorkflowStream form mastra ai : ", WorkflowStream)
 
 	return (
 		<div className="flex flex-col items-center justify-center gap-8 py-12 px-4">
