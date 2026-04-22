@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 import { CategorySchema } from '../inputTypeSchemas/CategorySchema'
 import { UnitSchema } from '../inputTypeSchemas/UnitSchema'
 
@@ -31,4 +31,4 @@ export const ProductSchema = z.object({
 
 export type Product = z.infer<typeof ProductSchema>
 
-export default ProductSchema;
+export default ProductSchema
