@@ -3,9 +3,9 @@
 import { createStep, createWorkflow } from '@mastra/core/workflows'
 import { z } from 'zod'
 import { getNonTrendingProducts } from '@/dl/products.data'
-import { embedder } from '@/mastra/rag/embedder.model'
 import { embed } from 'ai'
 import { LanceVectorStore } from '@mastra/lance'
+import { embedder } from '../rag/embedder.model'
 
 /* ------------------------ nonTrendingProductsSchema ----------------------- */
 const nonTrendingProductsSchema = z.array(z.object({
@@ -153,7 +153,7 @@ const generateExpertResponse = createStep({
   }
 })
 
-
+/* -------------------------------- skipStep -------------------------------- */
 // خطوة وهمية تمرر البيانات كما هي عند وجود نتيجة من RAG
 const skipStep = createStep({
   id: 'skip-step',
@@ -166,7 +166,7 @@ const skipStep = createStep({
   execute: async ({ inputData }) => inputData,
 })
 
-
+/* ----------------------------- butcherWorkflow ---------------------------- */
 const butcherWorkflow = createWorkflow({
   id: 'butcher-workflow',
   inputSchema: z.object({ limit: z.number().optional().default(5) }),

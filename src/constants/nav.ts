@@ -16,10 +16,6 @@ export const frontNavLinks = [
     href: "/articles",
   },
   {
-    title: "weather",
-    href: "/weather",
-  },
-  {
     title: "bot",
     href: "/bot",
   },
