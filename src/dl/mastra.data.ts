@@ -1,4 +1,4 @@
-import { mastra } from "@/mastra"
+import { mastra } from "@/bot"
 
 export const getButcherWorkflow = async () => {
   const workflow = mastra.getWorkflow('butcherWorkflow')

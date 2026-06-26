@@ -9,6 +9,38 @@
 * 🟢 You can import this file directly.
 */
 
+export const MeatType = {
+  سن: 'سن',
+  موزة: 'موزة',
+  ريش: 'ريش',
+  وش_فخدة: 'وش_فخدة',
+  ضهر_فخدة: 'ضهر_فخدة',
+  سمانة: 'سمانة',
+  انتركوت: 'انتركوت',
+  تربيانكو: 'تربيانكو',
+  لوحة_الكتف: 'لوحة_الكتف',
+  دوش: 'دوش',
+  كبدة: 'كبدة',
+  قلب: 'قلب',
+  كلاوي: 'كلاوي',
+  فلتو: 'فلتو'
+} as const
+
+export type MeatType = (typeof MeatType)[keyof typeof MeatType]
+
+
+export const Preparation = {
+  بفتيك: 'بفتيك',
+  ستيك: 'ستيك',
+  مكعبات: 'مكعبات',
+  كباب_حلة: 'كباب_حلة',
+  شرائح: 'شرائح',
+  مفروم: 'مفروم'
+} as const
+
+export type Preparation = (typeof Preparation)[keyof typeof Preparation]
+
+
 export const Role = {
   ADMIN: 'ADMIN',
   USER: 'USER',

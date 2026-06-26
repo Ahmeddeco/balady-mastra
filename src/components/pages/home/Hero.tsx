@@ -6,7 +6,7 @@ import Image from "next/image"
 export default function Hero() {
 	return (
 		<div className="lg:h-[85vh] h-auto flex gap-0 items-center justify-center relative border-b bg-foreground text-background py-8  lg:py-0 mb-16 ">
-			{/* ---------------------------- Left Image ---------------------------- */}
+			{/* ---------------------------- Right Image --------------------------- */}
 			<div className="h-full lg:block hidden w-2/12 relative">
 				<Image src={"/images/steakBlackDish.webp"} alt={"steak in Black Dish"} fill className="object-cover " />
 			</div>
@@ -30,8 +30,16 @@ export default function Hero() {
 				</div>
 
 				{/* -------------------------------- main Image --------------------------------- */}
-				<div className="p-0 w-full lg:h-[700px] lg:w-fit  relative aspect-square ">
-					<Image src={"/images/transparent/roaseBeaf.webp"} alt={"hero "} fill className="object-contain" />
+				<div className="p-0 w-full max-w-[380px] sm:max-w-[450px] lg:max-w-none h-[380px] sm:h-[450px] lg:h-[700px] lg:w-[700px] relative aspect-square mx-auto lg:mx-0">
+					<Image
+						src={"/images/transparent/roaseBeaf.webp"}
+						alt={"hero"}
+						fill
+						className="object-contain"
+						priority
+						sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 700px"
+						fetchPriority="high"
+					/>
 				</div>
 			</section>
 

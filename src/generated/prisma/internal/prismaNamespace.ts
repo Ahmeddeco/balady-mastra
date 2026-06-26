@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.7.0
- * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
+ * Prisma Client JS version: 7.8.0
+ * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.7.0",
-  engine: "75cbdc1eb7150937890ad5465d861175c6624711"
+  client: "7.8.0",
+  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
 }
 
 /**
@@ -1194,13 +1194,11 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const ProductScalarFieldEnum = {
   id: 'id',
-  type: 'type',
-  cut: 'cut',
-  preparation: 'preparation',
   title: 'title',
   slug: 'slug',
   description: 'description',
   increaseByOne: 'increaseByOne',
+  cut: 'cut',
   specialCut: 'specialCut',
   category: 'category',
   mainImage: 'mainImage',
@@ -1221,11 +1219,15 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 export const OrderScalarFieldEnum = {
   id: 'id',
   orderNumber: 'orderNumber',
+  subTotal: 'subTotal',
+  deliveryFee: 'deliveryFee',
   total: 'total',
   status: 'status',
   paymentMethod: 'paymentMethod',
   paymentStatus: 'paymentStatus',
-  orderStatus: 'orderStatus',
+  shippingAddress: 'shippingAddress',
+  customerNotes: 'customerNotes',
+  butcherNotes: 'butcherNotes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'
@@ -1236,8 +1238,11 @@ export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof Or
 
 export const OrderItemScalarFieldEnum = {
   id: 'id',
+  preparation: 'preparation',
   quantity: 'quantity',
   price: 'price',
+  requestedQuantity: 'requestedQuantity',
+  actualQuantity: 'actualQuantity',
   orderId: 'orderId',
   productId: 'productId'
 } as const
@@ -1348,6 +1353,20 @@ export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
+ * Reference to a field of type 'MeatType'
+ */
+export type EnumMeatTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeatType'>
+    
+
+
+/**
+ * Reference to a field of type 'MeatType[]'
+ */
+export type ListEnumMeatTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeatType[]'>
+    
+
+
+/**
  * Reference to a field of type 'Category'
  */
 export type EnumCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Category'>
@@ -1358,6 +1377,20 @@ export type EnumCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
  * Reference to a field of type 'Category[]'
  */
 export type ListEnumCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Category[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -1418,16 +1451,16 @@ export type ListEnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
- * Reference to a field of type 'Float'
+ * Reference to a field of type 'Preparation'
  */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+export type EnumPreparationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Preparation'>
     
 
 
 /**
- * Reference to a field of type 'Float[]'
+ * Reference to a field of type 'Preparation[]'
  */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+export type ListEnumPreparationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Preparation[]'>
     
 
 /**
@@ -1523,6 +1556,21 @@ export type PrismaClientOptions = ({
    * ```
    */
   comments?: runtime.SqlCommenterPlugin[]
+  /**
+   * Optional maximum size for the query plan cache. If not provided, a default size will be used.
+   * A value of `0` can be used to disable the cache entirely. A higher cache size can improve
+   * performance for applications that execute a large number of unique queries, while a smaller
+   * cache size can reduce memory usage.
+   * 
+   * @example
+   * ```
+   * const prisma = new PrismaClient({
+   *   adapter,
+   *   queryPlanCacheMaxSize: 100,
+   * })
+   * ```
+   */
+  queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
   account?: Prisma.AccountOmit

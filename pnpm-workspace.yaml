@@ -1,5 +1,13 @@
-packages:
-  - .
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
+allowBuilds:
+  '@google/genai': true
+  '@prisma/engines': true
+  agent-browser: true
+  bufferutil: true
+  edgedriver: true
+  esbuild: true
+  geckodriver: true
+  msgpackr-extract: true
+  prisma: true
+  protobufjs: true
+  sharp: true
+  unrs-resolver: true

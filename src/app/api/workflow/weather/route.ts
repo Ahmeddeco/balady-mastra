@@ -1,6 +1,6 @@
 import { handleChatStream } from '@mastra/ai-sdk'
 import { createUIMessageStreamResponse } from 'ai'
-import { mastra } from '@/mastra'
+import { mastra } from '@/bot'
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30

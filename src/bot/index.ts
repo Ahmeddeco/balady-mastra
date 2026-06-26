@@ -5,6 +5,7 @@ import { weatherWorkflow } from './workflows/weather-workflow'
 import { weatherAgent } from './agents/weather-agent'
 import { butcherWorkflow } from './workflows/butcher-workflow'
 import { butcherAgent } from './agents/butcher-agent'
+import { chatRoute } from "@mastra/ai-sdk"
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow, butcherWorkflow },
@@ -13,7 +14,15 @@ export const mastra = new Mastra({
     id: 'composite-storage',
     default: new LibSQLStore({
       id: "mastra-storage",
-      url: "file:D:/WORK/Portfolio/next/balady-mastra/mastra.db",
+      url: "file:./mastra.db",
     }),
   }),
+  server: {
+    apiRoutes: [
+      chatRoute({
+        path: '/chat',
+        agent: 'agricultureAgent',
+      }),
+    ],
+  },
 })

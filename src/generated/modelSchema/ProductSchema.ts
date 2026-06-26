@@ -1,4 +1,5 @@
-import { z } from 'zod'
+import { z } from 'zod';
+import { MeatTypeSchema } from '../inputTypeSchemas/MeatTypeSchema'
 import { CategorySchema } from '../inputTypeSchemas/CategorySchema'
 import { UnitSchema } from '../inputTypeSchemas/UnitSchema'
 
@@ -7,12 +8,10 @@ import { UnitSchema } from '../inputTypeSchemas/UnitSchema'
 /////////////////////////////////////////
 
 export const ProductSchema = z.object({
+  cut: MeatTypeSchema,
   category: CategorySchema,
   unit: UnitSchema.nullish(),
   id: z.string(),
-  type: z.string().nullish(),
-  cut: z.string().nullish(),
-  preparation: z.string().nullish(),
   title: z.string(),
   slug: z.string(),
   description: z.string(),
@@ -31,4 +30,4 @@ export const ProductSchema = z.object({
 
 export type Product = z.infer<typeof ProductSchema>
 
-export default ProductSchema
+export default ProductSchema;

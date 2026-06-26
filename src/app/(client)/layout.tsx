@@ -7,7 +7,6 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
 	return (
 		<>
 			<Header />
-			{/* TODO إضافة زركشة للخلفية */}
 			<main className="min-h-dvh lg:pt-14 pt-12 ">{children}</main>
 			<Toaster
 				theme="system"

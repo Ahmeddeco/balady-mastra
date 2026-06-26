@@ -114,25 +114,23 @@ model User {
   updatedAt       DateTime        @updatedAt
 }
 
+// TODO 
 model Product {
   id            String      @id @default(cuid())
-  // الحقول الجديدة لتمكين الذكاء الاصطناعي من الفلترة بدقة
-  type          String? // مثال: بقري، ضأن [تطابق meatType في البوت]
-  cut           String? // مثال: موزة، ريش [تطابق cutName في البوت]
-  preparation   String? // مثال: مفروم، مكعبات [تطابق preparation في البوت]
   title         String      @unique
-  slug          String      @unique // روابط صديقة لمحركات البحث
+  slug          String      @unique
   description   String
   increaseByOne Boolean     @default(true)
+  cut           MeatType
   specialCut    Boolean?    @default(false)
   category      Category
   mainImage     String
   images        String[]
-  price         Int         @default(0)
+  price         Float       @default(0)
   discount      Int?        @default(0)
   unit          Unit?       @default(KG)
-  quantity      Int         @default(0)
-  lowQuantity   Int?        @default(0)
+  quantity      Float       @default(0)
+  lowQuantity   Float?      @default(0)
   orderItems    OrderItem[]
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
@@ -140,31 +138,67 @@ model Product {
   isActive      Boolean?    @default(false) // لإخفاء منتج مؤقتاً دون حذفه.
 }
 
+enum MeatType {
+  سن
+  موزة
+  ريش
+  وش_فخدة
+  ضهر_فخدة
+  سمانة
+  انتركوت
+  تربيانكو
+  لوحة_الكتف
+  دوش
+  كبدة
+  قلب
+  كلاوي
+  فلتو
+}
+
 model Order {
   id            String        @id @default(cuid())
-  orderNumber   Int           @unique @default(autoincrement()) // العميل يحب التعامل مع الارقام العادية، وايضا لتحسين محركات البحث.
-  total         Int
+  orderNumber   Int           @unique @default(autoincrement())
+  subTotal      Float // إجمالي المنتجات قبل الشحن
+  deliveryFee   Float         @default(0) // مصاريف الشحن والتوصيل
+  total         Float // الإجمالي النهائي الفعلي (subTotal + deliveryFee)
   status        OrderStatus   @default(PENDING)
-  paymentMethod PaymentMethod @default(VISA)
+  paymentMethod PaymentMethod @default(CASH) // الكاش هو الأكثر شيوعاً في اللحوم بمصر
   paymentStatus PaymentStatus @default(PENDING)
-  items         OrderItem[]
-  orderStatus   OrderStatus   @default(PENDING)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  user          User?         @relation(fields: [userId], references: [id])
-  userId        String?
+
+  // حقول التوصيل والملاحظات التشغيلية الحيوية
+  shippingAddress String // العنوان التفصيلي للشحنة الحالية
+  customerNotes   String? // ملاحظات الزبون (مثال: "تقطيع المكعبات صغير للطبخ")
+  butcherNotes    String? // ملاحظات داخلية للجزار أثناء التجهيز والتعبئة
+
+  items     OrderItem[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  user      User?       @relation(fields: [userId], references: [id])
+  userId    String?
 }
 
 model OrderItem {
-  id        String  @id @default(cuid())
-  quantity  Int
+  id                String      @id @default(cuid())
+  preparation       Preparation
+  quantity          Float
   // نصيحة أمنية: لاتعتمد على سعر النتج الحالي في جدول المنتجات عند عرض المنتجات القديمة
   // لأنك لو غيرت السعر غدا ستتغير قيمة الطلبات التي تمت سابقا، يجب تخزين السعر وقت الشراء.
-  price     Int // تم اضافة حقل السعر هنا ليكون محدث لآخر سعر للمنتج، 
-  order     Order   @relation(fields: [orderId], references: [id])
-  orderId   String
-  product   Product @relation(fields: [productId], references: [id])
-  productId String
+  price             Float // تم اضافة حقل السعر هنا ليكون محدث لآخر سعر للمنتج، 
+  requestedQuantity Float // الوزن الذي طلبه العميل من الموقع (مثال: 1.00 كجم)
+  actualQuantity    Float? // الوزن الحقيقي الذي خرج من الميزان بعد التشفيه (مثال: 1.050 كجم)
+  order             Order       @relation(fields: [orderId], references: [id])
+  orderId           String
+  product           Product     @relation(fields: [productId], references: [id])
+  productId         String
+}
+
+enum Preparation {
+  بفتيك
+  ستيك
+  مكعبات
+  كباب_حلة
+  شرائح
+  مفروم
 }
 
 // يفضل استخدام "Explicit Many-to-Many" (جدول وسيط صريح).

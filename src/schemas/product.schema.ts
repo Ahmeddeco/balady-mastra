@@ -6,7 +6,7 @@ export const ProductSchema = z.object({
   category: CategorySchema,
   unit: UnitSchema.nullish(),
   id: z.string().nullish(),
-  // TODO add these fields later to AddProductForm and EditProductForm
+  // TODO: add these fields later to AddProductForm and EditProductForm
   // type: z.string().nullish(),
   // cut: z.string().nullish(),
   // preparation: z.string().nullish(),

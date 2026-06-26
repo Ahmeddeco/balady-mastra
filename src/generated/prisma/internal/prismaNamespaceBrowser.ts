@@ -155,13 +155,11 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const ProductScalarFieldEnum = {
   id: 'id',
-  type: 'type',
-  cut: 'cut',
-  preparation: 'preparation',
   title: 'title',
   slug: 'slug',
   description: 'description',
   increaseByOne: 'increaseByOne',
+  cut: 'cut',
   specialCut: 'specialCut',
   category: 'category',
   mainImage: 'mainImage',
@@ -182,11 +180,15 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 export const OrderScalarFieldEnum = {
   id: 'id',
   orderNumber: 'orderNumber',
+  subTotal: 'subTotal',
+  deliveryFee: 'deliveryFee',
   total: 'total',
   status: 'status',
   paymentMethod: 'paymentMethod',
   paymentStatus: 'paymentStatus',
-  orderStatus: 'orderStatus',
+  shippingAddress: 'shippingAddress',
+  customerNotes: 'customerNotes',
+  butcherNotes: 'butcherNotes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'
@@ -197,8 +199,11 @@ export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof Or
 
 export const OrderItemScalarFieldEnum = {
   id: 'id',
+  preparation: 'preparation',
   quantity: 'quantity',
   price: 'price',
+  requestedQuantity: 'requestedQuantity',
+  actualQuantity: 'actualQuantity',
   orderId: 'orderId',
   productId: 'productId'
 } as const

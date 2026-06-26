@@ -1,5 +1,5 @@
 import { z } from 'zod';
 
-export const OrderItemScalarFieldEnumSchema = z.enum(['id','quantity','price','orderId','productId']);
+export const OrderItemScalarFieldEnumSchema = z.enum(['id','preparation','quantity','price','requestedQuantity','actualQuantity','orderId','productId']);
 
 export default OrderItemScalarFieldEnumSchema;
