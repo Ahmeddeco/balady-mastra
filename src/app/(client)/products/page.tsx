@@ -3,6 +3,7 @@ import ProductCard from "@/components/shared/ProductCard"
 import ProductFilter from "@/components/shared/ProductFilter"
 import { getAllProductsForProductsPage } from "@/dl/products.data"
 import { Category } from "@/generated/prisma/enums"
+import { getAllProductsForProductsPageType } from "@/types/Product.type"
 
 export default async function ProductsPage({
 	searchParams,
@@ -14,7 +15,11 @@ export default async function ProductsPage({
 	const pageNumber = (await searchParams).page || 1
 	const pageSize = (await searchParams).size || 12
 	const activeCategory = (await searchParams).category
-	const products = await getAllProductsForProductsPage(+pageSize, +pageNumber, activeCategory as Category)
+	const products: getAllProductsForProductsPageType = await getAllProductsForProductsPage(
+		+pageSize,
+		+pageNumber,
+		activeCategory as Category,
+	)
 
 	return (
 		<div className="flex flex-col items-center justify-center gap-8 py-12 px-4">
@@ -26,7 +31,7 @@ export default async function ProductsPage({
 			{/* ------------------------------- products ------------------------------- */}
 			<div className="grid container mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center gap-8 ">
 				{products?.data.map((product) => (
-					<ProductCard product={product!} key={product.id} authId={authId!} />
+					<ProductCard product={product} key={product.id} authId={authId!} />
 				))}
 			</div>
 		</div>

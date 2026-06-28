@@ -62,8 +62,8 @@ export type Category = (typeof Category)[keyof typeof Category]
 
 
 export const Unit = {
-  KG: 'KG',
-  PIECE: 'PIECE'
+  كجم: 'كجم',
+  قطعة: 'قطعة'
 } as const
 
 export type Unit = (typeof Unit)[keyof typeof Unit]

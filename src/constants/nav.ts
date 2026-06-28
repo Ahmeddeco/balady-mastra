@@ -1,27 +1,37 @@
-import { MapPin, Smartphone } from "lucide-react"
+import { Ham, Home, MapPin, Newspaper, Server, Smartphone, Users } from "lucide-react"
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6"
-
+import { BsRobot } from "react-icons/bs"
 
 export const frontNavLinks = [
   {
+    title: "الرئيسية",
+    href: "/",
+    icon: Home
+  },
+  {
     title: "منتجاتنا",
-    href: "/products"
+    href: "/products",
+    icon: Ham
   },
   {
     title: "عملائنا",
-    href: "/clients"
+    href: "/clients",
+    icon: Users
   },
   {
     title: "مقالاتنا",
     href: "/articles",
+    icon: Newspaper
   },
   {
     title: "bot",
     href: "/bot",
+    icon: BsRobot
   },
   {
     title: "server",
     href: "/server",
+    icon: Server
   },
 ]
 

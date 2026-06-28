@@ -6,11 +6,11 @@ import { Badge } from "../ui/badge"
 import { Currency, finalPrice } from "@/logic/currency"
 import Link from "next/link"
 import { AddToCart } from "./CustomButtons"
-import { ProductCardType } from "@/types/Product.type"
+import { SingleProductPageType } from "@/types/Product.type"
 import FavoriteButton from "./FavoriteButton"
 
 type Props = {
-	product: ProductCardType
+	product: SingleProductPageType
 	authId: string | null
 }
 

@@ -2,11 +2,11 @@
 
 import { useFormStatus } from "react-dom"
 import { Button } from "../ui/button"
-import { Loader2, ShoppingBag, X } from "lucide-react"
+import { Loader2, ShoppingCart, X } from "lucide-react"
 import { useCartStore } from "@/store/cartStore"
 import { useSession } from "next-auth/react"
 import { IoBagCheckOutline } from "react-icons/io5"
-import { ProductCardType } from "@/types/Product.type"
+import { getOneProductBySlugType } from "@/types/Product.type"
 
 type SubmitButtonType = {
 	title: string
@@ -38,7 +38,7 @@ export function SubmitButton({ title, type = "submit", size = "full", variant }:
 
 /* -------------------------------- AddToCart ------------------------------- */
 
-export function AddToCart({ product }: { product: ProductCardType }) {
+export function AddToCart({ product }: { product: getOneProductBySlugType }) {
 	const session = useSession()
 	const { pending } = useFormStatus()
 	const addToCart = useCartStore((state) => state.addToCart)
@@ -52,7 +52,7 @@ export function AddToCart({ product }: { product: ProductCardType }) {
 				</Button>
 			) : (
 				<Button type="button" onClick={() => addToCart(product)}>
-					<ShoppingBag className="size-5" /> Add to Cart
+					<ShoppingCart className="size-5" /> أضف الى السلة الآن
 				</Button>
 			)}
 		</>

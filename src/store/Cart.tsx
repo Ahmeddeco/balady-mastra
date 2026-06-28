@@ -37,56 +37,6 @@ export default function Cart() {
 				<Separator />
 				<ScrollArea className="flex flex-col gap-4 p-4 w-full h-full max-h-[60vh]">
 					{items.map(({ id, image, price, quantity, title, increaseByOne }) => (
-						// <div key={id} className="h-full">
-						// 	<div className="flex items-start p-2 gap-4  justify-between h-full">
-						// 		<div className="w-1/4 relative aspect-square">
-						// 			<Image src={image} alt={title} fill className="rounded-md object-cover" />
-						// 		</div>
-						// 		<div className="w-3/4 flex items-start justify-between h-full ">
-						// 			{/* ---------------------------------- Text ---------------------------------- */}
-						// 			<div className="flex flex-col gap-1 h-full">
-						// 				<h6>{title}</h6>
-						// 				<p className="text-xs">{price.toFixed(2)}</p>
-
-						// 				{/* -------------------------------- quantity -------------------------------- */}
-						// 				<div className=" flex items-center gap-1">
-						// 					<Button
-						// 						variant={"ghost"}
-						// 						size={"icon"}
-						// 						type="button"
-						// 						onClick={() => {
-						// 							increaseByOne ? updateQuantityByOnes("decrement", id) : updateQuantityByHalf("decrement", id)
-						// 						}}
-						// 					>
-						// 						<Minus />
-						// 					</Button>
-						// 					<Button size={"sm"} type="button" variant={"outline"} className="cursor-not-allowed">
-						// 						{quantity.toFixed(1)}
-						// 					</Button>
-						// 					<Button
-						// 						variant={"ghost"}
-						// 						size={"icon"}
-						// 						type="button"
-						// 						onClick={() => {
-						// 							increaseByOne ? updateQuantityByOnes("increment", id) : updateQuantityByHalf("increment", id)
-						// 						}}
-						// 					>
-						// 						<Plus />
-						// 					</Button>
-						// 				</div>
-						// 			</div>
-
-						// 			{/* ---------------------------------- Total --------------------------------- */}
-						// 			<div className="flex flex-col items-center justify-end gap-6 h-full">
-						// 				<Button size={"icon"} type="button" className="rounded-full" onClick={() => removeFromCart(id)}>
-						// 					<X />
-						// 				</Button>
-						// 				<p className="text-sm font-medium text-foreground">الإجمالي : {(price * quantity).toFixed(2)}</p>
-						// 			</div>
-						// 		</div>
-						// 	</div>
-						// </div>
-
 						<Item key={id} variant="default" role="listitem">
 							<ItemMedia variant="image" className="relative aspect-square size-24">
 								<Image src={image} alt={title} fill className="object-cover rounded-md " />

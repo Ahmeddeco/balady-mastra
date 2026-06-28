@@ -21,6 +21,7 @@ export const ProductSchema = z.object({
   discount: z.number().nullish(),
   quantity: z.number(),
   lowQuantity: z.number().nullish(),
+  increaseByOne: z.boolean(),
   createdAt: z.date(),
   updatedAt: z.date(),
 })

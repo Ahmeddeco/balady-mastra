@@ -18,7 +18,6 @@ export const getAllProductsForProductsPage = async (size: number, page: number, 
         images: true,
         discount: true,
         unit: true,
-        specialCut: true,
         slug: true,
         favorites: { select: { userId: true, productId: true } }
       },
@@ -33,7 +32,7 @@ export const getAllProductsForProductsPage = async (size: number, page: number, 
 }
 
 /* ----------------------------- findOneProduct ----------------------------- */
-export const getOneProduct = async (slug: string) => {
+export const getOneProductBySlug = async (slug: string) => {
   try {
     const data = await prisma.product.findUnique({ where: { slug } })
     return data
@@ -76,7 +75,7 @@ export const getAllProductsForProductsServerPage = async (size: number, page: nu
 export const getNonTrendingProducts = async (limit: number = 3) => {
   try {
     const data = await prisma.product.findMany({
-      where: { specialCut: false, quantity: { gt: 0 } },
+      where: { quantity: { gt: 0 } },
       orderBy: { quantity: "desc" },
       select: { id: true, title: true, price: true, unit: true, slug: true, quantity: true, description: true },
       take: limit

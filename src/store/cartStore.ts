@@ -1,4 +1,4 @@
-import { ProductCardType } from "@/types/Product.type"
+import { getOneProductBySlugType } from "@/types/Product.type"
 import { toast } from "sonner"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
@@ -14,7 +14,7 @@ export type CartItem = {
 
 type CartState = {
   items: CartItem[]
-  addToCart: (product: ProductCardType) => void
+  addToCart: (product: getOneProductBySlugType) => void
   removeFromCart: (id: string) => void
   updateQuantityByHalf: (type: 'increment' | 'decrement', id: string) => void
   updateQuantityByOnes: (type: 'increment' | 'decrement', id: string) => void
@@ -25,7 +25,7 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
 
-      addToCart: (product: ProductCardType) => {
+      addToCart: (product: getOneProductBySlugType) => {
         const existingProduct = get().items.find((item) => item.id === product!.id)
         set({
           items: existingProduct
@@ -38,7 +38,7 @@ export const useCartStore = create<CartState>()(
                 title: product!.title,
                 price: product!.price,
                 image: product!.mainImage,
-                increaseByOne: product?.increaseByOne ?? false
+                increaseByOne: product?.unit === "قطعة" ? true : false
               },
             ],
         })
@@ -69,7 +69,7 @@ export const useCartStore = create<CartState>()(
                   type === "increment"
                     ? item.quantity + .5
 
-                    : Math.max(1, item.quantity - .5), // preventing the quantity from going below .5 when decrementing.
+                    : Math.max(.5, item.quantity - .5), // preventing the quantity from going below .5 when decrementing.
               }
               : item
           ),
@@ -93,6 +93,6 @@ export const useCartStore = create<CartState>()(
           ),
         })
       }
-    }), { name: 'cart-storage' }
+    }), { name: 'balady-cart-storage' }
   )
 )
