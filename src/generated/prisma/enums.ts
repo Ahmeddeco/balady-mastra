@@ -23,7 +23,8 @@ export const MeatType = {
   كبدة: 'كبدة',
   قلب: 'قلب',
   كلاوي: 'كلاوي',
-  فلتو: 'فلتو'
+  فلتو: 'فلتو',
+  مصنعات: 'مصنعات'
 } as const
 
 export type MeatType = (typeof MeatType)[keyof typeof MeatType]

@@ -7,7 +7,7 @@ export const getAllProductsForProductsPage = async (size: number, page: number, 
     const totalPages = Math.ceil(totalProducts / size)
 
     const data = await prisma.product.findMany({
-      where: { isActive: true, category: activeCategory, },
+      where: { category: activeCategory, },
       select: {
         id: true,
         title: true,
@@ -61,7 +61,7 @@ export const getAllProductsForProductsServerPage = async (size: number, page: nu
 
     const data = await prisma.product.findMany({
       where: { category: activeCategory },
-      select: { id: true, category: true, discount: true, mainImage: true, price: true, slug: true, title: true, unit: true, isActive: true, quantity: true, },
+      select: { id: true, category: true, cut: true, discount: true, mainImage: true, price: true, slug: true, title: true, unit: true, quantity: true, },
       orderBy: { createdAt: "desc" },
       take: size,
       skip: (page * size) - size
@@ -76,7 +76,7 @@ export const getAllProductsForProductsServerPage = async (size: number, page: nu
 export const getNonTrendingProducts = async (limit: number = 3) => {
   try {
     const data = await prisma.product.findMany({
-      where: { isActive: true, specialCut: false, quantity: { gt: 0 } },
+      where: { specialCut: false, quantity: { gt: 0 } },
       orderBy: { quantity: "desc" },
       select: { id: true, title: true, price: true, unit: true, slug: true, quantity: true, description: true },
       take: limit

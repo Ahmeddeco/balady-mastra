@@ -116,26 +116,23 @@ model User {
 
 // TODO 
 model Product {
-  id            String      @id @default(cuid())
-  title         String      @unique
-  slug          String      @unique
-  description   String
-  increaseByOne Boolean     @default(true)
-  cut           MeatType
-  specialCut    Boolean?    @default(false)
-  category      Category
-  mainImage     String
-  images        String[]
-  price         Float       @default(0)
-  discount      Int?        @default(0)
-  unit          Unit?       @default(KG)
-  quantity      Float       @default(0)
-  lowQuantity   Float?      @default(0)
-  orderItems    OrderItem[]
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  favorites     Favorite[]
-  isActive      Boolean?    @default(false) // لإخفاء منتج مؤقتاً دون حذفه.
+  id          String      @id @default(cuid())
+  title       String      @unique
+  slug        String      @unique
+  description String
+  cut         MeatType
+  category    Category
+  mainImage   String
+  images      String[]
+  price       Float       @default(0)
+  discount    Int?        @default(0)
+  unit        Unit?       @default(KG)
+  quantity    Float       @default(0)
+  lowQuantity Float?      @default(0)
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  favorites   Favorite[]
 }
 
 enum MeatType {
@@ -153,6 +150,7 @@ enum MeatType {
   قلب
   كلاوي
   فلتو
+  مصنعات
 }
 
 model Order {

@@ -32,6 +32,7 @@ import { getAllProductsForProductsServerPage } from "@/dl/products.data"
 import ProductFilter from "@/components/shared/ProductFilter"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Badge } from "@/components/ui/badge"
+import { getAllProductsForProductsServerPageType } from "@/types/Product.type"
 
 export default async function ProductsServerPage({
 	searchParams,
@@ -44,7 +45,11 @@ export default async function ProductsServerPage({
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
 	const activeCategory = (await searchParams).category
-	const products = await getAllProductsForProductsServerPage(pageSize, pageNumber, activeCategory)
+	const products: getAllProductsForProductsServerPageType = await getAllProductsForProductsServerPage(
+		pageSize,
+		pageNumber,
+		activeCategory,
+	)
 
 	return !products ? (
 		<EmptyCard href={""} linkTitle={""} linkIcon={PlusCircle} />
@@ -65,17 +70,17 @@ export default async function ProductsServerPage({
 						<TableRow>
 							<TableHead>صورة المنتج</TableHead>
 							<TableHead>اسم النتج</TableHead>
+							<TableHead>القطعية</TableHead>
 							<TableHead>السعر</TableHead>
 							<TableHead>الخصم</TableHead>
 							<TableHead>المخزون</TableHead>
-							<TableHead>معروض للبيع</TableHead>
 							<TableHead>الخصائص</TableHead>
 							<TableHead className="text-left">الإعدادات</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{products?.data.map(({ id, category, discount, mainImage, price, title, unit, isActive, quantity }) => (
+						{products?.data.map(({ id, category, discount, mainImage, price, title, cut, unit, quantity }) => (
 							<TableRow key={id}>
 								<TableCell>
 									{mainImage ? (
@@ -91,16 +96,10 @@ export default async function ProductsServerPage({
 									)}
 								</TableCell>
 								<TableCell>{title}</TableCell>
+								<TableCell>{cut}</TableCell>
 								<TableCell>{price}</TableCell>
 								<TableCell>{discount}</TableCell>
 								<TableCell>{quantity}</TableCell>
-								<TableCell>
-									{isActive === true ? (
-										<Badge variant={"accent"}>{"نعم"}</Badge>
-									) : (
-										<Badge variant={"default"}>{"لا"}</Badge>
-									)}
-								</TableCell>
 								<TableCell className="flex items-center gap-2">
 									<Badge>{category} </Badge>
 									<Badge>{unit} </Badge>

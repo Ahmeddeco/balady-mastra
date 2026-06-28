@@ -15,8 +15,6 @@ export const ProductSchema = z.object({
   title: z.string(),
   slug: z.string(),
   description: z.string(),
-  increaseByOne: z.boolean(),
-  specialCut: z.boolean().nullish(),
   mainImage: z.string(),
   images: z.string().array(),
   price: z.number(),
@@ -25,7 +23,6 @@ export const ProductSchema = z.object({
   lowQuantity: z.number().nullish(),
   createdAt: z.date(),
   updatedAt: z.date(),
-  isActive: z.boolean().nullish(),
 })
 
 export type Product = z.infer<typeof ProductSchema>

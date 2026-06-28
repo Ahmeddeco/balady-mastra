@@ -17,8 +17,8 @@ export const serverNav = [
     icon: Ham
   },
   {
-    title: "dashboard",
-    href: "/server/dashboard",
+    title: "الإحصائيات",
+    href: "/server/charts",
     icon: ChartNoAxesCombined
   },
 ]

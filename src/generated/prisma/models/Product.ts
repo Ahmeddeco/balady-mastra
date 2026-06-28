@@ -45,9 +45,7 @@ export type ProductMinAggregateOutputType = {
   title: string | null
   slug: string | null
   description: string | null
-  increaseByOne: boolean | null
   cut: $Enums.MeatType | null
-  specialCut: boolean | null
   category: $Enums.Category | null
   mainImage: string | null
   price: number | null
@@ -57,7 +55,6 @@ export type ProductMinAggregateOutputType = {
   lowQuantity: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  isActive: boolean | null
 }
 
 export type ProductMaxAggregateOutputType = {
@@ -65,9 +62,7 @@ export type ProductMaxAggregateOutputType = {
   title: string | null
   slug: string | null
   description: string | null
-  increaseByOne: boolean | null
   cut: $Enums.MeatType | null
-  specialCut: boolean | null
   category: $Enums.Category | null
   mainImage: string | null
   price: number | null
@@ -77,7 +72,6 @@ export type ProductMaxAggregateOutputType = {
   lowQuantity: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  isActive: boolean | null
 }
 
 export type ProductCountAggregateOutputType = {
@@ -85,9 +79,7 @@ export type ProductCountAggregateOutputType = {
   title: number
   slug: number
   description: number
-  increaseByOne: number
   cut: number
-  specialCut: number
   category: number
   mainImage: number
   images: number
@@ -98,7 +90,6 @@ export type ProductCountAggregateOutputType = {
   lowQuantity: number
   createdAt: number
   updatedAt: number
-  isActive: number
   _all: number
 }
 
@@ -122,9 +113,7 @@ export type ProductMinAggregateInputType = {
   title?: true
   slug?: true
   description?: true
-  increaseByOne?: true
   cut?: true
-  specialCut?: true
   category?: true
   mainImage?: true
   price?: true
@@ -134,7 +123,6 @@ export type ProductMinAggregateInputType = {
   lowQuantity?: true
   createdAt?: true
   updatedAt?: true
-  isActive?: true
 }
 
 export type ProductMaxAggregateInputType = {
@@ -142,9 +130,7 @@ export type ProductMaxAggregateInputType = {
   title?: true
   slug?: true
   description?: true
-  increaseByOne?: true
   cut?: true
-  specialCut?: true
   category?: true
   mainImage?: true
   price?: true
@@ -154,7 +140,6 @@ export type ProductMaxAggregateInputType = {
   lowQuantity?: true
   createdAt?: true
   updatedAt?: true
-  isActive?: true
 }
 
 export type ProductCountAggregateInputType = {
@@ -162,9 +147,7 @@ export type ProductCountAggregateInputType = {
   title?: true
   slug?: true
   description?: true
-  increaseByOne?: true
   cut?: true
-  specialCut?: true
   category?: true
   mainImage?: true
   images?: true
@@ -175,7 +158,6 @@ export type ProductCountAggregateInputType = {
   lowQuantity?: true
   createdAt?: true
   updatedAt?: true
-  isActive?: true
   _all?: true
 }
 
@@ -270,9 +252,7 @@ export type ProductGroupByOutputType = {
   title: string
   slug: string
   description: string
-  increaseByOne: boolean
   cut: $Enums.MeatType
-  specialCut: boolean | null
   category: $Enums.Category
   mainImage: string
   images: string[]
@@ -283,7 +263,6 @@ export type ProductGroupByOutputType = {
   lowQuantity: number | null
   createdAt: Date
   updatedAt: Date
-  isActive: boolean | null
   _count: ProductCountAggregateOutputType | null
   _avg: ProductAvgAggregateOutputType | null
   _sum: ProductSumAggregateOutputType | null
@@ -314,9 +293,7 @@ export type ProductWhereInput = {
   title?: Prisma.StringFilter<"Product"> | string
   slug?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringFilter<"Product"> | string
-  increaseByOne?: Prisma.BoolFilter<"Product"> | boolean
   cut?: Prisma.EnumMeatTypeFilter<"Product"> | $Enums.MeatType
-  specialCut?: Prisma.BoolNullableFilter<"Product"> | boolean | null
   category?: Prisma.EnumCategoryFilter<"Product"> | $Enums.Category
   mainImage?: Prisma.StringFilter<"Product"> | string
   images?: Prisma.StringNullableListFilter<"Product">
@@ -327,7 +304,6 @@ export type ProductWhereInput = {
   lowQuantity?: Prisma.FloatNullableFilter<"Product"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
-  isActive?: Prisma.BoolNullableFilter<"Product"> | boolean | null
   orderItems?: Prisma.OrderItemListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
 }
@@ -337,9 +313,7 @@ export type ProductOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  increaseByOne?: Prisma.SortOrder
   cut?: Prisma.SortOrder
-  specialCut?: Prisma.SortOrderInput | Prisma.SortOrder
   category?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   images?: Prisma.SortOrder
@@ -350,7 +324,6 @@ export type ProductOrderByWithRelationInput = {
   lowQuantity?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  isActive?: Prisma.SortOrderInput | Prisma.SortOrder
   orderItems?: Prisma.OrderItemOrderByRelationAggregateInput
   favorites?: Prisma.FavoriteOrderByRelationAggregateInput
 }
@@ -363,9 +336,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ProductWhereInput[]
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   description?: Prisma.StringFilter<"Product"> | string
-  increaseByOne?: Prisma.BoolFilter<"Product"> | boolean
   cut?: Prisma.EnumMeatTypeFilter<"Product"> | $Enums.MeatType
-  specialCut?: Prisma.BoolNullableFilter<"Product"> | boolean | null
   category?: Prisma.EnumCategoryFilter<"Product"> | $Enums.Category
   mainImage?: Prisma.StringFilter<"Product"> | string
   images?: Prisma.StringNullableListFilter<"Product">
@@ -376,7 +347,6 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   lowQuantity?: Prisma.FloatNullableFilter<"Product"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
-  isActive?: Prisma.BoolNullableFilter<"Product"> | boolean | null
   orderItems?: Prisma.OrderItemListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
 }, "id" | "title" | "slug">
@@ -386,9 +356,7 @@ export type ProductOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  increaseByOne?: Prisma.SortOrder
   cut?: Prisma.SortOrder
-  specialCut?: Prisma.SortOrderInput | Prisma.SortOrder
   category?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   images?: Prisma.SortOrder
@@ -399,7 +367,6 @@ export type ProductOrderByWithAggregationInput = {
   lowQuantity?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  isActive?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProductCountOrderByAggregateInput
   _avg?: Prisma.ProductAvgOrderByAggregateInput
   _max?: Prisma.ProductMaxOrderByAggregateInput
@@ -415,9 +382,7 @@ export type ProductScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"Product"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Product"> | string
   description?: Prisma.StringWithAggregatesFilter<"Product"> | string
-  increaseByOne?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
   cut?: Prisma.EnumMeatTypeWithAggregatesFilter<"Product"> | $Enums.MeatType
-  specialCut?: Prisma.BoolNullableWithAggregatesFilter<"Product"> | boolean | null
   category?: Prisma.EnumCategoryWithAggregatesFilter<"Product"> | $Enums.Category
   mainImage?: Prisma.StringWithAggregatesFilter<"Product"> | string
   images?: Prisma.StringNullableListFilter<"Product">
@@ -428,7 +393,6 @@ export type ProductScalarWhereWithAggregatesInput = {
   lowQuantity?: Prisma.FloatNullableWithAggregatesFilter<"Product"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
-  isActive?: Prisma.BoolNullableWithAggregatesFilter<"Product"> | boolean | null
 }
 
 export type ProductCreateInput = {
@@ -436,9 +400,7 @@ export type ProductCreateInput = {
   title: string
   slug: string
   description: string
-  increaseByOne?: boolean
   cut: $Enums.MeatType
-  specialCut?: boolean | null
   category: $Enums.Category
   mainImage: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -449,7 +411,6 @@ export type ProductCreateInput = {
   lowQuantity?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  isActive?: boolean | null
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutProductInput
 }
@@ -459,9 +420,7 @@ export type ProductUncheckedCreateInput = {
   title: string
   slug: string
   description: string
-  increaseByOne?: boolean
   cut: $Enums.MeatType
-  specialCut?: boolean | null
   category: $Enums.Category
   mainImage: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -472,7 +431,6 @@ export type ProductUncheckedCreateInput = {
   lowQuantity?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  isActive?: boolean | null
   orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutProductInput
 }
@@ -482,9 +440,7 @@ export type ProductUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
-  specialCut?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -495,7 +451,6 @@ export type ProductUpdateInput = {
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutProductNestedInput
 }
@@ -505,9 +460,7 @@ export type ProductUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
-  specialCut?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -518,7 +471,6 @@ export type ProductUncheckedUpdateInput = {
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutProductNestedInput
 }
@@ -528,9 +480,7 @@ export type ProductCreateManyInput = {
   title: string
   slug: string
   description: string
-  increaseByOne?: boolean
   cut: $Enums.MeatType
-  specialCut?: boolean | null
   category: $Enums.Category
   mainImage: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -541,7 +491,6 @@ export type ProductCreateManyInput = {
   lowQuantity?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  isActive?: boolean | null
 }
 
 export type ProductUpdateManyMutationInput = {
@@ -549,9 +498,7 @@ export type ProductUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
-  specialCut?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -562,7 +509,6 @@ export type ProductUpdateManyMutationInput = {
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type ProductUncheckedUpdateManyInput = {
@@ -570,9 +516,7 @@ export type ProductUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
-  specialCut?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -583,7 +527,6 @@ export type ProductUncheckedUpdateManyInput = {
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type StringNullableListFilter<$PrismaModel = never> = {
@@ -599,9 +542,7 @@ export type ProductCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  increaseByOne?: Prisma.SortOrder
   cut?: Prisma.SortOrder
-  specialCut?: Prisma.SortOrder
   category?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   images?: Prisma.SortOrder
@@ -612,7 +553,6 @@ export type ProductCountOrderByAggregateInput = {
   lowQuantity?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
 }
 
 export type ProductAvgOrderByAggregateInput = {
@@ -627,9 +567,7 @@ export type ProductMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  increaseByOne?: Prisma.SortOrder
   cut?: Prisma.SortOrder
-  specialCut?: Prisma.SortOrder
   category?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   price?: Prisma.SortOrder
@@ -639,7 +577,6 @@ export type ProductMaxOrderByAggregateInput = {
   lowQuantity?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
 }
 
 export type ProductMinOrderByAggregateInput = {
@@ -647,9 +584,7 @@ export type ProductMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  increaseByOne?: Prisma.SortOrder
   cut?: Prisma.SortOrder
-  specialCut?: Prisma.SortOrder
   category?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   price?: Prisma.SortOrder
@@ -659,7 +594,6 @@ export type ProductMinOrderByAggregateInput = {
   lowQuantity?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
 }
 
 export type ProductSumOrderByAggregateInput = {
@@ -680,10 +614,6 @@ export type ProductCreateimagesInput = {
 
 export type EnumMeatTypeFieldUpdateOperationsInput = {
   set?: $Enums.MeatType
-}
-
-export type NullableBoolFieldUpdateOperationsInput = {
-  set?: boolean | null
 }
 
 export type EnumCategoryFieldUpdateOperationsInput = {
@@ -748,9 +678,7 @@ export type ProductCreateWithoutOrderItemsInput = {
   title: string
   slug: string
   description: string
-  increaseByOne?: boolean
   cut: $Enums.MeatType
-  specialCut?: boolean | null
   category: $Enums.Category
   mainImage: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -761,7 +689,6 @@ export type ProductCreateWithoutOrderItemsInput = {
   lowQuantity?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  isActive?: boolean | null
   favorites?: Prisma.FavoriteCreateNestedManyWithoutProductInput
 }
 
@@ -770,9 +697,7 @@ export type ProductUncheckedCreateWithoutOrderItemsInput = {
   title: string
   slug: string
   description: string
-  increaseByOne?: boolean
   cut: $Enums.MeatType
-  specialCut?: boolean | null
   category: $Enums.Category
   mainImage: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -783,7 +708,6 @@ export type ProductUncheckedCreateWithoutOrderItemsInput = {
   lowQuantity?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  isActive?: boolean | null
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutProductInput
 }
 
@@ -808,9 +732,7 @@ export type ProductUpdateWithoutOrderItemsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
-  specialCut?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -821,7 +743,6 @@ export type ProductUpdateWithoutOrderItemsInput = {
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   favorites?: Prisma.FavoriteUpdateManyWithoutProductNestedInput
 }
 
@@ -830,9 +751,7 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
-  specialCut?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -843,7 +762,6 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutProductNestedInput
 }
 
@@ -852,9 +770,7 @@ export type ProductCreateWithoutFavoritesInput = {
   title: string
   slug: string
   description: string
-  increaseByOne?: boolean
   cut: $Enums.MeatType
-  specialCut?: boolean | null
   category: $Enums.Category
   mainImage: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -865,7 +781,6 @@ export type ProductCreateWithoutFavoritesInput = {
   lowQuantity?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  isActive?: boolean | null
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
@@ -874,9 +789,7 @@ export type ProductUncheckedCreateWithoutFavoritesInput = {
   title: string
   slug: string
   description: string
-  increaseByOne?: boolean
   cut: $Enums.MeatType
-  specialCut?: boolean | null
   category: $Enums.Category
   mainImage: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -887,7 +800,6 @@ export type ProductUncheckedCreateWithoutFavoritesInput = {
   lowQuantity?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  isActive?: boolean | null
   orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
@@ -912,9 +824,7 @@ export type ProductUpdateWithoutFavoritesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
-  specialCut?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -925,7 +835,6 @@ export type ProductUpdateWithoutFavoritesInput = {
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
@@ -934,9 +843,7 @@ export type ProductUncheckedUpdateWithoutFavoritesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
-  specialCut?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -947,7 +854,6 @@ export type ProductUncheckedUpdateWithoutFavoritesInput = {
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
@@ -996,9 +902,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   title?: boolean
   slug?: boolean
   description?: boolean
-  increaseByOne?: boolean
   cut?: boolean
-  specialCut?: boolean
   category?: boolean
   mainImage?: boolean
   images?: boolean
@@ -1009,7 +913,6 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   lowQuantity?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  isActive?: boolean
   orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
   favorites?: boolean | Prisma.Product$favoritesArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
@@ -1020,9 +923,7 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   title?: boolean
   slug?: boolean
   description?: boolean
-  increaseByOne?: boolean
   cut?: boolean
-  specialCut?: boolean
   category?: boolean
   mainImage?: boolean
   images?: boolean
@@ -1033,7 +934,6 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   lowQuantity?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  isActive?: boolean
 }, ExtArgs["result"]["product"]>
 
 export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1041,9 +941,7 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   title?: boolean
   slug?: boolean
   description?: boolean
-  increaseByOne?: boolean
   cut?: boolean
-  specialCut?: boolean
   category?: boolean
   mainImage?: boolean
   images?: boolean
@@ -1054,7 +952,6 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   lowQuantity?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  isActive?: boolean
 }, ExtArgs["result"]["product"]>
 
 export type ProductSelectScalar = {
@@ -1062,9 +959,7 @@ export type ProductSelectScalar = {
   title?: boolean
   slug?: boolean
   description?: boolean
-  increaseByOne?: boolean
   cut?: boolean
-  specialCut?: boolean
   category?: boolean
   mainImage?: boolean
   images?: boolean
@@ -1075,10 +970,9 @@ export type ProductSelectScalar = {
   lowQuantity?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  isActive?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "increaseByOne" | "cut" | "specialCut" | "category" | "mainImage" | "images" | "price" | "discount" | "unit" | "quantity" | "lowQuantity" | "createdAt" | "updatedAt" | "isActive", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "cut" | "category" | "mainImage" | "images" | "price" | "discount" | "unit" | "quantity" | "lowQuantity" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
   favorites?: boolean | Prisma.Product$favoritesArgs<ExtArgs>
@@ -1098,9 +992,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     title: string
     slug: string
     description: string
-    increaseByOne: boolean
     cut: $Enums.MeatType
-    specialCut: boolean | null
     category: $Enums.Category
     mainImage: string
     images: string[]
@@ -1111,7 +1003,6 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     lowQuantity: number | null
     createdAt: Date
     updatedAt: Date
-    isActive: boolean | null
   }, ExtArgs["result"]["product"]>
   composites: {}
 }
@@ -1541,9 +1432,7 @@ export interface ProductFieldRefs {
   readonly title: Prisma.FieldRef<"Product", 'String'>
   readonly slug: Prisma.FieldRef<"Product", 'String'>
   readonly description: Prisma.FieldRef<"Product", 'String'>
-  readonly increaseByOne: Prisma.FieldRef<"Product", 'Boolean'>
   readonly cut: Prisma.FieldRef<"Product", 'MeatType'>
-  readonly specialCut: Prisma.FieldRef<"Product", 'Boolean'>
   readonly category: Prisma.FieldRef<"Product", 'Category'>
   readonly mainImage: Prisma.FieldRef<"Product", 'String'>
   readonly images: Prisma.FieldRef<"Product", 'String[]'>
@@ -1554,7 +1443,6 @@ export interface ProductFieldRefs {
   readonly lowQuantity: Prisma.FieldRef<"Product", 'Float'>
   readonly createdAt: Prisma.FieldRef<"Product", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Product", 'DateTime'>
-  readonly isActive: Prisma.FieldRef<"Product", 'Boolean'>
 }
     
 

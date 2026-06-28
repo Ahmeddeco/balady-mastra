@@ -3,7 +3,7 @@
 import { useForm } from "@conform-to/react"
 import { parseWithZod } from "@conform-to/zod"
 import Form from "next/form"
-import { useActionState, useState } from "react"
+import { useActionState } from "react"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { UploadManyImagesDropZone, UploadOneImagesDropZone } from "@/components/shared/UploadImagesDropZone"
@@ -13,33 +13,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Category, Unit } from "@/generated/prisma/enums"
 import { editProductAction } from "@/actions/product.action "
 import ProductSchema from "@/schemas/product.schema"
-import { createSlug } from "@/logic/slug"
-
-import { Switch } from "@/components/ui/switch"
+import { getOneProductByIdType } from "@/types/Product.type"
+import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
 
 type Props = {
-	product:
-		| {
-				id: string
-				title: string
-				slug: string
-				description: string
-				specialCut: boolean | null
-				category: Category
-				mainImage: string
-				images: string[]
-				price: number
-				discount: number | null
-				unit: Unit | null
-				increaseByOne: boolean | null
-				quantity: number
-				lowQuantity: number | null
-				createdAt: Date
-				updatedAt: Date
-				isActive: boolean | null
-		  }
-		| null
-		| undefined
+	product: getOneProductByIdType
 }
 
 export default function EditProductForm({ product }: Props) {
@@ -53,69 +31,52 @@ export default function EditProductForm({ product }: Props) {
 		shouldRevalidate: "onInput",
 	})
 
-	const [slug, setSlug] = useState(product?.slug ?? "")
-
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
 			<Input type="hidden" name="id" value={product?.id} />
 
 			{/* --------------------------------- title -------------------------------- */}
 			<Field>
-				<FieldLabel htmlFor={fields.title.name}>الاسم بالكامل</FieldLabel>
-				<Input
-					type="text"
-					key={fields.title.key}
-					name={fields.title.name}
-					defaultValue={product?.title}
-					onChange={(event) => {
-						const newSlug = createSlug(event.target.value)
-						setSlug(newSlug)
-					}}
-				/>
+				<FieldLabel htmlFor={fields.title.name}>اسم المنتج</FieldLabel>
+				<Input type="text" key={fields.title.key} name={fields.title.name} defaultValue={product?.title} />
 				<FieldError>{fields.title.errors}</FieldError>
-			</Field>
-
-			{/* ---------------------------------- slug ---------------------------------- */}
-			<Field>
-				<FieldLabel htmlFor={fields.slug.name}>الاسم المستعار</FieldLabel>
-				<Input type="text" key={fields.slug.key} name={fields.slug.name} value={slug} readOnly />
-				<FieldError>{fields.slug.errors}</FieldError>
 			</Field>
 
 			{/* ----------------------------- description ----------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.description.name}>وصف المنتج</FieldLabel>
-				<Textarea key={fields.description.key} name={fields.description.name} defaultValue={product?.description} />
+				<Textarea
+					key={fields.description.key}
+					name={fields.description.name}
+					defaultValue={product?.description ?? ""}
+				/>
 				<FieldError>{fields.description.errors}</FieldError>
 			</Field>
-
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
-				{/* ------------------------------- specialCut ------------------------------- */}
+				{/* --------------------------------- cut -------------------------------- */}
 				<Field>
-					<FieldLabel htmlFor={fields.specialCut.name}>قطعية ممتازة ؟</FieldLabel>
-					<Switch
-						key={fields.specialCut.key}
-						name={fields.specialCut.name}
-						defaultChecked={product?.specialCut ?? false}
-					/>
-					<FieldError>{fields.specialCut.errors}</FieldError>
+					<FieldLabel htmlFor={fields.cut.name}>القطعية</FieldLabel>
+					<Select key={fields.cut.key} name={fields.cut.name} defaultValue={product?.cut}>
+						<SelectTrigger>
+							<SelectValue placeholder={MeatTypeSchema.Enum.انتركوت} />
+						</SelectTrigger>
+						<SelectContent>
+							{Object.values(MeatTypeSchema.Values).map((cut) => (
+								<SelectItem value={cut} key={cut}>
+									{cut}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
+					<FieldError>{fields.cut.errors}</FieldError>
 				</Field>
 
-				{/* ------------------------------- isActive ------------------------------ */}
-				<Field>
-					<FieldLabel htmlFor={fields.isActive.name}>حالة النشر</FieldLabel>
-					<Switch key={fields.isActive.key} name={fields.isActive.name} defaultChecked={product?.isActive ?? false} />
-					<FieldError>{fields.isActive.errors}</FieldError>
-				</Field>
-			</div>
-
-			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
 				{/* -------------------------------- category -------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.category.name}>الفئة</FieldLabel>
 					<Select key={fields.category.key} name={fields.category.name} defaultValue={product?.category}>
 						<SelectTrigger>
-							<SelectValue />
+							<SelectValue placeholder={Category.MEAT} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(Category).map((degreeProgram) => (
@@ -133,7 +94,7 @@ export default function EditProductForm({ product }: Props) {
 					<FieldLabel htmlFor={fields.unit.name}>الوحدة</FieldLabel>
 					<Select key={fields.unit.key} name={fields.unit.name} defaultValue={product?.unit ?? Unit.KG}>
 						<SelectTrigger>
-							<SelectValue />
+							<SelectValue placeholder={Unit.KG} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(Unit).map((degreeProgram) => (
@@ -145,16 +106,16 @@ export default function EditProductForm({ product }: Props) {
 					</Select>
 					<FieldError>{fields.unit.errors}</FieldError>
 				</Field>
-			</div>
 
-			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
 				{/* ---------------------------------- price --------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.price.name}>السعر</FieldLabel>
 					<Input type="number" key={fields.price.key} name={fields.price.name} defaultValue={product?.price} />
 					<FieldError>{fields.price.errors}</FieldError>
 				</Field>
+			</div>
 
+			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
 				{/* ------------------------------- discount ------------------------------ */}
 				<Field>
 					<FieldLabel htmlFor={fields.discount.name}>الخصم</FieldLabel>
@@ -170,7 +131,12 @@ export default function EditProductForm({ product }: Props) {
 				{/* ------------------------------- quantity ------------------------------ */}
 				<Field>
 					<FieldLabel htmlFor={fields.quantity.name}>الكمية</FieldLabel>
-					<Input type="number" key={fields.quantity.key} name={fields.quantity.name} defaultValue={product?.quantity} />
+					<Input
+						type="number"
+						key={fields.quantity.key}
+						name={fields.quantity.name}
+						defaultValue={product?.quantity ?? fields.quantity.initialValue}
+					/>
 					<FieldError>{fields.quantity.errors}</FieldError>
 				</Field>
 
@@ -181,7 +147,7 @@ export default function EditProductForm({ product }: Props) {
 						type="number"
 						key={fields.lowQuantity.key}
 						name={fields.lowQuantity.name}
-						defaultValue={product?.lowQuantity ?? 0}
+						defaultValue={product?.lowQuantity ?? fields.lowQuantity.initialValue}
 					/>
 					<FieldError>{fields.lowQuantity.errors}</FieldError>
 				</Field>
@@ -201,8 +167,12 @@ export default function EditProductForm({ product }: Props) {
 				imageKey={fields.images.key}
 				errors={fields.images.errors}
 				label="صور المنتج"
-				dbImages={product?.images}
+				dbImages={product?.images ?? [""]}
 			/>
+
+			{/* عرض الأخطاء العامة للفورم إن وجدت */}
+			{form.errors && <FieldError>{form.errors}</FieldError>}
+
 			{/* ------------------------------ SubmitButton ------------------------------ */}
 			<SubmitButton text={"تعديل المنتج"} />
 		</Form>

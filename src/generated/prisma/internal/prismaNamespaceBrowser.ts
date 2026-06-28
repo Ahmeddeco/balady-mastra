@@ -158,9 +158,7 @@ export const ProductScalarFieldEnum = {
   title: 'title',
   slug: 'slug',
   description: 'description',
-  increaseByOne: 'increaseByOne',
   cut: 'cut',
-  specialCut: 'specialCut',
   category: 'category',
   mainImage: 'mainImage',
   images: 'images',
@@ -170,8 +168,7 @@ export const ProductScalarFieldEnum = {
   quantity: 'quantity',
   lowQuantity: 'lowQuantity',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  isActive: 'isActive'
+  updatedAt: 'updatedAt'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]

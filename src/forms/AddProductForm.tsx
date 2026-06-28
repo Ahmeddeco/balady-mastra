@@ -3,7 +3,7 @@
 import { useForm } from "@conform-to/react"
 import { parseWithZod } from "@conform-to/zod"
 import Form from "next/form"
-import { useActionState, useState } from "react"
+import { useActionState } from "react"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { UploadManyImagesDropZone, UploadOneImagesDropZone } from "@/components/shared/UploadImagesDropZone"
@@ -13,8 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Category, Unit } from "@/generated/prisma/enums"
 import { addProductAction } from "@/actions/product.action "
 import ProductSchema from "@/schemas/product.schema"
-import { createSlug } from "@/logic/slug"
-import { Switch } from "@/components/ui/switch"
+import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
 
 export default function AddProductForm() {
 	const [lastResult, action] = useActionState(addProductAction, undefined)
@@ -27,38 +26,13 @@ export default function AddProductForm() {
 		shouldRevalidate: "onInput",
 	})
 
-	const [slug, setSlug] = useState("")
-
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
 			{/* --------------------------------- title -------------------------------- */}
 			<Field>
-				<FieldLabel htmlFor={fields.title.name}>الاسم بالكامل</FieldLabel>
-				<Input
-					type="text"
-					key={fields.title.key}
-					name={fields.title.name}
-					defaultValue={fields.title.initialValue}
-					onChange={(event) => {
-						const newSlug = createSlug(event.target.value)
-						setSlug(newSlug)
-					}}
-				/>
+				<FieldLabel htmlFor={fields.title.name}>اسم المنتج</FieldLabel>
+				<Input type="text" key={fields.title.key} name={fields.title.name} defaultValue={fields.title.initialValue} />
 				<FieldError>{fields.title.errors}</FieldError>
-			</Field>
-
-			{/* ---------------------------------- slug ---------------------------------- */}
-			<Field>
-				<FieldLabel htmlFor={fields.slug.name}>الاسم المستعار</FieldLabel>
-				<Input
-					type="text"
-					key={fields.slug.key}
-					name={fields.slug.name}
-					defaultValue={fields.slug.initialValue}
-					value={slug}
-					readOnly
-				/>
-				<FieldError>{fields.slug.errors}</FieldError>
 			</Field>
 
 			{/* ----------------------------- description ----------------------------- */}
@@ -71,28 +45,25 @@ export default function AddProductForm() {
 				/>
 				<FieldError>{fields.description.errors}</FieldError>
 			</Field>
-
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
-				{/* ------------------------------- specialCut ------------------------------- */}
+				{/* --------------------------------- cut -------------------------------- */}
 				<Field>
-					<FieldLabel htmlFor={fields.specialCut.name}>قطعية ممتازة ؟</FieldLabel>
-					<Switch
-						key={fields.specialCut.key}
-						name={fields.specialCut.name}
-						defaultValue={fields.specialCut.initialValue}
-					/>
-					<FieldError>{fields.specialCut.errors}</FieldError>
+					<FieldLabel htmlFor={fields.cut.name}>القطعية</FieldLabel>
+					<Select key={fields.cut.key} name={fields.cut.name} defaultValue={MeatTypeSchema.Enum.سن}>
+						<SelectTrigger>
+							<SelectValue placeholder={MeatTypeSchema.Enum.سن} />
+						</SelectTrigger>
+						<SelectContent>
+							{Object.values(MeatTypeSchema.Values).map((cut) => (
+								<SelectItem value={cut} key={cut}>
+									{cut}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
+					<FieldError>{fields.cut.errors}</FieldError>
 				</Field>
 
-				{/* ------------------------------- isActive ------------------------------ */}
-				<Field>
-					<FieldLabel htmlFor={fields.isActive.name}>حالة النشر</FieldLabel>
-					<Switch key={fields.isActive.key} name={fields.isActive.name} defaultValue={fields.isActive.initialValue} />
-					<FieldError>{fields.isActive.errors}</FieldError>
-				</Field>
-			</div>
-
-			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
 				{/* -------------------------------- category -------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.category.name}>الفئة</FieldLabel>
@@ -128,9 +99,7 @@ export default function AddProductForm() {
 					</Select>
 					<FieldError>{fields.unit.errors}</FieldError>
 				</Field>
-			</div>
 
-			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
 				{/* ---------------------------------- price --------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.price.name}>السعر</FieldLabel>
@@ -142,7 +111,9 @@ export default function AddProductForm() {
 					/>
 					<FieldError>{fields.price.errors}</FieldError>
 				</Field>
+			</div>
 
+			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
 				{/* ------------------------------- discount ------------------------------ */}
 				<Field>
 					<FieldLabel htmlFor={fields.discount.name}>الخصم</FieldLabel>
@@ -194,6 +165,9 @@ export default function AddProductForm() {
 				errors={fields.images.errors}
 				label="صور المنتج"
 			/>
+
+			{/* عرض الأخطاء العامة للفورم إن وجدت */}
+			{form.errors && <FieldError>{form.errors}</FieldError>}
 			{/* ------------------------------ SubmitButton ------------------------------ */}
 			<SubmitButton text={"أضف منتج"} />
 		</Form>

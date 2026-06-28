@@ -4,6 +4,7 @@ import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import ProductSchema from "@/schemas/product.schema"
+import { slugifyTitle } from "@/logic/slugifyTitle"
 
 /* ------------------------------ addUserAction ----------------------------- */
 export const addProductAction = async (prevState: unknown, formData: FormData) => {
@@ -13,16 +14,17 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
   if (submission.status !== 'success') {
     return submission.reply()
   }
+  const slug = slugifyTitle(submission.value.title)
 
   try {
     await prisma.product.upsert({
       where: { title: submission.value.title },
       create: {
         title: submission.value.title,
-        slug: submission.value.slug,
+        slug: slug,
         description: submission.value.description,
-        specialCut: submission.value.specialCut,
         isActive: submission.value.isActive,
+        cut: submission.value.cut,
         category: submission.value.category,
         unit: submission.value.unit,
         price: submission.value.price,
@@ -34,9 +36,9 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
       },
       update: {
         title: submission.value.title,
-        slug: submission.value.slug,
+        slug: slug,
         description: submission.value.description,
-        specialCut: submission.value.specialCut,
+        cut: submission.value.cut,
         isActive: submission.value.isActive,
         category: submission.value.category,
         unit: submission.value.unit,
@@ -49,7 +51,10 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
       }
     })
   } catch (error) {
-    console.error(error)
+    console.error("Failed to create product: ", error)
+    return submission.reply({
+      formErrors: ["حدث خطأ أثناء حفظ المنتج ومكوناته الفعالة في قاعدة البيانات."],
+    })
   }
   redirect("/server/products")
 }
@@ -63,15 +68,17 @@ export const editProductAction = async (prevState: unknown, formData: FormData) 
     return submission.reply()
   }
 
+  const slug = slugifyTitle(submission.value.title)
+
   try {
     await prisma.product.update({
       where: { id: submission.value.id! },
       data: {
         title: submission.value.title,
-        slug: submission.value.slug,
+        slug: slug,
         description: submission.value.description,
-        specialCut: submission.value.specialCut ?? false,
-        isActive: submission.value.isActive ?? false,
+        cut: submission.value.cut,
+        isActive: submission.value.isActive,
         category: submission.value.category,
         unit: submission.value.unit,
         price: submission.value.price,
@@ -83,7 +90,10 @@ export const editProductAction = async (prevState: unknown, formData: FormData) 
       }
     })
   } catch (error) {
-    console.error(error)
+    console.error("Failed to update product: ", error)
+    return submission.reply({
+      formErrors: ["حدث خطأ أثناء حفظ المنتج ومكوناته الفعالة في قاعدة البيانات."],
+    })
   }
   redirect("/server/products")
 }
