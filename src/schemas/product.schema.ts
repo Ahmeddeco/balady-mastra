@@ -15,7 +15,7 @@ export const ProductSchema = z.object({
   images: z.string().array(),
   price: z.number(),
   discount: z.number().nullish(),
-  quantity: z.number(),
+  stock: z.number(),
   lowQuantity: z.number().nullish(),
 })
 

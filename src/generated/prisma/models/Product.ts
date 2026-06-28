@@ -29,14 +29,14 @@ export type AggregateProduct = {
 export type ProductAvgAggregateOutputType = {
   price: number | null
   discount: number | null
-  quantity: number | null
+  stock: number | null
   lowQuantity: number | null
 }
 
 export type ProductSumAggregateOutputType = {
   price: number | null
   discount: number | null
-  quantity: number | null
+  stock: number | null
   lowQuantity: number | null
 }
 
@@ -51,7 +51,7 @@ export type ProductMinAggregateOutputType = {
   price: number | null
   discount: number | null
   unit: $Enums.Unit | null
-  quantity: number | null
+  stock: number | null
   lowQuantity: number | null
   increaseByOne: boolean | null
   createdAt: Date | null
@@ -69,7 +69,7 @@ export type ProductMaxAggregateOutputType = {
   price: number | null
   discount: number | null
   unit: $Enums.Unit | null
-  quantity: number | null
+  stock: number | null
   lowQuantity: number | null
   increaseByOne: boolean | null
   createdAt: Date | null
@@ -88,7 +88,7 @@ export type ProductCountAggregateOutputType = {
   price: number
   discount: number
   unit: number
-  quantity: number
+  stock: number
   lowQuantity: number
   increaseByOne: number
   createdAt: number
@@ -100,14 +100,14 @@ export type ProductCountAggregateOutputType = {
 export type ProductAvgAggregateInputType = {
   price?: true
   discount?: true
-  quantity?: true
+  stock?: true
   lowQuantity?: true
 }
 
 export type ProductSumAggregateInputType = {
   price?: true
   discount?: true
-  quantity?: true
+  stock?: true
   lowQuantity?: true
 }
 
@@ -122,7 +122,7 @@ export type ProductMinAggregateInputType = {
   price?: true
   discount?: true
   unit?: true
-  quantity?: true
+  stock?: true
   lowQuantity?: true
   increaseByOne?: true
   createdAt?: true
@@ -140,7 +140,7 @@ export type ProductMaxAggregateInputType = {
   price?: true
   discount?: true
   unit?: true
-  quantity?: true
+  stock?: true
   lowQuantity?: true
   increaseByOne?: true
   createdAt?: true
@@ -159,7 +159,7 @@ export type ProductCountAggregateInputType = {
   price?: true
   discount?: true
   unit?: true
-  quantity?: true
+  stock?: true
   lowQuantity?: true
   increaseByOne?: true
   createdAt?: true
@@ -264,8 +264,8 @@ export type ProductGroupByOutputType = {
   images: string[]
   price: number
   discount: number | null
-  unit: $Enums.Unit | null
-  quantity: number
+  unit: $Enums.Unit
+  stock: number
   lowQuantity: number | null
   increaseByOne: boolean
   createdAt: Date
@@ -306,8 +306,8 @@ export type ProductWhereInput = {
   images?: Prisma.StringNullableListFilter<"Product">
   price?: Prisma.FloatFilter<"Product"> | number
   discount?: Prisma.IntNullableFilter<"Product"> | number | null
-  unit?: Prisma.EnumUnitNullableFilter<"Product"> | $Enums.Unit | null
-  quantity?: Prisma.FloatFilter<"Product"> | number
+  unit?: Prisma.EnumUnitFilter<"Product"> | $Enums.Unit
+  stock?: Prisma.FloatFilter<"Product"> | number
   lowQuantity?: Prisma.FloatNullableFilter<"Product"> | number | null
   increaseByOne?: Prisma.BoolFilter<"Product"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -327,8 +327,8 @@ export type ProductOrderByWithRelationInput = {
   images?: Prisma.SortOrder
   price?: Prisma.SortOrder
   discount?: Prisma.SortOrderInput | Prisma.SortOrder
-  unit?: Prisma.SortOrderInput | Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   lowQuantity?: Prisma.SortOrderInput | Prisma.SortOrder
   increaseByOne?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -351,8 +351,8 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   images?: Prisma.StringNullableListFilter<"Product">
   price?: Prisma.FloatFilter<"Product"> | number
   discount?: Prisma.IntNullableFilter<"Product"> | number | null
-  unit?: Prisma.EnumUnitNullableFilter<"Product"> | $Enums.Unit | null
-  quantity?: Prisma.FloatFilter<"Product"> | number
+  unit?: Prisma.EnumUnitFilter<"Product"> | $Enums.Unit
+  stock?: Prisma.FloatFilter<"Product"> | number
   lowQuantity?: Prisma.FloatNullableFilter<"Product"> | number | null
   increaseByOne?: Prisma.BoolFilter<"Product"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -372,8 +372,8 @@ export type ProductOrderByWithAggregationInput = {
   images?: Prisma.SortOrder
   price?: Prisma.SortOrder
   discount?: Prisma.SortOrderInput | Prisma.SortOrder
-  unit?: Prisma.SortOrderInput | Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   lowQuantity?: Prisma.SortOrderInput | Prisma.SortOrder
   increaseByOne?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -399,8 +399,8 @@ export type ProductScalarWhereWithAggregatesInput = {
   images?: Prisma.StringNullableListFilter<"Product">
   price?: Prisma.FloatWithAggregatesFilter<"Product"> | number
   discount?: Prisma.IntNullableWithAggregatesFilter<"Product"> | number | null
-  unit?: Prisma.EnumUnitNullableWithAggregatesFilter<"Product"> | $Enums.Unit | null
-  quantity?: Prisma.FloatWithAggregatesFilter<"Product"> | number
+  unit?: Prisma.EnumUnitWithAggregatesFilter<"Product"> | $Enums.Unit
+  stock?: Prisma.FloatWithAggregatesFilter<"Product"> | number
   lowQuantity?: Prisma.FloatNullableWithAggregatesFilter<"Product"> | number | null
   increaseByOne?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
@@ -418,8 +418,8 @@ export type ProductCreateInput = {
   images?: Prisma.ProductCreateimagesInput | string[]
   price?: number
   discount?: number | null
-  unit?: $Enums.Unit | null
-  quantity?: number
+  unit?: $Enums.Unit
+  stock?: number
   lowQuantity?: number | null
   increaseByOne?: boolean
   createdAt?: Date | string
@@ -439,8 +439,8 @@ export type ProductUncheckedCreateInput = {
   images?: Prisma.ProductCreateimagesInput | string[]
   price?: number
   discount?: number | null
-  unit?: $Enums.Unit | null
-  quantity?: number
+  unit?: $Enums.Unit
+  stock?: number
   lowQuantity?: number | null
   increaseByOne?: boolean
   createdAt?: Date | string
@@ -460,8 +460,8 @@ export type ProductUpdateInput = {
   images?: Prisma.ProductUpdateimagesInput | string[]
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  unit?: Prisma.NullableEnumUnitFieldUpdateOperationsInput | $Enums.Unit | null
-  quantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+  stock?: Prisma.FloatFieldUpdateOperationsInput | number
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -481,8 +481,8 @@ export type ProductUncheckedUpdateInput = {
   images?: Prisma.ProductUpdateimagesInput | string[]
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  unit?: Prisma.NullableEnumUnitFieldUpdateOperationsInput | $Enums.Unit | null
-  quantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+  stock?: Prisma.FloatFieldUpdateOperationsInput | number
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -502,8 +502,8 @@ export type ProductCreateManyInput = {
   images?: Prisma.ProductCreateimagesInput | string[]
   price?: number
   discount?: number | null
-  unit?: $Enums.Unit | null
-  quantity?: number
+  unit?: $Enums.Unit
+  stock?: number
   lowQuantity?: number | null
   increaseByOne?: boolean
   createdAt?: Date | string
@@ -521,8 +521,8 @@ export type ProductUpdateManyMutationInput = {
   images?: Prisma.ProductUpdateimagesInput | string[]
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  unit?: Prisma.NullableEnumUnitFieldUpdateOperationsInput | $Enums.Unit | null
-  quantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+  stock?: Prisma.FloatFieldUpdateOperationsInput | number
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -540,8 +540,8 @@ export type ProductUncheckedUpdateManyInput = {
   images?: Prisma.ProductUpdateimagesInput | string[]
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  unit?: Prisma.NullableEnumUnitFieldUpdateOperationsInput | $Enums.Unit | null
-  quantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+  stock?: Prisma.FloatFieldUpdateOperationsInput | number
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -568,7 +568,7 @@ export type ProductCountOrderByAggregateInput = {
   price?: Prisma.SortOrder
   discount?: Prisma.SortOrder
   unit?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   lowQuantity?: Prisma.SortOrder
   increaseByOne?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -578,7 +578,7 @@ export type ProductCountOrderByAggregateInput = {
 export type ProductAvgOrderByAggregateInput = {
   price?: Prisma.SortOrder
   discount?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   lowQuantity?: Prisma.SortOrder
 }
 
@@ -593,7 +593,7 @@ export type ProductMaxOrderByAggregateInput = {
   price?: Prisma.SortOrder
   discount?: Prisma.SortOrder
   unit?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   lowQuantity?: Prisma.SortOrder
   increaseByOne?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -611,7 +611,7 @@ export type ProductMinOrderByAggregateInput = {
   price?: Prisma.SortOrder
   discount?: Prisma.SortOrder
   unit?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   lowQuantity?: Prisma.SortOrder
   increaseByOne?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -621,7 +621,7 @@ export type ProductMinOrderByAggregateInput = {
 export type ProductSumOrderByAggregateInput = {
   price?: Prisma.SortOrder
   discount?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   lowQuantity?: Prisma.SortOrder
 }
 
@@ -655,8 +655,8 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type NullableEnumUnitFieldUpdateOperationsInput = {
-  set?: $Enums.Unit | null
+export type EnumUnitFieldUpdateOperationsInput = {
+  set?: $Enums.Unit
 }
 
 export type NullableFloatFieldUpdateOperationsInput = {
@@ -706,8 +706,8 @@ export type ProductCreateWithoutOrderItemsInput = {
   images?: Prisma.ProductCreateimagesInput | string[]
   price?: number
   discount?: number | null
-  unit?: $Enums.Unit | null
-  quantity?: number
+  unit?: $Enums.Unit
+  stock?: number
   lowQuantity?: number | null
   increaseByOne?: boolean
   createdAt?: Date | string
@@ -726,8 +726,8 @@ export type ProductUncheckedCreateWithoutOrderItemsInput = {
   images?: Prisma.ProductCreateimagesInput | string[]
   price?: number
   discount?: number | null
-  unit?: $Enums.Unit | null
-  quantity?: number
+  unit?: $Enums.Unit
+  stock?: number
   lowQuantity?: number | null
   increaseByOne?: boolean
   createdAt?: Date | string
@@ -762,8 +762,8 @@ export type ProductUpdateWithoutOrderItemsInput = {
   images?: Prisma.ProductUpdateimagesInput | string[]
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  unit?: Prisma.NullableEnumUnitFieldUpdateOperationsInput | $Enums.Unit | null
-  quantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+  stock?: Prisma.FloatFieldUpdateOperationsInput | number
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -782,8 +782,8 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   images?: Prisma.ProductUpdateimagesInput | string[]
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  unit?: Prisma.NullableEnumUnitFieldUpdateOperationsInput | $Enums.Unit | null
-  quantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+  stock?: Prisma.FloatFieldUpdateOperationsInput | number
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -802,8 +802,8 @@ export type ProductCreateWithoutFavoritesInput = {
   images?: Prisma.ProductCreateimagesInput | string[]
   price?: number
   discount?: number | null
-  unit?: $Enums.Unit | null
-  quantity?: number
+  unit?: $Enums.Unit
+  stock?: number
   lowQuantity?: number | null
   increaseByOne?: boolean
   createdAt?: Date | string
@@ -822,8 +822,8 @@ export type ProductUncheckedCreateWithoutFavoritesInput = {
   images?: Prisma.ProductCreateimagesInput | string[]
   price?: number
   discount?: number | null
-  unit?: $Enums.Unit | null
-  quantity?: number
+  unit?: $Enums.Unit
+  stock?: number
   lowQuantity?: number | null
   increaseByOne?: boolean
   createdAt?: Date | string
@@ -858,8 +858,8 @@ export type ProductUpdateWithoutFavoritesInput = {
   images?: Prisma.ProductUpdateimagesInput | string[]
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  unit?: Prisma.NullableEnumUnitFieldUpdateOperationsInput | $Enums.Unit | null
-  quantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+  stock?: Prisma.FloatFieldUpdateOperationsInput | number
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -878,8 +878,8 @@ export type ProductUncheckedUpdateWithoutFavoritesInput = {
   images?: Prisma.ProductUpdateimagesInput | string[]
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  unit?: Prisma.NullableEnumUnitFieldUpdateOperationsInput | $Enums.Unit | null
-  quantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+  stock?: Prisma.FloatFieldUpdateOperationsInput | number
   lowQuantity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   increaseByOne?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -939,7 +939,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   price?: boolean
   discount?: boolean
   unit?: boolean
-  quantity?: boolean
+  stock?: boolean
   lowQuantity?: boolean
   increaseByOne?: boolean
   createdAt?: boolean
@@ -961,7 +961,7 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   price?: boolean
   discount?: boolean
   unit?: boolean
-  quantity?: boolean
+  stock?: boolean
   lowQuantity?: boolean
   increaseByOne?: boolean
   createdAt?: boolean
@@ -980,7 +980,7 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   price?: boolean
   discount?: boolean
   unit?: boolean
-  quantity?: boolean
+  stock?: boolean
   lowQuantity?: boolean
   increaseByOne?: boolean
   createdAt?: boolean
@@ -999,14 +999,14 @@ export type ProductSelectScalar = {
   price?: boolean
   discount?: boolean
   unit?: boolean
-  quantity?: boolean
+  stock?: boolean
   lowQuantity?: boolean
   increaseByOne?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "cut" | "category" | "mainImage" | "images" | "price" | "discount" | "unit" | "quantity" | "lowQuantity" | "increaseByOne" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "cut" | "category" | "mainImage" | "images" | "price" | "discount" | "unit" | "stock" | "lowQuantity" | "increaseByOne" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
   favorites?: boolean | Prisma.Product$favoritesArgs<ExtArgs>
@@ -1032,8 +1032,8 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     images: string[]
     price: number
     discount: number | null
-    unit: $Enums.Unit | null
-    quantity: number
+    unit: $Enums.Unit
+    stock: number
     lowQuantity: number | null
     increaseByOne: boolean
     createdAt: Date
@@ -1474,7 +1474,7 @@ export interface ProductFieldRefs {
   readonly price: Prisma.FieldRef<"Product", 'Float'>
   readonly discount: Prisma.FieldRef<"Product", 'Int'>
   readonly unit: Prisma.FieldRef<"Product", 'Unit'>
-  readonly quantity: Prisma.FieldRef<"Product", 'Float'>
+  readonly stock: Prisma.FieldRef<"Product", 'Float'>
   readonly lowQuantity: Prisma.FieldRef<"Product", 'Float'>
   readonly increaseByOne: Prisma.FieldRef<"Product", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Product", 'DateTime'>

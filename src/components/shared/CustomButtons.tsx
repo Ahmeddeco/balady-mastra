@@ -2,22 +2,21 @@
 
 import { useFormStatus } from "react-dom"
 import { Button } from "../ui/button"
-import { Loader2, ShoppingCart, X } from "lucide-react"
+import { CircleDollarSign, Loader2, ShoppingCart, X } from "lucide-react"
 import { useCartStore } from "@/store/cartStore"
 import { useSession } from "next-auth/react"
-import { IoBagCheckOutline } from "react-icons/io5"
-import { getOneProductBySlugType } from "@/types/Product.type"
+import { getOneProductBySlugType, SingleProductPageType } from "@/types/Product.type"
 
 type SubmitButtonType = {
 	title: string
 	type?: "button" | "submit" | "reset" | undefined
-	size?: "default" | "sm" | "lg" | "full" | "icon" | null | undefined
+	size?: "default" | "sm" | "lg" | "icon" | null | undefined
 	variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"
 }
 
 /* ------------------------------ SubmitButton ------------------------------ */
 
-export function SubmitButton({ title, type = "submit", size = "full", variant }: SubmitButtonType) {
+export function SubmitButton({ title, type = "submit", size = "lg", variant }: SubmitButtonType) {
 	const { pending } = useFormStatus()
 
 	return (
@@ -38,7 +37,7 @@ export function SubmitButton({ title, type = "submit", size = "full", variant }:
 
 /* -------------------------------- AddToCart ------------------------------- */
 
-export function AddToCart({ product }: { product: getOneProductBySlugType }) {
+export function AddToCart({ product }: { product: SingleProductPageType }) {
 	const session = useSession()
 	const { pending } = useFormStatus()
 	const addToCart = useCartStore((state) => state.addToCart)
@@ -71,7 +70,7 @@ export const CheckOutButton = () => {
 				</Button>
 			) : (
 				<Button type="button" onClick={() => console.log("CheckOut Button pressed!")}>
-					<IoBagCheckOutline /> اتمام عملية الشراء
+					<CircleDollarSign /> اتمام عملية الشراء
 				</Button>
 			)}
 		</>

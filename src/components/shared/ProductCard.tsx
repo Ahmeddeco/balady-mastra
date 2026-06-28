@@ -26,8 +26,6 @@ export default function ProductCard({ product, authId }: Props) {
 					) : (
 						<Image src={product?.mainImage} alt={product?.title} fill className="object-cover rounded-t-xl" />
 					)}
-					{/* ----------------------------- FavoriteButton ----------------------------- */}
-					{authId && <FavoriteButton productId={product?.id} userId={authId} isFavorite={isFavorite} />}
 
 					{product?.discount && product.discount > 0 && (
 						<Badge className="absolute top-2 left-2 ">خصم {product?.discount} %</Badge>
@@ -35,7 +33,13 @@ export default function ProductCard({ product, authId }: Props) {
 				</div>
 			</CardHeader>
 			<CardContent>
-				<h6>{product?.category}</h6>
+				<div className="flex items-center justify-between ">
+					<div className="flex items-center gap-2">
+						<Badge variant={"outline"}>{product?.category}</Badge>
+						<Badge variant={"outline"}>{product?.unit}</Badge>
+					</div>
+					{authId && <FavoriteButton productId={product?.id} userId={authId} isFavorite={isFavorite} />}
+				</div>
 				<h4>{product?.title}</h4>
 				<h4 className="line-through text-muted-foreground">{Currency(product?.price as number)}</h4>
 				<h2>{finalPrice(product?.price as number, product?.discount as number)}</h2>

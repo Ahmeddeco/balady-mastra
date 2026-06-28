@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import { CheckOutButton } from "@/components/shared/CustomButtons"
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item"
+import { Unit } from "@/generated/prisma/enums"
 
 export default function Cart() {
 	const { items, removeFromCart, updateQuantityByHalf, updateQuantityByOnes } = useCartStore((state) => state)
@@ -32,19 +33,22 @@ export default function Cart() {
 			</SheetTrigger>
 			<SheetContent className="max-w-lg " dir="rtl">
 				<SheetHeader>
-					<SheetTitle className="text-center">سلة المشتريات</SheetTitle>
+					<SheetTitle className="text-center flex items-center justify-center gap-2">
+						<ShoppingCart className="text-primary" />
+						سلة المشتريات
+					</SheetTitle>
 				</SheetHeader>
 				<Separator />
 				<ScrollArea className="flex flex-col gap-4 p-4 w-full h-full max-h-[60vh]">
-					{items.map(({ id, image, price, quantity, title, increaseByOne }) => (
+					{items.map(({ id, image, price, quantity, stock, title, unit }) => (
 						<Item key={id} variant="default" role="listitem">
 							<ItemMedia variant="image" className="relative aspect-square size-24">
 								<Image src={image} alt={title} fill className="object-cover rounded-md " />
 								<Button
-									size={"icon"}
+									size={"icon-xs"}
 									variant={"destructive"}
 									type="button"
-									className=" absolute top-0 left-0 rounded-full z-20"
+									className=" absolute top-0 left-0 rounded-full z-20 bg-red-600! text-neutral-50"
 									onClick={() => removeFromCart(id)}
 								>
 									<X />
@@ -53,28 +57,34 @@ export default function Cart() {
 							<ItemContent>
 								<ItemTitle className="line-clamp-1">{title}</ItemTitle>
 								<ItemDescription>{Currency(price)}</ItemDescription>
-								{/* -------------------------------- quantity -------------------------------- */}
 								<div className=" flex items-center gap-1">
+									{/* --------------------------- decrement --------------------------- */}
 									<Button
 										variant={"ghost"}
 										size={"icon"}
 										type="button"
 										onClick={() => {
-											increaseByOne ? updateQuantityByOnes("decrement", id) : updateQuantityByHalf("decrement", id)
+											unit === Unit.قطعة ? updateQuantityByOnes("decrement", id) : updateQuantityByHalf("decrement", id)
 										}}
+										disabled={(unit === Unit.قطعة && quantity <= 1) || (unit === Unit.كجم && quantity <= 0.5)}
 									>
 										<Minus />
 									</Button>
+
+									{/* -------------------------------- quantity -------------------------------- */}
 									<Button size={"sm"} type="button" variant={"outline"} className="cursor-not-allowed">
-										{quantity.toFixed(1)}
+										{quantity && quantity.toFixed(1)}
 									</Button>
+
+									{/* --------------------------- increment --------------------------- */}
 									<Button
 										variant={"ghost"}
 										size={"icon"}
 										type="button"
 										onClick={() => {
-											increaseByOne ? updateQuantityByOnes("increment", id) : updateQuantityByHalf("increment", id)
+											unit === Unit.قطعة ? updateQuantityByOnes("increment", id) : updateQuantityByHalf("increment", id)
 										}}
+										disabled={quantity >= stock}
 									>
 										<Plus />
 									</Button>

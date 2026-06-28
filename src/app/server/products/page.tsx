@@ -68,19 +68,19 @@ export default async function ProductsServerPage({
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
-							<TableHead>صورة المنتج</TableHead>
-							<TableHead>اسم النتج</TableHead>
-							<TableHead>القطعية</TableHead>
-							<TableHead>السعر</TableHead>
-							<TableHead>الخصم</TableHead>
-							<TableHead>المخزون</TableHead>
-							<TableHead>الخصائص</TableHead>
+							<TableHead className="text-right">صورة المنتج</TableHead>
+							<TableHead className="text-right">اسم النتج</TableHead>
+							<TableHead className="text-right">القطعية</TableHead>
+							<TableHead className="text-right">السعر</TableHead>
+							<TableHead className="text-right">الخصم</TableHead>
+							<TableHead className="text-right">المخزون</TableHead>
+							<TableHead className="text-right">الخصائص</TableHead>
 							<TableHead className="text-left">الإعدادات</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{products?.data.map(({ id, category, discount, mainImage, price, title, cut, unit, quantity }) => (
+						{products?.data.map(({ id, category, discount, mainImage, price, title, cut, unit, stock }) => (
 							<TableRow key={id}>
 								<TableCell>
 									{mainImage ? (
@@ -95,27 +95,27 @@ export default async function ProductsServerPage({
 										React.createElement(ImageOff)
 									)}
 								</TableCell>
-								<TableCell>{title}</TableCell>
-								<TableCell>{cut}</TableCell>
-								<TableCell>{price}</TableCell>
-								<TableCell>{discount}</TableCell>
-								<TableCell>{quantity}</TableCell>
-								<TableCell className="flex items-center gap-2">
-									<Badge>{category} </Badge>
-									<Badge>{unit} </Badge>
+								<TableCell className="text-right">{title}</TableCell>
+								<TableCell className="text-right">{cut}</TableCell>
+								<TableCell className="text-right">{price}</TableCell>
+								<TableCell className="text-right">{discount} %</TableCell>
+								<TableCell className="text-right">{stock}</TableCell>
+								<TableCell className="flex items-center gap-2 ">
+									<Badge variant={"default"}>{category} </Badge>
+									<Badge variant={"default"}>{unit} </Badge>
 								</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}
-								<TableCell className="text-left col-span-1">
+								<TableCell className="text-left ">
 									<DropdownMenu>
 										<DropdownMenuTrigger asChild>
 											<Button variant={"outline"} size={"icon"} suppressHydrationWarning>
 												<MoreVertical />
 											</Button>
 										</DropdownMenuTrigger>
-										<DropdownMenuContent align="start" className="space-y-2 p-2">
+										<DropdownMenuContent align="start" className="flex flex-col gap-2 items-center justify-center p-2">
 											<DropdownMenuItem asChild>
-												<Button variant={"accent"} size={"full"} asChild>
+												<Button size={"lg"} asChild className="w-full" variant={"outline"}>
 													<Link href={`/server/products/edit/${id}`}>تعديل</Link>
 												</Button>
 											</DropdownMenuItem>
@@ -123,7 +123,7 @@ export default async function ProductsServerPage({
 											<DropdownMenuItem asChild>
 												<Dialog>
 													<DialogTrigger asChild>
-														<Button variant={"default"} size={"full"}>
+														<Button size={"lg"} className="w-full">
 															حذف
 														</Button>
 													</DialogTrigger>
@@ -136,8 +136,8 @@ export default async function ProductsServerPage({
 															</DialogDescription>
 														</DialogHeader>
 														<div className="flex items-center justify-between ">
-															<Button asChild variant={"outline"}>
-																<DialogClose>الغاء الحذف</DialogClose>
+															<Button asChild variant={"secondary"}>
+																<DialogClose>إلغاء الحذف</DialogClose>
 															</Button>
 															<Form action={deleteUserAction}>
 																<Input type="hidden" name="id" value={id} />

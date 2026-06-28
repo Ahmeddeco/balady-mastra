@@ -15,6 +15,7 @@ export const getAllProductsForProductsPage = async (size: number, page: number, 
         price: true,
         category: true,
         mainImage: true,
+        stock: true,
         images: true,
         discount: true,
         unit: true,
@@ -60,7 +61,7 @@ export const getAllProductsForProductsServerPage = async (size: number, page: nu
 
     const data = await prisma.product.findMany({
       where: { category: activeCategory },
-      select: { id: true, category: true, cut: true, discount: true, mainImage: true, price: true, slug: true, title: true, unit: true, quantity: true, },
+      select: { id: true, category: true, cut: true, discount: true, mainImage: true, price: true, slug: true, title: true, unit: true, stock: true, },
       orderBy: { createdAt: "desc" },
       take: size,
       skip: (page * size) - size
@@ -75,8 +76,8 @@ export const getAllProductsForProductsServerPage = async (size: number, page: nu
 export const getNonTrendingProducts = async (limit: number = 3) => {
   try {
     const data = await prisma.product.findMany({
-      where: { quantity: { gt: 0 } },
-      orderBy: { quantity: "desc" },
+      where: { stock: { gt: 0 } },
+      orderBy: { stock: "desc" },
       select: { id: true, title: true, price: true, unit: true, slug: true, quantity: true, description: true },
       take: limit
     })

@@ -126,8 +126,8 @@ model Product {
   images        String[]
   price         Float       @default(0)
   discount      Int?        @default(0)
-  unit          Unit?       @default(قطعة)
-  quantity      Float       @default(0)
+  unit          Unit        @default(قطعة)
+  stock         Float       @default(0)
   lowQuantity   Float?      @default(0)
   increaseByOne Boolean     @default(false)
   orderItems    OrderItem[]

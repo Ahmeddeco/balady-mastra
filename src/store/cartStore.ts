@@ -1,4 +1,5 @@
-import { getOneProductBySlugType } from "@/types/Product.type"
+import { Unit } from "@/generated/prisma/enums"
+import { SingleProductPageType } from "@/types/Product.type"
 import { toast } from "sonner"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
@@ -6,15 +7,16 @@ import { persist } from "zustand/middleware"
 export type CartItem = {
   id: string
   quantity: number
+  stock: number
   title: string
   price: number
   image: string
-  increaseByOne?: boolean
+  unit: Unit
 }
 
 type CartState = {
   items: CartItem[]
-  addToCart: (product: getOneProductBySlugType) => void
+  addToCart: (product: SingleProductPageType) => void
   removeFromCart: (id: string) => void
   updateQuantityByHalf: (type: 'increment' | 'decrement', id: string) => void
   updateQuantityByOnes: (type: 'increment' | 'decrement', id: string) => void
@@ -25,20 +27,22 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
 
-      addToCart: (product: getOneProductBySlugType) => {
+      addToCart: (product: SingleProductPageType) => {
         const existingProduct = get().items.find((item) => item.id === product!.id)
+        const unit = product?.unit ?? Unit.قطعة
         set({
           items: existingProduct
             ? get().items
             : [
               ...get().items,
               {
-                quantity: 1,
-                id: product!.id,
-                title: product!.title,
-                price: product!.price,
-                image: product!.mainImage,
-                increaseByOne: product?.unit === "قطعة" ? true : false
+                quantity: unit === Unit.قطعة ? 1 : 0.5,
+                id: product?.id,
+                title: product?.title,
+                price: product?.price,
+                image: product?.mainImage,
+                stock: product?.stock,
+                unit,
               },
             ],
         })

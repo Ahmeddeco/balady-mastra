@@ -10,7 +10,7 @@ import { UnitSchema } from '../inputTypeSchemas/UnitSchema'
 export const ProductSchema = z.object({
   cut: MeatTypeSchema,
   category: CategorySchema,
-  unit: UnitSchema.nullish(),
+  unit: UnitSchema,
   id: z.string(),
   title: z.string(),
   slug: z.string(),
@@ -19,7 +19,7 @@ export const ProductSchema = z.object({
   images: z.string().array(),
   price: z.number(),
   discount: z.number().nullish(),
-  quantity: z.number(),
+  stock: z.number(),
   lowQuantity: z.number().nullish(),
   increaseByOne: z.boolean(),
   createdAt: z.date(),

@@ -85,9 +85,9 @@ export default function AddProductForm() {
 				{/* ---------------------------------- unit ---------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.unit.name}>الوحدة</FieldLabel>
-					<Select key={fields.unit.key} name={fields.unit.name} defaultValue={Unit.KG}>
+					<Select key={fields.unit.key} name={fields.unit.name} defaultValue={Unit.كجم}>
 						<SelectTrigger>
-							<SelectValue placeholder={Unit.KG} />
+							<SelectValue placeholder={Unit.كجم} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(Unit).map((degreeProgram) => (
@@ -126,16 +126,16 @@ export default function AddProductForm() {
 					<FieldError>{fields.discount.errors}</FieldError>
 				</Field>
 
-				{/* ------------------------------- quantity ------------------------------ */}
+				{/* ------------------------------- stock ------------------------------ */}
 				<Field>
-					<FieldLabel htmlFor={fields.quantity.name}>الكمية</FieldLabel>
+					<FieldLabel htmlFor={fields.stock.name}>الكمية</FieldLabel>
 					<Input
 						type="number"
-						key={fields.quantity.key}
-						name={fields.quantity.name}
-						defaultValue={fields.quantity.initialValue}
+						key={fields.stock.key}
+						name={fields.stock.name}
+						defaultValue={fields.stock.initialValue}
 					/>
-					<FieldError>{fields.quantity.errors}</FieldError>
+					<FieldError>{fields.stock.errors}</FieldError>
 				</Field>
 
 				{/* ------------------------------- lowQuantity ------------------------------ */}
