@@ -62,13 +62,14 @@ export default function MultiSelect({ allSelectedData, inputName, label, default
 				{/* ------------------------------- select ------------------------------- */}
 				<CardContent className="flex flex-col gap-3 w-full">
 					<Popover>
-						<PopoverTrigger asChild>
-							<Button variant="outline" role="combobox" size={"lg"} type="button" className="justify-start w-fit">
-								select {inputName}
-								<ChevronDown opacity={0.5} />
-							</Button>
-						</PopoverTrigger>
-
+						<PopoverTrigger
+							render={
+								<Button variant="outline" role="combobox" size={"lg"} type="button" className="justify-start w-fit">
+									select {inputName}
+									<ChevronDown opacity={0.5} />
+								</Button>
+							}
+						/>
 						<PopoverContent className="w-[200px] p-0 " align="start">
 							<Command>
 								<CommandEmpty>No result found.</CommandEmpty>

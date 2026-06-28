@@ -28,20 +28,22 @@ export default function DatePicker({ defaultValue, key, name, errors }: Props) {
 			<FieldLabel htmlFor={name}>{name}</FieldLabel>
 			<Popover>
 				<Input type="hidden" key={key} name={name} defaultValue={defaultValue} value={date ? date.toISOString() : ""} />
-				<PopoverTrigger asChild>
-					<Button
-						variant="outline"
-						data-empty={!date}
-						className="data-[empty=true]:text-muted-foreground w-full justify-start text-left font-normal"
-					>
-						<CalendarIcon />
-						{date ? (
-							date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
-						) : (
-							<h6>Pick a Date</h6>
-						)}
-					</Button>
-				</PopoverTrigger>
+				<PopoverTrigger
+					render={
+						<Button
+							variant="outline"
+							data-empty={!date}
+							className="data-[empty=true]:text-muted-foreground w-full justify-start text-left font-normal"
+						>
+							<CalendarIcon />
+							{date ? (
+								date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
+							) : (
+								<h6>Pick a Date</h6>
+							)}
+						</Button>
+					}
+				/>
 				<PopoverContent className="w-auto p-0" align="start">
 					<Calendar
 						mode="single"

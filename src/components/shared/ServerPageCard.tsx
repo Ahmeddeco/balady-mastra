@@ -30,12 +30,15 @@ export default function ServerPageCard({
 				<CardTitle>{title}</CardTitle>
 				<CardDescription>{description}</CardDescription>
 				<CardAction>
-					<Button asChild size={"sm"}>
-						<Link href={href}>
-							{React.createElement(icon)}
-							{btnTitle}
-						</Link>
-					</Button>
+					<Button
+						render={
+							<Link href={href}>
+								{React.createElement(icon)}
+								{btnTitle}
+							</Link>
+						}
+						size={"sm"}
+					/>
 				</CardAction>
 			</CardHeader>
 			<Separator />

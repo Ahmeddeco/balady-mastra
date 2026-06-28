@@ -14,12 +14,17 @@ export default function ServerNavigation() {
 		<SidebarMenu>
 			{serverNav.map(({ href, title, icon }) => (
 				<SidebarMenu key={href}>
-					<Button asChild variant={pathName === href ? "default" : "ghost"} size={"lg"} className="justify-start">
-						<Link href={href}>
-							{React.createElement(icon)}
-							{title}
-						</Link>
-					</Button>
+					<Button
+						render={
+							<Link href={href}>
+								{React.createElement(icon)}
+								{title}
+							</Link>
+						}
+						variant={pathName === href ? "default" : "ghost"}
+						size={"lg"}
+						className="justify-start"
+					/>
 				</SidebarMenu>
 			))}
 		</SidebarMenu>

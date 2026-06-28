@@ -185,11 +185,15 @@
 	--radius-2xl: calc(var(--radius) + 8px);
 	--radius-3xl: calc(var(--radius) + 12px);
 	--radius-4xl: calc(var(--radius) + 16px);
-	--font-heading: var(--font-sans);
+	--font-heading: var(--font-mono);
 	--shadow-color: var(--shadow-color);
 }
 
 @layer base {
+	button:not(:disabled),
+	[role="button"]:not(:disabled) {
+		cursor: pointer;
+	}
 	* {
 		@apply border-border outline-ring/50;
 	}
@@ -198,25 +202,25 @@
 		letter-spacing: var(--tracking-normal);
 	}
 	h1 {
-		@apply text-3xl lg:text-4xl font-black capitalize text-center lg:text-start;
+		@apply text-3xl lg:text-4xl font-black capitalize;
 	}
 	h2 {
-		@apply text-2xl lg:text-3xl font-bold capitalize text-center lg:text-start;
+		@apply text-2xl lg:text-3xl font-bold capitalize;
 	}
 	h3 {
-		@apply text-xl lg:text-2xl font-semibold capitalize text-center lg:text-start;
+		@apply text-xl lg:text-2xl font-semibold capitalize;
 	}
 	h4 {
-		@apply text-lg lg:text-xl font-medium capitalize text-center lg:text-start;
+		@apply text-lg lg:text-xl font-medium capitalize;
 	}
 	h5 {
-		@apply text-base lg:text-lg font-normal capitalize text-center lg:text-start;
+		@apply text-base lg:text-lg font-normal capitalize;
 	}
 	h6 {
-		@apply text-sm lg:text-base font-light text-pretty  text-center lg:text-start;
+		@apply text-sm lg:text-base font-light text-pretty;
 	}
 	p {
-		@apply text-xs lg:text-sm font-extralight text-muted-foreground text-center lg:text-start;
+		@apply text-xs lg:text-sm font-extralight text-muted-foreground;
 	}
 	section {
 		@apply container mx-auto px-4 py-12;
@@ -228,6 +232,6 @@
 		@apply !bg-input !text-foreground;
 	}
 	html {
-		@apply font-sans;
+		@apply font-mono;
 	}
 }

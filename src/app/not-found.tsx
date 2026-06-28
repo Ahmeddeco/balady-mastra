@@ -6,9 +6,7 @@ export default function NotFound() {
 		<div className="h-dvh flex flex-col items-center justify-center gap-4 ">
 			<h2>Not Found</h2>
 			<h6>Could not find requested resource</h6>
-			<Button asChild>
-				<Link href="/">Return Home</Link>
-			</Button>
+			<Button render={<Link href="/" />}>Return Home</Button>
 		</div>
 	)
 }

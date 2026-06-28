@@ -13,23 +13,16 @@ import {
 	PromptInputTextarea,
 	PromptInputSubmit,
 } from "@/components/ai-elements/prompt-input"
-import { MessageSquare } from "lucide-react"
 import { useState } from "react"
 import { useChat } from "@ai-sdk/react"
 import { DefaultChatTransport } from "ai"
+import { RiRobot3Line } from "react-icons/ri"
 
 export default function BotPage() {
 	const [input, setInput] = useState("")
 	const { messages, sendMessage, status } = useChat({
 		transport: new DefaultChatTransport({
-			api: "/api/workflow/butcher",
-			prepareSendMessagesRequest: () => ({
-				body: {
-					inputData: {
-						limit: 3,
-					},
-				},
-			}),
+			api: "/api/agents/butcher",
 		}),
 	})
 
@@ -41,15 +34,15 @@ export default function BotPage() {
 	}
 
 	return (
-		<div className="max-w-5xl mx-auto p-6 mt-12 size-full rounded-lg border h-[85vh]">
+		<div className=" container mx-auto p-6 mt-12 size-full rounded-lg lg:border h-[86vh] ">
 			<div className="flex flex-col h-full">
 				<Conversation>
 					<ConversationContent>
 						{messages.length === 0 ? (
 							<ConversationEmptyState
-								icon={<MessageSquare className="size-12" />}
-								title="Start a conversation"
-								description="Type a message below to begin chatting"
+								icon={<RiRobot3Line size={150} />}
+								title="أهلا , أنا روز-بوت"
+								description="مساعدك الذكي  في اختيار أجود أنواع اللحوم اللي تناسب ذوقك"
 							/>
 						) : (
 							messages.map((message) => (

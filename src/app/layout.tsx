@@ -7,8 +7,10 @@ import { extractRouterConfig } from "uploadthing/server"
 import { ourFileRouter } from "@/app/api/uploadthing/core"
 import NextAuthProvider from "@/components/auth/NextAuthProvider"
 import { TooltipProvider } from "@/components/ui/tooltip"
-import { Figtree } from "next/font/google";
+import { Figtree, JetBrains_Mono } from "next/font/google";
 import { cn } from "@/lib/utils";
+
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
 const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
 
@@ -27,7 +29,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang="ar" dir="rtl" suppressHydrationWarning className={cn("font-sans", figtree.variable)}>
+		<html lang="ar" dir="rtl" suppressHydrationWarning className={cn( figtree.variable, "font-mono", jetbrainsMono.variable)}>
 			<body className={`${cairo.className} antialiased`} suppressHydrationWarning>
 				<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

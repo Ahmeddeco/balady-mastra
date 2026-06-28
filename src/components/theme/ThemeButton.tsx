@@ -12,12 +12,14 @@ export function ThemeButton() {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" size="icon">
-					<Sun className="size-8 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-					<Moon className="absolute size-8 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-				</Button>
-			</DropdownMenuTrigger>
+			<DropdownMenuTrigger
+				render={
+					<Button variant="ghost" size="icon">
+						<Sun className="size-8 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+						<Moon className="absolute size-8 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+					</Button>
+				}
+			/>
 			<DropdownMenuContent align="end">
 				<DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
 				<DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>

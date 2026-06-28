@@ -108,45 +108,52 @@ export default async function ProductsServerPage({
 								{/* -------------------------------- settings -------------------------------- */}
 								<TableCell className="text-left ">
 									<DropdownMenu>
-										<DropdownMenuTrigger asChild>
-											<Button variant={"outline"} size={"icon"} suppressHydrationWarning>
-												<MoreVertical />
-											</Button>
+										<DropdownMenuTrigger render={<Button variant={"outline"} size={"icon"} suppressHydrationWarning />}>
+											<MoreVertical />
 										</DropdownMenuTrigger>
 										<DropdownMenuContent align="start" className="flex flex-col gap-2 items-center justify-center p-2">
-											<DropdownMenuItem asChild>
-												<Button size={"lg"} asChild className="w-full" variant={"outline"}>
-													<Link href={`/server/products/edit/${id}`}>تعديل</Link>
-												</Button>
-											</DropdownMenuItem>
+											<DropdownMenuItem
+												render={
+													<Button
+														size={"lg"}
+														render={<Link href={`/server/products/edit/${id}`} />}
+														className="w-full"
+														variant={"outline"}
+													>
+														تعديل
+													</Button>
+												}
+											/>
 											{/* ---------------------------- delete --------------------------- */}
-											<DropdownMenuItem asChild>
-												<Dialog>
-													<DialogTrigger asChild>
-														<Button size={"lg"} className="w-full">
-															حذف
-														</Button>
-													</DialogTrigger>
-													<DialogContent>
-														<DialogHeader>
-															<DialogTitle>هل أنت متأكد من رغبتك في حذف هذا المنتج؟</DialogTitle>
-															<DialogDescription>
-																لا يمكن التراجع عن هذا الإجراء. سيؤدي ذلك إلى حذف هذا المنتج نهائيًا وإزالة بياناته من
-																خوادمنا.
-															</DialogDescription>
-														</DialogHeader>
-														<div className="flex items-center justify-between ">
-															<Button asChild variant={"secondary"}>
-																<DialogClose>إلغاء الحذف</DialogClose>
-															</Button>
-															<Form action={deleteUserAction}>
-																<Input type="hidden" name="id" value={id} />
-																<Button type="submit">الحذف نهائيا</Button>
-															</Form>
-														</div>
-													</DialogContent>
-												</Dialog>
-											</DropdownMenuItem>
+											<DropdownMenuItem
+												render={
+													<Dialog>
+														<DialogTrigger
+															render={
+																<Button size={"lg"} className="w-full">
+																	حذف
+																</Button>
+															}
+														></DialogTrigger>
+														<DialogContent>
+															<DialogHeader>
+																<DialogTitle>هل أنت متأكد من رغبتك في حذف هذا المنتج؟</DialogTitle>
+																<DialogDescription>
+																	لا يمكن التراجع عن هذا الإجراء. سيؤدي ذلك إلى حذف هذا المنتج نهائيًا وإزالة بياناته من
+																	خوادمنا.
+																</DialogDescription>
+															</DialogHeader>
+															<div className="flex items-center justify-between ">
+																<Button render={<DialogClose>إلغاء الحذف</DialogClose>} variant={"secondary"}></Button>
+																<Form action={deleteUserAction}>
+																	<Input type="hidden" name="id" value={id} />
+																	<Button type="submit">الحذف نهائيا</Button>
+																</Form>
+															</div>
+														</DialogContent>
+													</Dialog>
+												}
+											></DropdownMenuItem>
 										</DropdownMenuContent>
 									</DropdownMenu>
 								</TableCell>

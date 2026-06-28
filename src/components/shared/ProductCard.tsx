@@ -49,12 +49,16 @@ export default function ProductCard({ product, authId }: Props) {
 			<CardFooter className="flex items-center justify-center gap-2 ">
 				{/* AddToCart */}
 				<AddToCart product={product} />
-				<Button className="lg:flex-1" variant={"outline"} asChild>
-					<Link href={`/products/${product?.slug}`}>
-						<Eye />
-						شاهد المزيد
-					</Link>
-				</Button>
+				<Button
+					className="lg:flex-1"
+					variant={"outline"}
+					render={
+						<Link href={`/products/${product?.slug}`}>
+							<Eye />
+							شاهد المزيد
+						</Link>
+					}
+				/>
 			</CardFooter>
 		</Card>
 	)

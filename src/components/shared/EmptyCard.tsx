@@ -1,11 +1,4 @@
-import {
-	Empty,
-	EmptyContent,
-	EmptyDescription,
-	EmptyHeader,
-	EmptyMedia,
-	EmptyTitle,
-} from "@/components/ui/empty"
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
 import { Button } from "../ui/button"
 import { LucideIcon, Trash2 } from "lucide-react"
 import Link from "next/link"
@@ -28,12 +21,14 @@ export default function EmptyCard({ href, linkTitle, linkIcon }: Props) {
 				<EmptyDescription>No data found in the database.</EmptyDescription>
 			</EmptyHeader>
 			<EmptyContent>
-				<Button asChild>
-					<Link href={href}>
-						{React.createElement(linkIcon)}
-						{linkTitle}
-					</Link>
-				</Button>
+				<Button
+					render={
+						<Link href={href}>
+							{React.createElement(linkIcon)}
+							{linkTitle}
+						</Link>
+					}
+				/>
 			</EmptyContent>
 		</Empty>
 	)
