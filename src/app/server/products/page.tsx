@@ -1,5 +1,5 @@
 import { isAdmin } from "@/logic/isAdmin"
-import { ImageOff, MoreVertical, PlusCircle } from "lucide-react"
+import { ImageOff, MoreVertical, Percent, PlusCircle } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import {
@@ -68,19 +68,19 @@ export default async function ProductsServerPage({
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
-							<TableHead className="text-right">صورة المنتج</TableHead>
-							<TableHead className="text-right">اسم النتج</TableHead>
-							<TableHead className="text-right">القطعية</TableHead>
-							<TableHead className="text-right">السعر</TableHead>
-							<TableHead className="text-right">الخصم</TableHead>
-							<TableHead className="text-right">المخزون</TableHead>
-							<TableHead className="text-right">الخصائص</TableHead>
+							<TableHead>صورة المنتج</TableHead>
+							<TableHead>اسم النتج</TableHead>
+							<TableHead>الفئة</TableHead>
+							<TableHead>القطعية</TableHead>
+							<TableHead>السعر</TableHead>
+							<TableHead>الخصم</TableHead>
+							<TableHead>المخزون</TableHead>
 							<TableHead className="text-left">الإعدادات</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{products?.data.map(({ id, category, discount, mainImage, price, title, cut, unit, stock }) => (
+						{products?.data.map(({ id, discount, mainImage, price, title, cut, unit, stock, category }) => (
 							<TableRow key={id}>
 								<TableCell>
 									{mainImage ? (
@@ -95,65 +95,64 @@ export default async function ProductsServerPage({
 										React.createElement(ImageOff)
 									)}
 								</TableCell>
-								<TableCell className="text-right">{title}</TableCell>
-								<TableCell className="text-right">{cut}</TableCell>
-								<TableCell className="text-right">{price}</TableCell>
-								<TableCell className="text-right">{discount} %</TableCell>
-								<TableCell className="text-right">{stock}</TableCell>
-								<TableCell className="flex items-center gap-2 ">
-									<Badge variant={"default"}>{category} </Badge>
-									<Badge variant={"default"}>{unit} </Badge>
+								<TableCell>{title}</TableCell>
+								<TableCell>
+									<Badge variant={"outline"}>{category}</Badge>
+								</TableCell>
+								<TableCell>{cut}</TableCell>
+								<TableCell>{+price}</TableCell>
+								<TableCell>
+									<Badge variant={"ghost"}>
+										{discount}
+										<Percent />
+									</Badge>
+								</TableCell>
+								<TableCell>
+									{+stock} {unit}
 								</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}
 								<TableCell className="text-left ">
 									<DropdownMenu>
-										<DropdownMenuTrigger render={<Button variant={"outline"} size={"icon"} suppressHydrationWarning />}>
-											<MoreVertical />
+										<DropdownMenuTrigger asChild>
+											<Button variant={"outline"} size={"icon"} suppressHydrationWarning>
+												<MoreVertical />
+											</Button>
 										</DropdownMenuTrigger>
 										<DropdownMenuContent align="start" className="flex flex-col gap-2 items-center justify-center p-2">
-											<DropdownMenuItem
-												render={
-													<Button
-														size={"lg"}
-														render={<Link href={`/server/products/edit/${id}`} />}
-														className="w-full"
-														variant={"outline"}
-													>
-														تعديل
-													</Button>
-												}
-											/>
+											<DropdownMenuItem asChild>
+												<Button asChild size={"lg"} className="w-full" variant={"outline"}>
+													<Link href={`/server/products/edit/${id}`}>تعديل</Link>
+												</Button>
+											</DropdownMenuItem>
 											{/* ---------------------------- delete --------------------------- */}
-											<DropdownMenuItem
-												render={
-													<Dialog>
-														<DialogTrigger
-															render={
-																<Button size={"lg"} className="w-full">
-																	حذف
-																</Button>
-															}
-														></DialogTrigger>
-														<DialogContent>
-															<DialogHeader>
-																<DialogTitle>هل أنت متأكد من رغبتك في حذف هذا المنتج؟</DialogTitle>
-																<DialogDescription>
-																	لا يمكن التراجع عن هذا الإجراء. سيؤدي ذلك إلى حذف هذا المنتج نهائيًا وإزالة بياناته من
-																	خوادمنا.
-																</DialogDescription>
-															</DialogHeader>
-															<div className="flex items-center justify-between ">
-																<Button render={<DialogClose>إلغاء الحذف</DialogClose>} variant={"secondary"}></Button>
-																<Form action={deleteUserAction}>
-																	<Input type="hidden" name="id" value={id} />
-																	<Button type="submit">الحذف نهائيا</Button>
-																</Form>
-															</div>
-														</DialogContent>
-													</Dialog>
-												}
-											></DropdownMenuItem>
+											<DropdownMenuItem asChild>
+												<Dialog>
+													<DialogTrigger asChild>
+														<Button size={"lg"} className="w-full">
+															حذف
+														</Button>
+													</DialogTrigger>
+													<DialogContent>
+														<DialogHeader>
+															<DialogTitle>هل أنت متأكد من رغبتك في حذف هذا المنتج؟</DialogTitle>
+															<DialogDescription>
+																لا يمكن التراجع عن هذا الإجراء. سيؤدي ذلك إلى حذف هذا المنتج نهائيًا وإزالة بياناته من
+																خوادمنا.
+															</DialogDescription>
+														</DialogHeader>
+														<div className="flex items-center justify-between ">
+															<Button asChild>
+																<DialogClose>إلغاء الحذف</DialogClose> variant={"secondary"}
+															</Button>
+															<Form action={deleteUserAction}>
+																<Input type="hidden" name="id" value={id} />
+																<Button type="submit">الحذف نهائيا</Button>
+															</Form>
+														</div>
+													</DialogContent>
+												</Dialog>
+											</DropdownMenuItem>
 										</DropdownMenuContent>
 									</DropdownMenu>
 								</TableCell>

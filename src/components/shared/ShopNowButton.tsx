@@ -21,14 +21,10 @@ export default function ShopNowButton({
 	buttonSize = "sm",
 }: Props) {
 	return (
-		<Button
-			render={
-				<Link href={searchParams ? `/products/?category=${searchParams}` : `/products`}>
-					<ShoppingCart /> {title}
-				</Link>
-			}
-			variant={buttonVariant}
-			size={buttonSize}
-		/>
+		<Button asChild variant={buttonVariant} size={buttonSize}>
+			<Link href={searchParams ? `/products/?category=${searchParams}` : `/products`}>
+				<ShoppingCart /> {title}
+			</Link>
+		</Button>
 	)
 }

@@ -21,14 +21,12 @@ export default function EmptyCard({ href, linkTitle, linkIcon }: Props) {
 				<EmptyDescription>No data found in the database.</EmptyDescription>
 			</EmptyHeader>
 			<EmptyContent>
-				<Button
-					render={
-						<Link href={href}>
-							{React.createElement(linkIcon)}
-							{linkTitle}
-						</Link>
-					}
-				/>
+				<Button asChild>
+					<Link href={href}>
+						{React.createElement(linkIcon)}
+						{linkTitle}
+					</Link>
+				</Button>
 			</EmptyContent>
 		</Empty>
 	)

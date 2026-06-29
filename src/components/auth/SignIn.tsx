@@ -5,14 +5,11 @@ import { LogIn } from "lucide-react"
 
 export default function SignIn() {
 	return (
-		<Button
-			render={
-				<Link href={"/auth/sign-in"}>
-					<LogIn />
-					SignIn
-				</Link>
-			}
-			size={"sm"}
-		/>
+		<Button asChild size={"sm"}>
+			<Link href={"/auth/sign-in"}>
+				<LogIn />
+				SignIn
+			</Link>
+		</Button>
 	)
 }

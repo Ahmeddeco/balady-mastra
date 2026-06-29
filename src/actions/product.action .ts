@@ -3,8 +3,8 @@
 import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import ProductSchema from "@/schemas/product.schema"
 import { slugifyTitle } from "@/logic/slugifyTitle"
+import ProductSchema from "@/schemas/Product.Schema"
 
 /* ------------------------------ addUserAction ----------------------------- */
 export const addProductAction = async (prevState: unknown, formData: FormData) => {
@@ -27,10 +27,10 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
         cut: submission.value.cut,
         category: submission.value.category,
         unit: submission.value.unit,
-        price: submission.value.price,
-        discount: submission.value.discount,
-        quantity: submission.value.quantity,
-        lowQuantity: submission.value.lowQuantity,
+        price: Number(submission.value.price),
+        discount: Number(submission.value.discount),
+        stock: Number(submission.value.stock),
+        lowQuantity: Number(submission.value.lowQuantity),
         mainImage: submission.value.mainImage,
         images: submission.value.images,
       },
@@ -42,10 +42,10 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
         isActive: submission.value.isActive,
         category: submission.value.category,
         unit: submission.value.unit,
-        price: submission.value.price,
-        discount: submission.value.discount,
-        quantity: submission.value.quantity,
-        lowQuantity: submission.value.lowQuantity,
+        price: Number(submission.value.price),
+        discount: Number(submission.value.discount),
+        stock: Number(submission.value.stock),
+        lowQuantity: Number(submission.value.lowQuantity),
         mainImage: submission.value.mainImage,
         images: submission.value.images,
       }
@@ -81,10 +81,10 @@ export const editProductAction = async (prevState: unknown, formData: FormData) 
         isActive: submission.value.isActive,
         category: submission.value.category,
         unit: submission.value.unit,
-        price: submission.value.price,
-        discount: submission.value.discount,
-        quantity: submission.value.quantity,
-        lowQuantity: submission.value.lowQuantity,
+        price: Number(submission.value.price),
+        discount: Number(submission.value.discount),
+        stock: Number(submission.value.stock),
+        lowQuantity: Number(submission.value.lowQuantity),
         mainImage: submission.value.mainImage,
         images: submission.value.images,
       }

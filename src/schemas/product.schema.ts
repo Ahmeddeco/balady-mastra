@@ -1,22 +1,25 @@
 import CategorySchema from "@/generated/inputTypeSchemas/CategorySchema"
 import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
-import UnitSchema from '@/generated/inputTypeSchemas/UnitSchema'
+import UnitSchema from "@/generated/inputTypeSchemas/UnitSchema"
 import { z } from 'zod'
 
 export const ProductSchema = z.object({
   cut: MeatTypeSchema,
   category: CategorySchema,
-  unit: UnitSchema.nullish(),
+  unit: UnitSchema,
   id: z.string().nullish(),
   title: z.string(),
-  slug: z.string().nullish(),
+  slug: z.string().optional(),
   description: z.string(),
   mainImage: z.string(),
-  images: z.string().array(),
-  price: z.number(),
-  discount: z.number().nullish(),
-  stock: z.number(),
-  lowQuantity: z.number().nullish(),
+  images: z.string().array().default([]),
+  price: z.coerce.number().min(0),
+  discount: z.coerce.number().nullish().default(0),
+  stock: z.coerce.number().min(0),
+  lowQuantity: z.coerce.number().nullish().default(0),
+  increaseByOne: z.boolean().default(false),
+  isActive: z.boolean().default(true),
+  cattleId: z.string().nullish(),
 })
 
 export type Product = z.infer<typeof ProductSchema>

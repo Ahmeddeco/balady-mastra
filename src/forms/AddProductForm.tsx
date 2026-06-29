@@ -12,8 +12,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Category, Unit } from "@/generated/prisma/enums"
 import { addProductAction } from "@/actions/product.action "
-import ProductSchema from "@/schemas/product.schema"
 import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
+import ProductSchema from "@/schemas/Product.Schema"
 
 export default function AddProductForm() {
 	const [lastResult, action] = useActionState(addProductAction, undefined)

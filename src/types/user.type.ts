@@ -1,3 +1,4 @@
+import { getAllUsersForFarmsPage } from "@/dl/user.data"
 import { Role } from "@/generated/prisma/enums"
 
 export type getAllUsersForUsersPageType = {
@@ -14,3 +15,5 @@ export type getAllUsersForUsersPageType = {
   }[]
   totalPages: number
 } | undefined
+
+export type getAllUsersForFarmsPageType = Awaited<ReturnType<typeof getAllUsersForFarmsPage>>

@@ -61,7 +61,7 @@ export const getAllProductsForProductsServerPage = async (size: number, page: nu
 
     const data = await prisma.product.findMany({
       where: { category: activeCategory },
-      select: { id: true, category: true, cut: true, discount: true, mainImage: true, price: true, slug: true, title: true, unit: true, stock: true, },
+      select: { id: true, category: true, cut: true, discount: true, mainImage: true, price: true, title: true, unit: true, stock: true, },
       orderBy: { createdAt: "desc" },
       take: size,
       skip: (page * size) - size

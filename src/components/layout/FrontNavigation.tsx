@@ -18,17 +18,17 @@ export default function FrontNavigation() {
 					(link.href !== "/" && pathName.startsWith(link.href))
 				return (
 					<Button
-						render={
-							<Link href={link.href}>
-								{isActive ? React.createElement(link.icon) : null}
-								{link.title}
-							</Link>
-						}
+						asChild
 						key={link.title}
 						variant={isActive ? "default" : "ghost"}
 						size={"sm"}
 						// className="rounded-full"
-					/>
+					>
+						<Link href={link.href}>
+							{isActive ? React.createElement(link.icon) : null}
+							{link.title}
+						</Link>
+					</Button>
 				)
 			})}
 		</>

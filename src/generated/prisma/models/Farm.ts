@@ -225,11 +225,11 @@ export type FarmOrderByWithRelationInput = {
 
 export type FarmWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  name?: string
   userId?: string
   AND?: Prisma.FarmWhereInput | Prisma.FarmWhereInput[]
   OR?: Prisma.FarmWhereInput[]
   NOT?: Prisma.FarmWhereInput | Prisma.FarmWhereInput[]
-  name?: Prisma.StringFilter<"Farm"> | string
   country?: Prisma.StringNullableFilter<"Farm"> | string | null
   state?: Prisma.StringNullableFilter<"Farm"> | string | null
   city?: Prisma.StringNullableFilter<"Farm"> | string | null
@@ -237,7 +237,7 @@ export type FarmWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Farm"> | Date | string
   manager?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   cattle?: Prisma.CattleListRelationFilter
-}, "id" | "userId">
+}, "id" | "name" | "userId">
 
 export type FarmOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

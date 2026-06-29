@@ -129,7 +129,7 @@ model Product {
 
 model Farm {
   id        String   @id @default(cuid())
-  name      String
+  name      String   @unique
   manager   User     @relation(fields: [userId], references: [id])
   userId    String   @unique
   cattle    Cattle[]
