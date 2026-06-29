@@ -390,6 +390,9 @@ export const ModelName = {
   Authenticator: 'Authenticator',
   User: 'User',
   Product: 'Product',
+  Farm: 'Farm',
+  Breed: 'Breed',
+  Cattle: 'Cattle',
   Order: 'Order',
   OrderItem: 'OrderItem',
   Favorite: 'Favorite'
@@ -408,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "session" | "verificationToken" | "authenticator" | "user" | "product" | "order" | "orderItem" | "favorite"
+    modelProps: "account" | "session" | "verificationToken" | "authenticator" | "user" | "product" | "farm" | "breed" | "cattle" | "order" | "orderItem" | "favorite"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -856,6 +859,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Farm: {
+      payload: Prisma.$FarmPayload<ExtArgs>
+      fields: Prisma.FarmFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FarmFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FarmPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FarmFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FarmPayload>
+        }
+        findFirst: {
+          args: Prisma.FarmFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FarmPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FarmFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FarmPayload>
+        }
+        findMany: {
+          args: Prisma.FarmFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FarmPayload>[]
+        }
+        create: {
+          args: Prisma.FarmCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FarmPayload>
+        }
+        createMany: {
+          args: Prisma.FarmCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FarmCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FarmPayload>[]
+        }
+        delete: {
+          args: Prisma.FarmDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FarmPayload>
+        }
+        update: {
+          args: Prisma.FarmUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FarmPayload>
+        }
+        deleteMany: {
+          args: Prisma.FarmDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FarmUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FarmUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FarmPayload>[]
+        }
+        upsert: {
+          args: Prisma.FarmUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FarmPayload>
+        }
+        aggregate: {
+          args: Prisma.FarmAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFarm>
+        }
+        groupBy: {
+          args: Prisma.FarmGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FarmGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FarmCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FarmCountAggregateOutputType> | number
+        }
+      }
+    }
+    Breed: {
+      payload: Prisma.$BreedPayload<ExtArgs>
+      fields: Prisma.BreedFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BreedFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BreedPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BreedFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BreedPayload>
+        }
+        findFirst: {
+          args: Prisma.BreedFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BreedPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BreedFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BreedPayload>
+        }
+        findMany: {
+          args: Prisma.BreedFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BreedPayload>[]
+        }
+        create: {
+          args: Prisma.BreedCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BreedPayload>
+        }
+        createMany: {
+          args: Prisma.BreedCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BreedCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BreedPayload>[]
+        }
+        delete: {
+          args: Prisma.BreedDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BreedPayload>
+        }
+        update: {
+          args: Prisma.BreedUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BreedPayload>
+        }
+        deleteMany: {
+          args: Prisma.BreedDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BreedUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BreedUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BreedPayload>[]
+        }
+        upsert: {
+          args: Prisma.BreedUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BreedPayload>
+        }
+        aggregate: {
+          args: Prisma.BreedAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBreed>
+        }
+        groupBy: {
+          args: Prisma.BreedGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BreedGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BreedCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BreedCountAggregateOutputType> | number
+        }
+      }
+    }
+    Cattle: {
+      payload: Prisma.$CattlePayload<ExtArgs>
+      fields: Prisma.CattleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CattleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CattlePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CattleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CattlePayload>
+        }
+        findFirst: {
+          args: Prisma.CattleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CattlePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CattleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CattlePayload>
+        }
+        findMany: {
+          args: Prisma.CattleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CattlePayload>[]
+        }
+        create: {
+          args: Prisma.CattleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CattlePayload>
+        }
+        createMany: {
+          args: Prisma.CattleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CattleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CattlePayload>[]
+        }
+        delete: {
+          args: Prisma.CattleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CattlePayload>
+        }
+        update: {
+          args: Prisma.CattleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CattlePayload>
+        }
+        deleteMany: {
+          args: Prisma.CattleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CattleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CattleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CattlePayload>[]
+        }
+        upsert: {
+          args: Prisma.CattleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CattlePayload>
+        }
+        aggregate: {
+          args: Prisma.CattleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCattle>
+        }
+        groupBy: {
+          args: Prisma.CattleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CattleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CattleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CattleCountAggregateOutputType> | number
+        }
+      }
+    }
     Order: {
       payload: Prisma.$OrderPayload<ExtArgs>
       fields: Prisma.OrderFieldRefs
@@ -1207,11 +1432,57 @@ export const ProductScalarFieldEnum = {
   stock: 'stock',
   lowQuantity: 'lowQuantity',
   increaseByOne: 'increaseByOne',
+  isActive: 'isActive',
+  cattleId: 'cattleId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const FarmScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId',
+  country: 'country',
+  state: 'state',
+  city: 'city',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FarmScalarFieldEnum = (typeof FarmScalarFieldEnum)[keyof typeof FarmScalarFieldEnum]
+
+
+export const BreedScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  conversionRate: 'conversionRate',
+  image: 'image',
+  images: 'images',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BreedScalarFieldEnum = (typeof BreedScalarFieldEnum)[keyof typeof BreedScalarFieldEnum]
+
+
+export const CattleScalarFieldEnum = {
+  id: 'id',
+  farmId: 'farmId',
+  breedId: 'breedId',
+  type: 'type',
+  gender: 'gender',
+  age: 'age',
+  liveWeight: 'liveWeight',
+  costPrice: 'costPrice',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CattleScalarFieldEnum = (typeof CattleScalarFieldEnum)[keyof typeof CattleScalarFieldEnum]
 
 
 export const OrderScalarFieldEnum = {
@@ -1226,9 +1497,9 @@ export const OrderScalarFieldEnum = {
   shippingAddress: 'shippingAddress',
   customerNotes: 'customerNotes',
   butcherNotes: 'butcherNotes',
+  userId: 'userId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
+  updatedAt: 'updatedAt'
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
@@ -1379,16 +1650,16 @@ export type ListEnumCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 
 
 /**
- * Reference to a field of type 'Float'
+ * Reference to a field of type 'Decimal'
  */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
     
 
 
 /**
- * Reference to a field of type 'Float[]'
+ * Reference to a field of type 'Decimal[]'
  */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -1403,6 +1674,48 @@ export type EnumUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'Unit[]'
  */
 export type ListEnumUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Unit[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CattleType'
+ */
+export type EnumCattleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CattleType'>
+    
+
+
+/**
+ * Reference to a field of type 'CattleType[]'
+ */
+export type ListEnumCattleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CattleType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Gender'
+ */
+export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
+    
+
+
+/**
+ * Reference to a field of type 'Gender[]'
+ */
+export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Age'
+ */
+export type EnumAgeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Age'>
+    
+
+
+/**
+ * Reference to a field of type 'Age[]'
+ */
+export type ListEnumAgeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Age[]'>
     
 
 
@@ -1459,6 +1772,20 @@ export type EnumPreparationFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'Preparation[]'
  */
 export type ListEnumPreparationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Preparation[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -1577,6 +1904,9 @@ export type GlobalOmitConfig = {
   authenticator?: Prisma.AuthenticatorOmit
   user?: Prisma.UserOmit
   product?: Prisma.ProductOmit
+  farm?: Prisma.FarmOmit
+  breed?: Prisma.BreedOmit
+  cattle?: Prisma.CattleOmit
   order?: Prisma.OrderOmit
   orderItem?: Prisma.OrderItemOmit
   favorite?: Prisma.FavoriteOmit

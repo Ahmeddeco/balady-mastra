@@ -5,7 +5,7 @@ import Image from "next/image"
 
 export default function Hero() {
 	return (
-		<div className="lg:h-[85vh] h-auto flex gap-0 items-center justify-center relative border-b bg-foreground text-background py-8  lg:py-0 mb-16 ">
+		<div className="lg:h-[85vh] h-auto flex gap-0 items-center justify-center  relative border-b bg-foreground text-background py-8  lg:py-0 mb-16 ">
 			{/* ---------------------------- Right Image --------------------------- */}
 			<div className="h-full lg:block hidden w-2/12 relative">
 				<Image src={"/images/steakBlackDish.webp"} alt={"steak in Black Dish"} fill className="object-cover " />

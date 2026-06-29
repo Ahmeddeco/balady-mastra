@@ -1,95 +1,100 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { createStep, createWorkflow } from '@mastra/core/workflows'
 import { z } from 'zod'
-import { getNonTrendingProducts } from '@/dl/products.data'
-import { embed } from 'ai'
-import { LanceVectorStore } from '@mastra/lance'
-import { embedder } from '../rag/embedder.model'
+import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
+import { getNonTrendingProductsTool } from "../tools/get-non-trending-products-tool"
 
 /* ------------------------ nonTrendingProductsSchema ----------------------- */
+// هذا التعريف يمثل مصفوفة المنتجات مباشرة
 const nonTrendingProductsSchema = z.array(z.object({
   id: z.string(),
   title: z.string(),
   price: z.number(),
   unit: z.string().nullable(),
   slug: z.string(),
-  quantity: z.number(),
+  stock: z.number(),
+  cut: MeatTypeSchema,
   description: z.string(),
 }))
 
-const limit = 3
+/* ------------------------ fetchButcherProductsStep ------------------------ */
+const fetchButcherProductsStep = createStep(getNonTrendingProductsTool)
 
-/* -------------------------- fetchButcherProducts -------------------------- */
-const fetchButcherProducts = createStep({
-  id: 'fetch-butcher-products',
-  description: 'جلب القطعيات الاكثر كمية من قاعدة البيانات',
-  inputSchema: z.object({
-    limit: z.number().optional().default(limit),
-  }),
+/* ------------------------- analyzeAndRecommendStep ------------------------ */
+const analyzeAndRecommendStep = createStep({
+  id: 'analyze-and-recommend',
+  description: 'يحلل المنتجات الراكدة ويختار قطعية معينة بناءً على المعايير ليرجعها كـ Schema محدد',
+
+  // ✅ التعديل هنا: جعل المدخل مصفوفة مباشرة (Array) ليتطابق تماماً مع مخرج الأداة السابقة
+  inputSchema: nonTrendingProductsSchema,
+
   outputSchema: z.object({
-    products: nonTrendingProductsSchema,
+    recommendation: MeatTypeSchema,
   }),
-  execute: async () => {
-    const products = await getNonTrendingProducts(limit)
-    return { products }
-  },
-})
+  execute: async ({ inputData, mastra }) => {
+    // التحقق من وجود البيانات (التي أصبحت الآن مصفوفة مباشرة)
+    if (!inputData || !Array.isArray(inputData)) {
+      throw new Error('Input data not found or not an array')
+    }
 
-/* ---------------------------- getRecepieFromRag --------------------------- */
-const getRecepieFromRag = createStep({
-  id: 'get-recepie-from-rag',
-  description: 'جلب وصفة من RAG تناسب القطعيات المأخوذة من الخطوة السابقة',
-  inputSchema: z.object({
-    products: nonTrendingProductsSchema,
-  }),
-  outputSchema: z.object({
-    recepie: z.string().array(),
-  }),
-  execute: async (inputData) => {
-    const userQuery = `ما هي الوصفة المناسبة لقطعة ${inputData.inputData.products[0].title} `
+    const agent = mastra?.getAgent('butcherAgent')
+    if (!agent) {
+      throw new Error('Butcher agent not found in Mastra context')
+    }
 
-    const store = await LanceVectorStore.create('../rag/db')
-    const { embedding: queryVector } = await embed({
-      value: userQuery,
-      model: embedder // استخدام نفس الموديل (embeddinggemma:300m) لضمان توافق الأبعاد
-    })
+    const validCuts = MeatTypeSchema.options
 
-    //  تنفيذ عملية البحث في LanceDB
-    const results = await store.query({
-      tableName: 'myVectors',
-      indexName: 'myCollection',
-      queryVector: queryVector,
-      topK: 3,
-    })
-    // نقوم باستخراج النصوص فقط من نتائج البحث ليتوافق مع outputSchema
-    const formattedRecipes = results.map((res: any) => res.text || res.content || JSON.stringify(res))
+    // قمنا بتمرير inputData مباشرة لأنها هي المصفوفة الآن بدلاً من inputData.productsData
+    const promptContext = `
+أنت الآن خبير اللحوم المسؤول عن اتخاذ قرار دقيق ومحدد. بناءً على قائمة المنتجات الراكدة التالية:
+${JSON.stringify(inputData, null, 3)}
+
+المطلوب منك: تحليل هذه المنتجات واختيار "قطعية واحدة فقط" ترى أنها الأنسب للترويج لها الآن.
+يجب أن تكون إجابتك عبارة عن كلمة واحدة فقط ومطابقة تماماً لـواحدة من هذه القيم حصراً:
+${validCuts.join(' | ')}
+
+تحذير: لا تكتب أي مقدمات أو تفسيرات أو علامات ترقيم، فقط اكتب الكلمة كما هي مكتوبة في الأعلى تماماً.
+`
+
+    const response = await agent.generate(promptContext)
+    const cleanedText = response.text.trim()
+
+    // التحقق من توافق النص الراجع مع الـ Enum
+    const parsedCut = MeatTypeSchema.safeParse(cleanedText)
+
+    if (!parsedCut.success) {
+      // الـ Fallback في حال أخطأ الـ Agent: نأخذ قطعية أول منتج متاح في المصفوفة مباشرة
+      const fallbackCut = inputData[0]?.cut
+      if (fallbackCut) {
+        return { recommendation: fallbackCut }
+      }
+      throw new Error(`الـ Agent أرجع قيمة غير مطابقة للـ Schema: ${cleanedText}`)
+    }
 
     return {
-      recepie: formattedRecipes // إرجاع كائن يحتوي على المصفوفة
+      recommendation: parsedCut.data,
     }
   },
 })
 
-/* ---------------------------- getRecepieFromWeb --------------------------- */
-const getRecepieFromWeb = createStep({
-  id: 'get-recepie-from-web',
-  description: 'جلب وصفة من الإنترنت تناسب القطعية',
+/* ---------------------------- getRecipeFromWeb --------------------------- */
+const getRecipeFromWeb = createStep({
+  id: 'get-recipe-from-web',
+  description: 'جلب وصفة من الإنترنت تناسب القطعية المستلمة',
   inputSchema: z.object({
-    recepie: z.string().array(), // ✅ تم التعديل - نفس outputSchema لـ getRecepieFromRag
+    recommendation: MeatTypeSchema,
   }),
   outputSchema: z.object({
-    recepie: z.string().array(),
+    recipe: z.string(),
   }),
-  execute: async ({ mastra }) => {
-    const agent = mastra.getAgent('butcherAgent')
+  execute: async ({ mastra, inputData }) => {
+    const agent = mastra.getAgent('webSearchAgent')
     if (!agent) throw new Error('Agent not found')
 
-    const userQuery = `اقترح وصفة مناسبة للحوم`
-    const response = await agent.generate(userQuery)
+    const userQuery = `اقترح وصفة طبخ مناسبة ومثالية جداً لقطعية اللحم المعروفة باسم: (${inputData.recommendation})`
+    const response = await agent.stream([{ role: 'user', content: userQuery }])
 
     return {
-      recepie: [response.text],
+      recipe: await response.text,
     }
   },
 })
@@ -98,14 +103,13 @@ const getRecepieFromWeb = createStep({
 const generateExpertResponse = createStep({
   id: 'generate-expert-response',
   description: 'صياغة الوصفة بأسلوب راقي وهيكل بيانات محدد',
-  inputSchema: z.object({ recepie: z.string().array() }),
+  inputSchema: z.object({ recipe: z.string() }),
   outputSchema: z.object({
     finalAnswer: z.string(),
   }),
   execute: async ({ inputData, mastra, writer }) => {
-    const recepie = inputData.recepie
-
-    if (!recepie) throw new Error('recepie not found')
+    const { recipe } = inputData
+    if (!recipe) throw new Error('recipe not found')
 
     const agent = mastra.getAgent('butcherAgent')
     if (!agent) throw new Error('Agent not found')
@@ -115,55 +119,33 @@ const generateExpertResponse = createStep({
       اللغة: العامية المصرية المهذبة (حضرتك، فندم، ذوق حضرتك الرفيع، معايير الجودة).
 
       البيانات المتاحة:
-      - اسم الوصفة: ${inputData.recepie}
-      - القطعة المختارة: ${inputData.recepie}
+      - تفاصيل الوصفة: ${recipe}
 
       المطلوب منك الآن:
-      تقديم وصفة مرتبطة بالقطعة المختارة. يجب أن يشمل الرد:
-      1. اسم الوصفة
-      2. قائمة بالمكونات (المكونات)
+      تقديم هذه الوصفة للعميل بأسلوبك الاحترافي اليدوي. يجب أن يشمل الرد:
+      1. اسم الوصفة المناسبة للقطعية
+      2. قائمة بالمكونات
       3. خطوات التحضير (طريقة التحضير)
 
       هيكل الرد المطلوب:
-      # ${inputData.recepie} والقطعة المختارة لها ${inputData.recepie}
+      # [اسم الوصفة المقترحة]
       ## المكونات
-      - [اسم المكون]
       - [اسم المكون]
 
       ## طريقة التحضير
-      1. [خطوة الأولى]
-      2. [خطوة الثانية]
+      1. [الخطوة الأولى]
 
-      **القيمة الغذائية لهذه الوصفة مع التركيز على أن القطعة المختارة لها هي من أفضل القطعيات لهذه الوصفة**
-
-      تعليمات هامة:
-      - استخدم اللهجة المصرية الراقية فقط.
-      - ركز على الجودة والحصرية (Exclusivity).
-- التزم تماما بالوصفة المقدمة لك من الخطوة السابقة.
+      **القيمة الغذائية لهذه الوصفة مع التركيز على مميزات هذه القطعية بالذات**
       `
-
 
     const response = await agent.stream([{ role: 'user', content: prompt }])
 
-    // Pipe agent stream to step writer for real-time text streaming
-    await response.fullStream.pipeTo(writer)
+    if (writer) {
+      await response.fullStream.pipeTo(writer)
+    }
+
     return { finalAnswer: await response.text }
-
-
   }
-})
-
-/* -------------------------------- skipStep -------------------------------- */
-// خطوة وهمية تمرر البيانات كما هي عند وجود نتيجة من RAG
-const skipStep = createStep({
-  id: 'skip-step',
-  inputSchema: z.object({
-    recepie: z.string().array(), // نفس outputSchema لـ getRecepieFromRag
-  }),
-  outputSchema: z.object({
-    recepie: z.string().array(),
-  }),
-  execute: async ({ inputData }) => inputData,
 })
 
 /* ----------------------------- butcherWorkflow ---------------------------- */
@@ -171,30 +153,12 @@ const butcherWorkflow = createWorkflow({
   id: 'butcher-workflow',
   inputSchema: z.object({ limit: z.number().optional().default(5) }),
   outputSchema: z.object({
-    title: z.string(),
-    ingrediants: z.string().array(),
-    steps: z.string().array(),
-    value: z.string(),
+    finalAnswer: z.string(),
   }),
 })
-  .then(fetchButcherProducts)
-  .then(getRecepieFromRag)
-  .branch([
-    [
-      async ({ inputData }) => Boolean(inputData.recepie?.length),
-      skipStep, // inputSchema: { recepie: string[] } ✅
-    ],
-    [
-      async ({ inputData }) => !inputData.recepie?.length,
-      getRecepieFromWeb, // inputSchema: { recepie: string[] } ✅
-    ],
-  ])
-  .map(async ({ inputData }) => {
-    const result = inputData['skip-step'] || inputData['get-recepie-from-web']
-    return {
-      recepie: result?.recepie ?? [],
-    }
-  })
+  .then(fetchButcherProductsStep)
+  .then(analyzeAndRecommendStep)
+  .then(getRecipeFromWeb)
   .then(generateExpertResponse)
 
 butcherWorkflow.commit()

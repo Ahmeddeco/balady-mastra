@@ -78,7 +78,7 @@ export const getNonTrendingProducts = async (limit: number = 3) => {
     const data = await prisma.product.findMany({
       where: { stock: { gt: 0 } },
       orderBy: { stock: "desc" },
-      select: { id: true, title: true, price: true, unit: true, slug: true, quantity: true, description: true },
+      select: { id: true, title: true, price: true, cut: true, unit: true, slug: true, stock: true, description: true },
       take: limit
     })
     return data

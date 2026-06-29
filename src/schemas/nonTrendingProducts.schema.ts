@@ -1,3 +1,4 @@
+import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
 import z from "zod"
 
 export const nonTrendingProductsSchema = z.array(z.object({
@@ -7,5 +8,6 @@ export const nonTrendingProductsSchema = z.array(z.object({
   price: z.number(),
   unit: z.string().nullable(),
   slug: z.string(),
-  quantity: z.number(),
+  cut: MeatTypeSchema,
+  stock: z.number(),
 }))

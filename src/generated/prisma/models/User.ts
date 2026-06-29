@@ -267,6 +267,7 @@ export type UserWhereInput = {
   Authenticator?: Prisma.AuthenticatorListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
+  farm?: Prisma.XOR<Prisma.FarmNullableScalarRelationFilter, Prisma.FarmWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -290,6 +291,7 @@ export type UserOrderByWithRelationInput = {
   Authenticator?: Prisma.AuthenticatorOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
   favorites?: Prisma.FavoriteOrderByRelationAggregateInput
+  farm?: Prisma.FarmOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -316,6 +318,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   Authenticator?: Prisma.AuthenticatorListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
+  farm?: Prisma.XOR<Prisma.FarmNullableScalarRelationFilter, Prisma.FarmWhereInput> | null
 }, "id" | "email" | "primaryMobile">
 
 export type UserOrderByWithAggregationInput = {
@@ -381,6 +384,7 @@ export type UserCreateInput = {
   Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -404,6 +408,7 @@ export type UserUncheckedCreateInput = {
   Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
 }
 
 export type UserUpdateInput = {
@@ -427,6 +432,7 @@ export type UserUpdateInput = {
   Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -450,6 +456,7 @@ export type UserUncheckedUpdateInput = {
   Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -620,6 +627,20 @@ export type EnumRoleFieldUpdateOperationsInput = {
   set?: $Enums.Role
 }
 
+export type UserCreateNestedOneWithoutFarmInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFarmInput, Prisma.UserUncheckedCreateWithoutFarmInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFarmInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFarmNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFarmInput, Prisma.UserUncheckedCreateWithoutFarmInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFarmInput
+  upsert?: Prisma.UserUpsertWithoutFarmInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFarmInput, Prisma.UserUpdateWithoutFarmInput>, Prisma.UserUncheckedUpdateWithoutFarmInput>
+}
+
 export type UserCreateNestedOneWithoutOrdersInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrdersInput
@@ -670,6 +691,7 @@ export type UserCreateWithoutAccountsInput = {
   Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -692,6 +714,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -730,6 +753,7 @@ export type UserUpdateWithoutAccountsInput = {
   Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -752,6 +776,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -774,6 +799,7 @@ export type UserCreateWithoutSessionsInput = {
   Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -796,6 +822,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -834,6 +861,7 @@ export type UserUpdateWithoutSessionsInput = {
   Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -856,6 +884,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
 }
 
 export type UserCreateWithoutAuthenticatorInput = {
@@ -878,6 +907,7 @@ export type UserCreateWithoutAuthenticatorInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
 }
 
 export type UserUncheckedCreateWithoutAuthenticatorInput = {
@@ -900,6 +930,7 @@ export type UserUncheckedCreateWithoutAuthenticatorInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
 }
 
 export type UserCreateOrConnectWithoutAuthenticatorInput = {
@@ -938,6 +969,7 @@ export type UserUpdateWithoutAuthenticatorInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthenticatorInput = {
@@ -958,6 +990,115 @@ export type UserUncheckedUpdateWithoutAuthenticatorInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
+}
+
+export type UserCreateWithoutFarmInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  role?: $Enums.Role
+  personalId?: string | null
+  primaryMobile?: string | null
+  secondaryMobile?: string | null
+  country?: string | null
+  state?: string | null
+  city?: string | null
+  detailedAddress?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFarmInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  role?: $Enums.Role
+  personalId?: string | null
+  primaryMobile?: string | null
+  secondaryMobile?: string | null
+  country?: string | null
+  state?: string | null
+  city?: string | null
+  detailedAddress?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFarmInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFarmInput, Prisma.UserUncheckedCreateWithoutFarmInput>
+}
+
+export type UserUpsertWithoutFarmInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFarmInput, Prisma.UserUncheckedUpdateWithoutFarmInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFarmInput, Prisma.UserUncheckedCreateWithoutFarmInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFarmInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFarmInput, Prisma.UserUncheckedUpdateWithoutFarmInput>
+}
+
+export type UserUpdateWithoutFarmInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFarmInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -982,6 +1123,7 @@ export type UserCreateWithoutOrdersInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -1004,6 +1146,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -1042,6 +1185,7 @@ export type UserUpdateWithoutOrdersInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -1064,6 +1208,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
 }
 
 export type UserCreateWithoutFavoritesInput = {
@@ -1086,6 +1231,7 @@ export type UserCreateWithoutFavoritesInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -1108,6 +1254,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -1146,6 +1293,7 @@ export type UserUpdateWithoutFavoritesInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -1168,6 +1316,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
 }
 
 
@@ -1258,6 +1407,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   Authenticator?: boolean | Prisma.User$AuthenticatorArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
+  farm?: boolean | Prisma.User$farmArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1322,6 +1472,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   Authenticator?: boolean | Prisma.User$AuthenticatorArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
+  farm?: boolean | Prisma.User$farmArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1335,6 +1486,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     Authenticator: Prisma.$AuthenticatorPayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
     favorites: Prisma.$FavoritePayload<ExtArgs>[]
+    farm: Prisma.$FarmPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1751,6 +1903,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   Authenticator<T extends Prisma.User$AuthenticatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$AuthenticatorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthenticatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   favorites<T extends Prisma.User$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  farm<T extends Prisma.User$farmArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$farmArgs<ExtArgs>>): Prisma.Prisma__FarmClient<runtime.Types.Result.GetResult<Prisma.$FarmPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2305,6 +2458,25 @@ export type User$favoritesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.FavoriteScalarFieldEnum | Prisma.FavoriteScalarFieldEnum[]
+}
+
+/**
+ * User.farm
+ */
+export type User$farmArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Farm
+   */
+  select?: Prisma.FarmSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Farm
+   */
+  omit?: Prisma.FarmOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FarmInclude<ExtArgs> | null
+  where?: Prisma.FarmWhereInput
 }
 
 /**

@@ -72,6 +72,21 @@ export type User = Prisma.UserModel
  */
 export type Product = Prisma.ProductModel
 /**
+ * Model Farm
+ * 
+ */
+export type Farm = Prisma.FarmModel
+/**
+ * Model Breed
+ * 
+ */
+export type Breed = Prisma.BreedModel
+/**
+ * Model Cattle
+ * 
+ */
+export type Cattle = Prisma.CattleModel
+/**
  * Model Order
  * 
  */

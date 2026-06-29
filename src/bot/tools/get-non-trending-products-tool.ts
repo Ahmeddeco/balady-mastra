@@ -3,8 +3,8 @@ import { nonTrendingProductsSchema } from "@/schemas/nonTrendingProducts.schema"
 import { createTool } from "@mastra/core/tools"
 import z from "zod"
 
-export const getStagnantProductsTool = createTool({
-  id: 'get-stagnant-inventory',
+export const getNonTrendingProductsTool = createTool({
+  id: 'get-non-trending-products-tool',
   description: 'جلب قائمة بقطعيات اللحوم المتوفرة بكثرة والتي تعاني من بطء في المبيعات',
   inputSchema: z.object({
     limit: z.number().optional().default(3),

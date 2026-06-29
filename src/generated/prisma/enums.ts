@@ -9,6 +9,34 @@
 * 🟢 You can import this file directly.
 */
 
+export const CattleType = {
+  بقري: 'بقري',
+  جاموسي: 'جاموسي',
+  ماعز: 'ماعز',
+  غنم: 'غنم',
+  جملي: 'جملي'
+} as const
+
+export type CattleType = (typeof CattleType)[keyof typeof CattleType]
+
+
+export const Age = {
+  صغير: 'صغير',
+  وسيط: 'وسيط',
+  كبير: 'كبير'
+} as const
+
+export type Age = (typeof Age)[keyof typeof Age]
+
+
+export const Gender = {
+  ذكر: 'ذكر',
+  أنثى: 'أنثى'
+} as const
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
 export const MeatType = {
   سن: 'سن',
   موزة: 'موزة',
@@ -24,7 +52,9 @@ export const MeatType = {
   قلب: 'قلب',
   كلاوي: 'كلاوي',
   فلتو: 'فلتو',
-  مصنعات: 'مصنعات'
+  مصنعات: 'مصنعات',
+  صدور_دواجن: 'صدور_دواجن',
+  أوراك_دواجن: 'أوراك_دواجن'
 } as const
 
 export type MeatType = (typeof MeatType)[keyof typeof MeatType]
@@ -36,7 +66,8 @@ export const Preparation = {
   مكعبات: 'مكعبات',
   كباب_حلة: 'كباب_حلة',
   شرائح: 'شرائح',
-  مفروم: 'مفروم'
+  مفروم: 'مفروم',
+  كامل: 'كامل'
 } as const
 
 export type Preparation = (typeof Preparation)[keyof typeof Preparation]

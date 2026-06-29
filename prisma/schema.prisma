@@ -4,35 +4,22 @@ generator zod {
   useMultipleFiles                 = true
   writeNullishInModelTypes         = true
   createModelTypes                 = true
-  // default is true
   writeBarrelFiles                 = false
-  // default is true
   createInputTypes                 = false
-  // default is true
   addInputTypeValidation           = false
-  // default is true
   addIncludeType                   = false
-  // default is true
   addSelectType                    = false
-  // default is true
   validateWhereUniqueInput         = false
-  // default is true
   createOptionalDefaultValuesTypes = false
-  // default is false
   createRelationValuesTypes        = false
-  // default is false
   createPartialTypes               = false
-  // default is false
   useDefaultValidators             = false
-  // default is true
   coerceDate                       = false
-  // default is true
 }
 
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
-  // output   = "./src/generated/prisma"
 }
 
 datasource db {
@@ -60,7 +47,7 @@ model Account {
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique // <--- THIS IS THE CRITICAL LINE
+  sessionToken String   @unique
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -85,8 +72,7 @@ model Authenticator {
   credentialDeviceType String
   credentialBackedUp   Boolean
   transports           String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, credentialID])
 }
@@ -110,11 +96,11 @@ model User {
   detailedAddress String?
   orders          Order[]
   favorites       Favorite[]
+  farm            Farm?
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 }
 
-// TODO 
 model Product {
   id            String      @id @default(cuid())
   title         String      @unique
@@ -124,16 +110,123 @@ model Product {
   category      Category
   mainImage     String
   images        String[]
-  price         Float       @default(0)
+  price         Decimal     @default(0) @db.Decimal(10, 2) // تعديل إلى Decimal للدقة المالية
   discount      Int?        @default(0)
-  unit          Unit        @default(قطعة)
-  stock         Float       @default(0)
-  lowQuantity   Float?      @default(0)
+  unit          Unit        @default(كجم) // اللحوم تباع بالوزن غالباً كإجراء افتراضي
+  stock         Decimal     @default(0) @db.Decimal(10, 2) // تعديل إلى Decimal لحسابات تشفي الأوزان
+  lowQuantity   Decimal?    @default(0) @db.Decimal(10, 2)
   increaseByOne Boolean     @default(false)
+  isActive      Boolean     @default(true) // مضاف: لإيقاف البيع دون حذف المنتج وتخريب سجل الطلبات القديمة
   orderItems    OrderItem[]
+  favorites     Favorite[]
+  cattleId      String? // جعلناه اختياري لبيع المصنعات أو الدواجن أو اللحوم العامة دون ربطها برأس ماشية عينية
+  Cattle        Cattle?     @relation(fields: [cattleId], references: [id], onDelete: SetNull)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
-  favorites     Favorite[]
+
+  @@index([cut])
+}
+
+model Farm {
+  id        String   @id @default(cuid())
+  name      String
+  manager   User     @relation(fields: [userId], references: [id])
+  userId    String   @unique
+  cattle    Cattle[]
+  country   String? // تصحيح الخطأ الإملائي conuntry -> country
+  state     String?
+  city      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Breed {
+  id             String   @id @default(cuid())
+  title          String
+  description    String?
+  conversionRate Decimal? @db.Decimal(10, 2)
+  image          String
+  images         String[]
+  cattle         Cattle[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Cattle {
+  id         String     @id @default(cuid())
+  farm       Farm       @relation(fields: [farmId], references: [id])
+  farmId     String
+  breed      Breed      @relation(fields: [breedId], references: [id])
+  breedId    String
+  type       CattleType @default(بقري)
+  gender     Gender     @default(ذكر)
+  age        Age        @default(صغير)
+  liveWeight Decimal?   @db.Decimal(10, 2) // مضاف: الوزن القائم للرأس وهو أساسي للمزارع والتجارة
+  costPrice  Decimal?   @db.Decimal(10, 2) // مضاف: تكلفة شراء الرأس لحساب الأرباح بدقة
+  product    Product[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}
+
+model Order {
+  id              String        @id @default(cuid())
+  orderNumber     Int           @unique @default(autoincrement())
+  subTotal        Decimal       @db.Decimal(10, 2) // تعديل إلى Decimal منعاً لكسور الـ Float المالية
+  deliveryFee     Decimal       @default(0) @db.Decimal(10, 2)
+  total           Decimal       @db.Decimal(10, 2)
+  status          OrderStatus   @default(PENDING)
+  paymentMethod   PaymentMethod @default(CASH)
+  paymentStatus   PaymentStatus @default(PENDING)
+  shippingAddress String
+  customerNotes   String? // مثال: "تقطيع المكعبات صغير للطبخ"
+  butcherNotes    String? // ملاحظات داخلية للجزار أثناء التجهيز والتعبئة والتشفية
+  items           OrderItem[]
+  user            User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId          String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model OrderItem {
+  id                String      @id @default(cuid())
+  preparation       Preparation
+  quantity          Decimal     @db.Decimal(10, 2) // الكمية المطلوبة (بالوزن أو القطعة)
+  price             Decimal     @db.Decimal(10, 2) // سعر المنتج وقت الشراء الفعلي لضمان ثبات التقارير المالية
+  requestedQuantity Decimal     @db.Decimal(10, 2) // الوزن المحجوز من الموقع (مثال: 1.00 كجم)
+  actualQuantity    Decimal?    @db.Decimal(10, 2) // الوزن الحقيقي الخارج من الميزان بعد التشفية (مثال: 1.050 كجم)
+  order             Order       @relation(fields: [orderId], references: [id], onDelete: Cascade) // حذف العناصر تلقائياً عند حذف الطلب
+  orderId           String
+  product           Product     @relation(fields: [productId], references: [id], onDelete: Restrict) // منع حذف المنتج إذا كان متواجداً في طلبات قديمة
+  productId         String
+}
+
+model Favorite {
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade) // إذا حُذف المنتج تُحذف من المفضلة
+  productId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // إذا حُذف المستخدم تُحذف مفضلته
+  userId    String
+  createdAt DateTime @default(now())
+
+  @@id([userId, productId])
+}
+
+enum CattleType {
+  بقري
+  جاموسي
+  ماعز
+  غنم
+  جملي
+}
+
+enum Age {
+  صغير // لباني
+  وسيط // كاسر جوز / أربعة
+  كبير // جامع
+}
+
+enum Gender {
+  ذكر
+  أنثى
 }
 
 enum MeatType {
@@ -152,43 +245,8 @@ enum MeatType {
   كلاوي
   فلتو
   مصنعات
-}
-
-model Order {
-  id            String        @id @default(cuid())
-  orderNumber   Int           @unique @default(autoincrement())
-  subTotal      Float // إجمالي المنتجات قبل الشحن
-  deliveryFee   Float         @default(0) // مصاريف الشحن والتوصيل
-  total         Float // الإجمالي النهائي الفعلي (subTotal + deliveryFee)
-  status        OrderStatus   @default(PENDING)
-  paymentMethod PaymentMethod @default(CASH) // الكاش هو الأكثر شيوعاً في اللحوم بمصر
-  paymentStatus PaymentStatus @default(PENDING)
-
-  // حقول التوصيل والملاحظات التشغيلية الحيوية
-  shippingAddress String // العنوان التفصيلي للشحنة الحالية
-  customerNotes   String? // ملاحظات الزبون (مثال: "تقطيع المكعبات صغير للطبخ")
-  butcherNotes    String? // ملاحظات داخلية للجزار أثناء التجهيز والتعبئة
-
-  items     OrderItem[]
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  user      User?       @relation(fields: [userId], references: [id])
-  userId    String?
-}
-
-model OrderItem {
-  id                String      @id @default(cuid())
-  preparation       Preparation
-  quantity          Float
-  // نصيحة أمنية: لاتعتمد على سعر النتج الحالي في جدول المنتجات عند عرض المنتجات القديمة
-  // لأنك لو غيرت السعر غدا ستتغير قيمة الطلبات التي تمت سابقا، يجب تخزين السعر وقت الشراء.
-  price             Float // تم اضافة حقل السعر هنا ليكون محدث لآخر سعر للمنتج، 
-  requestedQuantity Float // الوزن الذي طلبه العميل من الموقع (مثال: 1.00 كجم)
-  actualQuantity    Float? // الوزن الحقيقي الذي خرج من الميزان بعد التشفيه (مثال: 1.050 كجم)
-  order             Order       @relation(fields: [orderId], references: [id])
-  orderId           String
-  product           Product     @relation(fields: [productId], references: [id])
-  productId         String
+  صدور_دواجن // مضاف: لدعم تصنيف الدواجن الجديد
+  أوراك_دواجن // مضاف: لدعم تصنيف الدواجن الجديد
 }
 
 enum Preparation {
@@ -198,18 +256,7 @@ enum Preparation {
   كباب_حلة
   شرائح
   مفروم
-}
-
-// يفضل استخدام "Explicit Many-to-Many" (جدول وسيط صريح).
-// لماذا؟ لتتمكن من معرفة "متى" قام العميل بإضافة المنتج للمفضلة، ولضمان أداء أفضل عند الاستعلام.
-model Favorite {
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade) // إذا حُذف الطلب، تُحذف عناصره تلقائياً
-  productId String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // إذا حُذف الطلب، تُحذف عناصره تلقائياً
-  userId    String
-  createdAt DateTime @default(now())
-
-  @@id([userId, productId]) // منع تكرار نفس المنتج لنفس العميل
+  كامل // مضاف: لقطعيات مثل العروق كاملة أو الطيور الكاملة
 }
 
 enum Role {

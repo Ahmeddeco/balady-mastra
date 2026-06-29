@@ -57,6 +57,9 @@ export const ModelName = {
   Authenticator: 'Authenticator',
   User: 'User',
   Product: 'Product',
+  Farm: 'Farm',
+  Breed: 'Breed',
+  Cattle: 'Cattle',
   Order: 'Order',
   OrderItem: 'OrderItem',
   Favorite: 'Favorite'
@@ -168,11 +171,57 @@ export const ProductScalarFieldEnum = {
   stock: 'stock',
   lowQuantity: 'lowQuantity',
   increaseByOne: 'increaseByOne',
+  isActive: 'isActive',
+  cattleId: 'cattleId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const FarmScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId',
+  country: 'country',
+  state: 'state',
+  city: 'city',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FarmScalarFieldEnum = (typeof FarmScalarFieldEnum)[keyof typeof FarmScalarFieldEnum]
+
+
+export const BreedScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  conversionRate: 'conversionRate',
+  image: 'image',
+  images: 'images',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BreedScalarFieldEnum = (typeof BreedScalarFieldEnum)[keyof typeof BreedScalarFieldEnum]
+
+
+export const CattleScalarFieldEnum = {
+  id: 'id',
+  farmId: 'farmId',
+  breedId: 'breedId',
+  type: 'type',
+  gender: 'gender',
+  age: 'age',
+  liveWeight: 'liveWeight',
+  costPrice: 'costPrice',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CattleScalarFieldEnum = (typeof CattleScalarFieldEnum)[keyof typeof CattleScalarFieldEnum]
 
 
 export const OrderScalarFieldEnum = {
@@ -187,9 +236,9 @@ export const OrderScalarFieldEnum = {
   shippingAddress: 'shippingAddress',
   customerNotes: 'customerNotes',
   butcherNotes: 'butcherNotes',
+  userId: 'userId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
+  updatedAt: 'updatedAt'
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
