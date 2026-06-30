@@ -38,6 +38,8 @@ export type UserMinAggregateOutputType = {
   state: string | null
   city: string | null
   detailedAddress: string | null
+  lat: string | null
+  lng: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,6 +58,8 @@ export type UserMaxAggregateOutputType = {
   state: string | null
   city: string | null
   detailedAddress: string | null
+  lat: string | null
+  lng: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -74,6 +78,8 @@ export type UserCountAggregateOutputType = {
   state: number
   city: number
   detailedAddress: number
+  lat: number
+  lng: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -94,6 +100,8 @@ export type UserMinAggregateInputType = {
   state?: true
   city?: true
   detailedAddress?: true
+  lat?: true
+  lng?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -112,6 +120,8 @@ export type UserMaxAggregateInputType = {
   state?: true
   city?: true
   detailedAddress?: true
+  lat?: true
+  lng?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -130,6 +140,8 @@ export type UserCountAggregateInputType = {
   state?: true
   city?: true
   detailedAddress?: true
+  lat?: true
+  lng?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -221,6 +233,8 @@ export type UserGroupByOutputType = {
   state: string | null
   city: string | null
   detailedAddress: string | null
+  lat: string | null
+  lng: string | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -260,6 +274,8 @@ export type UserWhereInput = {
   state?: Prisma.StringNullableFilter<"User"> | string | null
   city?: Prisma.StringNullableFilter<"User"> | string | null
   detailedAddress?: Prisma.StringNullableFilter<"User"> | string | null
+  lat?: Prisma.StringNullableFilter<"User"> | string | null
+  lng?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   accounts?: Prisma.AccountListRelationFilter
@@ -267,7 +283,7 @@ export type UserWhereInput = {
   Authenticator?: Prisma.AuthenticatorListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
-  farm?: Prisma.XOR<Prisma.FarmNullableScalarRelationFilter, Prisma.FarmWhereInput> | null
+  farm?: Prisma.FarmListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -284,6 +300,8 @@ export type UserOrderByWithRelationInput = {
   state?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   detailedAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  lat?: Prisma.SortOrderInput | Prisma.SortOrder
+  lng?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
@@ -291,7 +309,7 @@ export type UserOrderByWithRelationInput = {
   Authenticator?: Prisma.AuthenticatorOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
   favorites?: Prisma.FavoriteOrderByRelationAggregateInput
-  farm?: Prisma.FarmOrderByWithRelationInput
+  farm?: Prisma.FarmOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -311,6 +329,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   state?: Prisma.StringNullableFilter<"User"> | string | null
   city?: Prisma.StringNullableFilter<"User"> | string | null
   detailedAddress?: Prisma.StringNullableFilter<"User"> | string | null
+  lat?: Prisma.StringNullableFilter<"User"> | string | null
+  lng?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   accounts?: Prisma.AccountListRelationFilter
@@ -318,7 +338,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   Authenticator?: Prisma.AuthenticatorListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
-  farm?: Prisma.XOR<Prisma.FarmNullableScalarRelationFilter, Prisma.FarmWhereInput> | null
+  farm?: Prisma.FarmListRelationFilter
 }, "id" | "email" | "primaryMobile">
 
 export type UserOrderByWithAggregationInput = {
@@ -335,6 +355,8 @@ export type UserOrderByWithAggregationInput = {
   state?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   detailedAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  lat?: Prisma.SortOrderInput | Prisma.SortOrder
+  lng?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -359,6 +381,8 @@ export type UserScalarWhereWithAggregatesInput = {
   state?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   city?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   detailedAddress?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  lat?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  lng?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -377,6 +401,8 @@ export type UserCreateInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
@@ -384,7 +410,7 @@ export type UserCreateInput = {
   Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmCreateNestedManyWithoutManagerInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -401,6 +427,8 @@ export type UserUncheckedCreateInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
@@ -408,7 +436,7 @@ export type UserUncheckedCreateInput = {
   Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmUncheckedCreateNestedManyWithoutManagerInput
 }
 
 export type UserUpdateInput = {
@@ -425,6 +453,8 @@ export type UserUpdateInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
@@ -432,7 +462,7 @@ export type UserUpdateInput = {
   Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUpdateManyWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -449,6 +479,8 @@ export type UserUncheckedUpdateInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -456,7 +488,7 @@ export type UserUncheckedUpdateInput = {
   Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUncheckedUpdateManyWithoutManagerNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -473,6 +505,8 @@ export type UserCreateManyInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -491,6 +525,8 @@ export type UserUpdateManyMutationInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -509,6 +545,8 @@ export type UserUncheckedUpdateManyInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -532,6 +570,8 @@ export type UserCountOrderByAggregateInput = {
   state?: Prisma.SortOrder
   city?: Prisma.SortOrder
   detailedAddress?: Prisma.SortOrder
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -550,6 +590,8 @@ export type UserMaxOrderByAggregateInput = {
   state?: Prisma.SortOrder
   city?: Prisma.SortOrder
   detailedAddress?: Prisma.SortOrder
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -568,6 +610,8 @@ export type UserMinOrderByAggregateInput = {
   state?: Prisma.SortOrder
   city?: Prisma.SortOrder
   detailedAddress?: Prisma.SortOrder
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -685,13 +729,15 @@ export type UserCreateWithoutAccountsInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmCreateNestedManyWithoutManagerInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -708,13 +754,15 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmUncheckedCreateNestedManyWithoutManagerInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -747,13 +795,15 @@ export type UserUpdateWithoutAccountsInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUpdateManyWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -770,13 +820,15 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUncheckedUpdateManyWithoutManagerNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -793,13 +845,15 @@ export type UserCreateWithoutSessionsInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmCreateNestedManyWithoutManagerInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -816,13 +870,15 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmUncheckedCreateNestedManyWithoutManagerInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -855,13 +911,15 @@ export type UserUpdateWithoutSessionsInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUpdateManyWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -878,13 +936,15 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUncheckedUpdateManyWithoutManagerNestedInput
 }
 
 export type UserCreateWithoutAuthenticatorInput = {
@@ -901,13 +961,15 @@ export type UserCreateWithoutAuthenticatorInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmCreateNestedManyWithoutManagerInput
 }
 
 export type UserUncheckedCreateWithoutAuthenticatorInput = {
@@ -924,13 +986,15 @@ export type UserUncheckedCreateWithoutAuthenticatorInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmUncheckedCreateNestedManyWithoutManagerInput
 }
 
 export type UserCreateOrConnectWithoutAuthenticatorInput = {
@@ -963,13 +1027,15 @@ export type UserUpdateWithoutAuthenticatorInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUpdateManyWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthenticatorInput = {
@@ -986,13 +1052,15 @@ export type UserUncheckedUpdateWithoutAuthenticatorInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUncheckedUpdateManyWithoutManagerNestedInput
 }
 
 export type UserCreateWithoutFarmInput = {
@@ -1009,6 +1077,8 @@ export type UserCreateWithoutFarmInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
@@ -1032,6 +1102,8 @@ export type UserUncheckedCreateWithoutFarmInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
@@ -1071,6 +1143,8 @@ export type UserUpdateWithoutFarmInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
@@ -1094,6 +1168,8 @@ export type UserUncheckedUpdateWithoutFarmInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -1117,13 +1193,15 @@ export type UserCreateWithoutOrdersInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmCreateNestedManyWithoutManagerInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -1140,13 +1218,15 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmUncheckedCreateNestedManyWithoutManagerInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -1179,13 +1259,15 @@ export type UserUpdateWithoutOrdersInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUpdateManyWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -1202,13 +1284,15 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUncheckedUpdateManyWithoutManagerNestedInput
 }
 
 export type UserCreateWithoutFavoritesInput = {
@@ -1225,13 +1309,15 @@ export type UserCreateWithoutFavoritesInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmCreateNestedManyWithoutManagerInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -1248,13 +1334,15 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   state?: string | null
   city?: string | null
   detailedAddress?: string | null
+  lat?: string | null
+  lng?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
-  farm?: Prisma.FarmUncheckedCreateNestedOneWithoutManagerInput
+  farm?: Prisma.FarmUncheckedCreateNestedManyWithoutManagerInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -1287,13 +1375,15 @@ export type UserUpdateWithoutFavoritesInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUpdateManyWithoutManagerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -1310,13 +1400,15 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   detailedAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
-  farm?: Prisma.FarmUncheckedUpdateOneWithoutManagerNestedInput
+  farm?: Prisma.FarmUncheckedUpdateManyWithoutManagerNestedInput
 }
 
 
@@ -1330,6 +1422,7 @@ export type UserCountOutputType = {
   Authenticator: number
   orders: number
   favorites: number
+  farm: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1338,6 +1431,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   Authenticator?: boolean | UserCountOutputTypeCountAuthenticatorArgs
   orders?: boolean | UserCountOutputTypeCountOrdersArgs
   favorites?: boolean | UserCountOutputTypeCountFavoritesArgs
+  farm?: boolean | UserCountOutputTypeCountFarmArgs
 }
 
 /**
@@ -1385,6 +1479,13 @@ export type UserCountOutputTypeCountFavoritesArgs<ExtArgs extends runtime.Types.
   where?: Prisma.FavoriteWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFarmArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FarmWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1400,6 +1501,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   state?: boolean
   city?: boolean
   detailedAddress?: boolean
+  lat?: boolean
+  lng?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
@@ -1425,6 +1528,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   state?: boolean
   city?: boolean
   detailedAddress?: boolean
+  lat?: boolean
+  lng?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -1443,6 +1548,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   state?: boolean
   city?: boolean
   detailedAddress?: boolean
+  lat?: boolean
+  lng?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -1461,11 +1568,13 @@ export type UserSelectScalar = {
   state?: boolean
   city?: boolean
   detailedAddress?: boolean
+  lat?: boolean
+  lng?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "role" | "personalId" | "primaryMobile" | "secondaryMobile" | "country" | "state" | "city" | "detailedAddress" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "role" | "personalId" | "primaryMobile" | "secondaryMobile" | "country" | "state" | "city" | "detailedAddress" | "lat" | "lng" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
@@ -1486,7 +1595,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     Authenticator: Prisma.$AuthenticatorPayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
     favorites: Prisma.$FavoritePayload<ExtArgs>[]
-    farm: Prisma.$FarmPayload<ExtArgs> | null
+    farm: Prisma.$FarmPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1502,6 +1611,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     state: string | null
     city: string | null
     detailedAddress: string | null
+    lat: string | null
+    lng: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1903,7 +2014,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   Authenticator<T extends Prisma.User$AuthenticatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$AuthenticatorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthenticatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   favorites<T extends Prisma.User$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  farm<T extends Prisma.User$farmArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$farmArgs<ExtArgs>>): Prisma.Prisma__FarmClient<runtime.Types.Result.GetResult<Prisma.$FarmPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  farm<T extends Prisma.User$farmArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$farmArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FarmPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1946,6 +2057,8 @@ export interface UserFieldRefs {
   readonly state: Prisma.FieldRef<"User", 'String'>
   readonly city: Prisma.FieldRef<"User", 'String'>
   readonly detailedAddress: Prisma.FieldRef<"User", 'String'>
+  readonly lat: Prisma.FieldRef<"User", 'String'>
+  readonly lng: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -2477,6 +2590,11 @@ export type User$farmArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs 
    */
   include?: Prisma.FarmInclude<ExtArgs> | null
   where?: Prisma.FarmWhereInput
+  orderBy?: Prisma.FarmOrderByWithRelationInput | Prisma.FarmOrderByWithRelationInput[]
+  cursor?: Prisma.FarmWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FarmScalarFieldEnum | Prisma.FarmScalarFieldEnum[]
 }
 
 /**

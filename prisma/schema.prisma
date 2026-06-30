@@ -94,9 +94,11 @@ model User {
   state           String?
   city            String?
   detailedAddress String?
+  lat             String?
+  lng             String?
   orders          Order[]
   favorites       Favorite[]
-  farm            Farm?
+  farm            Farm[]
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 }
@@ -128,16 +130,19 @@ model Product {
 }
 
 model Farm {
-  id        String   @id @default(cuid())
-  name      String   @unique
-  manager   User     @relation(fields: [userId], references: [id])
-  userId    String   @unique
-  cattle    Cattle[]
-  country   String? // تصحيح الخطأ الإملائي conuntry -> country
-  state     String?
-  city      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              String   @id @default(cuid())
+  name            String   @unique
+  manager         User     @relation(fields: [userId], references: [id])
+  cattle          Cattle[]
+  country         String? // تصحيح الخطأ الإملائي conuntry -> country
+  state           String?
+  city            String?
+  detailedAddress String?
+  lat             String?
+  lng             String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  userId          String
 }
 
 model Breed {

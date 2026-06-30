@@ -3,7 +3,6 @@
 import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import UserSchema from "@/schemas/user.schema"
 import FarmSchema from "@/schemas/Farm.Schema"
 
 /* ------------------------------ addFarmAction ----------------------------- */
@@ -24,6 +23,9 @@ export const addFarmAction = async (prevState: unknown, formData: FormData) => {
         country: submission.value.country,
         state: submission.value.state,
         city: submission.value.city,
+        lat: submission.value.lat,
+        lng: submission.value.lng,
+        detailedAddress: submission.value.detailedAddress
       },
       update: {
         name: submission.value.name,
@@ -31,57 +33,62 @@ export const addFarmAction = async (prevState: unknown, formData: FormData) => {
         country: submission.value.country,
         state: submission.value.state,
         city: submission.value.city,
+        lat: submission.value.lat,
+        lng: submission.value.lng,
+        detailedAddress: submission.value.detailedAddress
       }
     })
   } catch (error) {
-    console.error(error)
+    console.error("Failed to create product: ", error)
+    return submission.reply({
+      formErrors: ["حدث خطأ أثناء حفظ المزرعة في قاعدة البيانات."],
+    })
   }
-
-  // redirect("/server/farms")
+  redirect("/server/farms")
 }
 
 /* ----------------------------- editUserAction ----------------------------- */
-export const editUserAction = async (prevState: unknown, formData: FormData) => {
+export const editFarmAction = async (prevState: unknown, formData: FormData) => {
   const submission = parseWithZod(formData, {
-    schema: UserSchema,
+    schema: FarmSchema,
   })
   if (submission.status !== 'success') {
     return submission.reply()
   }
 
   try {
-    await prisma.user.update({
-      where: { email: submission.value.email },
+    await prisma.farm.update({
+      where: { id: submission.value.id! },
       data: {
         name: submission.value.name,
-        email: submission.value.email,
-        role: submission.value.role,
-        primaryMobile: submission.value.primaryMobile,
-        secondaryMobile: submission.value.secondaryMobile,
+        userId: submission.value.userId,
         country: submission.value.country,
         state: submission.value.state,
         city: submission.value.city,
-        detailedAddress: submission.value.detailedAddress,
-        image: submission.value.image,
-        personalId: submission.value.personalId
+        lat: submission.value.lat,
+        lng: submission.value.lng,
+        detailedAddress: submission.value.detailedAddress
       }
     })
   } catch (error) {
-    console.error(error)
+    console.error("Failed to create product: ", error)
+    return submission.reply({
+      formErrors: ["حدث خطأ أثناء تعديل بيانات المزرعة في قاعدة البيانات."],
+    })
   }
 
-  redirect("/server/users")
+  redirect("/server/farms")
 }
 
-/* ---------------------------- deleteUserAction ---------------------------- */
-export const deleteUserAction = async (formData: FormData) => {
+/* ---------------------------- deleteFarmAction ---------------------------- */
+export const deleteFarmAction = async (formData: FormData) => {
   try {
     const id = formData.get("id")
-    await prisma.user.delete({
+    await prisma.farm.delete({
       where: { id: id as string },
     })
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/users")
+  redirect("/server/farms")
 }

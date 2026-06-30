@@ -149,6 +149,8 @@ export const UserScalarFieldEnum = {
   state: 'state',
   city: 'city',
   detailedAddress: 'detailedAddress',
+  lat: 'lat',
+  lng: 'lng',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -183,12 +185,15 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 export const FarmScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  userId: 'userId',
   country: 'country',
   state: 'state',
   city: 'city',
+  detailedAddress: 'detailedAddress',
+  lat: 'lat',
+  lng: 'lng',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type FarmScalarFieldEnum = (typeof FarmScalarFieldEnum)[keyof typeof FarmScalarFieldEnum]

@@ -19,6 +19,8 @@ export const UserSchema = z.object({
   state: z.string().nullish(),
   city: z.string().nullish(),
   detailedAddress: z.string().nullish(),
+  lat: z.string().nullish(),
+  lng: z.string().nullish(),
   createdAt: z.date(),
   updatedAt: z.date(),
 })
