@@ -5,7 +5,6 @@ import { Decimal } from "@prisma/client/runtime/client"
 import { z } from 'zod'
 
 export const CattleSchema = z.object({
-  type: CattleTypeSchema,
   gender: GenderSchema,
   age: AgeSchema,
   id: z.string().nullish(),

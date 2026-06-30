@@ -1,11 +1,12 @@
-import { Decimal } from "@prisma/client/runtime/client"
+import CattleTypeSchema from "@/generated/inputTypeSchemas/CattleTypeSchema"
 import { z } from 'zod'
 
 export const BreedSchema = z.object({
   id: z.string().nullish(),
-  title: z.string(),
+  name: z.string(),
   description: z.string().nullish(),
-  conversionRate: z.instanceof(Decimal, { message: "Field 'conversionRate' must be a Decimal. Location: ['Models', 'Breed']" }).nullish(),
+  type: CattleTypeSchema,
+  conversionRate: z.number().positive().nullish(),
   image: z.string(),
   images: z.string().array(),
 })

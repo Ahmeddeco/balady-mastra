@@ -13,13 +13,13 @@ export const serverNav = [
     icon: Users
   },
   {
-    title: "farm",
+    title: "farms",
     href: "/server/farms",
     icon: PiFarmFill
   },
   {
-    title: "breed",
-    href: "/server/breed",
+    title: "breeds",
+    href: "/server/breeds",
     icon: RulerDimensionLine
   },
   {

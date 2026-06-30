@@ -201,8 +201,9 @@ export type FarmScalarFieldEnum = (typeof FarmScalarFieldEnum)[keyof typeof Farm
 
 export const BreedScalarFieldEnum = {
   id: 'id',
-  title: 'title',
+  name: 'name',
   description: 'description',
+  type: 'type',
   conversionRate: 'conversionRate',
   image: 'image',
   images: 'images',
@@ -217,7 +218,6 @@ export const CattleScalarFieldEnum = {
   id: 'id',
   farmId: 'farmId',
   breedId: 'breedId',
-  type: 'type',
   gender: 'gender',
   age: 'age',
   liveWeight: 'liveWeight',

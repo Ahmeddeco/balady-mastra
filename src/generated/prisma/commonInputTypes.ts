@@ -331,6 +331,16 @@ export type EnumCattleTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumCattleTypeFilter<$PrismaModel> | $Enums.CattleType
 }
 
+export type EnumCattleTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CattleType | Prisma.EnumCattleTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CattleType[] | Prisma.ListEnumCattleTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CattleType[] | Prisma.ListEnumCattleTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCattleTypeWithAggregatesFilter<$PrismaModel> | $Enums.CattleType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCattleTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCattleTypeFilter<$PrismaModel>
+}
+
 export type EnumGenderFilter<$PrismaModel = never> = {
   equals?: $Enums.Gender | Prisma.EnumGenderFieldRefInput<$PrismaModel>
   in?: $Enums.Gender[] | Prisma.ListEnumGenderFieldRefInput<$PrismaModel>
@@ -343,16 +353,6 @@ export type EnumAgeFilter<$PrismaModel = never> = {
   in?: $Enums.Age[] | Prisma.ListEnumAgeFieldRefInput<$PrismaModel>
   notIn?: $Enums.Age[] | Prisma.ListEnumAgeFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumAgeFilter<$PrismaModel> | $Enums.Age
-}
-
-export type EnumCattleTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.CattleType | Prisma.EnumCattleTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.CattleType[] | Prisma.ListEnumCattleTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.CattleType[] | Prisma.ListEnumCattleTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumCattleTypeWithAggregatesFilter<$PrismaModel> | $Enums.CattleType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumCattleTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumCattleTypeFilter<$PrismaModel>
 }
 
 export type EnumGenderWithAggregatesFilter<$PrismaModel = never> = {
@@ -773,6 +773,16 @@ export type NestedEnumCattleTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumCattleTypeFilter<$PrismaModel> | $Enums.CattleType
 }
 
+export type NestedEnumCattleTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CattleType | Prisma.EnumCattleTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CattleType[] | Prisma.ListEnumCattleTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CattleType[] | Prisma.ListEnumCattleTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCattleTypeWithAggregatesFilter<$PrismaModel> | $Enums.CattleType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCattleTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCattleTypeFilter<$PrismaModel>
+}
+
 export type NestedEnumGenderFilter<$PrismaModel = never> = {
   equals?: $Enums.Gender | Prisma.EnumGenderFieldRefInput<$PrismaModel>
   in?: $Enums.Gender[] | Prisma.ListEnumGenderFieldRefInput<$PrismaModel>
@@ -785,16 +795,6 @@ export type NestedEnumAgeFilter<$PrismaModel = never> = {
   in?: $Enums.Age[] | Prisma.ListEnumAgeFieldRefInput<$PrismaModel>
   notIn?: $Enums.Age[] | Prisma.ListEnumAgeFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumAgeFilter<$PrismaModel> | $Enums.Age
-}
-
-export type NestedEnumCattleTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.CattleType | Prisma.EnumCattleTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.CattleType[] | Prisma.ListEnumCattleTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.CattleType[] | Prisma.ListEnumCattleTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumCattleTypeWithAggregatesFilter<$PrismaModel> | $Enums.CattleType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumCattleTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumCattleTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumGenderWithAggregatesFilter<$PrismaModel = never> = {

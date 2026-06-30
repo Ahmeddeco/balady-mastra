@@ -36,8 +36,9 @@ export type BreedSumAggregateOutputType = {
 
 export type BreedMinAggregateOutputType = {
   id: string | null
-  title: string | null
+  name: string | null
   description: string | null
+  type: $Enums.CattleType | null
   conversionRate: runtime.Decimal | null
   image: string | null
   createdAt: Date | null
@@ -46,8 +47,9 @@ export type BreedMinAggregateOutputType = {
 
 export type BreedMaxAggregateOutputType = {
   id: string | null
-  title: string | null
+  name: string | null
   description: string | null
+  type: $Enums.CattleType | null
   conversionRate: runtime.Decimal | null
   image: string | null
   createdAt: Date | null
@@ -56,8 +58,9 @@ export type BreedMaxAggregateOutputType = {
 
 export type BreedCountAggregateOutputType = {
   id: number
-  title: number
+  name: number
   description: number
+  type: number
   conversionRate: number
   image: number
   images: number
@@ -77,8 +80,9 @@ export type BreedSumAggregateInputType = {
 
 export type BreedMinAggregateInputType = {
   id?: true
-  title?: true
+  name?: true
   description?: true
+  type?: true
   conversionRate?: true
   image?: true
   createdAt?: true
@@ -87,8 +91,9 @@ export type BreedMinAggregateInputType = {
 
 export type BreedMaxAggregateInputType = {
   id?: true
-  title?: true
+  name?: true
   description?: true
+  type?: true
   conversionRate?: true
   image?: true
   createdAt?: true
@@ -97,8 +102,9 @@ export type BreedMaxAggregateInputType = {
 
 export type BreedCountAggregateInputType = {
   id?: true
-  title?: true
+  name?: true
   description?: true
+  type?: true
   conversionRate?: true
   image?: true
   images?: true
@@ -195,8 +201,9 @@ export type BreedGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type BreedGroupByOutputType = {
   id: string
-  title: string
+  name: string
   description: string | null
+  type: $Enums.CattleType
   conversionRate: runtime.Decimal | null
   image: string
   images: string[]
@@ -229,8 +236,9 @@ export type BreedWhereInput = {
   OR?: Prisma.BreedWhereInput[]
   NOT?: Prisma.BreedWhereInput | Prisma.BreedWhereInput[]
   id?: Prisma.StringFilter<"Breed"> | string
-  title?: Prisma.StringFilter<"Breed"> | string
+  name?: Prisma.StringFilter<"Breed"> | string
   description?: Prisma.StringNullableFilter<"Breed"> | string | null
+  type?: Prisma.EnumCattleTypeFilter<"Breed"> | $Enums.CattleType
   conversionRate?: Prisma.DecimalNullableFilter<"Breed"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image?: Prisma.StringFilter<"Breed"> | string
   images?: Prisma.StringNullableListFilter<"Breed">
@@ -241,8 +249,9 @@ export type BreedWhereInput = {
 
 export type BreedOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrder
   conversionRate?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrder
   images?: Prisma.SortOrder
@@ -253,23 +262,25 @@ export type BreedOrderByWithRelationInput = {
 
 export type BreedWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  name?: string
   AND?: Prisma.BreedWhereInput | Prisma.BreedWhereInput[]
   OR?: Prisma.BreedWhereInput[]
   NOT?: Prisma.BreedWhereInput | Prisma.BreedWhereInput[]
-  title?: Prisma.StringFilter<"Breed"> | string
   description?: Prisma.StringNullableFilter<"Breed"> | string | null
+  type?: Prisma.EnumCattleTypeFilter<"Breed"> | $Enums.CattleType
   conversionRate?: Prisma.DecimalNullableFilter<"Breed"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image?: Prisma.StringFilter<"Breed"> | string
   images?: Prisma.StringNullableListFilter<"Breed">
   createdAt?: Prisma.DateTimeFilter<"Breed"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Breed"> | Date | string
   cattle?: Prisma.CattleListRelationFilter
-}, "id">
+}, "id" | "name">
 
 export type BreedOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrder
   conversionRate?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrder
   images?: Prisma.SortOrder
@@ -287,8 +298,9 @@ export type BreedScalarWhereWithAggregatesInput = {
   OR?: Prisma.BreedScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BreedScalarWhereWithAggregatesInput | Prisma.BreedScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Breed"> | string
-  title?: Prisma.StringWithAggregatesFilter<"Breed"> | string
+  name?: Prisma.StringWithAggregatesFilter<"Breed"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Breed"> | string | null
+  type?: Prisma.EnumCattleTypeWithAggregatesFilter<"Breed"> | $Enums.CattleType
   conversionRate?: Prisma.DecimalNullableWithAggregatesFilter<"Breed"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image?: Prisma.StringWithAggregatesFilter<"Breed"> | string
   images?: Prisma.StringNullableListFilter<"Breed">
@@ -298,8 +310,9 @@ export type BreedScalarWhereWithAggregatesInput = {
 
 export type BreedCreateInput = {
   id?: string
-  title: string
+  name: string
   description?: string | null
+  type?: $Enums.CattleType
   conversionRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image: string
   images?: Prisma.BreedCreateimagesInput | string[]
@@ -310,8 +323,9 @@ export type BreedCreateInput = {
 
 export type BreedUncheckedCreateInput = {
   id?: string
-  title: string
+  name: string
   description?: string | null
+  type?: $Enums.CattleType
   conversionRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image: string
   images?: Prisma.BreedCreateimagesInput | string[]
@@ -322,8 +336,9 @@ export type BreedUncheckedCreateInput = {
 
 export type BreedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
   conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
@@ -334,8 +349,9 @@ export type BreedUpdateInput = {
 
 export type BreedUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
   conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
@@ -346,8 +362,9 @@ export type BreedUncheckedUpdateInput = {
 
 export type BreedCreateManyInput = {
   id?: string
-  title: string
+  name: string
   description?: string | null
+  type?: $Enums.CattleType
   conversionRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image: string
   images?: Prisma.BreedCreateimagesInput | string[]
@@ -357,8 +374,9 @@ export type BreedCreateManyInput = {
 
 export type BreedUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
   conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
@@ -368,8 +386,9 @@ export type BreedUpdateManyMutationInput = {
 
 export type BreedUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
   conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
@@ -379,8 +398,9 @@ export type BreedUncheckedUpdateManyInput = {
 
 export type BreedCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   conversionRate?: Prisma.SortOrder
   image?: Prisma.SortOrder
   images?: Prisma.SortOrder
@@ -394,8 +414,9 @@ export type BreedAvgOrderByAggregateInput = {
 
 export type BreedMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   conversionRate?: Prisma.SortOrder
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -404,8 +425,9 @@ export type BreedMaxOrderByAggregateInput = {
 
 export type BreedMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   conversionRate?: Prisma.SortOrder
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -423,6 +445,10 @@ export type BreedScalarRelationFilter = {
 
 export type BreedCreateimagesInput = {
   set: string[]
+}
+
+export type EnumCattleTypeFieldUpdateOperationsInput = {
+  set?: $Enums.CattleType
 }
 
 export type BreedUpdateimagesInput = {
@@ -446,8 +472,9 @@ export type BreedUpdateOneRequiredWithoutCattleNestedInput = {
 
 export type BreedCreateWithoutCattleInput = {
   id?: string
-  title: string
+  name: string
   description?: string | null
+  type?: $Enums.CattleType
   conversionRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image: string
   images?: Prisma.BreedCreateimagesInput | string[]
@@ -457,8 +484,9 @@ export type BreedCreateWithoutCattleInput = {
 
 export type BreedUncheckedCreateWithoutCattleInput = {
   id?: string
-  title: string
+  name: string
   description?: string | null
+  type?: $Enums.CattleType
   conversionRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image: string
   images?: Prisma.BreedCreateimagesInput | string[]
@@ -484,8 +512,9 @@ export type BreedUpdateToOneWithWhereWithoutCattleInput = {
 
 export type BreedUpdateWithoutCattleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
   conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
@@ -495,8 +524,9 @@ export type BreedUpdateWithoutCattleInput = {
 
 export type BreedUncheckedUpdateWithoutCattleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
   conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
@@ -537,8 +567,9 @@ export type BreedCountOutputTypeCountCattleArgs<ExtArgs extends runtime.Types.Ex
 
 export type BreedSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
+  name?: boolean
   description?: boolean
+  type?: boolean
   conversionRate?: boolean
   image?: boolean
   images?: boolean
@@ -550,8 +581,9 @@ export type BreedSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 
 export type BreedSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
+  name?: boolean
   description?: boolean
+  type?: boolean
   conversionRate?: boolean
   image?: boolean
   images?: boolean
@@ -561,8 +593,9 @@ export type BreedSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type BreedSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
+  name?: boolean
   description?: boolean
+  type?: boolean
   conversionRate?: boolean
   image?: boolean
   images?: boolean
@@ -572,8 +605,9 @@ export type BreedSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type BreedSelectScalar = {
   id?: boolean
-  title?: boolean
+  name?: boolean
   description?: boolean
+  type?: boolean
   conversionRate?: boolean
   image?: boolean
   images?: boolean
@@ -581,7 +615,7 @@ export type BreedSelectScalar = {
   updatedAt?: boolean
 }
 
-export type BreedOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "conversionRate" | "image" | "images" | "createdAt" | "updatedAt", ExtArgs["result"]["breed"]>
+export type BreedOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "type" | "conversionRate" | "image" | "images" | "createdAt" | "updatedAt", ExtArgs["result"]["breed"]>
 export type BreedInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cattle?: boolean | Prisma.Breed$cattleArgs<ExtArgs>
   _count?: boolean | Prisma.BreedCountOutputTypeDefaultArgs<ExtArgs>
@@ -596,8 +630,9 @@ export type $BreedPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    title: string
+    name: string
     description: string | null
+    type: $Enums.CattleType
     conversionRate: runtime.Decimal | null
     image: string
     images: string[]
@@ -1028,8 +1063,9 @@ export interface Prisma__BreedClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface BreedFieldRefs {
   readonly id: Prisma.FieldRef<"Breed", 'String'>
-  readonly title: Prisma.FieldRef<"Breed", 'String'>
+  readonly name: Prisma.FieldRef<"Breed", 'String'>
   readonly description: Prisma.FieldRef<"Breed", 'String'>
+  readonly type: Prisma.FieldRef<"Breed", 'CattleType'>
   readonly conversionRate: Prisma.FieldRef<"Breed", 'Decimal'>
   readonly image: Prisma.FieldRef<"Breed", 'String'>
   readonly images: Prisma.FieldRef<"Breed", 'String[]'>

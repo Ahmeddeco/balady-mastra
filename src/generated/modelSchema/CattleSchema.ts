@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { Decimal as PrismaDecimal } from '../prisma/internal/prismaNamespace';
-import { CattleTypeSchema } from '../inputTypeSchemas/CattleTypeSchema'
 import { GenderSchema } from '../inputTypeSchemas/GenderSchema'
 import { AgeSchema } from '../inputTypeSchemas/AgeSchema'
 
@@ -9,7 +8,6 @@ import { AgeSchema } from '../inputTypeSchemas/AgeSchema'
 /////////////////////////////////////////
 
 export const CattleSchema = z.object({
-  type: CattleTypeSchema,
   gender: GenderSchema,
   age: AgeSchema,
   id: z.string(),

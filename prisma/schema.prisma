@@ -146,31 +146,31 @@ model Farm {
 }
 
 model Breed {
-  id             String   @id @default(cuid())
-  title          String
+  id             String     @id @default(cuid())
+  name           String     @unique
   description    String?
-  conversionRate Decimal? @db.Decimal(10, 2)
+  type           CattleType @default(أبقار)
+  conversionRate Decimal?   @db.Decimal(10, 2)
   image          String
   images         String[]
   cattle         Cattle[]
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
 }
 
 model Cattle {
-  id         String     @id @default(cuid())
-  farm       Farm       @relation(fields: [farmId], references: [id])
+  id         String    @id @default(cuid())
+  farm       Farm      @relation(fields: [farmId], references: [id])
   farmId     String
-  breed      Breed      @relation(fields: [breedId], references: [id])
+  breed      Breed     @relation(fields: [breedId], references: [id])
   breedId    String
-  type       CattleType @default(بقري)
-  gender     Gender     @default(ذكر)
-  age        Age        @default(صغير)
-  liveWeight Decimal?   @db.Decimal(10, 2) // مضاف: الوزن القائم للرأس وهو أساسي للمزارع والتجارة
-  costPrice  Decimal?   @db.Decimal(10, 2) // مضاف: تكلفة شراء الرأس لحساب الأرباح بدقة
+  gender     Gender    @default(ذكر)
+  age        Age       @default(صغير)
+  liveWeight Decimal?  @db.Decimal(10, 2) // مضاف: الوزن القائم للرأس وهو أساسي للمزارع والتجارة
+  costPrice  Decimal?  @db.Decimal(10, 2) // مضاف: تكلفة شراء الرأس لحساب الأرباح بدقة
   product    Product[]
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
 
 model Order {
@@ -216,11 +216,11 @@ model Favorite {
 }
 
 enum CattleType {
-  بقري
-  جاموسي
+  أبقار
+  جاموس
   ماعز
   غنم
-  جملي
+  جمال
 }
 
 enum Age {

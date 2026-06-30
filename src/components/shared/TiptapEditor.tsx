@@ -25,11 +25,11 @@ import { Field, FieldError, FieldLabel } from "../ui/field"
 
 type TiptapEditorProps = {
 	name: string
-	editorKey?: string
-	defaultValue?: string
+	editorKey: string
+	defaultValue: string
 	onChange?: (value: string) => void
 	label: string
-	errors?: string[]
+	errors: string[]
 	id?: string
 }
 

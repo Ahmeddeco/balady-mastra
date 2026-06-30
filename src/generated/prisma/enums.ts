@@ -10,11 +10,11 @@
 */
 
 export const CattleType = {
-  بقري: 'بقري',
-  جاموسي: 'جاموسي',
+  أبقار: 'أبقار',
+  جاموس: 'جاموس',
   ماعز: 'ماعز',
   غنم: 'غنم',
-  جملي: 'جملي'
+  جمال: 'جمال'
 } as const
 
 export type CattleType = (typeof CattleType)[keyof typeof CattleType]
