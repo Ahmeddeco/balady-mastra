@@ -80,7 +80,7 @@ export default function EditCattleForm({ breeds, farms, oneCattle }: Props) {
 					<FieldLabel htmlFor={fields.age.name}>العمر</FieldLabel>
 					<Select key={fields.age.key} name={fields.age.name} defaultValue={oneCattle.age}>
 						<SelectTrigger>
-							<SelectValue placeholder={AgeSchema.Enum.صغير} />
+							<SelectValue placeholder={AgeSchema.Enum.young} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(AgeSchema.Enum).map((age) => (

@@ -16,6 +16,7 @@ export const OrderSchema = z.object({
   subTotal: z.number(),
   deliveryFee: z.number(),
   total: z.number(),
+  finalTotal: z.number().nullish(),
   shippingAddress: z.string(),
   customerNotes: z.string().nullish(),
   butcherNotes: z.string().nullish(),

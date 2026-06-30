@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const OrderStatusSchema = z.enum(['PENDING','SHIPPED','COMPLETED','CANCELLED']);
+export const OrderStatusSchema = z.enum(['pending','shipped','completed','cancelled']);
 
 export type OrderStatusType = `${z.infer<typeof OrderStatusSchema>}`
 

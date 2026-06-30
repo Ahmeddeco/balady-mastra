@@ -60,9 +60,9 @@ export default function AddUserForm({ authImage }: { authImage?: string }) {
 
 				<Field>
 					<FieldLabel htmlFor={fields.role.name}>الدور</FieldLabel>
-					<Select key={fields.role.key} name={fields.role.name} defaultValue={Role.USER}>
+					<Select key={fields.role.key} name={fields.role.name} defaultValue={Role.user}>
 						<SelectTrigger>
-							<SelectValue placeholder={Role.USER} />
+							<SelectValue placeholder={Role.user} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(Role).map((degreeProgram) => (

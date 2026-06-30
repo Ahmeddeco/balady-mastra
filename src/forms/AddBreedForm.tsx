@@ -38,7 +38,7 @@ export default function AddBreedForm() {
 				{/* ---------------------------------- type ---------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.type.name}>النوع</FieldLabel>
-					<Select key={fields.type.key} name={fields.type.name} defaultValue={CattleTypeSchema.Enum.أبقار}>
+					<Select key={fields.type.key} name={fields.type.name} defaultValue={CattleTypeSchema.Enum.cow}>
 						<SelectTrigger>
 							<SelectValue />
 						</SelectTrigger>

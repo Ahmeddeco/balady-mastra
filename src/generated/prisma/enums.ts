@@ -10,119 +10,119 @@
 */
 
 export const CattleType = {
-  أبقار: 'أبقار',
-  جاموس: 'جاموس',
-  ماعز: 'ماعز',
-  غنم: 'غنم',
-  جمال: 'جمال'
+  cow: 'cow',
+  buffalo: 'buffalo',
+  goat: 'goat',
+  sheep: 'sheep',
+  camel: 'camel'
 } as const
 
 export type CattleType = (typeof CattleType)[keyof typeof CattleType]
 
 
 export const Age = {
-  صغير: 'صغير',
-  وسيط: 'وسيط',
-  كبير: 'كبير'
+  young: 'young',
+  medium: 'medium',
+  adult: 'adult'
 } as const
 
 export type Age = (typeof Age)[keyof typeof Age]
 
 
 export const Gender = {
-  ذكر: 'ذكر',
-  أنثى: 'أنثى'
+  male: 'male',
+  female: 'female'
 } as const
 
 export type Gender = (typeof Gender)[keyof typeof Gender]
 
 
 export const MeatType = {
-  سن: 'سن',
-  موزة: 'موزة',
-  ريش: 'ريش',
-  وش_فخدة: 'وش_فخدة',
-  ضهر_فخدة: 'ضهر_فخدة',
-  سمانة: 'سمانة',
-  انتركوت: 'انتركوت',
-  تربيانكو: 'تربيانكو',
-  لوحة_الكتف: 'لوحة_الكتف',
-  دوش: 'دوش',
-  كبدة: 'كبدة',
-  قلب: 'قلب',
-  كلاوي: 'كلاوي',
-  فلتو: 'فلتو',
-  السرة: 'السرة',
-  مصنعات: 'مصنعات',
-  صدور_دواجن: 'صدور_دواجن',
-  أوراك_دواجن: 'أوراك_دواجن'
+  chuck: 'chuck',
+  shank: 'shank',
+  ribs: 'ribs',
+  topside: 'topside',
+  silverside: 'silverside',
+  knuckle: 'knuckle',
+  ribeye: 'ribeye',
+  eye_round: 'eye_round',
+  blade: 'blade',
+  brisket: 'brisket',
+  liver: 'liver',
+  heart: 'heart',
+  kidneys: 'kidneys',
+  tenderloin: 'tenderloin',
+  flank: 'flank',
+  processed: 'processed',
+  chicken_breast: 'chicken_breast',
+  chicken_thigh: 'chicken_thigh'
 } as const
 
 export type MeatType = (typeof MeatType)[keyof typeof MeatType]
 
 
 export const Preparation = {
-  بفتيك: 'بفتيك',
-  ستيك: 'ستيك',
-  مكعبات: 'مكعبات',
-  كباب_حلة: 'كباب_حلة',
-  شرائح: 'شرائح',
-  مفروم: 'مفروم',
-  كامل: 'كامل'
+  escalope: 'escalope',
+  steak: 'steak',
+  cubes: 'cubes',
+  kabab_hala: 'kabab_hala',
+  slices: 'slices',
+  minced: 'minced',
+  whole: 'whole'
 } as const
 
 export type Preparation = (typeof Preparation)[keyof typeof Preparation]
 
 
 export const Role = {
-  ADMIN: 'ADMIN',
-  USER: 'USER',
-  CLIENT: 'CLIENT',
-  SUPPLIER: 'SUPPLIER'
+  admin: 'admin',
+  user: 'user',
+  client: 'client',
+  supplier: 'supplier'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
 
 
 export const Category = {
-  MEAT: 'MEAT',
-  PROCESSED: 'PROCESSED',
-  CHICKEN: 'CHICKEN'
+  meat: 'meat',
+  processed: 'processed',
+  chicken: 'chicken'
 } as const
 
 export type Category = (typeof Category)[keyof typeof Category]
 
 
 export const Unit = {
-  كجم: 'كجم',
-  قطعة: 'قطعة'
+  kg: 'kg',
+  piece: 'piece'
 } as const
 
 export type Unit = (typeof Unit)[keyof typeof Unit]
 
 
 export const OrderStatus = {
-  PENDING: 'PENDING',
-  SHIPPED: 'SHIPPED',
-  COMPLETED: 'COMPLETED',
-  CANCELLED: 'CANCELLED'
+  pending: 'pending',
+  shipped: 'shipped',
+  completed: 'completed',
+  cancelled: 'cancelled'
 } as const
 
 export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
 
 
 export const PaymentMethod = {
-  VISA: 'VISA',
-  CASH: 'CASH'
+  visa: 'visa',
+  cash: 'cash'
 } as const
 
 export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
 
 
 export const PaymentStatus = {
-  PENDING: 'PENDING',
-  SUCCESS: 'SUCCESS',
-  FAILED: 'FAILED'
+  pending: 'pending',
+  success: 'success',
+  failed: 'failed'
 } as const
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]

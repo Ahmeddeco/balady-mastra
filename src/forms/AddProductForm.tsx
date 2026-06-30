@@ -49,9 +49,9 @@ export default function AddProductForm() {
 				{/* --------------------------------- cut -------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.cut.name}>القطعية</FieldLabel>
-					<Select key={fields.cut.key} name={fields.cut.name} defaultValue={MeatTypeSchema.Enum.سن}>
+					<Select key={fields.cut.key} name={fields.cut.name} defaultValue={MeatTypeSchema.Enum.chuck}>
 						<SelectTrigger>
-							<SelectValue placeholder={MeatTypeSchema.Enum.سن} />
+							<SelectValue placeholder={MeatTypeSchema.Enum.chuck} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(MeatTypeSchema.Values).map((cut) => (
@@ -67,9 +67,9 @@ export default function AddProductForm() {
 				{/* -------------------------------- category -------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.category.name}>الفئة</FieldLabel>
-					<Select key={fields.category.key} name={fields.category.name} defaultValue={Category.MEAT}>
+					<Select key={fields.category.key} name={fields.category.name} defaultValue={Category.meat}>
 						<SelectTrigger>
-							<SelectValue placeholder={Category.MEAT} />
+							<SelectValue placeholder={Category.meat} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(Category).map((degreeProgram) => (
@@ -85,9 +85,9 @@ export default function AddProductForm() {
 				{/* ---------------------------------- unit ---------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.unit.name}>الوحدة</FieldLabel>
-					<Select key={fields.unit.key} name={fields.unit.name} defaultValue={Unit.كجم}>
+					<Select key={fields.unit.key} name={fields.unit.name} defaultValue={Unit.kg}>
 						<SelectTrigger>
-							<SelectValue placeholder={Unit.كجم} />
+							<SelectValue placeholder={Unit.kg} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(Unit).map((degreeProgram) => (

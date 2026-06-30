@@ -393,6 +393,7 @@ export const ModelName = {
   Farm: 'Farm',
   Breed: 'Breed',
   Cattle: 'Cattle',
+  YieldReport: 'YieldReport',
   Order: 'Order',
   OrderItem: 'OrderItem',
   Favorite: 'Favorite'
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "session" | "verificationToken" | "authenticator" | "user" | "product" | "farm" | "breed" | "cattle" | "order" | "orderItem" | "favorite"
+    modelProps: "account" | "session" | "verificationToken" | "authenticator" | "user" | "product" | "farm" | "breed" | "cattle" | "yieldReport" | "order" | "orderItem" | "favorite"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1081,6 +1082,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    YieldReport: {
+      payload: Prisma.$YieldReportPayload<ExtArgs>
+      fields: Prisma.YieldReportFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.YieldReportFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$YieldReportPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.YieldReportFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$YieldReportPayload>
+        }
+        findFirst: {
+          args: Prisma.YieldReportFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$YieldReportPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.YieldReportFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$YieldReportPayload>
+        }
+        findMany: {
+          args: Prisma.YieldReportFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$YieldReportPayload>[]
+        }
+        create: {
+          args: Prisma.YieldReportCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$YieldReportPayload>
+        }
+        createMany: {
+          args: Prisma.YieldReportCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.YieldReportCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$YieldReportPayload>[]
+        }
+        delete: {
+          args: Prisma.YieldReportDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$YieldReportPayload>
+        }
+        update: {
+          args: Prisma.YieldReportUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$YieldReportPayload>
+        }
+        deleteMany: {
+          args: Prisma.YieldReportDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.YieldReportUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.YieldReportUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$YieldReportPayload>[]
+        }
+        upsert: {
+          args: Prisma.YieldReportUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$YieldReportPayload>
+        }
+        aggregate: {
+          args: Prisma.YieldReportAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateYieldReport>
+        }
+        groupBy: {
+          args: Prisma.YieldReportGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.YieldReportGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.YieldReportCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.YieldReportCountAggregateOutputType> | number
+        }
+      }
+    }
     Order: {
       payload: Prisma.$OrderPayload<ExtArgs>
       fields: Prisma.OrderFieldRefs
@@ -1487,10 +1562,26 @@ export const CattleScalarFieldEnum = {
   liveWeight: 'liveWeight',
   costPrice: 'costPrice',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  yieldReportId: 'yieldReportId'
 } as const
 
 export type CattleScalarFieldEnum = (typeof CattleScalarFieldEnum)[keyof typeof CattleScalarFieldEnum]
+
+
+export const YieldReportScalarFieldEnum = {
+  id: 'id',
+  cattleId: 'cattleId',
+  hotCarcassWeight: 'hotCarcassWeight',
+  boneWeight: 'boneWeight',
+  fatWeight: 'fatWeight',
+  wasteWeight: 'wasteWeight',
+  netYieldWeight: 'netYieldWeight',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type YieldReportScalarFieldEnum = (typeof YieldReportScalarFieldEnum)[keyof typeof YieldReportScalarFieldEnum]
 
 
 export const OrderScalarFieldEnum = {
@@ -1499,6 +1590,7 @@ export const OrderScalarFieldEnum = {
   subTotal: 'subTotal',
   deliveryFee: 'deliveryFee',
   total: 'total',
+  finalTotal: 'finalTotal',
   status: 'status',
   paymentMethod: 'paymentMethod',
   paymentStatus: 'paymentStatus',
@@ -1901,6 +1993,7 @@ export type GlobalOmitConfig = {
   farm?: Prisma.FarmOmit
   breed?: Prisma.BreedOmit
   cattle?: Prisma.CattleOmit
+  yieldReport?: Prisma.YieldReportOmit
   order?: Prisma.OrderOmit
   orderItem?: Prisma.OrderItemOmit
   favorite?: Prisma.FavoriteOmit

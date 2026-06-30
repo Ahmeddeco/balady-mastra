@@ -60,6 +60,7 @@ export const ModelName = {
   Farm: 'Farm',
   Breed: 'Breed',
   Cattle: 'Cattle',
+  YieldReport: 'YieldReport',
   Order: 'Order',
   OrderItem: 'OrderItem',
   Favorite: 'Favorite'
@@ -226,10 +227,26 @@ export const CattleScalarFieldEnum = {
   liveWeight: 'liveWeight',
   costPrice: 'costPrice',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  yieldReportId: 'yieldReportId'
 } as const
 
 export type CattleScalarFieldEnum = (typeof CattleScalarFieldEnum)[keyof typeof CattleScalarFieldEnum]
+
+
+export const YieldReportScalarFieldEnum = {
+  id: 'id',
+  cattleId: 'cattleId',
+  hotCarcassWeight: 'hotCarcassWeight',
+  boneWeight: 'boneWeight',
+  fatWeight: 'fatWeight',
+  wasteWeight: 'wasteWeight',
+  netYieldWeight: 'netYieldWeight',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type YieldReportScalarFieldEnum = (typeof YieldReportScalarFieldEnum)[keyof typeof YieldReportScalarFieldEnum]
 
 
 export const OrderScalarFieldEnum = {
@@ -238,6 +255,7 @@ export const OrderScalarFieldEnum = {
   subTotal: 'subTotal',
   deliveryFee: 'deliveryFee',
   total: 'total',
+  finalTotal: 'finalTotal',
   status: 'status',
   paymentMethod: 'paymentMethod',
   paymentStatus: 'paymentStatus',

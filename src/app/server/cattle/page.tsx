@@ -92,7 +92,7 @@ export default async function CattleServerPage({
 								<TableCell>{liveWeight}</TableCell>
 								<TableCell>
 									<Button asChild size={"sm"} variant={"outline"}>
-										<Link href={`/farms/${farm.id}`} target="_blank">
+										<Link href={`/farms/${farm.id}`} >
 											<Link2 />
 											{farm.name}
 										</Link>

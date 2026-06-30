@@ -83,7 +83,7 @@ model User {
   email           String          @unique
   emailVerified   DateTime?
   image           String?
-  role            Role            @default(USER)
+  role            Role            @default(user)
   accounts        Account[]
   sessions        Session[]
   Authenticator   Authenticator[]
@@ -114,7 +114,7 @@ model Product {
   images        String[]
   price         Float       @default(0) // تعديل إلى Float للدقة المالية
   discount      Int?        @default(0)
-  unit          Unit        @default(كجم) // اللحوم تباع بالوزن غالباً كإجراء افتراضي
+  unit          Unit        @default(kg) // اللحوم تباع بالوزن غالباً كإجراء افتراضي
   stock         Float       @default(0) // تعديل إلى Float لحسابات تشفي الأوزان
   lowQuantity   Float?      @default(0)
   increaseByOne Boolean     @default(false)
@@ -149,7 +149,7 @@ model Breed {
   id             String     @id @default(cuid())
   name           String     @unique
   description    String?
-  type           CattleType @default(أبقار)
+  type           CattleType @default(cow)
   conversionRate Float?
   image          String
   images         String[]
@@ -159,21 +159,39 @@ model Breed {
 }
 
 model Cattle {
-  id          String    @id @default(cuid())
-  farm        Farm      @relation(fields: [farmId], references: [id])
-  farmId      String
-  breed       Breed     @relation(fields: [breedId], references: [id])
-  breedId     String
-  description String?
-  image       String?
-  images      String[]
-  gender      Gender    @default(ذكر)
-  age         Age       @default(صغير)
-  liveWeight  Float? // مضاف: الوزن القائم للرأس وهو أساسي للمزارع والتجارة
-  costPrice   Float? // مضاف: تكلفة شراء الرأس لحساب الأرباح بدقة
-  product     Product[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id            String       @id @default(cuid())
+  farm          Farm         @relation(fields: [farmId], references: [id])
+  farmId        String
+  breed         Breed        @relation(fields: [breedId], references: [id])
+  breedId       String
+  description   String?
+  image         String?
+  images        String[]
+  gender        Gender       @default(male)
+  age           Age          @default(young)
+  liveWeight    Float? // مضاف: الوزن القائم للرأس وهو أساسي للمزارع والتجارة
+  costPrice     Float? // مضاف: تكلفة شراء الرأس لحساب الأرباح بدقة
+  product       Product[]
+  yieldReport   YieldReport?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  yieldReportId String
+
+  @@index([farmId])
+  @@index([breedId])
+}
+
+model YieldReport {
+  id               String   @id @default(cuid())
+  cattle           Cattle   @relation(fields: [cattleId], references: [id])
+  cattleId         String   @unique
+  hotCarcassWeight Float
+  boneWeight       Float
+  fatWeight        Float
+  wasteWeight      Float
+  netYieldWeight   Float
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 model Order {
@@ -182,9 +200,10 @@ model Order {
   subTotal        Float // تعديل إلى Float منعاً لكسور الـ Float المالية
   deliveryFee     Float         @default(0)
   total           Float
-  status          OrderStatus   @default(PENDING)
-  paymentMethod   PaymentMethod @default(CASH)
-  paymentStatus   PaymentStatus @default(PENDING)
+  finalTotal      Float? //يتم تسجيله فقط بعد قيام الجزار بالوزن الفعلي، وهو القيمة الحقيقية اللي هيدفعها العميل كاش أو تتخصم من الفيزا
+  status          OrderStatus   @default(pending)
+  paymentMethod   PaymentMethod @default(cash)
+  paymentStatus   PaymentStatus @default(pending)
   shippingAddress String
   customerNotes   String? // مثال: "تقطيع المكعبات صغير للطبخ"
   butcherNotes    String? // ملاحظات داخلية للجزار أثناء التجهيز والتعبئة والتشفية
@@ -193,6 +212,8 @@ model Order {
   userId          String?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
+
+  @@index([userId])
 }
 
 model OrderItem {
@@ -206,6 +227,9 @@ model OrderItem {
   orderId           String
   product           Product     @relation(fields: [productId], references: [id], onDelete: Restrict) // منع حذف المنتج إذا كان متواجداً في طلبات قديمة
   productId         String
+
+  @@index([orderId])
+  @@index([productId])
 }
 
 model Favorite {
@@ -219,87 +243,87 @@ model Favorite {
 }
 
 enum CattleType {
-  أبقار
-  جاموس
-  ماعز
-  غنم
-  جمال
+  cow // أبقار
+  buffalo // جاموس
+  goat // ماعز
+  sheep // غنم
+  camel // جمال
 }
 
 enum Age {
-  صغير // لباني
-  وسيط // كاسر جوز / أربعة
-  كبير // جامع
+  young // صغير (لباني)
+  medium // وسيط (كاسر جوز / أربعة)
+  adult // كبير (جامع)
 }
 
 enum Gender {
-  ذكر
-  أنثى
+  male // ذكر
+  female // أنثى
 }
 
 enum MeatType {
-  سن
-  موزة
-  ريش
-  وش_فخدة
-  ضهر_فخدة
-  سمانة
-  انتركوت
-  تربيانكو
-  لوحة_الكتف
-  دوش
-  كبدة
-  قلب
-  كلاوي
-  فلتو
-  السرة
-  مصنعات
-  صدور_دواجن // مضاف: لدعم تصنيف الدواجن الجديد
-  أوراك_دواجن // مضاف: لدعم تصنيف الدواجن الجديد
+  chuck // سن
+  shank // موزة
+  ribs // ريش
+  topside // وش فخدة
+  silverside // ضهر فخدة
+  knuckle // سمانة
+  ribeye // انتركوت
+  eye_round // تربيانكو
+  blade // لوحة الكتف
+  brisket // دوش
+  liver // كبدة
+  heart // قلب
+  kidneys // كلاوي
+  tenderloin // فلتو
+  flank // السرة
+  processed // مصنعات
+  chicken_breast // صدور دواجن
+  chicken_thigh // أوراك دواجن
 }
 
 enum Preparation {
-  بفتيك
-  ستيك
-  مكعبات
-  كباب_حلة
-  شرائح
-  مفروم
-  كامل // مضاف: لقطعيات مثل العروق كاملة أو الطيور الكاملة
+  escalope // بفتيك
+  steak // ستيك
+  cubes // مكعبات
+  kabab_hala // كباب حلة
+  slices // شرائح
+  minced // مفروم
+  whole // كامل (للعروق كاملة أو الطيور الكاملة)
 }
 
 enum Role {
-  ADMIN
-  USER
-  CLIENT
-  SUPPLIER
+  admin
+  user
+  client
+  supplier
 }
 
 enum Category {
-  MEAT
-  PROCESSED
-  CHICKEN
+  meat
+  processed
+  chicken
 }
 
 enum Unit {
-  كجم
-  قطعة
+  kg // كجم
+  piece // قطعة
 }
 
 enum OrderStatus {
-  PENDING
-  SHIPPED
-  COMPLETED
-  CANCELLED
+  pending
+  shipped
+  completed
+  cancelled
 }
 
 enum PaymentMethod {
-  VISA
-  CASH
+  visa
+  cash
 }
 
 enum PaymentStatus {
-  PENDING
-  SUCCESS
-  FAILED
+  pending
+  success
+  failed
 }

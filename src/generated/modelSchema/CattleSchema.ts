@@ -19,6 +19,7 @@ export const CattleSchema = z.object({
   costPrice: z.number().nullish(),
   createdAt: z.date(),
   updatedAt: z.date(),
+  yieldReportId: z.string(),
 })
 
 export type Cattle = z.infer<typeof CattleSchema>

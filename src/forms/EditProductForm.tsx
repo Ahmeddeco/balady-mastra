@@ -12,9 +12,9 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Category, Unit } from "@/generated/prisma/enums"
 import { editProductAction } from "@/actions/product.action"
-import ProductSchema from "@/schemas/product.schema"
 import { getOneProductByIdType } from "@/types/Product.type"
 import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
+import ProductSchema from "@/schemas/Product.Schema"
 
 type Props = {
 	product: getOneProductByIdType
@@ -58,7 +58,7 @@ export default function EditProductForm({ product }: Props) {
 					<FieldLabel htmlFor={fields.cut.name}>القطعية</FieldLabel>
 					<Select key={fields.cut.key} name={fields.cut.name} defaultValue={product?.cut}>
 						<SelectTrigger>
-							<SelectValue placeholder={MeatTypeSchema.Enum.انتركوت} />
+							<SelectValue placeholder={MeatTypeSchema.Enum.ribeye} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(MeatTypeSchema.Values).map((cut) => (
@@ -76,7 +76,7 @@ export default function EditProductForm({ product }: Props) {
 					<FieldLabel htmlFor={fields.category.name}>الفئة</FieldLabel>
 					<Select key={fields.category.key} name={fields.category.name} defaultValue={product?.category}>
 						<SelectTrigger>
-							<SelectValue placeholder={Category.MEAT} />
+							<SelectValue placeholder={Category.meat} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(Category).map((degreeProgram) => (
@@ -92,9 +92,9 @@ export default function EditProductForm({ product }: Props) {
 				{/* ---------------------------------- unit ---------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.unit.name}>الوحدة</FieldLabel>
-					<Select key={fields.unit.key} name={fields.unit.name} defaultValue={product?.unit ?? Unit.كجم}>
+					<Select key={fields.unit.key} name={fields.unit.name} defaultValue={product?.unit ?? Unit.kg}>
 						<SelectTrigger>
-							<SelectValue placeholder={Unit.كجم} />
+							<SelectValue placeholder={Unit.kg} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(Unit).map((degreeProgram) => (

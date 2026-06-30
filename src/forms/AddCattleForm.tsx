@@ -75,9 +75,9 @@ export default function AddCattleForm({ breeds, farms }: Props) {
 				{/* -------------------------------- age -------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.age.name}>العمر</FieldLabel>
-					<Select key={fields.age.key} name={fields.age.name} defaultValue={AgeSchema.Enum.صغير}>
+					<Select key={fields.age.key} name={fields.age.name} defaultValue={AgeSchema.Enum.young}>
 						<SelectTrigger>
-							<SelectValue placeholder={AgeSchema.Enum.صغير} />
+							<SelectValue placeholder={AgeSchema.Enum.young} />
 						</SelectTrigger>
 						<SelectContent>
 							{Object.values(AgeSchema.Enum).map((age) => (
@@ -93,7 +93,7 @@ export default function AddCattleForm({ breeds, farms }: Props) {
 				{/* ---------------------------------- gender ---------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.gender.name}>الجنس</FieldLabel>
-					<Select key={fields.gender.key} name={fields.gender.name} defaultValue={GenderSchema.Enum.ذكر}>
+					<Select key={fields.gender.key} name={fields.gender.name} defaultValue={GenderSchema.Enum.male}>
 						<SelectTrigger>
 							<SelectValue />
 						</SelectTrigger>
