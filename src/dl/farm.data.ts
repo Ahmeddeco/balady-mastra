@@ -35,3 +35,13 @@ export const getOneFarmForEditPage = async (id: string) => {
     throw error
   }
 }
+
+/* -------------------------- getAllFarmsForSelect ------------------------- */
+export const getAllFarmsForSelect = async () => {
+  try {
+    return await prisma.farm.findMany({ select: { id: true, name: true }, orderBy: { name: "asc" } })
+  } catch (error) {
+    console.error("خطأ أثناء جلب بيانات المزرعة:", error)
+    throw error
+  }
+}

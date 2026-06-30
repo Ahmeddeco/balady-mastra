@@ -112,11 +112,11 @@ model Product {
   category      Category
   mainImage     String
   images        String[]
-  price         Decimal     @default(0) @db.Decimal(10, 2) // تعديل إلى Decimal للدقة المالية
+  price         Float       @default(0) // تعديل إلى Float للدقة المالية
   discount      Int?        @default(0)
   unit          Unit        @default(كجم) // اللحوم تباع بالوزن غالباً كإجراء افتراضي
-  stock         Decimal     @default(0) @db.Decimal(10, 2) // تعديل إلى Decimal لحسابات تشفي الأوزان
-  lowQuantity   Decimal?    @default(0) @db.Decimal(10, 2)
+  stock         Float       @default(0) // تعديل إلى Float لحسابات تشفي الأوزان
+  lowQuantity   Float?      @default(0)
   increaseByOne Boolean     @default(false)
   isActive      Boolean     @default(true) // مضاف: لإيقاف البيع دون حذف المنتج وتخريب سجل الطلبات القديمة
   orderItems    OrderItem[]
@@ -150,7 +150,7 @@ model Breed {
   name           String     @unique
   description    String?
   type           CattleType @default(أبقار)
-  conversionRate Decimal?   @db.Decimal(10, 2)
+  conversionRate Float?
   image          String
   images         String[]
   cattle         Cattle[]
@@ -159,26 +159,29 @@ model Breed {
 }
 
 model Cattle {
-  id         String    @id @default(cuid())
-  farm       Farm      @relation(fields: [farmId], references: [id])
-  farmId     String
-  breed      Breed     @relation(fields: [breedId], references: [id])
-  breedId    String
-  gender     Gender    @default(ذكر)
-  age        Age       @default(صغير)
-  liveWeight Decimal?  @db.Decimal(10, 2) // مضاف: الوزن القائم للرأس وهو أساسي للمزارع والتجارة
-  costPrice  Decimal?  @db.Decimal(10, 2) // مضاف: تكلفة شراء الرأس لحساب الأرباح بدقة
-  product    Product[]
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  id          String    @id @default(cuid())
+  farm        Farm      @relation(fields: [farmId], references: [id])
+  farmId      String
+  breed       Breed     @relation(fields: [breedId], references: [id])
+  breedId     String
+  description String?
+  image       String?
+  images      String[]
+  gender      Gender    @default(ذكر)
+  age         Age       @default(صغير)
+  liveWeight  Float? // مضاف: الوزن القائم للرأس وهو أساسي للمزارع والتجارة
+  costPrice   Float? // مضاف: تكلفة شراء الرأس لحساب الأرباح بدقة
+  product     Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Order {
   id              String        @id @default(cuid())
   orderNumber     Int           @unique @default(autoincrement())
-  subTotal        Decimal       @db.Decimal(10, 2) // تعديل إلى Decimal منعاً لكسور الـ Float المالية
-  deliveryFee     Decimal       @default(0) @db.Decimal(10, 2)
-  total           Decimal       @db.Decimal(10, 2)
+  subTotal        Float // تعديل إلى Float منعاً لكسور الـ Float المالية
+  deliveryFee     Float         @default(0)
+  total           Float
   status          OrderStatus   @default(PENDING)
   paymentMethod   PaymentMethod @default(CASH)
   paymentStatus   PaymentStatus @default(PENDING)
@@ -195,10 +198,10 @@ model Order {
 model OrderItem {
   id                String      @id @default(cuid())
   preparation       Preparation
-  quantity          Decimal     @db.Decimal(10, 2) // الكمية المطلوبة (بالوزن أو القطعة)
-  price             Decimal     @db.Decimal(10, 2) // سعر المنتج وقت الشراء الفعلي لضمان ثبات التقارير المالية
-  requestedQuantity Decimal     @db.Decimal(10, 2) // الوزن المحجوز من الموقع (مثال: 1.00 كجم)
-  actualQuantity    Decimal?    @db.Decimal(10, 2) // الوزن الحقيقي الخارج من الميزان بعد التشفية (مثال: 1.050 كجم)
+  quantity          Float // الكمية المطلوبة (بالوزن أو القطعة)
+  price             Float // سعر المنتج وقت الشراء الفعلي لضمان ثبات التقارير المالية
+  requestedQuantity Float // الوزن المحجوز من الموقع (مثال: 1.00 كجم)
+  actualQuantity    Float? // الوزن الحقيقي الخارج من الميزان بعد التشفية (مثال: 1.050 كجم)
   order             Order       @relation(fields: [orderId], references: [id], onDelete: Cascade) // حذف العناصر تلقائياً عند حذف الطلب
   orderId           String
   product           Product     @relation(fields: [productId], references: [id], onDelete: Restrict) // منع حذف المنتج إذا كان متواجداً في طلبات قديمة
@@ -249,6 +252,7 @@ enum MeatType {
   قلب
   كلاوي
   فلتو
+  السرة
   مصنعات
   صدور_دواجن // مضاف: لدعم تصنيف الدواجن الجديد
   أوراك_دواجن // مضاف: لدعم تصنيف الدواجن الجديد

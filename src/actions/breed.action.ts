@@ -25,13 +25,13 @@ export const addBreedAction = async (prevState: unknown, formData: FormData) => 
         description: submission.value.description,
         conversionRate: submission.value.conversionRate,
         image: submission.value.image,
-        images: separatedImages,
+        images: separatedImages ?? "",
       },
       update: {
         description: submission.value.description,
         conversionRate: submission.value.conversionRate,
         image: submission.value.image,
-        images: separatedImages,
+        images: separatedImages ?? "",
       }
     })
   } catch (error) {

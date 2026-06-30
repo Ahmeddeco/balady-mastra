@@ -27,11 +27,11 @@ export type AggregateBreed = {
 }
 
 export type BreedAvgAggregateOutputType = {
-  conversionRate: runtime.Decimal | null
+  conversionRate: number | null
 }
 
 export type BreedSumAggregateOutputType = {
-  conversionRate: runtime.Decimal | null
+  conversionRate: number | null
 }
 
 export type BreedMinAggregateOutputType = {
@@ -39,7 +39,7 @@ export type BreedMinAggregateOutputType = {
   name: string | null
   description: string | null
   type: $Enums.CattleType | null
-  conversionRate: runtime.Decimal | null
+  conversionRate: number | null
   image: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -50,7 +50,7 @@ export type BreedMaxAggregateOutputType = {
   name: string | null
   description: string | null
   type: $Enums.CattleType | null
-  conversionRate: runtime.Decimal | null
+  conversionRate: number | null
   image: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -204,7 +204,7 @@ export type BreedGroupByOutputType = {
   name: string
   description: string | null
   type: $Enums.CattleType
-  conversionRate: runtime.Decimal | null
+  conversionRate: number | null
   image: string
   images: string[]
   createdAt: Date
@@ -239,7 +239,7 @@ export type BreedWhereInput = {
   name?: Prisma.StringFilter<"Breed"> | string
   description?: Prisma.StringNullableFilter<"Breed"> | string | null
   type?: Prisma.EnumCattleTypeFilter<"Breed"> | $Enums.CattleType
-  conversionRate?: Prisma.DecimalNullableFilter<"Breed"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: Prisma.FloatNullableFilter<"Breed"> | number | null
   image?: Prisma.StringFilter<"Breed"> | string
   images?: Prisma.StringNullableListFilter<"Breed">
   createdAt?: Prisma.DateTimeFilter<"Breed"> | Date | string
@@ -268,7 +268,7 @@ export type BreedWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BreedWhereInput | Prisma.BreedWhereInput[]
   description?: Prisma.StringNullableFilter<"Breed"> | string | null
   type?: Prisma.EnumCattleTypeFilter<"Breed"> | $Enums.CattleType
-  conversionRate?: Prisma.DecimalNullableFilter<"Breed"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: Prisma.FloatNullableFilter<"Breed"> | number | null
   image?: Prisma.StringFilter<"Breed"> | string
   images?: Prisma.StringNullableListFilter<"Breed">
   createdAt?: Prisma.DateTimeFilter<"Breed"> | Date | string
@@ -301,7 +301,7 @@ export type BreedScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Breed"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Breed"> | string | null
   type?: Prisma.EnumCattleTypeWithAggregatesFilter<"Breed"> | $Enums.CattleType
-  conversionRate?: Prisma.DecimalNullableWithAggregatesFilter<"Breed"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: Prisma.FloatNullableWithAggregatesFilter<"Breed"> | number | null
   image?: Prisma.StringWithAggregatesFilter<"Breed"> | string
   images?: Prisma.StringNullableListFilter<"Breed">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Breed"> | Date | string
@@ -313,7 +313,7 @@ export type BreedCreateInput = {
   name: string
   description?: string | null
   type?: $Enums.CattleType
-  conversionRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: number | null
   image: string
   images?: Prisma.BreedCreateimagesInput | string[]
   createdAt?: Date | string
@@ -326,7 +326,7 @@ export type BreedUncheckedCreateInput = {
   name: string
   description?: string | null
   type?: $Enums.CattleType
-  conversionRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: number | null
   image: string
   images?: Prisma.BreedCreateimagesInput | string[]
   createdAt?: Date | string
@@ -339,7 +339,7 @@ export type BreedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
-  conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -352,7 +352,7 @@ export type BreedUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
-  conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -365,7 +365,7 @@ export type BreedCreateManyInput = {
   name: string
   description?: string | null
   type?: $Enums.CattleType
-  conversionRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: number | null
   image: string
   images?: Prisma.BreedCreateimagesInput | string[]
   createdAt?: Date | string
@@ -377,7 +377,7 @@ export type BreedUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
-  conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -389,7 +389,7 @@ export type BreedUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
-  conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -475,7 +475,7 @@ export type BreedCreateWithoutCattleInput = {
   name: string
   description?: string | null
   type?: $Enums.CattleType
-  conversionRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: number | null
   image: string
   images?: Prisma.BreedCreateimagesInput | string[]
   createdAt?: Date | string
@@ -487,7 +487,7 @@ export type BreedUncheckedCreateWithoutCattleInput = {
   name: string
   description?: string | null
   type?: $Enums.CattleType
-  conversionRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: number | null
   image: string
   images?: Prisma.BreedCreateimagesInput | string[]
   createdAt?: Date | string
@@ -515,7 +515,7 @@ export type BreedUpdateWithoutCattleInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
-  conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -527,7 +527,7 @@ export type BreedUncheckedUpdateWithoutCattleInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumCattleTypeFieldUpdateOperationsInput | $Enums.CattleType
-  conversionRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  conversionRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   image?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.BreedUpdateimagesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -633,7 +633,7 @@ export type $BreedPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     name: string
     description: string | null
     type: $Enums.CattleType
-    conversionRate: runtime.Decimal | null
+    conversionRate: number | null
     image: string
     images: string[]
     createdAt: Date
@@ -1066,7 +1066,7 @@ export interface BreedFieldRefs {
   readonly name: Prisma.FieldRef<"Breed", 'String'>
   readonly description: Prisma.FieldRef<"Breed", 'String'>
   readonly type: Prisma.FieldRef<"Breed", 'CattleType'>
-  readonly conversionRate: Prisma.FieldRef<"Breed", 'Decimal'>
+  readonly conversionRate: Prisma.FieldRef<"Breed", 'Float'>
   readonly image: Prisma.FieldRef<"Breed", 'String'>
   readonly images: Prisma.FieldRef<"Breed", 'String[]'>
   readonly createdAt: Prisma.FieldRef<"Breed", 'DateTime'>

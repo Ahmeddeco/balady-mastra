@@ -34,7 +34,7 @@ export default function BotPage() {
 	}
 
 	return (
-		<div className=" container mx-auto p-6 mt-12 size-full rounded-lg lg:border h-[85vh] max-w-6xl ">
+		<div className=" container mx-auto p-6 mt-12 size-full rounded-lg lg:border h-[85vh] max-w-5xl ">
 			<div className="flex flex-col h-full">
 				<Conversation>
 					<ConversationContent>

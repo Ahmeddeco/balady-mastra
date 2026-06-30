@@ -21,7 +21,17 @@ export const getOneBreedForEditPage = async (id: string) => {
   try {
     return await prisma.breed.findUniqueOrThrow({ where: { id } })
   } catch (error) {
-    console.error("خطأ أثناء جلب بيانات المزرعة:", error)
+    console.error("خطأ أثناء جلب بيانات السلالة :", error)
+    throw error
+  }
+}
+
+
+export const getAllBreedForSelect = async () => {
+  try {
+    return await prisma.breed.findMany({ select: { id: true, name: true }, orderBy: { name: "asc" } })
+  } catch (error) {
+    console.error("خطأ أثناء جلب بيانات السلالة :", error)
     throw error
   }
 }

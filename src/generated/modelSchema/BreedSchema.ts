@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { Decimal as PrismaDecimal } from '../prisma/internal/prismaNamespace';
 import { CattleTypeSchema } from '../inputTypeSchemas/CattleTypeSchema'
 
 /////////////////////////////////////////
@@ -11,7 +10,7 @@ export const BreedSchema = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string().nullish(),
-  conversionRate: z.instanceof(PrismaDecimal, { message: "Field 'conversionRate' must be a Decimal. Location: ['Models', 'Breed']"}).nullish(),
+  conversionRate: z.number().nullish(),
   image: z.string(),
   images: z.string().array(),
   createdAt: z.date(),

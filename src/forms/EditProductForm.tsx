@@ -11,7 +11,7 @@ import SubmitButton from "@/components/shared/SubmitButton"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Category, Unit } from "@/generated/prisma/enums"
-import { editProductAction } from "@/actions/product.action "
+import { editProductAction } from "@/actions/product.action"
 import ProductSchema from "@/schemas/product.schema"
 import { getOneProductByIdType } from "@/types/Product.type"
 import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
@@ -110,7 +110,13 @@ export default function EditProductForm({ product }: Props) {
 				{/* ---------------------------------- price --------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.price.name}>السعر</FieldLabel>
-					<Input type="number" key={fields.price.key} name={fields.price.name} defaultValue={product?.price} />
+					<Input
+						type="number"
+						step="any"
+						key={fields.price.key}
+						name={fields.price.name}
+						defaultValue={product?.price}
+					/>
 					<FieldError>{fields.price.errors}</FieldError>
 				</Field>
 			</div>
@@ -121,6 +127,7 @@ export default function EditProductForm({ product }: Props) {
 					<FieldLabel htmlFor={fields.discount.name}>الخصم</FieldLabel>
 					<Input
 						type="number"
+						step="any"
 						key={fields.discount.key}
 						name={fields.discount.name}
 						defaultValue={product?.discount ?? 0}
@@ -133,6 +140,7 @@ export default function EditProductForm({ product }: Props) {
 					<FieldLabel htmlFor={fields.stock.name}>الكمية</FieldLabel>
 					<Input
 						type="number"
+						step="any"
 						key={fields.stock.key}
 						name={fields.stock.name}
 						defaultValue={product?.stock ?? fields.stock.initialValue}
@@ -145,6 +153,7 @@ export default function EditProductForm({ product }: Props) {
 					<FieldLabel htmlFor={fields.lowQuantity.name}>الحد الأدنى للكمية</FieldLabel>
 					<Input
 						type="number"
+						step="any"
 						key={fields.lowQuantity.key}
 						name={fields.lowQuantity.name}
 						defaultValue={product?.lowQuantity ?? fields.lowQuantity.initialValue}

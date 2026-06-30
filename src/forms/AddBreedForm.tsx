@@ -58,6 +58,7 @@ export default function AddBreedForm() {
 					<FieldLabel htmlFor={fields.conversionRate.name}>معدل التحويل الغذائي</FieldLabel>
 					<Input
 						type="number"
+						step="any"
 						key={fields.conversionRate.key}
 						name={fields.conversionRate.name}
 						defaultValue={fields.conversionRate.initialValue}
@@ -75,6 +76,7 @@ export default function AddBreedForm() {
 				errors={fields.description.errors!}
 			/>
 
+			{/* ---------------------------------- image --------------------------------- */}
 			<UploadOneImagesDropZone
 				label={"صورة رئيسية للسلالة"}
 				errors={fields.image.errors}
@@ -82,12 +84,14 @@ export default function AddBreedForm() {
 				imageKey={fields.image.key}
 			/>
 
+			{/* --------------------------------- images --------------------------------- */}
 			<UploadManyImagesDropZone
 				label={"صور إضافية للسلالة"}
 				imageKey={fields.images.key}
 				errors={fields.images.errors}
 				imagesName={fields.images.name}
 			/>
+
 			{/* ------------------ عرض الأخطاء العامة للفورم إن وجدت ------------------ */}
 			{form.errors && <FieldError>{form.errors}</FieldError>}
 

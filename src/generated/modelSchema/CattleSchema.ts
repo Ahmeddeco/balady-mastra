@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { Decimal as PrismaDecimal } from '../prisma/internal/prismaNamespace';
 import { GenderSchema } from '../inputTypeSchemas/GenderSchema'
 import { AgeSchema } from '../inputTypeSchemas/AgeSchema'
 
@@ -13,8 +12,11 @@ export const CattleSchema = z.object({
   id: z.string(),
   farmId: z.string(),
   breedId: z.string(),
-  liveWeight: z.instanceof(PrismaDecimal, { message: "Field 'liveWeight' must be a Decimal. Location: ['Models', 'Cattle']"}).nullish(),
-  costPrice: z.instanceof(PrismaDecimal, { message: "Field 'costPrice' must be a Decimal. Location: ['Models', 'Cattle']"}).nullish(),
+  description: z.string().nullish(),
+  image: z.string().nullish(),
+  images: z.string().array(),
+  liveWeight: z.number().nullish(),
+  costPrice: z.number().nullish(),
   createdAt: z.date(),
   updatedAt: z.date(),
 })

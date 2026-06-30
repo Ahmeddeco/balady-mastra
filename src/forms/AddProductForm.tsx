@@ -11,7 +11,7 @@ import SubmitButton from "@/components/shared/SubmitButton"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Category, Unit } from "@/generated/prisma/enums"
-import { addProductAction } from "@/actions/product.action "
+import { addProductAction } from "@/actions/product.action"
 import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
 import ProductSchema from "@/schemas/Product.Schema"
 
@@ -105,6 +105,7 @@ export default function AddProductForm() {
 					<FieldLabel htmlFor={fields.price.name}>السعر</FieldLabel>
 					<Input
 						type="number"
+						step="any"
 						key={fields.price.key}
 						name={fields.price.name}
 						defaultValue={fields.price.initialValue}
@@ -119,6 +120,7 @@ export default function AddProductForm() {
 					<FieldLabel htmlFor={fields.discount.name}>الخصم</FieldLabel>
 					<Input
 						type="number"
+						step="any"
 						key={fields.discount.key}
 						name={fields.discount.name}
 						defaultValue={fields.discount.initialValue}
@@ -131,6 +133,7 @@ export default function AddProductForm() {
 					<FieldLabel htmlFor={fields.stock.name}>الكمية</FieldLabel>
 					<Input
 						type="number"
+						step="any"
 						key={fields.stock.key}
 						name={fields.stock.name}
 						defaultValue={fields.stock.initialValue}
@@ -143,6 +146,7 @@ export default function AddProductForm() {
 					<FieldLabel htmlFor={fields.lowQuantity.name}>الحد الأدنى للكمية</FieldLabel>
 					<Input
 						type="number"
+						step="any"
 						key={fields.lowQuantity.key}
 						name={fields.lowQuantity.name}
 						defaultValue={fields.lowQuantity.initialValue}

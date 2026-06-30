@@ -63,6 +63,7 @@ export default function EditBreedForm({ oneBreed }: Props) {
 					<FieldLabel htmlFor={fields.conversionRate.name}>معدل التحويل الغذائي</FieldLabel>
 					<Input
 						type="number"
+						step="any"
 						key={fields.conversionRate.key}
 						name={fields.conversionRate.name}
 						defaultValue={String(oneBreed.conversionRate) ?? "0.0"}
