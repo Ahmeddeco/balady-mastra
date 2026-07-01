@@ -588,12 +588,14 @@ export type ProductUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type StringNullableListFilter<$PrismaModel = never> = {
-  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
-  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
-  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  isEmpty?: boolean
+export type ProductListRelationFilter = {
+  every?: Prisma.ProductWhereInput
+  some?: Prisma.ProductWhereInput
+  none?: Prisma.ProductWhereInput
+}
+
+export type ProductOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type ProductCountOrderByAggregateInput = {
@@ -671,56 +673,9 @@ export type ProductSumOrderByAggregateInput = {
   lowQuantity?: Prisma.SortOrder
 }
 
-export type ProductListRelationFilter = {
-  every?: Prisma.ProductWhereInput
-  some?: Prisma.ProductWhereInput
-  none?: Prisma.ProductWhereInput
-}
-
-export type ProductOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type ProductScalarRelationFilter = {
   is?: Prisma.ProductWhereInput
   isNot?: Prisma.ProductWhereInput
-}
-
-export type ProductCreateimagesInput = {
-  set: string[]
-}
-
-export type EnumMeatTypeFieldUpdateOperationsInput = {
-  set?: $Enums.MeatType
-}
-
-export type EnumCategoryFieldUpdateOperationsInput = {
-  set?: $Enums.Category
-}
-
-export type ProductUpdateimagesInput = {
-  set?: string[]
-  push?: string | string[]
-}
-
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type EnumUnitFieldUpdateOperationsInput = {
-  set?: $Enums.Unit
-}
-
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type ProductCreateNestedManyWithoutCattleInput = {
@@ -763,6 +718,27 @@ export type ProductUncheckedUpdateManyWithoutCattleNestedInput = {
   update?: Prisma.ProductUpdateWithWhereUniqueWithoutCattleInput | Prisma.ProductUpdateWithWhereUniqueWithoutCattleInput[]
   updateMany?: Prisma.ProductUpdateManyWithWhereWithoutCattleInput | Prisma.ProductUpdateManyWithWhereWithoutCattleInput[]
   deleteMany?: Prisma.ProductScalarWhereInput | Prisma.ProductScalarWhereInput[]
+}
+
+export type ProductCreateimagesInput = {
+  set: string[]
+}
+
+export type EnumMeatTypeFieldUpdateOperationsInput = {
+  set?: $Enums.MeatType
+}
+
+export type EnumCategoryFieldUpdateOperationsInput = {
+  set?: $Enums.Category
+}
+
+export type ProductUpdateimagesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type EnumUnitFieldUpdateOperationsInput = {
+  set?: $Enums.Unit
 }
 
 export type ProductCreateNestedOneWithoutOrderItemsInput = {

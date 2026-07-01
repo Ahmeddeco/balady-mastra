@@ -7,6 +7,7 @@ export const getAllYieldsForServerFarmsPage = async (size: number, page: number,
     const totalPages = Math.ceil(totalYields / size)
 
     const data = await prisma.yield.findMany({
+      include: { cattle: { select: { createdAt: true, image: true, breed: { select: { name: true } } } } },
       orderBy: { createdAt: "asc" },
       take: size,
       skip: (page * size) - size

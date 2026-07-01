@@ -43,11 +43,6 @@ export type Authenticator = Prisma.AuthenticatorModel
  */
 export type User = Prisma.UserModel
 /**
- * Model Product
- * 
- */
-export type Product = Prisma.ProductModel
-/**
  * Model Farm
  * 
  */
@@ -67,6 +62,11 @@ export type Cattle = Prisma.CattleModel
  * 
  */
 export type Yield = Prisma.YieldModel
+/**
+ * Model Product
+ * 
+ */
+export type Product = Prisma.ProductModel
 /**
  * Model Order
  * 

@@ -29,7 +29,7 @@ import Image from "next/image"
 import { deleteBreedAction } from "@/actions/breed.action"
 import { getAllCattleForServerCattlePage } from "@/dl/cattle.data"
 import { getAllCattleForServerCattlePageType } from "@/types/cattle.type"
-import { dateFormat } from "@/logic/dateFormat"
+import { formateDate } from "@/logic/formateDate"
 
 export default async function CattleServerPage({
 	searchParams,
@@ -85,14 +85,14 @@ export default async function CattleServerPage({
 										<ImageOff />
 									)}
 								</TableCell>
-								<TableCell>{dateFormat(createdAt)}</TableCell>
+								<TableCell>{formateDate(createdAt)}</TableCell>
 								<TableCell>{breed.name}</TableCell>
 								<TableCell>{gender}</TableCell>
 								<TableCell>{age}</TableCell>
 								<TableCell>{liveWeight}</TableCell>
 								<TableCell>
 									<Button asChild size={"sm"} variant={"outline"}>
-										<Link href={`/farms/${farm.id}`} >
+										<Link href={`/farms/${farm.id}`}>
 											<Link2 />
 											{farm.name}
 										</Link>

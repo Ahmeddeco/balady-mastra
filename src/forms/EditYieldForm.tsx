@@ -7,13 +7,13 @@ import { useActionState } from "react"
 import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import SubmitButton from "@/components/shared/SubmitButton"
-import { addYieldAction } from "@/actions/yield.action"
+import { editYieldAction } from "@/actions/yield.action"
 import YieldSchema from "@/schemas/Yield.schema"
 import TiptapEditor from "@/components/shared/TiptapEditor"
 import { getAllCattleForSelectType } from "@/types/cattle.type"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { dateFormat } from "@/logic/dateFormat"
 import { getOneYieldForEditPageType } from "@/types/yield.type"
+import { formateDate } from "@/logic/formateDate"
 
 type Props = {
 	allCattle: getAllCattleForSelectType
@@ -21,7 +21,7 @@ type Props = {
 }
 
 export default function EditYieldForm({ allCattle, oneYield }: Props) {
-	const [lastResult, action] = useActionState(addYieldAction, undefined)
+	const [lastResult, action] = useActionState(editYieldAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
 		onValidate({ formData }) {
@@ -34,6 +34,7 @@ export default function EditYieldForm({ allCattle, oneYield }: Props) {
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
 			<div className="grid lg:grid-cols-2 grid-cols-1 gap-6 lg:gap-8">
+				<Input type="hidden" name="id" value={oneYield.id} />
 				{/* --------------------------------- cattleId -------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.cattleId.name}>الحيوان</FieldLabel>
@@ -45,7 +46,7 @@ export default function EditYieldForm({ allCattle, oneYield }: Props) {
 						<SelectContent>
 							{allCattle.map(({ createdAt, id, breed, farm }) => (
 								<SelectItem value={id} key={id} className="capitalize">
-									{dateFormat(createdAt)} - {breed.name} - {farm.name}
+									{formateDate(createdAt)} - {breed.name} - {farm.name}
 								</SelectItem>
 							))}
 						</SelectContent>

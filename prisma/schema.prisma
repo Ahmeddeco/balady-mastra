@@ -103,32 +103,6 @@ model User {
   updatedAt       DateTime        @updatedAt
 }
 
-model Product {
-  id            String      @id @default(cuid())
-  title         String      @unique
-  slug          String      @unique
-  description   String
-  cut           MeatType
-  category      Category
-  mainImage     String
-  images        String[]
-  price         Float       @default(0) // تعديل إلى Float للدقة المالية
-  discount      Int?        @default(0)
-  unit          Unit        @default(kg) // اللحوم تباع بالوزن غالباً كإجراء افتراضي
-  stock         Float       @default(0) // تعديل إلى Float لحسابات تشفي الأوزان
-  lowQuantity   Float?      @default(0)
-  increaseByOne Boolean     @default(false)
-  isActive      Boolean     @default(true) // مضاف: لإيقاف البيع دون حذف المنتج وتخريب سجل الطلبات القديمة
-  orderItems    OrderItem[]
-  favorites     Favorite[]
-  cattleId      String? // جعلناه اختياري لبيع المصنعات أو الدواجن أو اللحوم العامة دون ربطها برأس ماشية عينية
-  Cattle        Cattle?     @relation(fields: [cattleId], references: [id], onDelete: SetNull)
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-
-  @@index([cut])
-}
-
 model Farm {
   id              String   @id @default(cuid())
   name            String   @unique
@@ -194,6 +168,32 @@ model Yield {
   updatedAt        DateTime @updatedAt
 
   @@index([cattleId])
+}
+
+model Product {
+  id            String      @id @default(cuid())
+  title         String      @unique
+  slug          String      @unique
+  description   String
+  cut           MeatType
+  category      Category
+  mainImage     String
+  images        String[]
+  price         Float       @default(0) // تعديل إلى Float للدقة المالية
+  discount      Int?        @default(0)
+  unit          Unit        @default(kg) // اللحوم تباع بالوزن غالباً كإجراء افتراضي
+  stock         Float       @default(0) // تعديل إلى Float لحسابات تشفي الأوزان
+  lowQuantity   Float?      @default(0)
+  increaseByOne Boolean     @default(false)
+  isActive      Boolean     @default(true) // مضاف: لإيقاف البيع دون حذف المنتج وتخريب سجل الطلبات القديمة
+  orderItems    OrderItem[]
+  favorites     Favorite[]
+  cattleId      String? // جعلناه اختياري لبيع المصنعات أو الدواجن أو اللحوم العامة دون ربطها برأس ماشية عينية
+  Cattle        Cattle?     @relation(fields: [cattleId], references: [id], onDelete: SetNull)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([cut])
 }
 
 model Order {

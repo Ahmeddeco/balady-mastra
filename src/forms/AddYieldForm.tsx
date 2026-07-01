@@ -12,7 +12,7 @@ import YieldSchema from "@/schemas/Yield.schema"
 import TiptapEditor from "@/components/shared/TiptapEditor"
 import { getAllCattleForSelectType } from "@/types/cattle.type"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { dateFormat } from "@/logic/dateFormat"
+import { dateFormat } from "@/logic/formateDate"
 
 type Props = {
 	allCattle: getAllCattleForSelectType
@@ -136,7 +136,7 @@ export default function AddYieldForm({ allCattle }: Props) {
 
 			{/* ------------------ عرض الأخطاء العامة للفورم إن وجدت ------------------ */}
 			{form.errors && <FieldError>{form.errors}</FieldError>}
-			
+
 			{/* ------------------------------ SubmitButton ------------------------------ */}
 			<SubmitButton text={"أضف تصافي"} />
 		</Form>

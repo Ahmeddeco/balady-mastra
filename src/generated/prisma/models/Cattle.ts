@@ -468,11 +468,6 @@ export type CattleUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type CattleNullableScalarRelationFilter = {
-  is?: Prisma.CattleWhereInput | null
-  isNot?: Prisma.CattleWhereInput | null
-}
-
 export type CattleListRelationFilter = {
   every?: Prisma.CattleWhereInput
   some?: Prisma.CattleWhereInput
@@ -541,20 +536,9 @@ export type CattleScalarRelationFilter = {
   isNot?: Prisma.CattleWhereInput
 }
 
-export type CattleCreateNestedOneWithoutProductInput = {
-  create?: Prisma.XOR<Prisma.CattleCreateWithoutProductInput, Prisma.CattleUncheckedCreateWithoutProductInput>
-  connectOrCreate?: Prisma.CattleCreateOrConnectWithoutProductInput
-  connect?: Prisma.CattleWhereUniqueInput
-}
-
-export type CattleUpdateOneWithoutProductNestedInput = {
-  create?: Prisma.XOR<Prisma.CattleCreateWithoutProductInput, Prisma.CattleUncheckedCreateWithoutProductInput>
-  connectOrCreate?: Prisma.CattleCreateOrConnectWithoutProductInput
-  upsert?: Prisma.CattleUpsertWithoutProductInput
-  disconnect?: Prisma.CattleWhereInput | boolean
-  delete?: Prisma.CattleWhereInput | boolean
-  connect?: Prisma.CattleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CattleUpdateToOneWithWhereWithoutProductInput, Prisma.CattleUpdateWithoutProductInput>, Prisma.CattleUncheckedUpdateWithoutProductInput>
+export type CattleNullableScalarRelationFilter = {
+  is?: Prisma.CattleWhereInput | null
+  isNot?: Prisma.CattleWhereInput | null
 }
 
 export type CattleCreateNestedManyWithoutFarmInput = {
@@ -672,84 +656,20 @@ export type CattleUpdateOneRequiredWithoutYieldReportNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CattleUpdateToOneWithWhereWithoutYieldReportInput, Prisma.CattleUpdateWithoutYieldReportInput>, Prisma.CattleUncheckedUpdateWithoutYieldReportInput>
 }
 
-export type CattleCreateWithoutProductInput = {
-  id?: string
-  description?: string | null
-  image?: string | null
-  images?: Prisma.CattleCreateimagesInput | string[]
-  gender?: $Enums.Gender
-  age?: $Enums.Age
-  liveWeight?: number | null
-  costPrice?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  farm: Prisma.FarmCreateNestedOneWithoutCattleInput
-  breed: Prisma.BreedCreateNestedOneWithoutCattleInput
-  yieldReport?: Prisma.YieldCreateNestedOneWithoutCattleInput
+export type CattleCreateNestedOneWithoutProductInput = {
+  create?: Prisma.XOR<Prisma.CattleCreateWithoutProductInput, Prisma.CattleUncheckedCreateWithoutProductInput>
+  connectOrCreate?: Prisma.CattleCreateOrConnectWithoutProductInput
+  connect?: Prisma.CattleWhereUniqueInput
 }
 
-export type CattleUncheckedCreateWithoutProductInput = {
-  id?: string
-  farmId: string
-  breedId: string
-  description?: string | null
-  image?: string | null
-  images?: Prisma.CattleCreateimagesInput | string[]
-  gender?: $Enums.Gender
-  age?: $Enums.Age
-  liveWeight?: number | null
-  costPrice?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  yieldReport?: Prisma.YieldUncheckedCreateNestedOneWithoutCattleInput
-}
-
-export type CattleCreateOrConnectWithoutProductInput = {
-  where: Prisma.CattleWhereUniqueInput
-  create: Prisma.XOR<Prisma.CattleCreateWithoutProductInput, Prisma.CattleUncheckedCreateWithoutProductInput>
-}
-
-export type CattleUpsertWithoutProductInput = {
-  update: Prisma.XOR<Prisma.CattleUpdateWithoutProductInput, Prisma.CattleUncheckedUpdateWithoutProductInput>
-  create: Prisma.XOR<Prisma.CattleCreateWithoutProductInput, Prisma.CattleUncheckedCreateWithoutProductInput>
-  where?: Prisma.CattleWhereInput
-}
-
-export type CattleUpdateToOneWithWhereWithoutProductInput = {
-  where?: Prisma.CattleWhereInput
-  data: Prisma.XOR<Prisma.CattleUpdateWithoutProductInput, Prisma.CattleUncheckedUpdateWithoutProductInput>
-}
-
-export type CattleUpdateWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  images?: Prisma.CattleUpdateimagesInput | string[]
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  age?: Prisma.EnumAgeFieldUpdateOperationsInput | $Enums.Age
-  liveWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  farm?: Prisma.FarmUpdateOneRequiredWithoutCattleNestedInput
-  breed?: Prisma.BreedUpdateOneRequiredWithoutCattleNestedInput
-  yieldReport?: Prisma.YieldUpdateOneWithoutCattleNestedInput
-}
-
-export type CattleUncheckedUpdateWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  farmId?: Prisma.StringFieldUpdateOperationsInput | string
-  breedId?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  images?: Prisma.CattleUpdateimagesInput | string[]
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  age?: Prisma.EnumAgeFieldUpdateOperationsInput | $Enums.Age
-  liveWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReport?: Prisma.YieldUncheckedUpdateOneWithoutCattleNestedInput
+export type CattleUpdateOneWithoutProductNestedInput = {
+  create?: Prisma.XOR<Prisma.CattleCreateWithoutProductInput, Prisma.CattleUncheckedCreateWithoutProductInput>
+  connectOrCreate?: Prisma.CattleCreateOrConnectWithoutProductInput
+  upsert?: Prisma.CattleUpsertWithoutProductInput
+  disconnect?: Prisma.CattleWhereInput | boolean
+  delete?: Prisma.CattleWhereInput | boolean
+  connect?: Prisma.CattleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CattleUpdateToOneWithWhereWithoutProductInput, Prisma.CattleUpdateWithoutProductInput>, Prisma.CattleUncheckedUpdateWithoutProductInput>
 }
 
 export type CattleCreateWithoutFarmInput = {
@@ -964,6 +884,86 @@ export type CattleUncheckedUpdateWithoutYieldReportInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product?: Prisma.ProductUncheckedUpdateManyWithoutCattleNestedInput
+}
+
+export type CattleCreateWithoutProductInput = {
+  id?: string
+  description?: string | null
+  image?: string | null
+  images?: Prisma.CattleCreateimagesInput | string[]
+  gender?: $Enums.Gender
+  age?: $Enums.Age
+  liveWeight?: number | null
+  costPrice?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  farm: Prisma.FarmCreateNestedOneWithoutCattleInput
+  breed: Prisma.BreedCreateNestedOneWithoutCattleInput
+  yieldReport?: Prisma.YieldCreateNestedOneWithoutCattleInput
+}
+
+export type CattleUncheckedCreateWithoutProductInput = {
+  id?: string
+  farmId: string
+  breedId: string
+  description?: string | null
+  image?: string | null
+  images?: Prisma.CattleCreateimagesInput | string[]
+  gender?: $Enums.Gender
+  age?: $Enums.Age
+  liveWeight?: number | null
+  costPrice?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  yieldReport?: Prisma.YieldUncheckedCreateNestedOneWithoutCattleInput
+}
+
+export type CattleCreateOrConnectWithoutProductInput = {
+  where: Prisma.CattleWhereUniqueInput
+  create: Prisma.XOR<Prisma.CattleCreateWithoutProductInput, Prisma.CattleUncheckedCreateWithoutProductInput>
+}
+
+export type CattleUpsertWithoutProductInput = {
+  update: Prisma.XOR<Prisma.CattleUpdateWithoutProductInput, Prisma.CattleUncheckedUpdateWithoutProductInput>
+  create: Prisma.XOR<Prisma.CattleCreateWithoutProductInput, Prisma.CattleUncheckedCreateWithoutProductInput>
+  where?: Prisma.CattleWhereInput
+}
+
+export type CattleUpdateToOneWithWhereWithoutProductInput = {
+  where?: Prisma.CattleWhereInput
+  data: Prisma.XOR<Prisma.CattleUpdateWithoutProductInput, Prisma.CattleUncheckedUpdateWithoutProductInput>
+}
+
+export type CattleUpdateWithoutProductInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.CattleUpdateimagesInput | string[]
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.EnumAgeFieldUpdateOperationsInput | $Enums.Age
+  liveWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  farm?: Prisma.FarmUpdateOneRequiredWithoutCattleNestedInput
+  breed?: Prisma.BreedUpdateOneRequiredWithoutCattleNestedInput
+  yieldReport?: Prisma.YieldUpdateOneWithoutCattleNestedInput
+}
+
+export type CattleUncheckedUpdateWithoutProductInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  farmId?: Prisma.StringFieldUpdateOperationsInput | string
+  breedId?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.CattleUpdateimagesInput | string[]
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.EnumAgeFieldUpdateOperationsInput | $Enums.Age
+  liveWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  yieldReport?: Prisma.YieldUncheckedUpdateOneWithoutCattleNestedInput
 }
 
 export type CattleCreateManyFarmInput = {

@@ -13,8 +13,19 @@ export const addYieldAction = async (prevState: unknown, formData: FormData) => 
   if (submission.status !== 'success') {
     return submission.reply()
   }
-  console.log('formData from addYieldAction', formData)
+
   try {
+    // التحقق مما إذا كان العجل المختار مرتبطاً بالفعل بتقرير تصافي آخر
+    const existingYield = await prisma.yield.findUnique({
+      where: { cattleId: submission.value.cattleId },
+    })
+
+    if (existingYield) {
+      return submission.reply({
+        formErrors: ["هذا الحيوان مرتبط بالفعل بتقرير تشفية آخر. يرجى اختيار حيوان آخر."],
+      })
+    }
+
     await prisma.yield.create({
       data: {
         cattle: { connect: { id: submission.value.cattleId } },
@@ -27,9 +38,9 @@ export const addYieldAction = async (prevState: unknown, formData: FormData) => 
       }
     })
   } catch (error) {
-    console.error("Failed to create yield: ", error)
+    console.error("DATABASE ERROR: Failed to create yield record ->", error)
     return submission.reply({
-      formErrors: ["حدث خطأ أثناء حفظ التصافي في قاعدة البيانات."],
+      formErrors: ["حدث خطأ غير متوقع في قاعدة البيانات أثناء حفظ تقرير التصافي."],
     })
   }
   redirect("/server/yields")
@@ -43,7 +54,21 @@ export const editYieldAction = async (prevState: unknown, formData: FormData) =>
   if (submission.status !== 'success') {
     return submission.reply()
   }
+
   try {
+    // 1. البحث عما إذا كان العجل المختار مرتبكاً بتقرير تصافي مسبقاً
+    const existingYieldForCattle = await prisma.yield.findUnique({
+      where: { cattleId: submission.value.cattleId },
+    })
+
+    // 2. إذا كان العجل مرتبطاً بتقرير تصافي آخر (وليس التقرير الحالي الذي نقوم بتعديله) يتم رفض العملية
+    if (existingYieldForCattle && existingYieldForCattle.id !== submission.value.id) {
+      return submission.reply({
+        formErrors: ["هذا الحيوان مرتبط بالفعل بتقرير تشفية آخر. يرجى اختيار حيوان آخر."],
+      })
+    }
+
+    // 3. تحديث البيانات بأمان في حال اجتياز التحقق
     await prisma.yield.update({
       where: { id: submission.value.id! },
       data: {
@@ -57,9 +82,9 @@ export const editYieldAction = async (prevState: unknown, formData: FormData) =>
       }
     })
   } catch (error) {
-    console.error("Failed to create yield: ", error)
+    console.error("DATABASE ERROR: Failed to update yield record ->", error)
     return submission.reply({
-      formErrors: ["حدث خطأ أثناء تعديل التصافي  في قاعدة البيانات."],
+      formErrors: ["حدث خطأ غير متوقع في قاعدة البيانات أثناء تعديل تقرير التصافي."],
     })
   }
   redirect("/server/yields")
@@ -73,7 +98,7 @@ export const deleteYieldAction = async (formData: FormData) => {
       where: { id: id as string },
     })
   } catch (error) {
-    console.error(error)
+    console.error("DATABASE ERROR: Failed to delete yield record ->", error)
   }
   redirect("/server/yields")
 }

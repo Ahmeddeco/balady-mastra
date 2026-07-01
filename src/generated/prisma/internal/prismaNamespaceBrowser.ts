@@ -56,11 +56,11 @@ export const ModelName = {
   VerificationToken: 'VerificationToken',
   Authenticator: 'Authenticator',
   User: 'User',
-  Product: 'Product',
   Farm: 'Farm',
   Breed: 'Breed',
   Cattle: 'Cattle',
   Yield: 'Yield',
+  Product: 'Product',
   Order: 'Order',
   OrderItem: 'OrderItem',
   Favorite: 'Favorite'
@@ -159,30 +159,6 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const ProductScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  slug: 'slug',
-  description: 'description',
-  cut: 'cut',
-  category: 'category',
-  mainImage: 'mainImage',
-  images: 'images',
-  price: 'price',
-  discount: 'discount',
-  unit: 'unit',
-  stock: 'stock',
-  lowQuantity: 'lowQuantity',
-  increaseByOne: 'increaseByOne',
-  isActive: 'isActive',
-  cattleId: 'cattleId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
-
-
 export const FarmScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -247,6 +223,30 @@ export const YieldScalarFieldEnum = {
 } as const
 
 export type YieldScalarFieldEnum = (typeof YieldScalarFieldEnum)[keyof typeof YieldScalarFieldEnum]
+
+
+export const ProductScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  cut: 'cut',
+  category: 'category',
+  mainImage: 'mainImage',
+  images: 'images',
+  price: 'price',
+  discount: 'discount',
+  unit: 'unit',
+  stock: 'stock',
+  lowQuantity: 'lowQuantity',
+  increaseByOne: 'increaseByOne',
+  isActive: 'isActive',
+  cattleId: 'cattleId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
 export const OrderScalarFieldEnum = {
