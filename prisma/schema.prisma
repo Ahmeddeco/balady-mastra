@@ -159,39 +159,41 @@ model Breed {
 }
 
 model Cattle {
-  id            String       @id @default(cuid())
-  farm          Farm         @relation(fields: [farmId], references: [id])
-  farmId        String
-  breed         Breed        @relation(fields: [breedId], references: [id])
-  breedId       String
-  description   String?
-  image         String?
-  images        String[]
-  gender        Gender       @default(male)
-  age           Age          @default(young)
-  liveWeight    Float? // مضاف: الوزن القائم للرأس وهو أساسي للمزارع والتجارة
-  costPrice     Float? // مضاف: تكلفة شراء الرأس لحساب الأرباح بدقة
-  product       Product[]
-  yieldReport   YieldReport?
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  yieldReportId String
+  id          String    @id @default(cuid())
+  farm        Farm      @relation(fields: [farmId], references: [id])
+  farmId      String
+  breed       Breed     @relation(fields: [breedId], references: [id])
+  breedId     String
+  description String?
+  image       String?
+  images      String[]
+  gender      Gender    @default(male)
+  age         Age       @default(young)
+  liveWeight  Float? // مضاف: الوزن القائم للرأس وهو أساسي للمزارع والتجارة
+  costPrice   Float? // مضاف: تكلفة شراء الرأس لحساب الأرباح بدقة
+  product     Product[]
+  yieldReport Yield?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   @@index([farmId])
   @@index([breedId])
 }
 
-model YieldReport {
+model Yield {
   id               String   @id @default(cuid())
   cattle           Cattle   @relation(fields: [cattleId], references: [id])
   cattleId         String   @unique
-  hotCarcassWeight Float
-  boneWeight       Float
-  fatWeight        Float
-  wasteWeight      Float
-  netYieldWeight   Float
+  hotCarcassWeight Float // وزن الذبيحة كاملة بعد الذبح والسلخ والتجويف مباشرة (وهي ساخنة قبل التبريد).
+  boneWeight       Float // إجمالي وزن العظام الناتجة بعد عملية التشفي.
+  fatWeight        Float // وزن الدهون (الدوش، المنديل، والدهون الداخلية) المستخرجة.
+  wasteWeight      Float // الهالك أثناء التقطيع، السوائل المفقودة، أو الأجزاء غير الصالحة للبيع.
+  netYieldWeight   Float // الوزن الصافي للحم الأحمر المخلي تماماً الجاهز للبيع أو التفصيل.
+  report           String? // ملاحظات نصية حول جودة اللحم، درجة التشفيه، أو أي تفاصيل خاصة بالذبيحة.
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+
+  @@index([cattleId])
 }
 
 model Order {

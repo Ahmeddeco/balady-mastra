@@ -46,10 +46,10 @@ export const getOneCattleForEditPage = async (id: string) => {
   }
 }
 
-
+/* -------------------------- getAllCattleForSelect ------------------------- */
 export const getAllCattleForSelect = async () => {
   try {
-    return await prisma.cattle.findMany({ select: { id: true, createdAt: true }, orderBy: { createdAt: "asc" } })
+    return await prisma.cattle.findMany({ select: { id: true, createdAt: true, breed: { select: { name: true } }, farm: { select: { name: true } } }, orderBy: { createdAt: "asc" } })
   } catch (error) {
     console.error("خطأ أثناء جلب بيانات الحيوان :", error)
     throw error

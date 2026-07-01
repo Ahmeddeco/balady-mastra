@@ -172,6 +172,7 @@ export default function AddProductForm() {
 
 			{/* عرض الأخطاء العامة للفورم إن وجدت */}
 			{form.errors && <FieldError>{form.errors}</FieldError>}
+
 			{/* ------------------------------ SubmitButton ------------------------------ */}
 			<SubmitButton text={"أضف منتج"} />
 		</Form>

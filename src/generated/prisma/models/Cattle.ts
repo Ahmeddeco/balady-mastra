@@ -48,7 +48,6 @@ export type CattleMinAggregateOutputType = {
   costPrice: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  yieldReportId: string | null
 }
 
 export type CattleMaxAggregateOutputType = {
@@ -63,7 +62,6 @@ export type CattleMaxAggregateOutputType = {
   costPrice: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  yieldReportId: string | null
 }
 
 export type CattleCountAggregateOutputType = {
@@ -79,7 +77,6 @@ export type CattleCountAggregateOutputType = {
   costPrice: number
   createdAt: number
   updatedAt: number
-  yieldReportId: number
   _all: number
 }
 
@@ -106,7 +103,6 @@ export type CattleMinAggregateInputType = {
   costPrice?: true
   createdAt?: true
   updatedAt?: true
-  yieldReportId?: true
 }
 
 export type CattleMaxAggregateInputType = {
@@ -121,7 +117,6 @@ export type CattleMaxAggregateInputType = {
   costPrice?: true
   createdAt?: true
   updatedAt?: true
-  yieldReportId?: true
 }
 
 export type CattleCountAggregateInputType = {
@@ -137,7 +132,6 @@ export type CattleCountAggregateInputType = {
   costPrice?: true
   createdAt?: true
   updatedAt?: true
-  yieldReportId?: true
   _all?: true
 }
 
@@ -240,7 +234,6 @@ export type CattleGroupByOutputType = {
   costPrice: number | null
   createdAt: Date
   updatedAt: Date
-  yieldReportId: string
   _count: CattleCountAggregateOutputType | null
   _avg: CattleAvgAggregateOutputType | null
   _sum: CattleSumAggregateOutputType | null
@@ -279,11 +272,10 @@ export type CattleWhereInput = {
   costPrice?: Prisma.FloatNullableFilter<"Cattle"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Cattle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Cattle"> | Date | string
-  yieldReportId?: Prisma.StringFilter<"Cattle"> | string
   farm?: Prisma.XOR<Prisma.FarmScalarRelationFilter, Prisma.FarmWhereInput>
   breed?: Prisma.XOR<Prisma.BreedScalarRelationFilter, Prisma.BreedWhereInput>
   product?: Prisma.ProductListRelationFilter
-  yieldReport?: Prisma.XOR<Prisma.YieldReportNullableScalarRelationFilter, Prisma.YieldReportWhereInput> | null
+  yieldReport?: Prisma.XOR<Prisma.YieldNullableScalarRelationFilter, Prisma.YieldWhereInput> | null
 }
 
 export type CattleOrderByWithRelationInput = {
@@ -299,11 +291,10 @@ export type CattleOrderByWithRelationInput = {
   costPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  yieldReportId?: Prisma.SortOrder
   farm?: Prisma.FarmOrderByWithRelationInput
   breed?: Prisma.BreedOrderByWithRelationInput
   product?: Prisma.ProductOrderByRelationAggregateInput
-  yieldReport?: Prisma.YieldReportOrderByWithRelationInput
+  yieldReport?: Prisma.YieldOrderByWithRelationInput
 }
 
 export type CattleWhereUniqueInput = Prisma.AtLeast<{
@@ -322,11 +313,10 @@ export type CattleWhereUniqueInput = Prisma.AtLeast<{
   costPrice?: Prisma.FloatNullableFilter<"Cattle"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Cattle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Cattle"> | Date | string
-  yieldReportId?: Prisma.StringFilter<"Cattle"> | string
   farm?: Prisma.XOR<Prisma.FarmScalarRelationFilter, Prisma.FarmWhereInput>
   breed?: Prisma.XOR<Prisma.BreedScalarRelationFilter, Prisma.BreedWhereInput>
   product?: Prisma.ProductListRelationFilter
-  yieldReport?: Prisma.XOR<Prisma.YieldReportNullableScalarRelationFilter, Prisma.YieldReportWhereInput> | null
+  yieldReport?: Prisma.XOR<Prisma.YieldNullableScalarRelationFilter, Prisma.YieldWhereInput> | null
 }, "id">
 
 export type CattleOrderByWithAggregationInput = {
@@ -342,7 +332,6 @@ export type CattleOrderByWithAggregationInput = {
   costPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  yieldReportId?: Prisma.SortOrder
   _count?: Prisma.CattleCountOrderByAggregateInput
   _avg?: Prisma.CattleAvgOrderByAggregateInput
   _max?: Prisma.CattleMaxOrderByAggregateInput
@@ -366,7 +355,6 @@ export type CattleScalarWhereWithAggregatesInput = {
   costPrice?: Prisma.FloatNullableWithAggregatesFilter<"Cattle"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Cattle"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Cattle"> | Date | string
-  yieldReportId?: Prisma.StringWithAggregatesFilter<"Cattle"> | string
 }
 
 export type CattleCreateInput = {
@@ -380,11 +368,10 @@ export type CattleCreateInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
   farm: Prisma.FarmCreateNestedOneWithoutCattleInput
   breed: Prisma.BreedCreateNestedOneWithoutCattleInput
   product?: Prisma.ProductCreateNestedManyWithoutCattleInput
-  yieldReport?: Prisma.YieldReportCreateNestedOneWithoutCattleInput
+  yieldReport?: Prisma.YieldCreateNestedOneWithoutCattleInput
 }
 
 export type CattleUncheckedCreateInput = {
@@ -400,9 +387,8 @@ export type CattleUncheckedCreateInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
   product?: Prisma.ProductUncheckedCreateNestedManyWithoutCattleInput
-  yieldReport?: Prisma.YieldReportUncheckedCreateNestedOneWithoutCattleInput
+  yieldReport?: Prisma.YieldUncheckedCreateNestedOneWithoutCattleInput
 }
 
 export type CattleUpdateInput = {
@@ -416,11 +402,10 @@ export type CattleUpdateInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
   farm?: Prisma.FarmUpdateOneRequiredWithoutCattleNestedInput
   breed?: Prisma.BreedUpdateOneRequiredWithoutCattleNestedInput
   product?: Prisma.ProductUpdateManyWithoutCattleNestedInput
-  yieldReport?: Prisma.YieldReportUpdateOneWithoutCattleNestedInput
+  yieldReport?: Prisma.YieldUpdateOneWithoutCattleNestedInput
 }
 
 export type CattleUncheckedUpdateInput = {
@@ -436,9 +421,8 @@ export type CattleUncheckedUpdateInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
   product?: Prisma.ProductUncheckedUpdateManyWithoutCattleNestedInput
-  yieldReport?: Prisma.YieldReportUncheckedUpdateOneWithoutCattleNestedInput
+  yieldReport?: Prisma.YieldUncheckedUpdateOneWithoutCattleNestedInput
 }
 
 export type CattleCreateManyInput = {
@@ -454,7 +438,6 @@ export type CattleCreateManyInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
 }
 
 export type CattleUpdateManyMutationInput = {
@@ -468,7 +451,6 @@ export type CattleUpdateManyMutationInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type CattleUncheckedUpdateManyInput = {
@@ -484,7 +466,6 @@ export type CattleUncheckedUpdateManyInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type CattleNullableScalarRelationFilter = {
@@ -515,7 +496,6 @@ export type CattleCountOrderByAggregateInput = {
   costPrice?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  yieldReportId?: Prisma.SortOrder
 }
 
 export type CattleAvgOrderByAggregateInput = {
@@ -535,7 +515,6 @@ export type CattleMaxOrderByAggregateInput = {
   costPrice?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  yieldReportId?: Prisma.SortOrder
 }
 
 export type CattleMinOrderByAggregateInput = {
@@ -550,7 +529,6 @@ export type CattleMinOrderByAggregateInput = {
   costPrice?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  yieldReportId?: Prisma.SortOrder
 }
 
 export type CattleSumOrderByAggregateInput = {
@@ -705,10 +683,9 @@ export type CattleCreateWithoutProductInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
   farm: Prisma.FarmCreateNestedOneWithoutCattleInput
   breed: Prisma.BreedCreateNestedOneWithoutCattleInput
-  yieldReport?: Prisma.YieldReportCreateNestedOneWithoutCattleInput
+  yieldReport?: Prisma.YieldCreateNestedOneWithoutCattleInput
 }
 
 export type CattleUncheckedCreateWithoutProductInput = {
@@ -724,8 +701,7 @@ export type CattleUncheckedCreateWithoutProductInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
-  yieldReport?: Prisma.YieldReportUncheckedCreateNestedOneWithoutCattleInput
+  yieldReport?: Prisma.YieldUncheckedCreateNestedOneWithoutCattleInput
 }
 
 export type CattleCreateOrConnectWithoutProductInput = {
@@ -755,10 +731,9 @@ export type CattleUpdateWithoutProductInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
   farm?: Prisma.FarmUpdateOneRequiredWithoutCattleNestedInput
   breed?: Prisma.BreedUpdateOneRequiredWithoutCattleNestedInput
-  yieldReport?: Prisma.YieldReportUpdateOneWithoutCattleNestedInput
+  yieldReport?: Prisma.YieldUpdateOneWithoutCattleNestedInput
 }
 
 export type CattleUncheckedUpdateWithoutProductInput = {
@@ -774,8 +749,7 @@ export type CattleUncheckedUpdateWithoutProductInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
-  yieldReport?: Prisma.YieldReportUncheckedUpdateOneWithoutCattleNestedInput
+  yieldReport?: Prisma.YieldUncheckedUpdateOneWithoutCattleNestedInput
 }
 
 export type CattleCreateWithoutFarmInput = {
@@ -789,10 +763,9 @@ export type CattleCreateWithoutFarmInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
   breed: Prisma.BreedCreateNestedOneWithoutCattleInput
   product?: Prisma.ProductCreateNestedManyWithoutCattleInput
-  yieldReport?: Prisma.YieldReportCreateNestedOneWithoutCattleInput
+  yieldReport?: Prisma.YieldCreateNestedOneWithoutCattleInput
 }
 
 export type CattleUncheckedCreateWithoutFarmInput = {
@@ -807,9 +780,8 @@ export type CattleUncheckedCreateWithoutFarmInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
   product?: Prisma.ProductUncheckedCreateNestedManyWithoutCattleInput
-  yieldReport?: Prisma.YieldReportUncheckedCreateNestedOneWithoutCattleInput
+  yieldReport?: Prisma.YieldUncheckedCreateNestedOneWithoutCattleInput
 }
 
 export type CattleCreateOrConnectWithoutFarmInput = {
@@ -854,7 +826,6 @@ export type CattleScalarWhereInput = {
   costPrice?: Prisma.FloatNullableFilter<"Cattle"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Cattle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Cattle"> | Date | string
-  yieldReportId?: Prisma.StringFilter<"Cattle"> | string
 }
 
 export type CattleCreateWithoutBreedInput = {
@@ -868,10 +839,9 @@ export type CattleCreateWithoutBreedInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
   farm: Prisma.FarmCreateNestedOneWithoutCattleInput
   product?: Prisma.ProductCreateNestedManyWithoutCattleInput
-  yieldReport?: Prisma.YieldReportCreateNestedOneWithoutCattleInput
+  yieldReport?: Prisma.YieldCreateNestedOneWithoutCattleInput
 }
 
 export type CattleUncheckedCreateWithoutBreedInput = {
@@ -886,9 +856,8 @@ export type CattleUncheckedCreateWithoutBreedInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
   product?: Prisma.ProductUncheckedCreateNestedManyWithoutCattleInput
-  yieldReport?: Prisma.YieldReportUncheckedCreateNestedOneWithoutCattleInput
+  yieldReport?: Prisma.YieldUncheckedCreateNestedOneWithoutCattleInput
 }
 
 export type CattleCreateOrConnectWithoutBreedInput = {
@@ -928,7 +897,6 @@ export type CattleCreateWithoutYieldReportInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
   farm: Prisma.FarmCreateNestedOneWithoutCattleInput
   breed: Prisma.BreedCreateNestedOneWithoutCattleInput
   product?: Prisma.ProductCreateNestedManyWithoutCattleInput
@@ -947,7 +915,6 @@ export type CattleUncheckedCreateWithoutYieldReportInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
   product?: Prisma.ProductUncheckedCreateNestedManyWithoutCattleInput
 }
 
@@ -978,7 +945,6 @@ export type CattleUpdateWithoutYieldReportInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
   farm?: Prisma.FarmUpdateOneRequiredWithoutCattleNestedInput
   breed?: Prisma.BreedUpdateOneRequiredWithoutCattleNestedInput
   product?: Prisma.ProductUpdateManyWithoutCattleNestedInput
@@ -997,7 +963,6 @@ export type CattleUncheckedUpdateWithoutYieldReportInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
   product?: Prisma.ProductUncheckedUpdateManyWithoutCattleNestedInput
 }
 
@@ -1013,7 +978,6 @@ export type CattleCreateManyFarmInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
 }
 
 export type CattleUpdateWithoutFarmInput = {
@@ -1027,10 +991,9 @@ export type CattleUpdateWithoutFarmInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
   breed?: Prisma.BreedUpdateOneRequiredWithoutCattleNestedInput
   product?: Prisma.ProductUpdateManyWithoutCattleNestedInput
-  yieldReport?: Prisma.YieldReportUpdateOneWithoutCattleNestedInput
+  yieldReport?: Prisma.YieldUpdateOneWithoutCattleNestedInput
 }
 
 export type CattleUncheckedUpdateWithoutFarmInput = {
@@ -1045,9 +1008,8 @@ export type CattleUncheckedUpdateWithoutFarmInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
   product?: Prisma.ProductUncheckedUpdateManyWithoutCattleNestedInput
-  yieldReport?: Prisma.YieldReportUncheckedUpdateOneWithoutCattleNestedInput
+  yieldReport?: Prisma.YieldUncheckedUpdateOneWithoutCattleNestedInput
 }
 
 export type CattleUncheckedUpdateManyWithoutFarmInput = {
@@ -1062,7 +1024,6 @@ export type CattleUncheckedUpdateManyWithoutFarmInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type CattleCreateManyBreedInput = {
@@ -1077,7 +1038,6 @@ export type CattleCreateManyBreedInput = {
   costPrice?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  yieldReportId: string
 }
 
 export type CattleUpdateWithoutBreedInput = {
@@ -1091,10 +1051,9 @@ export type CattleUpdateWithoutBreedInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
   farm?: Prisma.FarmUpdateOneRequiredWithoutCattleNestedInput
   product?: Prisma.ProductUpdateManyWithoutCattleNestedInput
-  yieldReport?: Prisma.YieldReportUpdateOneWithoutCattleNestedInput
+  yieldReport?: Prisma.YieldUpdateOneWithoutCattleNestedInput
 }
 
 export type CattleUncheckedUpdateWithoutBreedInput = {
@@ -1109,9 +1068,8 @@ export type CattleUncheckedUpdateWithoutBreedInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
   product?: Prisma.ProductUncheckedUpdateManyWithoutCattleNestedInput
-  yieldReport?: Prisma.YieldReportUncheckedUpdateOneWithoutCattleNestedInput
+  yieldReport?: Prisma.YieldUncheckedUpdateOneWithoutCattleNestedInput
 }
 
 export type CattleUncheckedUpdateManyWithoutBreedInput = {
@@ -1126,7 +1084,6 @@ export type CattleUncheckedUpdateManyWithoutBreedInput = {
   costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  yieldReportId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -1173,7 +1130,6 @@ export type CattleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   costPrice?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  yieldReportId?: boolean
   farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
   breed?: boolean | Prisma.BreedDefaultArgs<ExtArgs>
   product?: boolean | Prisma.Cattle$productArgs<ExtArgs>
@@ -1194,7 +1150,6 @@ export type CattleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   costPrice?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  yieldReportId?: boolean
   farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
   breed?: boolean | Prisma.BreedDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cattle"]>
@@ -1212,7 +1167,6 @@ export type CattleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   costPrice?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  yieldReportId?: boolean
   farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
   breed?: boolean | Prisma.BreedDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cattle"]>
@@ -1230,10 +1184,9 @@ export type CattleSelectScalar = {
   costPrice?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  yieldReportId?: boolean
 }
 
-export type CattleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "farmId" | "breedId" | "description" | "image" | "images" | "gender" | "age" | "liveWeight" | "costPrice" | "createdAt" | "updatedAt" | "yieldReportId", ExtArgs["result"]["cattle"]>
+export type CattleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "farmId" | "breedId" | "description" | "image" | "images" | "gender" | "age" | "liveWeight" | "costPrice" | "createdAt" | "updatedAt", ExtArgs["result"]["cattle"]>
 export type CattleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
   breed?: boolean | Prisma.BreedDefaultArgs<ExtArgs>
@@ -1256,7 +1209,7 @@ export type $CattlePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     farm: Prisma.$FarmPayload<ExtArgs>
     breed: Prisma.$BreedPayload<ExtArgs>
     product: Prisma.$ProductPayload<ExtArgs>[]
-    yieldReport: Prisma.$YieldReportPayload<ExtArgs> | null
+    yieldReport: Prisma.$YieldPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1271,7 +1224,6 @@ export type $CattlePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     costPrice: number | null
     createdAt: Date
     updatedAt: Date
-    yieldReportId: string
   }, ExtArgs["result"]["cattle"]>
   composites: {}
 }
@@ -1669,7 +1621,7 @@ export interface Prisma__CattleClient<T, Null = never, ExtArgs extends runtime.T
   farm<T extends Prisma.FarmDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FarmDefaultArgs<ExtArgs>>): Prisma.Prisma__FarmClient<runtime.Types.Result.GetResult<Prisma.$FarmPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   breed<T extends Prisma.BreedDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BreedDefaultArgs<ExtArgs>>): Prisma.Prisma__BreedClient<runtime.Types.Result.GetResult<Prisma.$BreedPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   product<T extends Prisma.Cattle$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cattle$productArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  yieldReport<T extends Prisma.Cattle$yieldReportArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cattle$yieldReportArgs<ExtArgs>>): Prisma.Prisma__YieldReportClient<runtime.Types.Result.GetResult<Prisma.$YieldReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  yieldReport<T extends Prisma.Cattle$yieldReportArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cattle$yieldReportArgs<ExtArgs>>): Prisma.Prisma__YieldClient<runtime.Types.Result.GetResult<Prisma.$YieldPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1711,7 +1663,6 @@ export interface CattleFieldRefs {
   readonly costPrice: Prisma.FieldRef<"Cattle", 'Float'>
   readonly createdAt: Prisma.FieldRef<"Cattle", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Cattle", 'DateTime'>
-  readonly yieldReportId: Prisma.FieldRef<"Cattle", 'String'>
 }
     
 
@@ -2141,18 +2092,18 @@ export type Cattle$productArgs<ExtArgs extends runtime.Types.Extensions.Internal
  */
 export type Cattle$yieldReportArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the YieldReport
+   * Select specific fields to fetch from the Yield
    */
-  select?: Prisma.YieldReportSelect<ExtArgs> | null
+  select?: Prisma.YieldSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the YieldReport
+   * Omit specific fields from the Yield
    */
-  omit?: Prisma.YieldReportOmit<ExtArgs> | null
+  omit?: Prisma.YieldOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.YieldReportInclude<ExtArgs> | null
-  where?: Prisma.YieldReportWhereInput
+  include?: Prisma.YieldInclude<ExtArgs> | null
+  where?: Prisma.YieldWhereInput
 }
 
 /**

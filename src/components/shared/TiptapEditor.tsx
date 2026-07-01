@@ -21,7 +21,7 @@ import {
 import { useEffect, useState } from "react"
 import { Separator } from "../ui/separator"
 import { Card, CardHeader, CardTitle } from "../ui/card"
-import { Field, FieldError, FieldLabel } from "../ui/field"
+import { Field, FieldDescription, FieldError, FieldLabel } from "../ui/field"
 
 type TiptapEditorProps = {
 	name: string
@@ -29,6 +29,7 @@ type TiptapEditorProps = {
 	defaultValue: string
 	onChange?: (value: string) => void
 	label: string
+	description?: string
 	errors: string[]
 	id?: string
 }
@@ -41,6 +42,7 @@ export default function TiptapEditor({
 	label,
 	errors,
 	id,
+	description,
 }: TiptapEditorProps) {
 	const [, setUpdateTrigger] = useState(0)
 	const [content, setContent] = useState<string>(defaultValue)
@@ -92,6 +94,7 @@ export default function TiptapEditor({
 	return (
 		<Field>
 			<FieldLabel>{label}</FieldLabel>
+			{description && <FieldDescription>{description}</FieldDescription>}
 			<div className="w-full rounded-md border border-input bg-background text-foreground overflow-hidden shadow-sm">
 				<input type="hidden" name={name} id={id} value={content} key={editorKey} />
 				{/* --------------------------------- Toolbar -------------------------------- */}

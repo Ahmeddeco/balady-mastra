@@ -63,10 +63,10 @@ export type Breed = Prisma.BreedModel
  */
 export type Cattle = Prisma.CattleModel
 /**
- * Model YieldReport
+ * Model Yield
  * 
  */
-export type YieldReport = Prisma.YieldReportModel
+export type Yield = Prisma.YieldModel
 /**
  * Model Order
  * 

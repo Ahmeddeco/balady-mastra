@@ -3,8 +3,6 @@
 import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import { slugifyTitle } from "@/logic/slugifyTitle"
-import ProductSchema from "@/schemas/Product.Schema"
 import CattleSchema from "@/schemas/Cattle.Schema"
 import { splittedImages } from "@/logic/splittedImages"
 

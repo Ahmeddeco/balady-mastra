@@ -121,6 +121,9 @@ export default function AddUserForm({ authImage }: { authImage?: string }) {
 				label="صورة البطاقة الشخصية"
 			/>
 
+			{/* ------------------ عرض الأخطاء العامة للفورم إن وجدت ------------------ */}
+			{form.errors && <FieldError>{form.errors}</FieldError>}
+
 			{/* ------------------------------ SubmitButton ------------------------------ */}
 			<SubmitButton text={"أضف مستخدم"} />
 		</Form>

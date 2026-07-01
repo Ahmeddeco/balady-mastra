@@ -166,6 +166,7 @@ export default function EditCattleForm({ breeds, farms, oneCattle }: Props) {
 
 			{/* عرض الأخطاء العامة للفورم إن وجدت */}
 			{form.errors && <FieldError>{form.errors}</FieldError>}
+
 			{/* ------------------------------ SubmitButton ------------------------------ */}
 			<SubmitButton text={"عدل على بينات الحيوان"} />
 		</Form>

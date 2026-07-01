@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
 /////////////////////////////////////////
-// YIELD REPORT SCHEMA
+// YIELD SCHEMA
 /////////////////////////////////////////
 
-export const YieldReportSchema = z.object({
+export const YieldSchema = z.object({
   id: z.string(),
   cattleId: z.string(),
   hotCarcassWeight: z.number(),
@@ -12,10 +12,11 @@ export const YieldReportSchema = z.object({
   fatWeight: z.number(),
   wasteWeight: z.number(),
   netYieldWeight: z.number(),
+  report: z.string().nullish(),
   createdAt: z.date(),
   updatedAt: z.date(),
 })
 
-export type YieldReport = z.infer<typeof YieldReportSchema>
+export type Yield = z.infer<typeof YieldSchema>
 
-export default YieldReportSchema;
+export default YieldSchema;

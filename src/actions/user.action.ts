@@ -45,8 +45,10 @@ export const addUserAction = async (prevState: unknown, formData: FormData) => {
     })
   } catch (error) {
     console.error(error)
+    return submission.reply({
+      formErrors: ["حدث خطأ أثناء حفظ المستخدم في قاعدة البيانات."],
+    })
   }
-
   redirect("/server/users")
 }
 
@@ -78,6 +80,9 @@ export const editUserAction = async (prevState: unknown, formData: FormData) => 
     })
   } catch (error) {
     console.error(error)
+    return submission.reply({
+      formErrors: ["حدث خطأ أثناء حفظ المستخدم في قاعدة البيانات."],
+    })
   }
 
   redirect("/server/users")

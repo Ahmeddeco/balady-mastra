@@ -123,6 +123,9 @@ export default function EditUserForm({ user }: Props) {
 				dbImage={user.personalId ?? ""}
 			/>
 
+			{/* ------------------ عرض الأخطاء العامة للفورم إن وجدت ------------------ */}
+			{form.errors && <FieldError>{form.errors}</FieldError>}
+
 			{/* ------------------------------ SubmitButton ------------------------------ */}
 			<SubmitButton text={"عدل مستخدم"} />
 		</Form>
