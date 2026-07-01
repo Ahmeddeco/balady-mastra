@@ -16,10 +16,10 @@ import { Field, FieldError, FieldLabel } from "../ui/field"
 type Props = {
 	dbImages?: string[] | string
 	dbImage?: string
-	label: string
+	label?: string
 	imageName?: string
 	imagesName?: string
-	imageKey: string | undefined
+	imageKey?: string | undefined
 	errors: string[] | undefined
 }
 
@@ -66,7 +66,7 @@ export function UploadManyImagesDropZone({ dbImages, label = "images", imagesNam
 			<Card className="w-full shadow-sm">
 				<CardContent className="flex flex-col gap-3 w-full p-6">
 					{/* تحويل المصفوفة إلى نص مفصول بفواصل عند الإرسال للفورم */}
-					<Input type="hidden" name={imagesName} value={images} />
+					<Input type="hidden" name={imagesName} value={images.join(",")} />
 
 					{images.length > 0 ? (
 						<div className="grid lg:grid-cols-6 grid-cols-3 gap-6">
@@ -85,7 +85,7 @@ export function UploadManyImagesDropZone({ dbImages, label = "images", imagesNam
 										size="icon"
 										onClick={() => handleDeleteManyImages(index)}
 										type="button"
-										className="absolute -top-2.5 -right-2.5 rounded-full size-6 shadow-sm bg-red-600! text-white!"
+										className="absolute -top-2.5 -right-2.5 rounded-full size-6 shadow-sm"
 									>
 										<X className="size-3.5" />
 									</Button>
@@ -159,7 +159,7 @@ export function UploadOneImagesDropZone({ dbImage, label = "image", imageName = 
 									size="icon"
 									onClick={() => handleDeleteOneImages()}
 									type="button"
-									className="absolute -top-2.5 -right-2.5 rounded-full size-6 shadow-sm bg-red-600! text-white!"
+									className="absolute -top-2.5 -right-2.5 rounded-full size-6 shadow-sm"
 								>
 									<X className="size-3.5" />
 								</Button>

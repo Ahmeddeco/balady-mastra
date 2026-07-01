@@ -7,12 +7,6 @@ import { extractRouterConfig } from "uploadthing/server"
 import { ourFileRouter } from "@/app/api/uploadthing/core"
 import NextAuthProvider from "@/components/auth/NextAuthProvider"
 import { TooltipProvider } from "@/components/ui/tooltip"
-import { Figtree, JetBrains_Mono, Inter } from "next/font/google";
-import { cn } from "@/lib/utils";
-
-const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
-
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 const cairo = localFont({
 	src: "../../public/fonts/Cairo.ttf",
@@ -29,7 +23,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang="ar" dir="rtl" suppressHydrationWarning className={cn( jetbrainsMono.variable, "font-sans", inter.variable)}>
+		<html lang="ar" dir="rtl" suppressHydrationWarning>
 			<body className={`${cairo.className} antialiased`} suppressHydrationWarning>
 				<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

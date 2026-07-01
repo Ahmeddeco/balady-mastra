@@ -64,9 +64,11 @@ export default function Cart() {
 										size={"icon"}
 										type="button"
 										onClick={() => {
-											unit === Unit.قطعة ? updateQuantityByOnes("decrement", id) : updateQuantityByHalf("decrement", id)
+											unit === Unit.piece
+												? updateQuantityByOnes("decrement", id)
+												: updateQuantityByHalf("decrement", id)
 										}}
-										disabled={(unit === Unit.قطعة && quantity <= 1) || (unit === Unit.كجم && quantity <= 0.5)}
+										disabled={(unit === Unit.piece && quantity <= 1) || (unit === Unit.kg && quantity <= 0.5)}
 									>
 										<Minus />
 									</Button>
@@ -82,7 +84,9 @@ export default function Cart() {
 										size={"icon"}
 										type="button"
 										onClick={() => {
-											unit === Unit.قطعة ? updateQuantityByOnes("increment", id) : updateQuantityByHalf("increment", id)
+											unit === Unit.piece
+												? updateQuantityByOnes("increment", id)
+												: updateQuantityByHalf("increment", id)
 										}}
 										disabled={quantity >= stock}
 									>

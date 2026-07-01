@@ -29,14 +29,14 @@ export const useCartStore = create<CartState>()(
 
       addToCart: (product: SingleProductPageType) => {
         const existingProduct = get().items.find((item) => item.id === product!.id)
-        const unit = product?.unit ?? Unit.قطعة
+        const unit = product?.unit ?? Unit.piece
         set({
           items: existingProduct
             ? get().items
             : [
               ...get().items,
               {
-                quantity: unit === Unit.قطعة ? 1 : 0.5,
+                quantity: unit === Unit.piece ? 1 : 0.5,
                 id: product?.id,
                 title: product?.title,
                 price: product?.price,
@@ -59,7 +59,6 @@ export const useCartStore = create<CartState>()(
           items: get().items.filter((item) => item.id !== id),
         })
         toast.error('تم إزالة المنتج من السلة.')
-
       },
 
       /* -------------------------- updateQuantityByHalf -------------------------- */
