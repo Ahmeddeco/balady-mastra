@@ -1,28 +1,27 @@
 import { Mastra } from '@mastra/core/mastra'
-import { LibSQLStore } from '@mastra/libsql'
-import { MastraCompositeStore } from '@mastra/core/storage'
 import { weatherWorkflow } from './workflows/weather-workflow'
 import { weatherAgent } from './agents/weather-agent'
 import { butcherWorkflow } from './workflows/butcher-workflow'
 import { butcherAgent } from './agents/butcher-agent'
-import { chatRoute } from "@mastra/ai-sdk"
 import { webSearchAgent } from "./agents/web-search-agent"
+import { chatRoute } from "@mastra/ai-sdk"
+import { PostgresStore } from '@mastra/pg'
+
+const storage = new PostgresStore({
+  id: 'pg-storage',
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: true } : { rejectUnauthorized: false },
+})
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow, butcherWorkflow },
   agents: { weatherAgent, butcherAgent, webSearchAgent },
-  storage: new MastraCompositeStore({
-    id: 'composite-storage',
-    default: new LibSQLStore({
-      id: "mastra-storage",
-      url: "file:./mastra.db",
-    }),
-  }),
+  storage,
   server: {
     apiRoutes: [
       chatRoute({
         path: '/chat',
-        agent: 'agricultureAgent',
+        agent: 'butcherAgent',
       }),
     ],
   },

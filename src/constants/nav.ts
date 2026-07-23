@@ -1,35 +1,30 @@
-import { Ham, Home, MapPin, Newspaper, Server, Smartphone, Users } from "lucide-react"
+import { Ham, Home, MapPin, Newspaper, Server, Smartphone, } from "lucide-react"
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6"
 import { RiRobot3Line } from "react-icons/ri"
 
 export const frontNavLinks = [
   {
-    title: "الرئيسية",
+    title: { ar: "الرئيسية", en: "home" },
     href: "/",
     icon: Home
   },
   {
-    title: "منتجاتنا",
+    title: { ar: "منتجاتنا", en: "products" },
     href: "/products",
     icon: Ham
   },
   {
-    title: "عملائنا",
-    href: "/clients",
-    icon: Users
-  },
-  {
-    title: "مقالاتنا",
+    title: { ar: "مقالاتنا", en: "articles" },
     href: "/articles",
     icon: Newspaper
   },
   {
-    title: "روز-بوت",
+    title: { ar: "روز-بوت", en: "bot" },
     href: "/bot",
     icon: RiRobot3Line
   },
   {
-    title: "server",
+    title: { ar: "سيرفر", en: "server" },
     href: "/server",
     icon: Server
   },

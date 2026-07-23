@@ -1,0 +1,25 @@
+{
+	"background_color": "#ffffff",
+	"description": "استوديو متقدم لتصاميم الديكور الداخلي والأثاث ثلاثي الأبعاد",
+	"dir": "rtl",
+	"display": "standalone",
+	"icons": [
+		{
+			"purpose": "any maskable",
+			"sizes": "192x192",
+			"src": "/icons/manifest-icon-192.maskable.png",
+			"type": "image/png"
+		},
+		{
+			"sizes": "512x512",
+			"src": "/icons/manifest-icon-512.maskable.png",
+			"type": "image/png"
+		}
+	],
+	"lang": "ar",
+	"name": "Balady | The First Smart Meat Shop",
+	"orientation": "portrait",
+	"short_name": "Balady",
+	"start_url": "/",
+	"theme_color": "#e11421"
+}

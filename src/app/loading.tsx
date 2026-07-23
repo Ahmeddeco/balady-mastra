@@ -1,4 +1,10 @@
+import { Spinner } from "@/components/ui/spinner"
+
 export default function Loading() {
-  // Or a custom loading skeleton component
-  return <p>Loading...</p>
+	return (
+		<div className="">
+			<Spinner className="size-8" />
+			<p>Loading...</p>
+		</div>
+	)
 }

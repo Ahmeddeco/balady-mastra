@@ -1,7 +1,9 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @import "tw-animate-css";
+@import "shadcn/tailwind.css";
 @import "uploadthing/tw/v4";
-@source "../../node_modules/@uploadthing/react/dist";
+@source "../node_modules/@uploadthing/react/dist";
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -195,34 +197,53 @@
 		@apply bg-background text-foreground;
 		letter-spacing: var(--tracking-normal);
 	}
-	h1 {
-		@apply text-3xl lg:text-4xl font-black capitalize text-center lg:text-start;
+	h1,
+	.prose h1 {
+		@apply text-3xl lg:text-4xl font-black;
 	}
-	h2 {
-		@apply text-2xl lg:text-3xl font-bold capitalize text-center lg:text-start;
+	h2,
+	.prose h2 {
+		@apply text-2xl lg:text-3xl font-bold;
 	}
-	h3 {
-		@apply text-xl lg:text-2xl font-semibold capitalize text-center lg:text-start;
+	h3,
+	.prose h3 {
+		@apply text-xl lg:text-2xl font-semibold;
 	}
-	h4 {
-		@apply text-lg lg:text-xl font-medium capitalize text-center lg:text-start;
+	h4,
+	.prose h4 {
+		@apply text-lg lg:text-xl font-medium;
 	}
-	h5 {
-		@apply text-base lg:text-lg font-normal capitalize text-center lg:text-start;
+	h5,
+	.prose h5 {
+		@apply text-base lg:text-lg font-normal;
 	}
-	h6 {
-		@apply text-sm lg:text-base font-light text-pretty  text-center lg:text-start;
+	h6,
+	.prose h6 {
+		@apply text-sm lg:text-base font-light text-pretty;
 	}
-	p {
-		@apply text-sm font-light text-foreground text-center lg:text-start;
+	p,
+	.prose p {
+		@apply text-xs font-light    leading-relaxed;
+	}
+	.prose ul {
+		@apply list-disc pr-6 pl-0 my-2 space-y-1;
+	}
+	.prose ol {
+		@apply list-decimal pr-6 pl-0 my-2 space-y-1;
+	}
+	.prose blockquote {
+		@apply border-r-4 border-l-0 border-primary pr-4 pl-0 italic my-4 text-muted-foreground bg-muted/5 p-2 rounded-l-md;
 	}
 	section {
-		@apply container mx-auto px-4 py-12;
+		@apply lg:py-12 py-6;
 	}
 	.PhoneInput {
 		@apply file:text-foreground  placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-0 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
 	}
+	.PhoneInputCountrySelect {
+		@apply bg-background;
+	}
 	.stdropdown-menu {
-		@apply !bg-input !text-foreground;
+		@apply bg-input! text-foreground!;
 	}
 }

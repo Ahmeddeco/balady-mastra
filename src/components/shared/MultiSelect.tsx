@@ -63,17 +63,22 @@ export default function MultiSelect({ allSelectedData, inputName, label, default
 				<CardContent className="flex flex-col gap-3 w-full">
 					<Popover>
 						<PopoverTrigger asChild>
-							<Button variant="outline" role="combobox" size={"lg"} type="button" className="justify-start w-fit">
+							<Button variant="default" role="combobox" size={"lg"} type="button">
 								select {inputName}
-								<ChevronDown opacity={0.5} />
+								<ChevronDown opacity={0.8} />
 							</Button>
 						</PopoverTrigger>
-						<PopoverContent className="w-[200px] p-0 " align="start">
-							<Command>
+
+						<PopoverContent className="w-full p-2 " align="center">
+							<Command className="w-full">
 								<CommandEmpty>No result found.</CommandEmpty>
-								<CommandGroup>
+								<CommandGroup className="w-full">
 									{allSelectedData?.map(({ id, title }) => (
-										<CommandItem key={id} onSelect={() => toggle(id)} className="flex items-start gap-4">
+										<CommandItem
+											key={id}
+											onSelect={() => toggle(id)}
+											className="flex items-center gap-4 lg:w-lg w-full"
+										>
 											<Check className={selected.some((item) => item.id === id) ? "opacity-100" : "opacity-0"} />
 											{title}
 										</CommandItem>

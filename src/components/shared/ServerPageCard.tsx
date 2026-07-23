@@ -10,7 +10,7 @@ type Props = {
 	children: React.ReactNode
 	title: string
 	description: string
-	btnTitle: string
+	btnTitle?: string
 	href: string
 	className?: string
 }
@@ -20,7 +20,7 @@ export default function ServerPageCard({
 	children,
 	title,
 	description,
-	btnTitle,
+	btnTitle = "go back",
 	href,
 	className,
 }: Props) {

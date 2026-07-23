@@ -3,7 +3,7 @@ import { Menu } from "lucide-react"
 import Logo from "./Logo"
 import FrontNavigation from "./FrontNavigation"
 import { ThemeButton } from "../theme/ThemeButton"
-import UserButton from "@/components/auth/UserButton"
+import UserButton from "@/auth/UserButton"
 
 export default function MobileMenu() {
 	return (

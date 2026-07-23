@@ -16,7 +16,6 @@
 # next.js
 /.next/
 /.mastra/
-/.agents/
 /out/
 
 # production
@@ -42,5 +41,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/generated/
-mastra*
+# mastra*

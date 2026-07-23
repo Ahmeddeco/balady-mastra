@@ -5,28 +5,22 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "../ui/button"
 import React from "react"
+import { useCurrentLocale } from "@/locales/client.locale"
 
 export default function FrontNavigation() {
 	const pathName = usePathname()
+	const locale = useCurrentLocale()
 
 	return (
 		<>
 			{frontNavLinks.map((link) => {
-				const isActive =
-					pathName === link.href ||
-					(link.href !== "/" && pathName.startsWith(`${link.href}/`)) ||
-					(link.href !== "/" && pathName.startsWith(link.href))
+				const isActive = pathName === `/${locale}${link.href}` || pathName === `${link.href}${locale}`
+
 				return (
-					<Button
-						asChild
-						key={link.title}
-						variant={isActive ? "default" : "ghost"}
-						size={"sm"}
-						// className="rounded-full"
-					>
+					<Button asChild key={link.href} variant={isActive ? "outline" : "ghost"} size={"sm"}>
 						<Link href={link.href}>
 							{isActive ? React.createElement(link.icon) : null}
-							{link.title}
+							{locale === "ar" ? link.title.ar : link.title.en}
 						</Link>
 					</Button>
 				)

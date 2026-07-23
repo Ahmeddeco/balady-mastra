@@ -1,16 +1,15 @@
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
 import { Button } from "../ui/button"
-import { LucideIcon, Trash2 } from "lucide-react"
+import { PlusCircle, Trash2 } from "lucide-react"
 import Link from "next/link"
 import React from "react"
 
 type Props = {
 	href: string
 	linkTitle: string
-	linkIcon: LucideIcon
 }
 
-export default function EmptyCard({ href, linkTitle, linkIcon }: Props) {
+export default function EmptyCard({ href, linkTitle }: Props) {
 	return (
 		<Empty>
 			<EmptyHeader>
@@ -23,7 +22,7 @@ export default function EmptyCard({ href, linkTitle, linkIcon }: Props) {
 			<EmptyContent>
 				<Button asChild>
 					<Link href={href}>
-						{React.createElement(linkIcon)}
+						{React.createElement(PlusCircle)}
 						{linkTitle}
 					</Link>
 				</Button>

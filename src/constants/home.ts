@@ -20,19 +20,19 @@ export const categories = [
     title: "دجاج طازج",
     description: "نحن نضمن لك لحوماً بلدية 100%، مصدرها مزارعنا التي تتبع أعلى معايير التغذية الطبيعية. يتم اختيار المواشي بعناية فائقة لضمان طعم ",
     icon: GiChickenOven,
-    searchParams: Category.CHICKEN
+    searchParams: Category.chicken
   },
   {
     title: "لحم بقري",
     description: "نحن نضمن لك لحوماً بلدية 100%، مصدرها مزارعنا التي تتبع أعلى معايير التغذية الطبيعية. يتم اختيار المواشي بعناية فائقة لضمان طعم ",
     icon: GiBuffaloHead,
-    searchParams: Category.MEAT
+    searchParams: Category.meat
   },
   {
     title: "مصنعات لحوم",
     description: "نحن نضمن لك لحوماً بلدية 100%، مصدرها مزارعنا التي تتبع أعلى معايير التغذية الطبيعية. يتم اختيار المواشي بعناية فائقة لضمان طعم ",
     icon: GiManualMeatGrinder,
-    searchParams: Category.PROCESSED
+    searchParams: Category.processed
   },
 ]
 

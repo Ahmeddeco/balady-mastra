@@ -1,21 +1,29 @@
 import ShopNowButton from "@/components/shared/ShopNowButton"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { categories } from "@/constants/home"
+import { getDictionary } from "@/locales/dictionaries"
 import React from "react"
 
-export default function Categories() {
+type Props = {
+	locale: "en" | "ar"
+}
+
+export default async function Categories({ locale }: Props) {
+	const dic = await getDictionary(locale)
+
 	return (
-		<section className="flex flex-col items-center justify-center gap-16">
+		<section className="flex flex-col items-center justify-center gap-16 container mx-auto">
 			<div className="flex flex-col items-center justify-center gap-2">
 				<h2 className="text-center">
-					نحن نقدم لحوم <br />
-					من أجود الأنواع.
+					{dic.homePage.categoriesSection.title}
+					<br />
+					{dic.homePage.categoriesSection.titleBr}
 				</h2>
 			</div>
 
 			{/* ---------------------- CategoriesCards --------------------- */}
 			<div className="flex flex-wrap items-center justify-center gap-8 ">
-				{categories.map(({ description, icon, searchParams, title }, index) => (
+				{dic.homePage.categoriesSection.categories.map(({ description, icon, searchParams, title }, index) => (
 					<Card
 						key={index}
 						className="w-full lg:w-md aspect-square even:bg-primary even:text-neutral-50 justify-center bg-card group-hover:scale-105"
@@ -31,13 +39,14 @@ export default function Categories() {
 							</CardDescription>
 						</CardHeader>
 						<CardContent>
-							<h6 className="text-center text-balance">{description}</h6>
+							<h6 className="text-center text-pretty">{description}</h6>
 						</CardContent>
 						<CardFooter className="justify-center">
 							<ShopNowButton
 								searchParams={searchParams}
-								buttonVariant={index % 2 === 0 ? "default" : "outline"}
+								buttonVariant={index % 2 === 0 ? "default" : "secondary"}
 								buttonSize={"lg"}
+								locale={locale}
 							/>
 						</CardFooter>
 					</Card>

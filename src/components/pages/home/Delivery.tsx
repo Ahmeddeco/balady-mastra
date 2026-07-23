@@ -6,7 +6,7 @@ export default function Delivery() {
 	return (
 		<section className="flex flex-col items-center justify-center gap-8">
 			<h2>مراحل عملية الشراء</h2>
-			<div className="flex flex-wrap items-center justify-center gap-8">
+			<div className="flex flex-wrap items-center justify-center gap-8 container mx-auto">
 				{delivery.map(({ description, icon, title }, index) => (
 					<Card key={index} className="w-full lg:w-md aspect-video ">
 						<CardHeader className="justify-center">{React.createElement(icon, { size: 100 })}</CardHeader>

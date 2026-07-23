@@ -8,22 +8,22 @@ type ButtonVariant = VariantProps<typeof Button>["variant"]
 type ButtonSize = VariantProps<typeof Button>["size"]
 
 type Props = {
-	title?: string
 	searchParams?: Category
 	buttonVariant?: ButtonVariant
 	buttonSize?: ButtonSize
+	locale: "en" | "ar"
 }
 
 export default function ShopNowButton({
-	title = "تسوق الآن",
 	searchParams,
 	buttonVariant = "default",
 	buttonSize = "sm",
+	locale,
 }: Props) {
 	return (
 		<Button asChild variant={buttonVariant} size={buttonSize}>
 			<Link href={searchParams ? `/products/?category=${searchParams}` : `/products`}>
-				<ShoppingCart /> {title}
+				<ShoppingCart /> {locale === "en" ? "shopping now" : "تسوق الآن"}
 			</Link>
 		</Button>
 	)

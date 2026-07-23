@@ -1,9 +1,7 @@
 import Form from "next/form"
-import { ButtonGroup } from "../ui/button-group"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
-import { Category, Role } from "@/generated/prisma/enums"
-import { User } from "@/schemas/user.schema"
+import { Role } from "@/generated/prisma/enums"
 
 type Props = {
 	activeRole: Role | undefined

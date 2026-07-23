@@ -3,9 +3,9 @@
 import { useState } from "react"
 import { CitySelect, CountrySelect, StateSelect } from "react-country-state-city"
 import "react-country-state-city/dist/react-country-state-city.css"
-import { Input } from "../ui/input"
-import { City, Country, State } from "@/types/address"
-import { Field, FieldLabel } from "../ui/field"
+import { Input } from "@/components/ui/input"
+import { Field, FieldLabel } from "@/components/ui/field"
+import { City, Country, State } from "@/types/address.type"
 
 type CountryProps = {
 	userCountry?: string
@@ -31,7 +31,7 @@ export default function CountryInput({
 	cityName,
 }: CountryProps) {
 	/* -------------------------------- useState -------------------------------- */
-	const [country, setCountry] = useState<Country>(userCountry ?? "")
+	const [country, setCountry] = useState<Country>(userCountry ?? "Egypt")
 	const [state, setState] = useState<State>(userState ?? "")
 	const [city, setCity] = useState<City>(userCity ?? "")
 
@@ -50,8 +50,8 @@ export default function CountryInput({
 						onChange={(_country: Country) => {
 							setCountry(_country)
 						}}
-						defaultValue={country ?? ""}
-						placeHolder={country ?? ""}
+						defaultValue={country ?? "Egypt"}
+						placeHolder={country ?? "Egypt"}
 					/>
 				</Field>
 

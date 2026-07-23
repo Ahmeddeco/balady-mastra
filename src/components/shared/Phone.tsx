@@ -23,7 +23,6 @@ export default function Phone({ defaultValue, fieldKey, name, errors, label }: P
 				<FieldLabel htmlFor={name}>{label ?? name}</FieldLabel>
 				<Input type="hidden" key={fieldKey} name={name} value={value ?? ""} />
 				<PhoneInput
-					// placeholder="0123456789"
 					value={value}
 					onChange={setValue}
 					defaultCountry="EG"

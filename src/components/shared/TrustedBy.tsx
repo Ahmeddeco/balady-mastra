@@ -3,13 +3,16 @@ import { faker } from "@faker-js/faker"
 
 type Props = {
 	number?: number
+	locale: "en" | "ar"
 }
-export default function TrustedBy({ number = 200 }: Props) {
+export default function TrustedBy({ number = 273, locale }: Props) {
 	return (
-		<div className="flex flex-col gap-2 w-full">
+		<div className="flex flex-col gap-2 w-full items-center lg:items-start">
 			<div className="flex items-center gap-4">
-				<h4 className="uppercase">حائز على ثقة</h4>
-				<h5>أكتر من {number} عميل</h5>
+				<h5 className="uppercase">
+					<b>{locale === "en" ? "Trusted by" : "حائز على ثقة"} </b>
+					{locale === "en" ? "More than" : "أكتر من"} {number} {locale === "en" ? "Clients" : "عميل"}
+				</h5>
 			</div>
 			<div className="-space-x-2 flex ">
 				{Array.from({ length: 5 }).map((_, index) => (

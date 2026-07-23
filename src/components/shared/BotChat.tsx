@@ -28,15 +28,16 @@ import {
 import { Message, MessageContent, MessageResponse } from "@/components/ai-elements/message"
 import { DefaultChatTransport } from "ai"
 import Image from "next/image"
-import { FileIcon, LucideIcon } from "lucide-react"
+import { FileIcon } from "lucide-react"
 import { Badge } from "../ui/badge"
 import { RiRobot3Line } from "react-icons/ri"
+import { useCurrentLocale } from "@/locales/client.locale"
 
 type Props = {
 	apiRoute: string
-	placeholder?: string
-	emptyTitle: string
-	emptyDescription: string
+	placeholder: { en: string; ar: string }
+	emptyTitle: { en: string; ar: string }
+	emptyDescription: { en: string; ar: string }
 }
 
 const PromptInputAttachmentsDisplay = () => {
@@ -59,13 +60,9 @@ const PromptInputAttachmentsDisplay = () => {
 }
 
 /* --------------------------------- BotChat -------------------------------- */
-export default function BotChat({
-	apiRoute,
-	placeholder = "مرحبا , كيف يمكن أن أساعدك ...",
-	emptyTitle,
-	emptyDescription,
-}: Props) {
+export default function BotChat({ apiRoute, placeholder, emptyTitle, emptyDescription }: Props) {
 	const [text, setText] = useState<string>("")
+	const lang = useCurrentLocale()
 
 	const { messages, status, sendMessage } = useChat({
 		transport: new DefaultChatTransport({
@@ -89,15 +86,15 @@ export default function BotChat({
 	}
 
 	return (
-		<div className="max-w-5xl mx-auto mt-6 p-6 relative size-full rounded-lg border h-[90vh]">
+		<div className="max-w-4xl mx-auto mt-6 p-6 relative size-full rounded-lg border h-[85vh]">
 			<div className="flex flex-col h-full">
 				<Conversation>
 					<ConversationContent>
 						{messages.length === 0 ? (
 							<ConversationEmptyState
 								icon={<RiRobot3Line size={150} />}
-								title={emptyTitle}
-								description={emptyDescription}
+								title={lang === "en" ? emptyTitle.en : emptyTitle.ar}
+								description={lang === "en" ? emptyDescription.en : emptyDescription.ar}
 							/>
 						) : (
 							<>
@@ -151,7 +148,7 @@ export default function BotChat({
 					<PromptInputBody>
 						<PromptInputTextarea
 							value={text}
-							placeholder={placeholder}
+							placeholder={lang === "en" ? placeholder.en : placeholder.ar}
 							onChange={(e) => {
 								e.preventDefault()
 								setText(e.currentTarget.value)

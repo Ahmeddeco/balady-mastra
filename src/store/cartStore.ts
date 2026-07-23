@@ -1,5 +1,3 @@
-import { Unit } from "@/generated/prisma/enums"
-import { SingleProductPageType } from "@/types/Product.type"
 import { toast } from "sonner"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
@@ -7,19 +5,21 @@ import { persist } from "zustand/middleware"
 export type CartItem = {
   id: string
   quantity: number
-  stock: number
-  title: string
+  titleAr: string
+  titleEn: string
   price: number
-  image: string
-  unit: Unit
+  mainImage: string
 }
+export type productCart = {
+  id: string; titleAr: string; titleEn: string; price: number; mainImage: string
+}
+
 
 type CartState = {
   items: CartItem[]
-  addToCart: (product: SingleProductPageType) => void
+  addToCart: (product: productCart) => void
   removeFromCart: (id: string) => void
-  updateQuantityByHalf: (type: 'increment' | 'decrement', id: string) => void
-  updateQuantityByOnes: (type: 'increment' | 'decrement', id: string) => void
+  updateQuantity: (type: 'increment' | 'decrement', id: string) => void
 }
 
 export const useCartStore = create<CartState>()(
@@ -27,22 +27,20 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
 
-      addToCart: (product: SingleProductPageType) => {
+      addToCart: (product: productCart) => {
         const existingProduct = get().items.find((item) => item.id === product!.id)
-        const unit = product?.unit ?? Unit.piece
         set({
           items: existingProduct
             ? get().items
             : [
               ...get().items,
               {
-                quantity: unit === Unit.piece ? 1 : 0.5,
-                id: product?.id,
-                title: product?.title,
-                price: product?.price,
-                image: product?.mainImage,
-                stock: product?.stock,
-                unit,
+                quantity: 1,
+                id: product!.id,
+                titleEn: product!.titleEn,
+                titleAr: product!.titleAr,
+                price: product!.price,
+                mainImage: product!.mainImage,
               },
             ],
         })
@@ -59,28 +57,11 @@ export const useCartStore = create<CartState>()(
           items: get().items.filter((item) => item.id !== id),
         })
         toast.error('تم إزالة المنتج من السلة.')
+
       },
 
-      /* -------------------------- updateQuantityByHalf -------------------------- */
-      updateQuantityByHalf: (type, id) => {
-        set({
-          items: get().items.map((item) =>
-            item.id === id
-              ? {
-                ...item,
-                quantity:
-                  type === "increment"
-                    ? item.quantity + .5
-
-                    : Math.max(.5, item.quantity - .5), // preventing the quantity from going below .5 when decrementing.
-              }
-              : item
-          ),
-        })
-      },
-
-      /* -------------------------- updateQuantityByOnes -------------------------- */
-      updateQuantityByOnes: (type, id) => {
+      /* ----------------------------- updateQuantity ----------------------------- */
+      updateQuantity: (type, id) => {
         set({
           items: get().items.map((item) =>
             item.id === id
@@ -96,6 +77,6 @@ export const useCartStore = create<CartState>()(
           ),
         })
       }
-    }), { name: 'balady-cart-storage' }
+    }), { name: 'interior-cart-storage' }
   )
 )
