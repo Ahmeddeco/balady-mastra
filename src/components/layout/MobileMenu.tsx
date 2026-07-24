@@ -4,6 +4,7 @@ import Logo from "./Logo"
 import FrontNavigation from "./FrontNavigation"
 import { ThemeButton } from "../theme/ThemeButton"
 import UserButton from "@/auth/UserButton"
+import LanguageButton from "./LanguageButton"
 
 export default function MobileMenu() {
 	return (
@@ -23,6 +24,7 @@ export default function MobileMenu() {
 					</nav>
 					<SheetFooter className="flex-row items-center justify-between border-t shadow-md">
 						<UserButton />
+						<LanguageButton />
 						<ThemeButton />
 					</SheetFooter>
 				</SheetContent>
