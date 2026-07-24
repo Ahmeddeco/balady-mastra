@@ -10,7 +10,7 @@ import { UploadManyImagesDropZone, UploadOneImagesDropZone } from "@/components/
 import SubmitButton from "@/components/shared/SubmitButton"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { EditCattleAction } from "@/actions/cattle.action"
-import CattleSchema from "@/schemas/Cattle.Schema"
+import CattleSchema from "@/schemas/CattleSchema"
 import AgeSchema from "@/generated/inputTypeSchemas/AgeSchema"
 import { getAllBreedForSelectType } from "@/types/breed.type"
 import { getAllFarmsForSelectType } from "@/types/farm.type"

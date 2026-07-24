@@ -14,7 +14,7 @@ import { Category, Unit } from "@/generated/prisma/enums"
 import { editProductAction } from "@/actions/product.action"
 import { getOneProductByIdType } from "@/types/Product.type"
 import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
-import ProductSchema from "@/schemas/Product.Schema"
+import ProductSchema from "@/schemas/ProductSchema"
 
 type Props = {
 	product: getOneProductByIdType

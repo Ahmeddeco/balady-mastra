@@ -3,7 +3,7 @@
 import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import FarmSchema from "@/schemas/Farm.Schema"
+import FarmSchema from "@/schemas/FarmSchema"
 
 /* ------------------------------ addFarmAction ----------------------------- */
 export const addFarmAction = async (prevState: unknown, formData: FormData) => {

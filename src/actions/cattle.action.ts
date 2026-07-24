@@ -3,7 +3,7 @@
 import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import CattleSchema from "@/schemas/Cattle.Schema"
+import CattleSchema from "@/schemas/CattleSchema"
 import { splittedImages } from "@/logic/splittedImages"
 
 /* ------------------------------ addUserAction ----------------------------- */

@@ -3,7 +3,7 @@
 import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import YieldSchema from "@/schemas/Yield.schema"
+import YieldSchema from "@/schemas/YieldSchema"
 
 /* ------------------------------ addYieldAction ----------------------------- */
 export const addYieldAction = async (prevState: unknown, formData: FormData) => {

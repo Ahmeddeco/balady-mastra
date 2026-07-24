@@ -3,7 +3,7 @@
 import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import BreedSchema from "@/schemas/Breed.Schema"
+import BreedSchema from "@/schemas/BreedSchema"
 import { splittedImages } from "@/logic/splittedImages"
 
 /* ----------------------------- addBreedAction ----------------------------- */

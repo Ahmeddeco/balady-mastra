@@ -8,7 +8,7 @@ import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui
 import { Input } from "@/components/ui/input"
 import SubmitButton from "@/components/shared/SubmitButton"
 import { editYieldAction } from "@/actions/yield.action"
-import YieldSchema from "@/schemas/Yield.schema"
+import YieldSchema from "@/schemas/YieldSchema"
 import TiptapEditor from "@/components/shared/TiptapEditor"
 import { getAllCattleForSelectType } from "@/types/cattle.type"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"

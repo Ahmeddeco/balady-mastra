@@ -1,5 +1,5 @@
 import { getNonTrendingProducts } from "@/dl/products.data"
-import { nonTrendingProductsSchema } from "@/schemas/nonTrendingProducts.schema"
+import { nonTrendingProductsSchema } from "@/schemas/nonTrendingProductsSchema"
 import { createTool } from "@mastra/core/tools"
 import z from "zod"
 

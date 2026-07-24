@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Category, Unit } from "@/generated/prisma/enums"
 import { addProductAction } from "@/actions/product.action"
 import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
-import ProductSchema from "@/schemas/Product.Schema"
+import ProductSchema from "@/schemas/ProductSchema"
 
 export default function AddProductForm() {
 	const [lastResult, action] = useActionState(addProductAction, undefined)
