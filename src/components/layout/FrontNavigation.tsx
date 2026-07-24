@@ -17,7 +17,7 @@ export default function FrontNavigation() {
 				const isActive = pathName === `/${locale}${link.href}` || pathName === `${link.href}${locale}`
 
 				return (
-					<Button asChild key={link.href} variant={isActive ? "outline" : "ghost"} size={"sm"}>
+					<Button asChild key={link.href} variant={isActive ? "default" : "ghost"} size={"sm"}>
 						<Link href={link.href}>
 							{isActive ? React.createElement(link.icon) : null}
 							{locale === "ar" ? link.title.ar : link.title.en}
