@@ -1,13 +1,20 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { delivery } from "@/constants/home"
+import { getDictionary } from "@/locales/dictionaries"
 import React from "react"
 
-export default function Delivery() {
+type Props = {
+	locale: "en" | "ar"
+}
+
+export default async function Delivery({ locale }: Props) {
+	const dic = await getDictionary(locale)
+
 	return (
 		<section className="flex flex-col items-center justify-center gap-8">
-			<h2>مراحل عملية الشراء</h2>
+			<h2>{dic.homePage.deliverySection.title}</h2>
 			<div className="flex flex-wrap items-center justify-center gap-8 container mx-auto">
-				{delivery.map(({ description, icon, title }, index) => (
+				{dic.homePage.deliverySection.delivery.map(({ description, icon, title }, index) => (
 					<Card key={index} className="w-full lg:w-md aspect-video ">
 						<CardHeader className="justify-center">{React.createElement(icon, { size: 100 })}</CardHeader>
 						<CardContent className="flex flex-col items-center justify-center gap-2">

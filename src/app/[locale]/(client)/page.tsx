@@ -11,11 +11,11 @@ export default async function HomePage({ params }: Props) {
 	const locale = (await params).locale
 
 	return (
-		<main className="px-4">
+		<>
 			<Hero locale={locale} />
 			<Categories locale={locale} />
 			<WhyChooseUs locale={locale} />
-			<Delivery />
-		</main>
+			<Delivery locale={locale} />
+		</>
 	)
 }

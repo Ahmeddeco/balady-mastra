@@ -21,7 +21,7 @@ export default async function UserButton() {
 			{user ? (
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<Button className=" relative " size={"icon"}>
+						<Button className=" relative " size={"icon"} variant={"outline"}>
 							<Image src={user.image ?? "/icons/noImage.svg"} alt={"user"} fill className="rounded-none object-cover" />
 						</Button>
 					</DropdownMenuTrigger>

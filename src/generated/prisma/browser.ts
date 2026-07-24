@@ -18,25 +18,20 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
- * Model Account
- * 
- */
-export type Account = Prisma.AccountModel
-/**
  * Model Session
  * 
  */
 export type Session = Prisma.SessionModel
 /**
- * Model VerificationToken
+ * Model Account
  * 
  */
-export type VerificationToken = Prisma.VerificationTokenModel
+export type Account = Prisma.AccountModel
 /**
- * Model Authenticator
+ * Model Verification
  * 
  */
-export type Authenticator = Prisma.AuthenticatorModel
+export type Verification = Prisma.VerificationModel
 /**
  * Model User
  * 

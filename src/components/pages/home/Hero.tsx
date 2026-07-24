@@ -12,7 +12,7 @@ export default async function Hero({ locale }: Props) {
 	const dic = await getDictionary(locale)
 
 	return (
-		<div className=" h-auto  flex gap-0 items-center justify-center w-full relative border-b py-8  lg:py-0 mb-16  ">
+		<div className=" h-auto  flex gap-0 items-center justify-center w-full relative border-b py-8 lg:py-0 mb-16  ">
 			{/* ---------------------------- Right Image --------------------------- */}
 			<div className="absolute inset-x-0 h-full lg:block hidden w-2/12 ">
 				<div className="h-full w-full relative">

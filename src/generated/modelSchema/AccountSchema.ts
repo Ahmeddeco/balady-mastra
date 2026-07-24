@@ -5,17 +5,17 @@ import { z } from 'zod';
 /////////////////////////////////////////
 
 export const AccountSchema = z.object({
+  id: z.string(),
+  accountId: z.string(),
+  providerId: z.string(),
   userId: z.string(),
-  type: z.string(),
-  provider: z.string(),
-  providerAccountId: z.string(),
-  refresh_token: z.string().nullish(),
-  access_token: z.string().nullish(),
-  expires_at: z.number().nullish(),
-  token_type: z.string().nullish(),
+  accessToken: z.string().nullish(),
+  refreshToken: z.string().nullish(),
+  idToken: z.string().nullish(),
+  accessTokenExpiresAt: z.date().nullish(),
+  refreshTokenExpiresAt: z.date().nullish(),
   scope: z.string().nullish(),
-  id_token: z.string().nullish(),
-  session_state: z.string().nullish(),
+  password: z.string().nullish(),
   createdAt: z.date(),
   updatedAt: z.date(),
 })

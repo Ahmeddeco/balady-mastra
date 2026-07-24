@@ -1,4 +1,5 @@
 import { Category } from "@/generated/prisma/enums"
+import { ShoppingBag, Smile, Truck } from "lucide-react"
 import { AiFillSafetyCertificate } from "react-icons/ai"
 import { FaUserDoctor } from "react-icons/fa6"
 import { GiBiceps, GiBuffaloHead, GiChickenOven, GiManualMeatGrinder } from "react-icons/gi"
@@ -67,6 +68,26 @@ export const enDic = {
           title: "An irresistible, delicious taste",
           description: "The irresistible local taste originates from the good nutrition of our animals.",
           icon: TbSoupFilled,
+        },
+      ]
+    },
+    deliverySection: {
+      title: "Stages of the purchasing process",
+      delivery: [
+        {
+          icon: ShoppingBag,
+          title: "1- Product selection",
+          description: "Browse our store, select items, and complete the payment process.",
+        },
+        {
+          icon: Truck,
+          title: "2- Shipping and Delivery",
+          description: "Delivery is done via equipped vehicles and securely packaged.",
+        },
+        {
+          icon: Smile,
+          title: "3- Achieving the desired happiness",
+          description: "This is what you will receive after completing the purchase and using the product.",
         },
       ]
     },

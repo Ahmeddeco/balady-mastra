@@ -12,7 +12,7 @@ export default async function Header() {
 	const user = session?.user
 
 	return (
-		<header className="fixed inset-0 w-full flex items-center justify-between h-12 lg:h-14 bg-background/90  backdrop-blur-md px-4 lg:px-16 z-50 shadow-md border-b border-primary">
+		<header className="fixed inset-0 w-full flex items-center justify-between h-12 lg:h-14 bg-background/90  backdrop-blur-md px-4 lg:px-16 z-50 shadow-md border-b ">
 			<Logo />
 			<nav className="hidden lg:flex items-center gap-6">
 				<FrontNavigation />

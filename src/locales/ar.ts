@@ -1,4 +1,5 @@
 import { Category } from "@/generated/prisma/enums"
+import { ShoppingBag, Smile, Truck } from "lucide-react"
 import { AiFillSafetyCertificate } from "react-icons/ai"
 import { FaUserDoctor } from "react-icons/fa6"
 import { GiBiceps, GiBuffaloHead, GiChickenOven, GiManualMeatGrinder } from "react-icons/gi"
@@ -67,6 +68,26 @@ export const arDic = {
           title: "طعم لذيذ لا يقاوم",
           description: "الطعم البلدي الذي لا يقاوم اصله من التغذية الجيدة لحيواناتنا",
           icon: TbSoupFilled,
+        },
+      ]
+    },
+    deliverySection: {
+      title: "مراحل عملية الشراء",
+      delivery: [
+        {
+          icon: ShoppingBag,
+          title: "1- اختيار المنتجات",
+          description: "التجول في متجرنا واتنقاء السلع واتمام عملية الدفع.",
+        },
+        {
+          icon: Truck,
+          title: "2- الشحن والتوصيل",
+          description: "يتم التوصيل من خلال عربات مجهزة وبتغليف محكم.",
+        },
+        {
+          icon: Smile,
+          title: "3- الحصول على السعادة المطلوبة",
+          description: "هذا ما ستحصل عليه بعد اتمام الشراء واستخدام المنتج ",
         },
       ]
     },
