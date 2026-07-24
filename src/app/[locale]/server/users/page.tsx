@@ -1,6 +1,6 @@
 import { getAllUsersForUsersPage } from "@/dl/user.data"
 import { getAllUsersForUsersPageType } from "@/types/user.type"
-import { isAdmin } from "@/logic/isAdmin"
+
 import { ImageOff, MoreVertical, PlusCircle } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -32,13 +32,14 @@ import React from "react"
 import { deleteUserAction } from "@/actions/user.action"
 import { Role } from "@/generated/prisma/enums"
 import UserFilter from "@/components/shared/UserFilter"
+import { isAllowedRoles } from "@/auth/isAllowedRoles"
 
 export default async function UsersPage({
 	searchParams,
 }: {
 	searchParams: Promise<{ page: string; size: string; role: Role }>
 }) {
-	await isAdmin()
+	await isAllowedRoles([Role.admin])
 
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1

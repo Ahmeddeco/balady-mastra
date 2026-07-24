@@ -14,8 +14,8 @@ export default function SignIn() {
 
 	return (
 		<Form action={signIn}>
-			<Button type="submit" size={"icon"} variant={"outline"}>
-				<LogIn />
+			<Button type="submit" size={"default"}>
+				<LogIn /> LogIn
 			</Button>
 		</Form>
 	)

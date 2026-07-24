@@ -92,7 +92,7 @@ export default function BotChat({ apiRoute, placeholder, emptyTitle, emptyDescri
 					<ConversationContent>
 						{messages.length === 0 ? (
 							<ConversationEmptyState
-								icon={<RiRobot3Line size={150} />}
+								icon={<RiRobot3Line size={120} color="var(--foreground)" />}
 								title={lang === "en" ? emptyTitle.en : emptyTitle.ar}
 								description={lang === "en" ? emptyDescription.en : emptyDescription.ar}
 							/>

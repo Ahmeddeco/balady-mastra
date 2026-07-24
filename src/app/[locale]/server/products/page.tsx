@@ -1,4 +1,3 @@
-import { isAdmin } from "@/logic/isAdmin"
 import { ImageOff, MoreVertical, Percent, PlusCircle } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -27,19 +26,20 @@ import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import React from "react"
 import { deleteUserAction } from "@/actions/user.action"
-import { Category } from "@/generated/prisma/enums"
+import { Category, Role } from "@/generated/prisma/enums"
 import { getAllProductsForProductsServerPage } from "@/dl/products.data"
 import ProductFilter from "@/components/shared/ProductFilter"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Badge } from "@/components/ui/badge"
 import { getAllProductsForProductsServerPageType } from "@/types/Product.type"
+import { isAllowedRoles } from "@/auth/isAllowedRoles"
 
 export default async function ProductsServerPage({
 	searchParams,
 }: {
 	searchParams: Promise<{ page: string; size: string; category: Category }>
 }) {
-	await isAdmin()
+	await isAllowedRoles([Role.admin])
 
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
@@ -52,7 +52,7 @@ export default async function ProductsServerPage({
 	)
 
 	return !products ? (
-		<EmptyCard href={""} linkTitle={""} linkIcon={PlusCircle} />
+		<EmptyCard href={""} linkTitle={""} />
 	) : (
 		<ServerPageCard
 			icon={PlusCircle}

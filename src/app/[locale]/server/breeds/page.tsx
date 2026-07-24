@@ -1,4 +1,3 @@
-import { isAdmin } from "@/logic/isAdmin"
 import { ImageOff, MoreVertical, PlusCircle } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -30,13 +29,15 @@ import { getAllBreedsForServerFarmsPageType } from "@/types/breed.type"
 import { getAllBreedsForServerFarmsPage } from "@/dl/breed.data"
 import Image from "next/image"
 import { deleteBreedAction } from "@/actions/breed.action"
+import { isAllowedRoles } from "@/auth/isAllowedRoles"
+import { Role } from "@/generated/prisma/enums"
 
 export default async function BreedsServerPage({
 	searchParams,
 }: {
 	searchParams: Promise<{ page: string; size: string }>
 }) {
-	await isAdmin()
+	await isAllowedRoles([Role.admin])
 
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
@@ -44,7 +45,7 @@ export default async function BreedsServerPage({
 	const breeds: getAllBreedsForServerFarmsPageType = await getAllBreedsForServerFarmsPage(pageSize, pageNumber)
 
 	return !breeds ? (
-		<EmptyCard href={"/server/breeds/add"} linkTitle={"أضف سلالة"} linkIcon={PlusCircle} />
+		<EmptyCard href={"/server/breeds/add"} linkTitle={"أضف سلالة"} />
 	) : (
 		<ServerPageCard
 			icon={PlusCircle}

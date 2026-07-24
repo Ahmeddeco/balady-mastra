@@ -1,13 +1,14 @@
+import { getSession } from "@/auth/getSession"
+import { isAllowedRoles } from "@/auth/isAllowedRoles"
 import ServerPageCard from "@/components/shared/ServerPageCard"
+import AddUserForm from "@/forms/AddUserForm"
+import { Role } from "@/generated/prisma/enums"
 import { CircleChevronLeft } from "lucide-react"
-import AddUserForm from "../../../../forms/AddUserForm"
-import { auth } from "../../../../../auth"
-import { isAdmin } from "@/logic/isAdmin"
 
 export default async function AddUsersPage() {
-	await isAdmin()
+	await isAllowedRoles([Role.admin])
 
-	const session = await auth()
+	const session = await getSession()
 	const authImage = session?.user?.image ?? undefined
 
 	return (

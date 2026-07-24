@@ -1,16 +1,19 @@
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { CircleChevronLeft } from "lucide-react"
-import { isAdmin } from "@/logic/isAdmin"
+
 import EditBreedForm from "@/forms/EditBreedForm"
 import { getOneBreedForEditPageType } from "@/types/breed.type"
 import { getOneBreedForEditPage } from "@/dl/breed.data"
+import { isAllowedRoles } from "@/auth/isAllowedRoles"
+import { Role } from "@/generated/prisma/enums"
 
 type Props = {
 	params: Promise<{ id: string }>
 }
 
 export default async function EditFarmsPage({ params }: Props) {
-	await isAdmin()
+	await isAllowedRoles([Role.admin])
+
 	const id = (await params).id
 	const oneBreed: getOneBreedForEditPageType = await getOneBreedForEditPage(id)
 

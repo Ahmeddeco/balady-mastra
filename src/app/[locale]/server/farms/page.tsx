@@ -1,4 +1,3 @@
-import { isAdmin } from "@/logic/isAdmin"
 import { MoreVertical, PlusCircle } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -30,13 +29,15 @@ import { getAllFarmsForServerFarmsPageType } from "@/types/farm.type"
 import { getAllFarmsForServerFarmsPage } from "@/dl/farm.data"
 import { deleteFarmAction } from "@/actions/farm.action"
 import MapDialog from "@/components/shared/MapDialog"
+import { isAllowedRoles } from "@/auth/isAllowedRoles"
+import { Role } from "@/generated/prisma/enums"
 
 export default async function FarmsServerPage({
 	searchParams,
 }: {
 	searchParams: Promise<{ page: string; size: string }>
 }) {
-	await isAdmin()
+	await isAllowedRoles([Role.admin])
 
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
@@ -44,7 +45,7 @@ export default async function FarmsServerPage({
 	const farms: getAllFarmsForServerFarmsPageType = await getAllFarmsForServerFarmsPage(pageSize, pageNumber)
 
 	return !farms ? (
-		<EmptyCard href={"/server/farms/add"} linkTitle={"أضف مزرعة"} linkIcon={PlusCircle} />
+		<EmptyCard href={"/server/farms/add"} linkTitle={"أضف مزرعة"} />
 	) : (
 		<ServerPageCard
 			icon={PlusCircle}

@@ -1,12 +1,15 @@
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { CircleChevronLeft } from "lucide-react"
-import { isAdmin } from "@/logic/isAdmin"
+
 import AddFarmForm from "@/forms/AddFarmForm"
 import { getAllUsersForFarmsPage } from "@/dl/user.data"
 import { getAllUsersForFarmsPageType } from "@/types/user.type"
+import { isAllowedRoles } from "@/auth/isAllowedRoles"
+import { Role } from "@/generated/prisma/enums"
 
 export default async function AddFarmsPage() {
-	await isAdmin()
+	await isAllowedRoles([Role.admin])
+
 	const allUsers: getAllUsersForFarmsPageType = await getAllUsersForFarmsPage()
 
 	return (

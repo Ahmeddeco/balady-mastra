@@ -1,4 +1,3 @@
-import { isAdmin } from "@/logic/isAdmin"
 import { ImageOff, MoreVertical, PlusCircle } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -30,20 +29,24 @@ import React from "react"
 import { Role } from "@/generated/prisma/enums"
 import { getAllYieldsForServerFarmsPageType } from "@/types/yield.type"
 import { getAllYieldsForServerFarmsPage } from "@/dl/yield.data"
-import { formateDate } from "@/logic/formateDate"
 import { deleteYieldAction } from "@/actions/yield.action"
+import { dateFormate } from "@/logic/dateFormate"
+import { isAllowedRoles } from "@/auth/isAllowedRoles"
 
 export default async function YieldsPage({
+	params,
 	searchParams,
 }: {
+	params: Promise<{ locale: "en" | "ar" }>
 	searchParams: Promise<{ page: string; size: string; role: Role }>
 }) {
-	await isAdmin()
+	await isAllowedRoles([Role.admin])
 
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
 	const allYields: getAllYieldsForServerFarmsPageType = await getAllYieldsForServerFarmsPage(pageSize, pageNumber)
+	const locale = (await params).locale
 
 	return (
 		<ServerPageCard
@@ -90,7 +93,7 @@ export default async function YieldsPage({
 									<TableCell>
 										<Badge>{cattle.breed.name}</Badge>
 									</TableCell>
-									<TableCell>{formateDate(createdAt)}</TableCell>
+									<TableCell>{dateFormate(createdAt, locale)}</TableCell>
 									<TableCell>{hotCarcassWeight} </TableCell>
 									<TableCell>{boneWeight} </TableCell>
 									<TableCell>{fatWeight}</TableCell>

@@ -49,9 +49,8 @@ export default function Cart() {
 								/>
 								<Button
 									size={"icon-xs"}
-									variant={"destructive"}
 									type="button"
-									className=" absolute top-0 left-0 rounded-full z-20"
+									className=" absolute top-1 left-1 rounded-full z-20"
 									onClick={() => removeFromCart(id)}
 								>
 									<X />

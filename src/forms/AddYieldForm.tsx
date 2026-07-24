@@ -12,7 +12,7 @@ import YieldSchema from "@/schemas/Yield.schema"
 import TiptapEditor from "@/components/shared/TiptapEditor"
 import { getAllCattleForSelectType } from "@/types/cattle.type"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { dateFormat } from "@/logic/formateDate"
+import { dateFormate } from "@/logic/dateFormate"
 
 type Props = {
 	allCattle: getAllCattleForSelectType
@@ -43,7 +43,7 @@ export default function AddYieldForm({ allCattle }: Props) {
 						<SelectContent>
 							{allCattle.map(({ createdAt, id, breed, farm }) => (
 								<SelectItem value={id} key={id} className="capitalize">
-									{dateFormat(createdAt)} - {breed.name} - {farm.name}
+									{dateFormate(createdAt)} - {breed.name} - {farm.name}
 								</SelectItem>
 							))}
 						</SelectContent>
@@ -131,7 +131,6 @@ export default function AddYieldForm({ allCattle }: Props) {
 				editorKey={fields.report.key!}
 				defaultValue={fields.report.initialValue!}
 				errors={fields.report.errors!}
-				description="ملاحظات نصية حول جودة اللحم، درجة التشفية، أو أي تفاصيل خاصة بالذبيحة"
 			/>
 
 			{/* ------------------ عرض الأخطاء العامة للفورم إن وجدت ------------------ */}

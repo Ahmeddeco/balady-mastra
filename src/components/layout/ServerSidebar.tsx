@@ -8,24 +8,30 @@ import {
 } from "@/components/ui/sidebar"
 import Logo from "./Logo"
 import { ThemeButton } from "../theme/ThemeButton"
-import UserButton from "../auth/UserButton"
 import ServerNavigation from "./ServerNavigation"
+import UserButton from "@/auth/UserButton"
+import LanguageButton from "./LanguageButton"
 
-export function ServerSidebar() {
+type Props = {
+	locale: "ar" | "en"
+}
+
+export function ServerSidebar({ locale }: Props) {
 	return (
-		<Sidebar dir="rtl" side="right">
+		<Sidebar side={locale === "ar" ? "right" : "left"}>
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupLabel>
 						<Logo />
 					</SidebarGroupLabel>
-					<SidebarGroupContent className="mt-4">
+					<SidebarGroupContent className="mt-4 ">
 						<ServerNavigation />
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
 			<SidebarFooter className="flex flex-row items-center justify-between">
 				<ThemeButton />
+				<LanguageButton />
 				<UserButton />
 			</SidebarFooter>
 		</Sidebar>

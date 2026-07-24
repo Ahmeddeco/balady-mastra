@@ -1,4 +1,3 @@
-import { isAdmin } from "@/logic/isAdmin"
 import { ImageOff, Link2, MoreVertical, PlusCircle } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -29,22 +28,27 @@ import Image from "next/image"
 import { deleteBreedAction } from "@/actions/breed.action"
 import { getAllCattleForServerCattlePage } from "@/dl/cattle.data"
 import { getAllCattleForServerCattlePageType } from "@/types/cattle.type"
-import { formateDate } from "@/logic/formateDate"
+import { dateFormate } from "@/logic/dateFormate"
+import { isAllowedRoles } from "@/auth/isAllowedRoles"
+import { Role } from "@/generated/prisma/enums"
 
 export default async function CattleServerPage({
+	params,
 	searchParams,
 }: {
+	params: Promise<{ locale: "en" | "ar" }>
 	searchParams: Promise<{ page: string; size: string }>
 }) {
-	await isAdmin()
+	await isAllowedRoles([Role.admin])
 
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
 	const cattle: getAllCattleForServerCattlePageType = await getAllCattleForServerCattlePage(pageSize, pageNumber)
+	const locale = (await params).locale
 
 	return !cattle ? (
-		<EmptyCard href={"/server/cattle/add"} linkTitle={"أضف حيوان"} linkIcon={PlusCircle} />
+		<EmptyCard href={"/server/cattle/add"} linkTitle={"أضف حيوان"} />
 	) : (
 		<ServerPageCard
 			icon={PlusCircle}
@@ -85,7 +89,7 @@ export default async function CattleServerPage({
 										<ImageOff />
 									)}
 								</TableCell>
-								<TableCell>{formateDate(createdAt)}</TableCell>
+								<TableCell>{dateFormate(createdAt, locale)}</TableCell>
 								<TableCell>{breed.name}</TableCell>
 								<TableCell>{gender}</TableCell>
 								<TableCell>{age}</TableCell>

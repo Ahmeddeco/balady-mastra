@@ -3,8 +3,8 @@
 import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import { slugifyTitle } from "@/logic/slugifyTitle"
 import ProductSchema from "@/schemas/Product.Schema"
+import slugify from 'slugify'
 
 /* ------------------------------ addUserAction ----------------------------- */
 export const addProductAction = async (prevState: unknown, formData: FormData) => {
@@ -14,7 +14,7 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
   if (submission.status !== 'success') {
     return submission.reply()
   }
-  const slug = slugifyTitle(submission.value.title)
+  const slug = slugify(submission.value.title, { lower: true })
 
   try {
     await prisma.product.upsert({
@@ -68,7 +68,7 @@ export const editProductAction = async (prevState: unknown, formData: FormData) 
     return submission.reply()
   }
 
-  const slug = slugifyTitle(submission.value.title)
+  const slug = slugify(submission.value.title, { lower: true })
 
   try {
     await prisma.product.update({

@@ -1,10 +1,12 @@
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { CircleChevronLeft } from "lucide-react"
-import { isAdmin } from "@/logic/isAdmin"
+
 import AddProductForm from "@/forms/AddProductForm"
+import { isAllowedRoles } from "@/auth/isAllowedRoles"
+import { Role } from "@/generated/prisma/enums"
 
 export default async function AddProductPage() {
-	await isAdmin()
+	await isAllowedRoles([Role.admin])
 
 	return (
 		<ServerPageCard

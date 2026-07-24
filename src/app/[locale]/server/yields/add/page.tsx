@@ -1,12 +1,15 @@
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { CircleChevronLeft } from "lucide-react"
-import { isAdmin } from "@/logic/isAdmin"
+
 import AddYieldForm from "@/forms/AddYieldForm"
 import { getAllCattleForSelect } from "@/dl/cattle.data"
 import { getAllCattleForSelectType } from "@/types/cattle.type"
+import { isAllowedRoles } from "@/auth/isAllowedRoles"
+import { Role } from "@/generated/prisma/enums"
 
 export default async function AddYieldPage() {
-	await isAdmin()
+	await isAllowedRoles([Role.admin])
+
 	const allCattle: getAllCattleForSelectType = await getAllCattleForSelect()
 
 	return (
