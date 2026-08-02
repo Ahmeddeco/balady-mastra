@@ -34,8 +34,8 @@ export default function Footer() {
 					))}
 				</nav>
 				<Separator />
-				<Badge>
-					<Copyright /> 2025 Ahmed Elgazzar. All rights reserved.
+				<Badge variant={"default"} className="border-primary">
+					<Copyright /> 2026 Ahmed Elgazzar. All rights reserved.
 				</Badge>
 			</div>
 		</footer>

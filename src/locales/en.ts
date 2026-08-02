@@ -13,7 +13,7 @@ export const enDic = {
       titleBr: "Meat experts",
       subTitle: "We guarantee 100% locally sourced meat, sourced from our farms that adhere to the highest standards of natural feeding. Our livestock is carefully selected to ensure rich flavor and high nutritional value, free from any hormones or artificial additives.",
       bottomCard: {
-        first: "A ton of meat every month",
+        first: "ton of meat every month",
         second: "A type of meat product"
       }
     },
