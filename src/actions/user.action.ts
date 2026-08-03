@@ -4,6 +4,8 @@ import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import UserSchema from "@/schemas/UserSchema"
+import { refresh, updateTag } from "next/cache"
+import { DeleteActionState } from "@/components/backend/Delete"
 
 /* ------------------------------ addUserAction ----------------------------- */
 export const addUserAction = async (prevState: unknown, formData: FormData) => {
@@ -49,6 +51,7 @@ export const addUserAction = async (prevState: unknown, formData: FormData) => {
       formErrors: ["حدث خطأ أثناء حفظ المستخدم في قاعدة البيانات."],
     })
   }
+  updateTag("users")
   redirect("/server/users")
 }
 
@@ -84,19 +87,31 @@ export const editUserAction = async (prevState: unknown, formData: FormData) => 
       formErrors: ["حدث خطأ أثناء حفظ المستخدم في قاعدة البيانات."],
     })
   }
-
+  updateTag("users")
   redirect("/server/users")
 }
 
 /* ---------------------------- deleteUserAction ---------------------------- */
-export const deleteUserAction = async (formData: FormData) => {
+export const deleteUserAction = async (
+  _prevState: DeleteActionState,
+  formData: FormData
+): Promise<DeleteActionState> => {
+  const id = formData.get("id") as string
+
+  if (!id) {
+    return { success: false, error: "project ID not found" }
+  }
+
   try {
-    const id = formData.get("id")
     await prisma.user.delete({
-      where: { id: id as string },
+      where: { id },
     })
   } catch (error) {
-    console.error(error)
+    console.error("Delete Action Error:", error)
+    return { success: false, error: "An error occurred during the deletion project." }
   }
-  redirect("/server/users")
+
+  updateTag("users")
+  refresh()
+  return { success: true, error: null }
 }

@@ -19,7 +19,7 @@ const cairo = localFont({
 const APP_NAME = "Balady"
 const APP_DEFAULT_TITLE = "Balady | The First Smart Meat Shop "
 const APP_TITLE_TEMPLATE = "%s - Balady"
-const APP_DESCRIPTION = "أول منصة ذكية لبيع اللحوم البلدية."
+const APP_DESCRIPTION = "The First Smart Meat Shop"
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL
 	? process.env.NEXT_PUBLIC_APP_URL
 	: process.env.NODE_ENV === "development"
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
 
 /* -------------------------------- Viewport -------------------------------- */
 export const viewport: Viewport = {
-	themeColor: "#e11421",
+	themeColor: "#b91c1c",
 }
 
 /* -------------------------- generateStaticParams -------------------------- */

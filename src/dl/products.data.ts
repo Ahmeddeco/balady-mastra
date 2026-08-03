@@ -1,8 +1,13 @@
+"use cache"
+
 import { Category } from "@/generated/prisma/enums"
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 export const getAllProductsForProductsPage = async (size: number, page: number, activeCategory?: Category) => {
   try {
+    cacheLife("hours")
+    cacheTag('products')
     const totalProducts = await prisma.product.count()
     const totalPages = Math.ceil(totalProducts / size)
 
@@ -10,8 +15,10 @@ export const getAllProductsForProductsPage = async (size: number, page: number, 
       where: { category: activeCategory, },
       select: {
         id: true,
-        title: true,
-        description: true,
+        titleAr: true,
+        titleEn: true,
+        descriptionAr: true,
+        descriptionEn: true,
         price: true,
         category: true,
         mainImage: true,
@@ -32,8 +39,10 @@ export const getAllProductsForProductsPage = async (size: number, page: number, 
   }
 }
 
-/* ----------------------------- findOneProduct ----------------------------- */
+/* ----------------------------- getOneProductBySlug ----------------------------- */
 export const getOneProductBySlug = async (slug: string) => {
+  cacheLife("hours")
+  cacheTag('products')
   try {
     const data = await prisma.product.findUnique({ where: { slug } })
     return data
@@ -45,8 +54,12 @@ export const getOneProductBySlug = async (slug: string) => {
 
 /* ---------------------------- getOneProductById --------------------------- */
 export const getOneProductById = async (id: string) => {
+  cacheLife("hours")
+  cacheTag('products')
   try {
-    const data = await prisma.product.findUnique({ where: { id } })
+    const data = await prisma.product.findUnique({
+      where: { id },
+    })
     return data
   } catch (error) {
     console.error(error)
@@ -55,13 +68,15 @@ export const getOneProductById = async (id: string) => {
 
 /* ------------------- getAllProductsForProductsServerPage ------------------ */
 export const getAllProductsForProductsServerPage = async (size: number, page: number, activeCategory?: Category) => {
+  cacheLife("hours")
+  cacheTag('products')
   try {
     const totalProducts = await prisma.product.count()
     const totalPages = Math.ceil(totalProducts / size)
 
     const data = await prisma.product.findMany({
       where: { category: activeCategory },
-      select: { id: true, category: true, cut: true, discount: true, mainImage: true, price: true, title: true, unit: true, stock: true, },
+      select: { id: true, category: true, cut: true, discount: true, mainImage: true, price: true, titleAr: true, titleEn: true, unit: true, stock: true, },
       orderBy: { createdAt: "desc" },
       take: size,
       skip: (page * size) - size
@@ -74,6 +89,8 @@ export const getAllProductsForProductsServerPage = async (size: number, page: nu
 
 /* ------------------------- getNonTrendingProducts ------------------------- */
 export const getNonTrendingProducts = async (limit: number = 3) => {
+  cacheLife("hours")
+  cacheTag('products')
   try {
     const data = await prisma.product.findMany({
       where: { stock: { gt: 0 } },

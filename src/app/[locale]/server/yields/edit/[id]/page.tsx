@@ -1,6 +1,6 @@
 import { isAllowedRoles } from "@/auth/isAllowedRoles"
 import EmptyCard from "@/components/shared/EmptyCard"
-import ServerPageCard from "@/components/shared/ServerPageCard"
+import ServerPageCard from "@/components/backend/ServerPageCard"
 import { getAllCattleForSelect } from "@/dl/cattle.data"
 import { getOneYieldForEditPage } from "@/dl/yield.data"
 import EditYieldForm from "@/forms/EditYieldForm"

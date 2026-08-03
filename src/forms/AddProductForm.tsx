@@ -8,12 +8,12 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { UploadManyImagesDropZone, UploadOneImagesDropZone } from "@/components/shared/UploadImagesDropZone"
 import SubmitButton from "@/components/shared/SubmitButton"
-import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Category, Unit } from "@/generated/prisma/enums"
 import { addProductAction } from "@/actions/product.action"
 import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
 import ProductSchema from "@/schemas/ProductSchema"
+import TiptapEditor from "@/components/shared/TiptapEditor"
 
 export default function AddProductForm() {
 	const [lastResult, action] = useActionState(addProductAction, undefined)
@@ -29,22 +29,48 @@ export default function AddProductForm() {
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
 			{/* --------------------------------- title -------------------------------- */}
+			{/* --------------------------------- titleAr -------------------------------- */}
 			<Field>
-				<FieldLabel htmlFor={fields.title.name}>اسم المنتج</FieldLabel>
-				<Input type="text" key={fields.title.key} name={fields.title.name} defaultValue={fields.title.initialValue} />
-				<FieldError>{fields.title.errors}</FieldError>
+				<FieldLabel htmlFor={fields.titleAr.name}>اسم المنتج</FieldLabel>
+				<Input
+					type="text"
+					key={fields.titleAr.key}
+					name={fields.titleAr.name}
+					defaultValue={fields.titleAr.initialValue}
+				/>
+				<FieldError>{fields.titleAr.errors}</FieldError>
 			</Field>
 
-			{/* ----------------------------- description ----------------------------- */}
+			{/* --------------------------------- titleEn -------------------------------- */}
 			<Field>
-				<FieldLabel htmlFor={fields.description.name}>وصف المنتج</FieldLabel>
-				<Textarea
-					key={fields.description.key}
-					name={fields.description.name}
-					defaultValue={fields.description.initialValue}
+				<FieldLabel htmlFor={fields.titleEn.name}>اسم المنتج</FieldLabel>
+				<Input
+					type="text"
+					key={fields.titleEn.key}
+					name={fields.titleEn.name}
+					defaultValue={fields.titleEn.initialValue}
 				/>
-				<FieldError>{fields.description.errors}</FieldError>
+				<FieldError>{fields.titleEn.errors}</FieldError>
 			</Field>
+
+			{/* ------------------------------- descriptionAr ------------------------------ */}
+			<TiptapEditor
+				name={fields.descriptionAr.name}
+				editorKey={fields.descriptionAr.key ?? ""}
+				defaultValue={fields.descriptionAr.initialValue ?? ""}
+				label={"description Ar"}
+				errors={fields.descriptionAr.errors ?? []}
+			/>
+
+			{/* ------------------------------- descriptionEn ------------------------------ */}
+			<TiptapEditor
+				name={fields.descriptionEn.name}
+				editorKey={fields.descriptionEn.key ?? ""}
+				defaultValue={fields.descriptionEn.initialValue ?? ""}
+				label={"description En"}
+				errors={fields.descriptionEn.errors ?? []}
+			/>
+
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
 				{/* --------------------------------- cut -------------------------------- */}
 				<Field>

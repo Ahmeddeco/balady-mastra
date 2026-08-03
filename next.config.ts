@@ -14,7 +14,8 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-
+  turbopack: {},
+  cacheComponents: true,
   serverExternalPackages: [
     '@lancedb/lancedb',
     '@mastra/lance',

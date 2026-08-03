@@ -1,6 +1,11 @@
+"use cache"
+
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 export const getAllFarmsForServerFarmsPage = async (size: number, page: number,) => {
+  cacheLife("weeks")
+  cacheTag('farms')
   try {
     const totalFarms = await prisma.farm.count()
     const totalPages = Math.ceil(totalFarms / size)
@@ -28,6 +33,8 @@ export const getAllFarmsForServerFarmsPage = async (size: number, page: number,)
 
 /* -------------------------- getOneFarmForEditPage ------------------------- */
 export const getOneFarmForEditPage = async (id: string) => {
+  cacheLife("weeks")
+  cacheTag('farms')
   try {
     return await prisma.farm.findUniqueOrThrow({ where: { id }, include: { manager: { select: { name: true, id: true } } } })
   } catch (error) {
@@ -38,6 +45,8 @@ export const getOneFarmForEditPage = async (id: string) => {
 
 /* -------------------------- getAllFarmsForSelect ------------------------- */
 export const getAllFarmsForSelect = async () => {
+  cacheLife("weeks")
+  cacheTag('farms')
   try {
     return await prisma.farm.findMany({ select: { id: true, name: true }, orderBy: { name: "asc" } })
   } catch (error) {

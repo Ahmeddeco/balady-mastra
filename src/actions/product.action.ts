@@ -5,6 +5,7 @@ import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import ProductSchema from "@/schemas/ProductSchema"
 import slugify from 'slugify'
+import { refresh, updateTag } from "next/cache"
 
 /* ------------------------------ addUserAction ----------------------------- */
 export const addProductAction = async (prevState: unknown, formData: FormData) => {
@@ -56,6 +57,7 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
       formErrors: ["حدث خطأ أثناء حفظ المنتج ومكوناته الفعالة في قاعدة البيانات."],
     })
   }
+  updateTag("products")
   redirect("/server/products")
 }
 
@@ -95,6 +97,7 @@ export const editProductAction = async (prevState: unknown, formData: FormData) 
       formErrors: ["حدث خطأ أثناء حفظ المنتج ومكوناته الفعالة في قاعدة البيانات."],
     })
   }
+  updateTag("products")
   redirect("/server/products")
 }
 
@@ -108,5 +111,6 @@ export const deleteUserAction = async (formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/users")
+  updateTag("products")
+  refresh()
 }

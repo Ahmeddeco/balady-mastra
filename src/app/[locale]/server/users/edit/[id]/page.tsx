@@ -1,6 +1,6 @@
 import { isAllowedRoles } from "@/auth/isAllowedRoles"
 import EmptyCard from "@/components/shared/EmptyCard"
-import ServerPageCard from "@/components/shared/ServerPageCard"
+import ServerPageCard from "@/components/backend/ServerPageCard"
 import { getOneUser } from "@/dl/user.data"
 import EditUserForm from "@/forms/EditUserForm"
 import { Role } from "@/generated/prisma/enums"

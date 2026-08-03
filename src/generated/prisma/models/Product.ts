@@ -42,9 +42,11 @@ export type ProductSumAggregateOutputType = {
 
 export type ProductMinAggregateOutputType = {
   id: string | null
-  title: string | null
+  titleAr: string | null
+  titleEn: string | null
   slug: string | null
-  description: string | null
+  descriptionAr: string | null
+  descriptionEn: string | null
   cut: $Enums.MeatType | null
   category: $Enums.Category | null
   mainImage: string | null
@@ -62,9 +64,11 @@ export type ProductMinAggregateOutputType = {
 
 export type ProductMaxAggregateOutputType = {
   id: string | null
-  title: string | null
+  titleAr: string | null
+  titleEn: string | null
   slug: string | null
-  description: string | null
+  descriptionAr: string | null
+  descriptionEn: string | null
   cut: $Enums.MeatType | null
   category: $Enums.Category | null
   mainImage: string | null
@@ -82,9 +86,11 @@ export type ProductMaxAggregateOutputType = {
 
 export type ProductCountAggregateOutputType = {
   id: number
-  title: number
+  titleAr: number
+  titleEn: number
   slug: number
-  description: number
+  descriptionAr: number
+  descriptionEn: number
   cut: number
   category: number
   mainImage: number
@@ -119,9 +125,11 @@ export type ProductSumAggregateInputType = {
 
 export type ProductMinAggregateInputType = {
   id?: true
-  title?: true
+  titleAr?: true
+  titleEn?: true
   slug?: true
-  description?: true
+  descriptionAr?: true
+  descriptionEn?: true
   cut?: true
   category?: true
   mainImage?: true
@@ -139,9 +147,11 @@ export type ProductMinAggregateInputType = {
 
 export type ProductMaxAggregateInputType = {
   id?: true
-  title?: true
+  titleAr?: true
+  titleEn?: true
   slug?: true
-  description?: true
+  descriptionAr?: true
+  descriptionEn?: true
   cut?: true
   category?: true
   mainImage?: true
@@ -159,9 +169,11 @@ export type ProductMaxAggregateInputType = {
 
 export type ProductCountAggregateInputType = {
   id?: true
-  title?: true
+  titleAr?: true
+  titleEn?: true
   slug?: true
-  description?: true
+  descriptionAr?: true
+  descriptionEn?: true
   cut?: true
   category?: true
   mainImage?: true
@@ -267,9 +279,11 @@ export type ProductGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type ProductGroupByOutputType = {
   id: string
-  title: string
+  titleAr: string
+  titleEn: string
   slug: string
-  description: string
+  descriptionAr: string
+  descriptionEn: string
   cut: $Enums.MeatType
   category: $Enums.Category
   mainImage: string
@@ -311,9 +325,11 @@ export type ProductWhereInput = {
   OR?: Prisma.ProductWhereInput[]
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   id?: Prisma.StringFilter<"Product"> | string
-  title?: Prisma.StringFilter<"Product"> | string
+  titleAr?: Prisma.StringFilter<"Product"> | string
+  titleEn?: Prisma.StringFilter<"Product"> | string
   slug?: Prisma.StringFilter<"Product"> | string
-  description?: Prisma.StringFilter<"Product"> | string
+  descriptionAr?: Prisma.StringFilter<"Product"> | string
+  descriptionEn?: Prisma.StringFilter<"Product"> | string
   cut?: Prisma.EnumMeatTypeFilter<"Product"> | $Enums.MeatType
   category?: Prisma.EnumCategoryFilter<"Product"> | $Enums.Category
   mainImage?: Prisma.StringFilter<"Product"> | string
@@ -335,9 +351,11 @@ export type ProductWhereInput = {
 
 export type ProductOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  titleAr?: Prisma.SortOrder
+  titleEn?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  descriptionAr?: Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrder
   cut?: Prisma.SortOrder
   category?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
@@ -359,12 +377,14 @@ export type ProductOrderByWithRelationInput = {
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  title?: string
   slug?: string
   AND?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   OR?: Prisma.ProductWhereInput[]
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
-  description?: Prisma.StringFilter<"Product"> | string
+  titleAr?: Prisma.StringFilter<"Product"> | string
+  titleEn?: Prisma.StringFilter<"Product"> | string
+  descriptionAr?: Prisma.StringFilter<"Product"> | string
+  descriptionEn?: Prisma.StringFilter<"Product"> | string
   cut?: Prisma.EnumMeatTypeFilter<"Product"> | $Enums.MeatType
   category?: Prisma.EnumCategoryFilter<"Product"> | $Enums.Category
   mainImage?: Prisma.StringFilter<"Product"> | string
@@ -382,13 +402,15 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   orderItems?: Prisma.OrderItemListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
   Cattle?: Prisma.XOR<Prisma.CattleNullableScalarRelationFilter, Prisma.CattleWhereInput> | null
-}, "id" | "title" | "slug">
+}, "id" | "slug">
 
 export type ProductOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  titleAr?: Prisma.SortOrder
+  titleEn?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  descriptionAr?: Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrder
   cut?: Prisma.SortOrder
   category?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
@@ -415,9 +437,11 @@ export type ProductScalarWhereWithAggregatesInput = {
   OR?: Prisma.ProductScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ProductScalarWhereWithAggregatesInput | Prisma.ProductScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Product"> | string
-  title?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  titleAr?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  titleEn?: Prisma.StringWithAggregatesFilter<"Product"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Product"> | string
-  description?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  descriptionAr?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  descriptionEn?: Prisma.StringWithAggregatesFilter<"Product"> | string
   cut?: Prisma.EnumMeatTypeWithAggregatesFilter<"Product"> | $Enums.MeatType
   category?: Prisma.EnumCategoryWithAggregatesFilter<"Product"> | $Enums.Category
   mainImage?: Prisma.StringWithAggregatesFilter<"Product"> | string
@@ -436,9 +460,11 @@ export type ProductScalarWhereWithAggregatesInput = {
 
 export type ProductCreateInput = {
   id?: string
-  title: string
+  titleAr: string
+  titleEn: string
   slug: string
-  description: string
+  descriptionAr: string
+  descriptionEn: string
   cut: $Enums.MeatType
   category: $Enums.Category
   mainImage: string
@@ -459,9 +485,11 @@ export type ProductCreateInput = {
 
 export type ProductUncheckedCreateInput = {
   id?: string
-  title: string
+  titleAr: string
+  titleEn: string
   slug: string
-  description: string
+  descriptionAr: string
+  descriptionEn: string
   cut: $Enums.MeatType
   category: $Enums.Category
   mainImage: string
@@ -482,9 +510,11 @@ export type ProductUncheckedCreateInput = {
 
 export type ProductUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -505,9 +535,11 @@ export type ProductUpdateInput = {
 
 export type ProductUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -528,9 +560,11 @@ export type ProductUncheckedUpdateInput = {
 
 export type ProductCreateManyInput = {
   id?: string
-  title: string
+  titleAr: string
+  titleEn: string
   slug: string
-  description: string
+  descriptionAr: string
+  descriptionEn: string
   cut: $Enums.MeatType
   category: $Enums.Category
   mainImage: string
@@ -549,9 +583,11 @@ export type ProductCreateManyInput = {
 
 export type ProductUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -569,9 +605,11 @@ export type ProductUpdateManyMutationInput = {
 
 export type ProductUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -600,9 +638,11 @@ export type ProductOrderByRelationAggregateInput = {
 
 export type ProductCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  titleAr?: Prisma.SortOrder
+  titleEn?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  descriptionAr?: Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrder
   cut?: Prisma.SortOrder
   category?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
@@ -628,9 +668,11 @@ export type ProductAvgOrderByAggregateInput = {
 
 export type ProductMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  titleAr?: Prisma.SortOrder
+  titleEn?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  descriptionAr?: Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrder
   cut?: Prisma.SortOrder
   category?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
@@ -648,9 +690,11 @@ export type ProductMaxOrderByAggregateInput = {
 
 export type ProductMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  titleAr?: Prisma.SortOrder
+  titleEn?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  descriptionAr?: Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrder
   cut?: Prisma.SortOrder
   category?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
@@ -779,9 +823,11 @@ export type ProductUpdateOneRequiredWithoutFavoritesNestedInput = {
 
 export type ProductCreateWithoutCattleInput = {
   id?: string
-  title: string
+  titleAr: string
+  titleEn: string
   slug: string
-  description: string
+  descriptionAr: string
+  descriptionEn: string
   cut: $Enums.MeatType
   category: $Enums.Category
   mainImage: string
@@ -801,9 +847,11 @@ export type ProductCreateWithoutCattleInput = {
 
 export type ProductUncheckedCreateWithoutCattleInput = {
   id?: string
-  title: string
+  titleAr: string
+  titleEn: string
   slug: string
-  description: string
+  descriptionAr: string
+  descriptionEn: string
   cut: $Enums.MeatType
   category: $Enums.Category
   mainImage: string
@@ -852,9 +900,11 @@ export type ProductScalarWhereInput = {
   OR?: Prisma.ProductScalarWhereInput[]
   NOT?: Prisma.ProductScalarWhereInput | Prisma.ProductScalarWhereInput[]
   id?: Prisma.StringFilter<"Product"> | string
-  title?: Prisma.StringFilter<"Product"> | string
+  titleAr?: Prisma.StringFilter<"Product"> | string
+  titleEn?: Prisma.StringFilter<"Product"> | string
   slug?: Prisma.StringFilter<"Product"> | string
-  description?: Prisma.StringFilter<"Product"> | string
+  descriptionAr?: Prisma.StringFilter<"Product"> | string
+  descriptionEn?: Prisma.StringFilter<"Product"> | string
   cut?: Prisma.EnumMeatTypeFilter<"Product"> | $Enums.MeatType
   category?: Prisma.EnumCategoryFilter<"Product"> | $Enums.Category
   mainImage?: Prisma.StringFilter<"Product"> | string
@@ -873,9 +923,11 @@ export type ProductScalarWhereInput = {
 
 export type ProductCreateWithoutOrderItemsInput = {
   id?: string
-  title: string
+  titleAr: string
+  titleEn: string
   slug: string
-  description: string
+  descriptionAr: string
+  descriptionEn: string
   cut: $Enums.MeatType
   category: $Enums.Category
   mainImage: string
@@ -895,9 +947,11 @@ export type ProductCreateWithoutOrderItemsInput = {
 
 export type ProductUncheckedCreateWithoutOrderItemsInput = {
   id?: string
-  title: string
+  titleAr: string
+  titleEn: string
   slug: string
-  description: string
+  descriptionAr: string
+  descriptionEn: string
   cut: $Enums.MeatType
   category: $Enums.Category
   mainImage: string
@@ -933,9 +987,11 @@ export type ProductUpdateToOneWithWhereWithoutOrderItemsInput = {
 
 export type ProductUpdateWithoutOrderItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -955,9 +1011,11 @@ export type ProductUpdateWithoutOrderItemsInput = {
 
 export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -977,9 +1035,11 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
 
 export type ProductCreateWithoutFavoritesInput = {
   id?: string
-  title: string
+  titleAr: string
+  titleEn: string
   slug: string
-  description: string
+  descriptionAr: string
+  descriptionEn: string
   cut: $Enums.MeatType
   category: $Enums.Category
   mainImage: string
@@ -999,9 +1059,11 @@ export type ProductCreateWithoutFavoritesInput = {
 
 export type ProductUncheckedCreateWithoutFavoritesInput = {
   id?: string
-  title: string
+  titleAr: string
+  titleEn: string
   slug: string
-  description: string
+  descriptionAr: string
+  descriptionEn: string
   cut: $Enums.MeatType
   category: $Enums.Category
   mainImage: string
@@ -1037,9 +1099,11 @@ export type ProductUpdateToOneWithWhereWithoutFavoritesInput = {
 
 export type ProductUpdateWithoutFavoritesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1059,9 +1123,11 @@ export type ProductUpdateWithoutFavoritesInput = {
 
 export type ProductUncheckedUpdateWithoutFavoritesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1081,9 +1147,11 @@ export type ProductUncheckedUpdateWithoutFavoritesInput = {
 
 export type ProductCreateManyCattleInput = {
   id?: string
-  title: string
+  titleAr: string
+  titleEn: string
   slug: string
-  description: string
+  descriptionAr: string
+  descriptionEn: string
   cut: $Enums.MeatType
   category: $Enums.Category
   mainImage: string
@@ -1101,9 +1169,11 @@ export type ProductCreateManyCattleInput = {
 
 export type ProductUpdateWithoutCattleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1123,9 +1193,11 @@ export type ProductUpdateWithoutCattleInput = {
 
 export type ProductUncheckedUpdateWithoutCattleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1145,9 +1217,11 @@ export type ProductUncheckedUpdateWithoutCattleInput = {
 
 export type ProductUncheckedUpdateManyWithoutCattleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
   cut?: Prisma.EnumMeatTypeFieldUpdateOperationsInput | $Enums.MeatType
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1205,9 +1279,11 @@ export type ProductCountOutputTypeCountFavoritesArgs<ExtArgs extends runtime.Typ
 
 export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
+  titleAr?: boolean
+  titleEn?: boolean
   slug?: boolean
-  description?: boolean
+  descriptionAr?: boolean
+  descriptionEn?: boolean
   cut?: boolean
   category?: boolean
   mainImage?: boolean
@@ -1230,9 +1306,11 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 
 export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
+  titleAr?: boolean
+  titleEn?: boolean
   slug?: boolean
-  description?: boolean
+  descriptionAr?: boolean
+  descriptionEn?: boolean
   cut?: boolean
   category?: boolean
   mainImage?: boolean
@@ -1252,9 +1330,11 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
+  titleAr?: boolean
+  titleEn?: boolean
   slug?: boolean
-  description?: boolean
+  descriptionAr?: boolean
+  descriptionEn?: boolean
   cut?: boolean
   category?: boolean
   mainImage?: boolean
@@ -1274,9 +1354,11 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ProductSelectScalar = {
   id?: boolean
-  title?: boolean
+  titleAr?: boolean
+  titleEn?: boolean
   slug?: boolean
-  description?: boolean
+  descriptionAr?: boolean
+  descriptionEn?: boolean
   cut?: boolean
   category?: boolean
   mainImage?: boolean
@@ -1293,7 +1375,7 @@ export type ProductSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "cut" | "category" | "mainImage" | "images" | "price" | "discount" | "unit" | "stock" | "lowQuantity" | "increaseByOne" | "isActive" | "cattleId" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titleAr" | "titleEn" | "slug" | "descriptionAr" | "descriptionEn" | "cut" | "category" | "mainImage" | "images" | "price" | "discount" | "unit" | "stock" | "lowQuantity" | "increaseByOne" | "isActive" | "cattleId" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
   favorites?: boolean | Prisma.Product$favoritesArgs<ExtArgs>
@@ -1316,9 +1398,11 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    title: string
+    titleAr: string
+    titleEn: string
     slug: string
-    description: string
+    descriptionAr: string
+    descriptionEn: string
     cut: $Enums.MeatType
     category: $Enums.Category
     mainImage: string
@@ -1760,9 +1844,11 @@ export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface ProductFieldRefs {
   readonly id: Prisma.FieldRef<"Product", 'String'>
-  readonly title: Prisma.FieldRef<"Product", 'String'>
+  readonly titleAr: Prisma.FieldRef<"Product", 'String'>
+  readonly titleEn: Prisma.FieldRef<"Product", 'String'>
   readonly slug: Prisma.FieldRef<"Product", 'String'>
-  readonly description: Prisma.FieldRef<"Product", 'String'>
+  readonly descriptionAr: Prisma.FieldRef<"Product", 'String'>
+  readonly descriptionEn: Prisma.FieldRef<"Product", 'String'>
   readonly cut: Prisma.FieldRef<"Product", 'MeatType'>
   readonly category: Prisma.FieldRef<"Product", 'Category'>
   readonly mainImage: Prisma.FieldRef<"Product", 'String'>

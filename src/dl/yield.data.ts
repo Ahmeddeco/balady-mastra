@@ -1,7 +1,12 @@
+"use cache"
+
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 /* --------------------- getAllYieldsForServerFarmsPage --------------------- */
 export const getAllYieldsForServerFarmsPage = async (size: number, page: number,) => {
+  cacheLife("days")
+  cacheTag('yields')
   try {
     const totalYields = await prisma.yield.count()
     const totalPages = Math.ceil(totalYields / size)
@@ -21,6 +26,8 @@ export const getAllYieldsForServerFarmsPage = async (size: number, page: number,
 
 /* -------------------------- getOneYieldForEditPage ------------------------- */
 export const getOneYieldForEditPage = async (id: string) => {
+  cacheLife("days")
+  cacheTag('yields')
   try {
     return await prisma.yield.findUniqueOrThrow({ where: { id } })
   } catch (error) {
@@ -31,6 +38,8 @@ export const getOneYieldForEditPage = async (id: string) => {
 
 /* -------------------------- getAllYieldsForSelect ------------------------- */
 export const getAllYieldsForSelect = async () => {
+  cacheLife("days")
+  cacheTag('yields')
   try {
     return await prisma.yield.findMany({ select: { id: true, createdAt: true }, orderBy: { createdAt: "asc" } })
   } catch (error) {

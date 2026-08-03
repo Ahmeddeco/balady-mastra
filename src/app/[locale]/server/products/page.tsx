@@ -1,28 +1,6 @@
-import { ImageOff, MoreVertical, Percent, PlusCircle } from "lucide-react"
-import ServerPageCard from "@/components/shared/ServerPageCard"
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import {
-	Pagination,
-	PaginationContent,
-	PaginationItem,
-	PaginationLink,
-	PaginationNext,
-	PaginationPrevious,
-} from "@/components/ui/pagination"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import {
-	Dialog,
-	DialogClose,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog"
-import Form from "next/form"
-import { Input } from "@/components/ui/input"
+import { ImageOff, Percent, PlusCircle } from "lucide-react"
+import ServerPageCard from "@/components/backend/ServerPageCard"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import Image from "next/image"
 import React from "react"
 import { deleteUserAction } from "@/actions/user.action"
@@ -33,11 +11,15 @@ import EmptyCard from "@/components/shared/EmptyCard"
 import { Badge } from "@/components/ui/badge"
 import { getAllProductsForProductsServerPageType } from "@/types/Product.type"
 import { isAllowedRoles } from "@/auth/isAllowedRoles"
+import Settings from "@/components/backend/Settings"
+import PaginationSection from "@/components/backend/Pagination"
 
 export default async function ProductsServerPage({
 	searchParams,
+	params,
 }: {
 	searchParams: Promise<{ page: string; size: string; category: Category }>
+	params: Promise<{ locale: "en" | "ar" }>
 }) {
 	await isAllowedRoles([Role.admin])
 
@@ -50,6 +32,7 @@ export default async function ProductsServerPage({
 		pageNumber,
 		activeCategory,
 	)
+	const locale = (await params).locale
 
 	return !products ? (
 		<EmptyCard href={""} linkTitle={""} />
@@ -68,19 +51,19 @@ export default async function ProductsServerPage({
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
-							<TableHead>صورة المنتج</TableHead>
-							<TableHead>اسم النتج</TableHead>
-							<TableHead>الفئة</TableHead>
-							<TableHead>القطعية</TableHead>
-							<TableHead>السعر</TableHead>
-							<TableHead>الخصم</TableHead>
-							<TableHead>المخزون</TableHead>
-							<TableHead className="text-left">الإعدادات</TableHead>
+							<TableHead>{locale === "en" ? "product image" : "صورة المنتج"}</TableHead>
+							<TableHead>{locale === "en" ? "product name" : "اسم المنتج"}</TableHead>
+							<TableHead>{locale === "en" ? "category" : "الفئة"}</TableHead>
+							<TableHead>{locale === "en" ? "cut" : "القطعية"}</TableHead>
+							<TableHead>{locale === "en" ? "price" : "السعر"}</TableHead>
+							<TableHead>{locale === "en" ? "discount" : "الخصم"}</TableHead>
+							<TableHead>{locale === "en" ? "stock" : "المخزون"}</TableHead>
+							<TableHead className="text-end">{locale === "en" ? "settings" : "الإعدادات"}</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{products?.data.map(({ id, discount, mainImage, price, title, cut, unit, stock, category }) => (
+						{products?.data.map(({ id, discount, mainImage, price, titleAr, titleEn, cut, unit, stock, category }) => (
 							<TableRow key={id}>
 								<TableCell>
 									{mainImage ? (
@@ -95,7 +78,7 @@ export default async function ProductsServerPage({
 										React.createElement(ImageOff)
 									)}
 								</TableCell>
-								<TableCell>{title}</TableCell>
+								<TableCell>{locale === "en" ? titleEn : titleAr}</TableCell>
 								<TableCell>
 									<Badge variant={"outline"}>{category}</Badge>
 								</TableCell>
@@ -112,78 +95,18 @@ export default async function ProductsServerPage({
 								</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}
-								<TableCell className="text-left ">
-									<DropdownMenu>
-										<DropdownMenuTrigger asChild>
-											<Button variant={"outline"} size={"icon"} suppressHydrationWarning>
-												<MoreVertical />
-											</Button>
-										</DropdownMenuTrigger>
-										<DropdownMenuContent align="start" className="flex flex-col gap-2 items-center justify-center p-2">
-											<DropdownMenuItem asChild>
-												<Button asChild size={"lg"} className="w-full" variant={"outline"}>
-													<Link href={`/server/products/edit/${id}`}>تعديل</Link>
-												</Button>
-											</DropdownMenuItem>
-											{/* ---------------------------- delete --------------------------- */}
-											<DropdownMenuItem asChild>
-												<Dialog>
-													<DialogTrigger asChild>
-														<Button size={"lg"} className="w-full">
-															حذف
-														</Button>
-													</DialogTrigger>
-													<DialogContent>
-														<DialogHeader>
-															<DialogTitle>هل أنت متأكد من رغبتك في حذف هذا المنتج؟</DialogTitle>
-															<DialogDescription>
-																لا يمكن التراجع عن هذا الإجراء. سيؤدي ذلك إلى حذف هذا المنتج نهائيًا وإزالة بياناته من
-																خوادمنا.
-															</DialogDescription>
-														</DialogHeader>
-														<div className="flex items-center justify-between ">
-															<Button asChild>
-																<DialogClose>إلغاء الحذف</DialogClose> variant={"secondary"}
-															</Button>
-															<Form action={deleteUserAction}>
-																<Input type="hidden" name="id" value={id} />
-																<Button type="submit">الحذف نهائيا</Button>
-															</Form>
-														</div>
-													</DialogContent>
-												</Dialog>
-											</DropdownMenuItem>
-										</DropdownMenuContent>
-									</DropdownMenu>
-								</TableCell>
+								<Settings
+									id={id}
+									deleteAction={deleteUserAction}
+									editLink={`/server/products/edit/${id}`}
+									deleteName={"service"}
+								/>
 							</TableRow>
 						))}
 					</TableBody>
+
 					{/* ---------------------------- Pagination ---------------------------- */}
-					<TableCaption>
-						<Pagination>
-							<PaginationContent>
-								<PaginationItem>
-									{/* --------------------------- Previous --------------------------- */}
-									{pageNumber > 1 && <PaginationPrevious href={`?size=${pageSize}&page=${pageNumber - 1}`} />}
-								</PaginationItem>
-								{/* ------------------------- PaginationLink ------------------------ */}
-								{Array.from({ length: products!.totalPages ?? 1 }).map((_, index) => (
-									<PaginationItem key={index}>
-										<PaginationLink href={`?size=${pageSize}&page=${index + 1}`} isActive={pageNumber === index + 1}>
-											{index + 1}
-										</PaginationLink>
-									</PaginationItem>
-								))}
-								<PaginationItem>
-									{/* ----------------------------- Next ----------------------------- */}
-									{pageNumber < products!.totalPages && (
-										<PaginationNext href={`?size=${pageSize}&page=${pageNumber + 1}`} />
-									)}
-								</PaginationItem>
-							</PaginationContent>
-						</Pagination>
-					</TableCaption>
+					<PaginationSection pageNumber={pageNumber} pageSize={pageSize} totalPages={products.totalPages} />
 				</Table>
 			</div>
 		</ServerPageCard>

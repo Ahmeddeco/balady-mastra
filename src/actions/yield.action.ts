@@ -4,6 +4,7 @@ import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import YieldSchema from "@/schemas/YieldSchema"
+import { refresh, updateTag } from "next/cache"
 
 /* ------------------------------ addYieldAction ----------------------------- */
 export const addYieldAction = async (prevState: unknown, formData: FormData) => {
@@ -43,6 +44,7 @@ export const addYieldAction = async (prevState: unknown, formData: FormData) => 
       formErrors: ["حدث خطأ غير متوقع في قاعدة البيانات أثناء حفظ تقرير التصافي."],
     })
   }
+  updateTag("yields")
   redirect("/server/yields")
 }
 
@@ -87,6 +89,7 @@ export const editYieldAction = async (prevState: unknown, formData: FormData) =>
       formErrors: ["حدث خطأ غير متوقع في قاعدة البيانات أثناء تعديل تقرير التصافي."],
     })
   }
+  updateTag("yields")
   redirect("/server/yields")
 }
 
@@ -100,5 +103,6 @@ export const deleteYieldAction = async (formData: FormData) => {
   } catch (error) {
     console.error("DATABASE ERROR: Failed to delete yield record ->", error)
   }
-  redirect("/server/yields")
+  updateTag("yields")
+  refresh()
 }

@@ -1,8 +1,13 @@
+"use cache"
+
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 
 /* --------------------- getAllCattleForServerCattlePage -------------------- */
 export const getAllCattleForServerCattlePage = async (size: number, page: number,) => {
+  cacheLife("days")
+  cacheTag('cattle')
   try {
     const totalCattle = await prisma.cattle.count()
     const totalPages = Math.ceil(totalCattle / size)
@@ -21,6 +26,8 @@ export const getAllCattleForServerCattlePage = async (size: number, page: number
 
 /* --------------------- getAllCattleForServerFarmsPage --------------------- */
 export const getAllCattleForServerFarmsPage = async (size: number, page: number,) => {
+  cacheLife("days")
+  cacheTag('cattle')
   try {
     const totalCattle = await prisma.cattle.count()
     const totalPages = Math.ceil(totalCattle / size)
@@ -38,6 +45,8 @@ export const getAllCattleForServerFarmsPage = async (size: number, page: number,
 
 /* -------------------------- getOneBreedForEditPage ------------------------- */
 export const getOneCattleForEditPage = async (id: string) => {
+  cacheLife("days")
+  cacheTag('cattle')
   try {
     return await prisma.cattle.findUniqueOrThrow({ where: { id } })
   } catch (error) {
@@ -48,6 +57,8 @@ export const getOneCattleForEditPage = async (id: string) => {
 
 /* -------------------------- getAllCattleForSelect ------------------------- */
 export const getAllCattleForSelect = async () => {
+  cacheLife("days")
+  cacheTag('cattle')
   try {
     return await prisma.cattle.findMany({ select: { id: true, createdAt: true, breed: { select: { name: true } }, farm: { select: { name: true } } }, orderBy: { createdAt: "asc" } })
   } catch (error) {

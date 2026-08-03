@@ -9,9 +9,9 @@ import { Currency } from "@/logic/currency"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
-import { CheckOutButton } from "@/components/shared/CustomButtons"
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item"
 import { useCurrentLocale } from "@/locales/client.locale"
+import CheckoutButton from "@/store/CheckoutButton"
 
 export default function Cart() {
 	const { items, removeFromCart, updateQuantity } = useCartStore((state) => state)
@@ -106,9 +106,8 @@ export default function Cart() {
 								<h6>الإجمالي</h6>
 								<p>{Currency(total, locale)}</p>
 							</div>
-
-							{/* TODO: Add a checkout method with payment service like paymob or kashir*/}
-							<CheckOutButton />
+							{/* ----------------------------- CheckoutButton ----------------------------- */}
+							<CheckoutButton amount={total} />
 						</CardContent>
 					</Card>
 				</SheetFooter>

@@ -1,7 +1,7 @@
 import Form from "next/form"
-import { Button } from "../ui/button"
-import { Input } from "../ui/input"
 import { Category } from "@/generated/prisma/enums"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 type Props = {
 	activeCategory: Category | undefined

@@ -5,6 +5,7 @@ import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import CattleSchema from "@/schemas/CattleSchema"
 import { splittedImages } from "@/logic/splittedImages"
+import { refresh, updateTag } from "next/cache"
 
 /* ------------------------------ addUserAction ----------------------------- */
 export const AddCattleAction = async (prevState: unknown, formData: FormData) => {
@@ -37,6 +38,7 @@ export const AddCattleAction = async (prevState: unknown, formData: FormData) =>
       formErrors: ["حدث خطأ أثناء حفظ المنتج ومكوناته الفعالة في قاعدة البيانات."],
     })
   }
+  updateTag("cattle")
   redirect("/server/cattle")
 }
 
@@ -73,6 +75,7 @@ export const EditCattleAction = async (prevState: unknown, formData: FormData) =
       formErrors: ["حدث خطأ أثناء حفظ المنتج ومكوناته الفعالة في قاعدة البيانات."],
     })
   }
+  updateTag("cattle")
   redirect("/server/cattle")
 }
 
@@ -86,5 +89,6 @@ export const deleteUserAction = async (formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/users")
+  updateTag("cattle")
+  refresh()
 }

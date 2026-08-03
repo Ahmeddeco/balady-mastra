@@ -1,16 +1,6 @@
 import { Age, Category, CattleType, Gender, MeatType, Role, Unit } from "@/generated/prisma/enums"
 import prisma from "@/lib/prisma"
-
-// Helper function to slugify Arabic text safely and correctly
-function slugify(text: string): string {
-  return text
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\u0621-\u064A0-9\-_]/g, '')
-    .replace(/\-+/g, '-')
-}
+import { faker } from "@faker-js/faker"
 
 async function main() {
   console.log('⏳ DATABASE CLEANUP: Purging all tables in reverse order to avoid constraint violations...')
@@ -237,74 +227,99 @@ async function main() {
   console.log('🔹 SEEDING: Creating 12 commercial butcher shop products...')
   const productsData = [
     {
-      title: 'انتركوت ستيك (ريب آي) أنجوس فاخر',
-      description: 'قطعية الانتركوت مأخوذة من عجل بلاك أنجوس. تمتاز بتداخل دهني خفيف (ماربلينج) يمنحها طراوة وعصارة فريدة عند الشوي السريع.',
+      titleAr: 'انتركوت ستيك (ريب آي) أنجوس فاخر',
+      titleEn: 'Premium Angus Ribeye Steak (Entrecôte)',
+      descriptionAr: 'قطعية الانتركوت مأخوذة من عجل بلاك أنجوس. تمتاز بتداخل دهني خفيف (ماربلينج) يمنحها طراوة وعصارة فريدة عند الشوي السريع.',
+      descriptionEn: 'Entrecôte cut sourced from Black Angus cattle. Features fine marbling that delivers exceptional tenderness and juiciness when quick-grilled.',
       cut: MeatType.ribeye, category: Category.meat, mainImage: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=800',
       price: 480.0, stock: 45.0, lowQuantity: 5.0, cattleId: cattles[1].id
     },
     {
-      title: 'كباب حلة بلدي من قطعية السن الصافي',
-      description: 'مكعبات لحم بقري طازجة مقطوعة بعناية من منطقة السن لعجولنا البلدية الخليط. متوازنة بين اللحم والدهن لطعم بلدي أصيل.',
+      titleAr: 'كباب حلة بلدي من قطعية السن الصافي',
+      titleEn: 'Local Beef Stew Cubes (Chuck Cut)',
+      descriptionAr: 'مكعبات لحم بقري طازجة مقطوعة بعناية من منطقة السن لعجولنا البلدية الخليط. متوازنة بين اللحم والدهن لطعم بلدي أصيل.',
+      descriptionEn: 'Fresh beef cubes carefully cut from the chuck area of our crossbreed local cattle. Well-balanced fat content for an authentic traditional flavor.',
       cut: MeatType.chuck, category: Category.meat, mainImage: 'https://images.unsplash.com/photo-1560781290-7dc94c0f8f4f?w=800',
       price: 420.0, stock: 65.0, lowQuantity: 10.0, cattleId: cattles[2].id
     },
     {
-      title: 'عرق فلتو بقري ناعم (Tenderloin)',
-      description: 'بيت الكلاوي الفاخر، أنعم نسيج عضلي في الذبيحة بالكامل، خالي تماماً من الدهون ومخصص للإستيك السريع الذي يذوب في الفم.',
+      titleAr: 'عرق فلتو بقري ناعم (Tenderloin)',
+      titleEn: 'Tender Beef Tenderloin Roast',
+      descriptionAr: 'بيت الكلاوي الفاخر، أنعم نسيج عضلي في الذبيحة بالكامل، خالي تماماً من الدهون ومخصص للإستيك السريع الذي يذوب في الفم.',
+      descriptionEn: 'Premium tenderloin cut, the softest muscle tissue in the entire carcass. Completely lean and perfect for quick melt-in-your-mouth steaks.',
       cut: MeatType.tenderloin, category: Category.meat, mainImage: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800',
       price: 520.0, stock: 12.0, lowQuantity: 2.0, cattleId: cattles[1].id
     },
     {
-      title: 'موزة بقري بلدي بالعظم وللصواني',
-      description: 'قطعية الموزة الخلفية الغنية بالجيلاتين الطبيعي والأنسجة الناعمة، مثالية للسلق وعمل طواجن البصل بالفرن.',
+      titleAr: 'موزة بقري بلدي بالعظم وللصواني',
+      titleEn: 'Local Bone-In Beef Shank',
+      descriptionAr: 'قطعية الموزة الخلفية الغنية بالجيلاتين الطبيعي والأنسجة الناعمة، مثالية للسلق وعمل طواجن البصل بالفرن.',
+      descriptionEn: 'Hind beef shank rich in natural gelatin and tender fibers. Ideal for boiling, braising, and slow-baked onion casseroles.',
       cut: MeatType.shank, category: Category.meat, mainImage: 'https://images.unsplash.com/photo-1551028150-64b9f398f678?w=800',
       price: 430.0, stock: 30.0, lowQuantity: 6.0, cattleId: cattles[2].id
     },
     {
-      title: 'لحم مفروم كندوز سوبر (قليل الدسم)',
-      description: 'مفروم طازج يجهز يومياً من قطعيات الرقبة والسن والوش فخدة، مضاف له نسبة 10% دهون دوش طبيعية لضمان التماسك والطعم الزكي.',
+      titleAr: 'لحم مفروم كندوز سوبر (قليل الدسم)',
+      titleEn: 'Super Lean Minced Beef (Kandoz)',
+      descriptionAr: 'مفروم طازج يجهز يومياً من قطعيات الرقبة والسن والوش فخدة، مضاف له نسبة 10% دهون دوش طبيعية لضمان التماسك والطعم الزكي.',
+      descriptionEn: 'Fresh minced beef prepared daily from neck, chuck, and topside cuts, blended with 10% natural brisket fat for optimal texture and rich flavor.',
       cut: MeatType.processed, category: Category.processed, mainImage: 'https://images.unsplash.com/photo-1588168333622-24244fe27066?w=800',
       price: 390.0, stock: 120.0, lowQuantity: 15.0, cattleId: cattles[3].id
     },
     {
-      title: 'سجق بلدي بالخلطة الشرقية السرية',
-      description: 'سجق بلدي داخل ممبار ضاني طبيعي (هانك)، مفروم من لحم الكندوز الصافي ومتبل ببهارات حتة لحمة المميزة بدون مواد حافظة.',
+      titleAr: 'سجق بلدي بالخلطة الشرقية السرية',
+      titleEn: 'Traditional Egyptian Sausage with Secret Oriental Spice',
+      descriptionAr: 'سجق بلدي داخل ممبار ضاني طبيعي (هانك)، مفروم من لحم الكندوز الصافي ومتبل ببهارات حتة لحمة المميزة بدون مواد حافظة.',
+      descriptionEn: 'Traditional sausage encased in natural lamb casing (Hank), filled with pure minced beef and seasoned with our signature blend without preservatives.',
       cut: MeatType.processed, category: Category.processed, mainImage: 'https://images.unsplash.com/photo-1541048611056-22998c2394e3?w=800',
-      price: 350.0, stock: 80.0, lowQuantity: 10.0, cattleId: null
+      price: 350.0, stock: 80.0, lowQuantity: 10.0,
+      cattleId: null
     },
     {
-      title: 'وش فخدة بفتيك (إسكالوب) سريع الطهي',
-      description: 'شرائح بفتيك رقيقة ومفصولة نتيج تشفية وش الفخدة للبقري الليموزين، خالية من الشغت والعروق لتنضج في أقل من دقيقتين.',
+      titleAr: 'وش فخدة بفتيك (إسكالوب) سريع الطهي',
+      titleEn: 'Quick-Cook Beef Escalope (Topside)',
+      descriptionAr: 'شرائح بفتيك رقيقة ومفصولة نتيج تشفية وش الفخدة للبقري الليموزين، خالية من الشغت والعروق لتنضج في أقل من دقيقتين.',
+      descriptionEn: 'Thinly sliced beef escalope meticulously trimmed from Limousin beef topside, completely gristle-free for fast cooking in under two minutes.',
       cut: MeatType.topside, category: Category.meat, mainImage: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800',
       price: 460.0, stock: 25.0, lowQuantity: 4.0, cattleId: cattles[4].id
     },
     {
-      title: 'عرق تربيانكو (اللحمة الباردة) مميز',
-      description: 'قطعية ضهر الفخدة الحبال الطويلة الخالية من الدهون الداخلية، مخصصة لعمل اللحمة الباردة بالثوم والفلفل الأسود والربط بالدوبارة.',
+      titleAr: 'عرق تربيانكو (اللحمة الباردة) مميز',
+      titleEn: 'Premium Eye of Round Roast (Cold Cuts)',
+      descriptionAr: 'قطعية ضهر الفخدة الحبال الطويلة الخالية من الدهون الداخلية، مخصصة لعمل اللحمة الباردة بالثوم والفلفل الأسود والربط بالدوبارة.',
+      descriptionEn: 'Lean eye of round cut with no intramuscular fat, ideal for tied roasts prepared with garlic and black peppercorns.',
       cut: MeatType.eye_round, category: Category.meat, mainImage: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=800',
       price: 470.0, stock: 18.0, lowQuantity: 2.0, cattleId: cattles[4].id
     },
     {
-      title: 'ريش ضاني برقي للشوي على الفحم',
-      description: 'ريش غنم برقي مرساوي طازجة، طعم غني جداً ونسبة دهن متناسقة تذوب على الفحم لتمنحك تجربة شوي بدوية أصيلة.',
+      titleAr: 'ريش ضاني برقي للشوي على الفحم',
+      titleEn: 'Barki Lamb Chops for Charcoal Grilling',
+      descriptionAr: 'ريش غنم برقي مرساوي طازجة، طعم غني جداً ونسبة دهن متناسقة تذوب على الفحم لتمنحك تجربة شوي بدوية أصيلة.',
+      descriptionEn: 'Fresh Marsa-Matrouh Barki lamb chops featuring rich flavor and balanced fat that melts over charcoal for an authentic Bedouin barbecue experience.',
       cut: MeatType.ribs, category: Category.meat, mainImage: 'https://images.unsplash.com/photo-1602489114881-48a86033d4d4?w=800',
       price: 490.0, stock: 20.0, lowQuantity: 3.0, cattleId: cattles[7].id
     },
     {
-      title: 'كبدة بقري بلدي طازجة بالقلب والكلاوي',
-      description: 'كبدة دبيحة اليوم الفريش، تقطع حسب الطلب (عصافيري أو شرائح للردة) مع قطع من القلب والكلاوي والحلويات البلدي.',
+      titleAr: 'كبدة بقري بلدي طازجة بالقلب والكلاوي',
+      titleEn: 'Fresh Local Beef Liver with Heart & Kidneys',
+      descriptionAr: 'كبدة دبيحة اليوم الفريش، تقطع حسب الطلب (عصافيري أو شرائح للردة) مع قطع من القلب والكلاوي والحلويات البلدي.',
+      descriptionEn: 'Daily fresh beef liver, custom sliced (diced or flat cut for breading) served with fresh heart, kidneys, and sweetbreads.',
       cut: MeatType.liver, category: Category.meat, mainImage: 'https://images.unsplash.com/photo-1628268909376-e8c44bb3153f?w=800',
       price: 450.0, stock: 15.0, lowQuantity: 2.0, cattleId: cattles[1].id
     },
     {
-      title: 'صدور دجاج بانيه مخلية (سوبر فريش)',
-      description: 'صدور دجاج بيضاء مخلية تماماً من العظم والجلد، تنظف وتجهز يومياً داخل قسم الدواجن الخاص بمحلاتنا لضمان النظافة والجودة.',
+      titleAr: 'صدور دجاج بانيه مخلية (سوبر فريش)',
+      titleEn: 'Boneless Super Fresh Chicken Breasts',
+      descriptionAr: 'صدور دجاج بيضاء مخلية تماماً من العظم والجلد، تنظف وتجهز يومياً داخل قسم الدواجن الخاص بمحلاتنا لضمان النظافة والجودة.',
+      descriptionEn: 'Boneless, skinless white chicken breasts freshly cleaned and prepared daily in our dedicated poultry section for maximum hygiene and quality.',
       cut: MeatType.chicken_breast, category: Category.chicken, mainImage: 'https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=800',
       price: 210.0, stock: 150.0, lowQuantity: 20.0, unit: Unit.piece, cattleId: null
     },
     {
-      title: 'برجر حتة لحمة الجامبو الملكي',
-      description: 'أقراص برجر مجهزة من لحم الموزة والسن الكندوز الصافي مع بهارات البرجر الأمريكية، بدون إضافة صويا تماماً للحفاظ على الطعم الأصلي.',
+      titleAr: 'برجر حتة لحمة الجامبو الملكي',
+      titleEn: 'Royal Jumbo Beef Burger Patties',
+      descriptionAr: 'أقراص برجر مجهزة من لحم الموزة والسن الكندوز الصافي مع بهارات البرجر الأمريكية، بدون إضافة صويا تماماً للحفاظ على الطعم الأصلي.',
+      descriptionEn: 'Jumbo burger patties crafted from pure shank and chuck beef blended with classic American burger spices, completely soy-free to preserve original taste.',
       cut: MeatType.processed, category: Category.processed, mainImage: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800',
       price: 380.0, stock: 90.0, lowQuantity: 12.0, unit: Unit.piece, cattleId: null
     }
@@ -313,9 +328,11 @@ async function main() {
   for (const p of productsData) {
     await prisma.product.create({
       data: {
-        title: p.title,
-        slug: slugify(p.title),
-        description: p.description,
+        titleAr: p.titleAr,
+        titleEn: p.titleEn,
+        slug: faker.helpers.slugify(p.titleEn),
+        descriptionAr: p.descriptionAr,
+        descriptionEn: p.descriptionEn,
         cut: p.cut,
         category: p.category,
         mainImage: p.mainImage,

@@ -25,7 +25,7 @@ export default function ProductCard({ product, authId, locale }: Props) {
 					{!product?.mainImage ? (
 						<ImageOff />
 					) : (
-						<Image src={product?.mainImage} alt={product?.title} fill className="object-cover rounded-t-xl" />
+						<Image src={product?.mainImage} alt={product?.titleEn} fill className="object-cover rounded-t-xl" />
 					)}
 
 					{product?.discount && product.discount > 0 && (
@@ -41,16 +41,16 @@ export default function ProductCard({ product, authId, locale }: Props) {
 					</div>
 					{authId && <FavoriteButton productId={product?.id} userId={authId} isFavorite={isFavorite} />}
 				</div>
-				<h4 className="line-clamp-1">{product?.title}</h4>
+				<h4 className="line-clamp-1">{locale === "en" ? product?.titleEn : product.titleAr}</h4>
 				<h4 className="line-through text-muted-foreground">{Currency(+product?.price, locale)}</h4>
 				<h2>{finalPrice(+product?.price, product?.discount ?? 0, locale)}</h2>
 			</CardContent>
 
 			{/* ------------------------------ CardFooter ----------------------------- */}
-			<CardFooter className="flex items-center justify-center gap-2 ">
+			<CardFooter className="flex flex-col items-center justify-center gap-4 ">
 				{/* AddToCart */}
 				<AddToCart product={product} />
-				<Button className="lg:flex-1" variant={"outline"} asChild>
+				<Button variant={"outline"} asChild size={"full"}>
 					<Link href={`/products/${product?.slug}`}>
 						<Eye />
 						شاهد المزيد

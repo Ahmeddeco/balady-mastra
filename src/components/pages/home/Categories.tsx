@@ -44,7 +44,7 @@ export default async function Categories({ locale }: Props) {
 						<CardFooter className="justify-center">
 							<ShopNowButton
 								searchParams={searchParams}
-								buttonVariant={index % 2 === 0 ? "default" : "secondary"}
+								buttonVariant={index % 2 === 0 ? "default" : "outline"}
 								buttonSize={"lg"}
 								locale={locale}
 							/>

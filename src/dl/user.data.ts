@@ -1,9 +1,14 @@
+"use cache"
+
 import { Role } from "@/generated/prisma/enums"
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 
 /* ------------------------------- getOneUser ------------------------------- */
 export const getOneUser = async (id: string) => {
+  cacheLife("minutes")
+  cacheTag('users')
   try {
     const user = await prisma.user.findUnique({
       where: { id: id }
@@ -16,6 +21,8 @@ export const getOneUser = async (id: string) => {
 
 /* ------------------------- getAllUsersForUsersPage ------------------------ */
 export const getAllUsersForUsersPage = async (size: number, page: number, role?: Role) => {
+  cacheLife("minutes")
+  cacheTag('users')
   try {
     const totalStudents = await prisma.user.count()
     const totalPages = Math.ceil(totalStudents / size)
@@ -45,6 +52,8 @@ export const getAllUsersForUsersPage = async (size: number, page: number, role?:
 
 /* ------------------------- getAllUsersForFarmsPage ------------------------ */
 export const getAllUsersForFarmsPage = async () => {
+  cacheLife("minutes")
+  cacheTag('users')
   try {
 
     return await prisma.user.findMany({

@@ -5,6 +5,7 @@ import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import BreedSchema from "@/schemas/BreedSchema"
 import { splittedImages } from "@/logic/splittedImages"
+import { refresh, updateTag } from "next/cache"
 
 /* ----------------------------- addBreedAction ----------------------------- */
 export const addBreedAction = async (prevState: unknown, formData: FormData) => {
@@ -40,6 +41,7 @@ export const addBreedAction = async (prevState: unknown, formData: FormData) => 
       formErrors: ["حدث خطأ أثناء حفظ السلالة في قاعدة البيانات."],
     })
   }
+  updateTag("breeds")
   redirect("/server/breeds")
 }
 
@@ -70,7 +72,7 @@ export const editBreedAction = async (prevState: unknown, formData: FormData) =>
       formErrors: ["حدث خطأ أثناء تعديل بيانات السلالة في قاعدة البيانات."],
     })
   }
-
+  updateTag("breeds")
   redirect("/server/breeds")
 }
 
@@ -84,5 +86,6 @@ export const deleteBreedAction = async (formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/breeds")
+  updateTag("breeds")
+  refresh()
 }

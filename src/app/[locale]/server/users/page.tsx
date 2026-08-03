@@ -2,7 +2,7 @@ import { getAllUsersForUsersPage } from "@/dl/user.data"
 import { getAllUsersForUsersPageType } from "@/types/user.type"
 
 import { ImageOff, MoreVertical, PlusCircle } from "lucide-react"
-import ServerPageCard from "@/components/shared/ServerPageCard"
+import ServerPageCard from "@/components/backend/ServerPageCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import {
 	Pagination,

@@ -4,6 +4,7 @@ import { parseWithZod } from "@conform-to/zod"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import FarmSchema from "@/schemas/FarmSchema"
+import { refresh, updateTag } from "next/cache"
 
 /* ------------------------------ addFarmAction ----------------------------- */
 export const addFarmAction = async (prevState: unknown, formData: FormData) => {
@@ -44,6 +45,7 @@ export const addFarmAction = async (prevState: unknown, formData: FormData) => {
       formErrors: ["حدث خطأ أثناء حفظ المزرعة في قاعدة البيانات."],
     })
   }
+  updateTag("farms")
   redirect("/server/farms")
 }
 
@@ -76,7 +78,7 @@ export const editFarmAction = async (prevState: unknown, formData: FormData) => 
       formErrors: ["حدث خطأ أثناء تعديل بيانات المزرعة في قاعدة البيانات."],
     })
   }
-
+  updateTag("farms")
   redirect("/server/farms")
 }
 
@@ -90,5 +92,6 @@ export const deleteFarmAction = async (formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/farms")
+  updateTag("farms")
+  refresh()
 }

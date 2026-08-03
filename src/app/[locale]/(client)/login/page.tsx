@@ -15,7 +15,7 @@ export default function LoginPage() {
 			<div className="flex-1 flex flex-col items-center justify-center size-full dark:bg-neutral-900 dark:text-neutral-100 gap-6 ">
 				<h2>welcome back</h2>
 				<h6>login to our amazing services</h6>
-				<SignIn size="lg" variant="secondary" withTitle icon={GrGoogle} />
+				<SignIn size="lg" variant="default" withTitle icon={GrGoogle} />
 
 				<div className="flex items-center justify-center gap-4">
 					<Separator orientation="horizontal" />

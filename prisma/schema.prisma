@@ -176,9 +176,11 @@ model Yield {
 
 model Product {
   id            String      @id @default(cuid())
-  title         String      @unique
+  titleAr       String
+  titleEn       String
   slug          String      @unique
-  description   String
+  descriptionAr String      @db.Text
+  descriptionEn String      @db.Text
   cut           MeatType
   category      Category
   mainImage     String

@@ -218,9 +218,11 @@ export type YieldScalarFieldEnum = (typeof YieldScalarFieldEnum)[keyof typeof Yi
 
 export const ProductScalarFieldEnum = {
   id: 'id',
-  title: 'title',
+  titleAr: 'titleAr',
+  titleEn: 'titleEn',
   slug: 'slug',
-  description: 'description',
+  descriptionAr: 'descriptionAr',
+  descriptionEn: 'descriptionEn',
   cut: 'cut',
   category: 'category',
   mainImage: 'mainImage',

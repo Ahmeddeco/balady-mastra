@@ -1,4 +1,4 @@
-import ServerPageCard from "@/components/shared/ServerPageCard"
+import ServerPageCard from "@/components/backend/ServerPageCard"
 import { CircleChevronLeft } from "lucide-react"
 import { getAllBreedForSelectType } from "@/types/breed.type"
 import { getAllBreedForSelect } from "@/dl/breed.data"

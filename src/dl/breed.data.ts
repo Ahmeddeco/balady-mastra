@@ -1,6 +1,11 @@
+"use cache"
+
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 export const getAllBreedsForServerFarmsPage = async (size: number, page: number,) => {
+  cacheLife("weeks")
+  cacheTag('breeds')
   try {
     const totalBreeds = await prisma.breed.count()
     const totalPages = Math.ceil(totalBreeds / size)
@@ -18,6 +23,8 @@ export const getAllBreedsForServerFarmsPage = async (size: number, page: number,
 
 /* -------------------------- getOneBreedForEditPage ------------------------- */
 export const getOneBreedForEditPage = async (id: string) => {
+  cacheLife("weeks")
+  cacheTag('breeds')
   try {
     return await prisma.breed.findUniqueOrThrow({ where: { id } })
   } catch (error) {
@@ -28,6 +35,8 @@ export const getOneBreedForEditPage = async (id: string) => {
 
 
 export const getAllBreedForSelect = async () => {
+  cacheLife("weeks")
+  cacheTag('breeds')
   try {
     return await prisma.breed.findMany({ select: { id: true, name: true }, orderBy: { name: "asc" } })
   } catch (error) {

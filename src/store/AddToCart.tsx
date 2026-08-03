@@ -5,11 +5,18 @@ import { productCart, useCartStore } from "./cartStore"
 import { useFormStatus } from "react-dom"
 import { useCurrentLocale } from "@/locales/client.locale"
 import { Button } from "@/components/ui/button"
-import { Loader2, Minus, Plus, ShoppingBag, XCircle } from "lucide-react"
+import { Minus, Plus, ShoppingBag, XCircle } from "lucide-react"
+import { Spinner } from "@/components/ui/spinner"
+import { VariantProps } from "class-variance-authority"
 
-type Props = { product: productCart; className?: string }
+type Props = {
+	product: productCart
+	className?: string
+	size?: VariantProps<typeof Button>["size"]
+	variant?: VariantProps<typeof Button>["variant"]
+}
 
-export default function AddToCart({ product, className }: Props) {
+export default function AddToCart({ product, className, size = "full", variant = "default" }: Props) {
 	const { data, isPending } = authClient.useSession()
 	const { pending } = useFormStatus()
 	const { items, updateQuantity, addToCart, removeFromCart } = useCartStore((state) => state)
@@ -21,8 +28,8 @@ export default function AddToCart({ product, className }: Props) {
 	return (
 		<div className="w-full">
 			{pending ? (
-				<Button size={"full"} disabled className={className} variant={"default"}>
-					<Loader2 className="size-5 animate-spin" /> انتظر لحظة
+				<Button size={size} disabled className={className} variant={variant}>
+					<Spinner /> انتظر لحظة
 				</Button>
 			) : currentItem ? (
 				<div className="flex items-center justify-between w-full ">
@@ -56,7 +63,7 @@ export default function AddToCart({ product, className }: Props) {
 					</Button>
 				</div>
 			) : (
-				<Button size={"full"} variant={"default"} type="button" onClick={() => addToCart(product)}>
+				<Button size={size} variant={variant} type="button" onClick={() => addToCart(product)}>
 					<ShoppingBag /> {locale === "en" ? "add to cart" : "أضف الى السلة"}
 				</Button>
 			)}

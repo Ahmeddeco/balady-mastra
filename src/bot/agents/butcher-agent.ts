@@ -50,9 +50,8 @@ export const butcherAgent = new Agent({
   tools: { getNonTrendingProductsTool },
   memory: new Memory(),
   skills: [
-    "../../.agents/skills/marketing-psychology",
-    "../../.agents/skills/copywriting",
-    "../../.agents/interior-design-visualization",
-    "../../.agents/copywriting",
+    "../information/copywriting",
+    "../information/marketing-psychology",
+    "../information/product-marketing",
   ]
 })

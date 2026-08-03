@@ -1,6 +1,6 @@
 import { isAllowedRoles } from "@/auth/isAllowedRoles"
 import EmptyCard from "@/components/shared/EmptyCard"
-import ServerPageCard from "@/components/shared/ServerPageCard"
+import ServerPageCard from "@/components/backend/ServerPageCard"
 import { getOneProductById } from "@/dl/products.data"
 import EditProductForm from "@/forms/EditProductForm"
 import { Role } from "@/generated/prisma/enums"

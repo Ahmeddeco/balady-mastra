@@ -23,15 +23,18 @@ export default async function OneProductPage({ params }: Props) {
 				<ImageSlider
 					mainImage={product?.mainImage ?? "/images/noImage.svg"}
 					images={product?.images ?? []}
-					alt={product?.title ?? "meat"}
+					alt={product?.titleEn ?? "meat"}
 				/>
 			</div>
 
 			{/* ---------------------------- Information --------------------------- */}
 			<Card className="flex-1 ">
 				<CardContent className="flex flex-col gap-4">
-					<h2>{product?.title}</h2>
-					<h6>{product?.description}</h6>
+					<h2>{locale === "en" ? product?.titleEn : product?.titleAr}</h2>
+					<div
+						className="prose dark:prose-invert "
+						dangerouslySetInnerHTML={{ __html: locale === "en" ? product?.descriptionEn ?? "" : product?.descriptionAr ?? "" }}
+					/>
 
 					{/* category & cut */}
 					<div className="flex items-center  gap-4">
@@ -52,9 +55,7 @@ export default async function OneProductPage({ params }: Props) {
 					</h4>
 				</CardContent>
 				{/* AddToCart */}
-				<CardFooter>
-					<AddToCart product={product} />
-				</CardFooter>
+				<CardFooter>{product && <AddToCart product={product} />}</CardFooter>
 			</Card>
 		</section>
 	)

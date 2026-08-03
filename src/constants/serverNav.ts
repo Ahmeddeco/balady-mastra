@@ -1,4 +1,5 @@
 import { ChartNoAxesCombined, Ham, Newspaper, RulerDimensionLine, Server, Users } from "lucide-react"
+import { GiReceiveMoney } from "react-icons/gi"
 import { PiCowDuotone, PiFarmFill } from "react-icons/pi"
 
 export const serverNav = [
@@ -30,7 +31,7 @@ export const serverNav = [
   {
     title: { ar: "التصافي", en: "yields" },
     href: "/server/yields",
-    icon: PiCowDuotone
+    icon: GiReceiveMoney
   },
   {
     title: { ar: "المنتجات", en: "products" },

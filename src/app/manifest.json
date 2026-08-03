@@ -1,6 +1,6 @@
 {
-	"background_color": "#ffffff",
-	"description": "استوديو متقدم لتصاميم الديكور الداخلي والأثاث ثلاثي الأبعاد",
+	"background_color": "#1c1917",
+	"description": "The First Smart Meat Shop",
 	"dir": "rtl",
 	"display": "standalone",
 	"icons": [
@@ -21,5 +21,5 @@
 	"orientation": "portrait",
 	"short_name": "Balady",
 	"start_url": "/",
-	"theme_color": "#e11421"
+	"theme_color": "#b91c1c"
 }

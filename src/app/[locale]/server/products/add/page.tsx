@@ -1,4 +1,4 @@
-import ServerPageCard from "@/components/shared/ServerPageCard"
+import ServerPageCard from "@/components/backend/ServerPageCard"
 import { CircleChevronLeft } from "lucide-react"
 
 import AddProductForm from "@/forms/AddProductForm"
