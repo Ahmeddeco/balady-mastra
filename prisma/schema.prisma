@@ -226,7 +226,7 @@ model Order {
 
 model OrderItem {
   id                String      @id @default(cuid())
-  preparation       Preparation
+  preparation       Preparation @default(cubes)
   quantity          Float // الكمية المطلوبة (بالوزن أو القطعة)
   price             Float // سعر المنتج وقت الشراء الفعلي لضمان ثبات التقارير المالية
   requestedQuantity Float // الوزن المحجوز من الموقع (مثال: 1.00 كجم)

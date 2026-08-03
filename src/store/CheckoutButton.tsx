@@ -3,28 +3,45 @@
 import { createOrder } from "@/actions/order.action"
 import { createPaymobCheckout } from "@/actions/paymob.action"
 import { Button } from "@/components/ui/button"
-import { useCartStore } from "@/store/cartStore"
+import { authClient } from "@/lib/auth-client"
+import { CartItem, useCartStore } from "@/store/cartStore"
 import { useTransition } from "react"
 
 type Props = {
 	shippingAddress?: string
+	deliveryFee?: number
+	customerNotes?: string
 }
 
-export default function CheckoutButton({ shippingAddress = "شبين الكوم - المنوفية" }: Props) {
+export default function CheckoutButton({
+	shippingAddress = "شبين الكوم - المنوفية",
+	customerNotes,
+	deliveryFee = 0,
+}: Props) {
 	const [isPending, startTransition] = useTransition()
-	const items = useCartStore((state) => state.items)
+	const items: CartItem[] = useCartStore((state) => state.items)
+	const session = authClient.useSession()
+	const user = session.data?.user
 
 	const handlePayment = () => {
 		if (items.length === 0) return
 
 		startTransition(async () => {
-			// الخطوة الأولى: إنشاء الطلب في قاعدة البيانات
+			// إنشاء الطلب في قاعدة البيانات
 			const orderResult = await createOrder({
 				shippingAddress,
+				customerNotes,
+				deliveryFee,
+				userId: user?.id,
 				items: items.map((item) => ({
 					id: item.id,
+					titleAr: item.titleAr,
+					titleEn: item.titleEn,
+					mainImage: item.mainImage,
 					price: item.price,
-					quantity: item.quantity,
+					quantity: item.quantity ?? item.requestedQuantity ?? 1,
+					requestedQuantity: item.requestedQuantity ?? item.quantity ?? 1,
+					preparation: item.preparation,
 				})),
 			})
 
@@ -33,10 +50,16 @@ export default function CheckoutButton({ shippingAddress = "شبين الكوم 
 				return
 			}
 
+			const formattedItems = items.map((item) => ({
+				name: item.titleAr,
+				amount: item.price * 100,
+			}))
 			// الخطوة الثانية: إرسال الطلب إلى Paymob
 			await createPaymobCheckout({
 				amount: Math.round(orderResult.order.total * 100),
 				orderId: orderResult.order.id,
+				items: formattedItems,
+				user,
 			})
 		})
 	}
