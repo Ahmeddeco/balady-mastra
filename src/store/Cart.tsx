@@ -12,9 +12,10 @@ import { Button } from "@/components/ui/button"
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item"
 import { useCurrentLocale } from "@/locales/client.locale"
 import CheckoutButton from "@/store/CheckoutButton"
+import { Unit } from "@/generated/prisma/enums"
 
 export default function Cart() {
-	const { items, removeFromCart, updateQuantity } = useCartStore((state) => state)
+	const { items, removeFromCart, updateQuantityByHalf, updateQuantityByOnes } = useCartStore((state) => state)
 
 	const subTotal = items.reduce((total, item) => total + item.price * item.quantity, 0)
 	const tax = subTotal * 0.1 // Assuming 10% tax
@@ -38,7 +39,7 @@ export default function Cart() {
 				</SheetHeader>
 				<Separator />
 				<ScrollArea className="flex flex-col gap-4 p-4 w-full h-full max-h-[60vh]">
-					{items.map(({ id, mainImage, price, quantity, titleAr, titleEn }) => (
+					{items.map(({ id, mainImage, price, quantity, titleAr, titleEn, unit, stock }) => (
 						<Item key={id} variant="default" role="listitem">
 							<ItemMedia variant="image" className="relative aspect-square size-24">
 								<Image
@@ -61,26 +62,41 @@ export default function Cart() {
 								<ItemDescription>{Currency(price, locale)}</ItemDescription>
 								{/* -------------------------------- quantity -------------------------------- */}
 								<div className=" flex items-center gap-1">
+									{/* --------------------------- decrement --------------------------- */}
 									<Button
 										variant={"ghost"}
 										size={"icon"}
 										type="button"
 										onClick={() => {
-											updateQuantity("decrement", id)
+											if (unit === Unit.piece) {
+												updateQuantityByOnes("decrement", id)
+											} else {
+												updateQuantityByHalf("decrement", id)
+											}
 										}}
+										disabled={(unit === Unit.piece && quantity <= 1) || (unit === Unit.kg && quantity <= 0.5)}
 									>
 										<Minus />
 									</Button>
+
+									{/* -------------------------------- quantity -------------------------------- */}
 									<Button size={"icon"} type="button" variant={"outline"} className="cursor-not-allowed">
 										{quantity.toFixed(0)}
 									</Button>
+
+									{/* --------------------------- increment --------------------------- */}
 									<Button
 										variant={"ghost"}
 										size={"icon"}
 										type="button"
 										onClick={() => {
-											updateQuantity("increment", id)
+											if (unit === Unit.piece) {
+												updateQuantityByOnes("increment", id)
+											} else {
+												updateQuantityByHalf("increment", id)
+											}
 										}}
+										disabled={quantity >= stock}
 									>
 										<Plus />
 									</Button>
@@ -107,7 +123,7 @@ export default function Cart() {
 								<p>{Currency(total, locale)}</p>
 							</div>
 							{/* ----------------------------- CheckoutButton ----------------------------- */}
-							<CheckoutButton amount={total} />
+							<CheckoutButton />
 						</CardContent>
 					</Card>
 				</SheetFooter>

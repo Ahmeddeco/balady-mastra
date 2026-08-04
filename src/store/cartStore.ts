@@ -1,24 +1,29 @@
-import { Preparation } from "@/generated/prisma/enums"
+import { Unit } from "@/generated/prisma/enums"
 import { toast } from "sonner"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
 export type CartItem = {
   id: string
-  requestedQuantity: number
   quantity: number
+  stock: number
   titleAr: string
   titleEn: string
   price: number
   mainImage: string
-  preparation: Preparation
+  unit: Unit
+}
+
+export type CartItemInput = Omit<CartItem, "quantity"> & {
+  quantity?: number
 }
 
 type CartState = {
   items: CartItem[]
-  addToCart: (product: CartItem) => void
+  addToCart: (product: CartItemInput) => void
   removeFromCart: (id: string) => void
-  updateQuantity: (type: 'increment' | 'decrement', id: string) => void
+  updateQuantityByHalf: (type: "increment" | "decrement", id: string) => void
+  updateQuantityByOnes: (type: "increment" | "decrement", id: string) => void
 }
 
 export const useCartStore = create<CartState>()(
@@ -26,31 +31,28 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
 
-      addToCart: (product: CartItem) => {
-        const existingProduct = get().items.find((item) => item.id === product!.id)
+      addToCart: (product: CartItemInput) => {
+        const existingProduct = get().items.find((item) => item.id === product.id)
+        const unit = product?.unit ?? Unit.piece
+        const initialQuantity = unit === Unit.piece ? 1 : 0.5
+
         set({
           items: existingProduct
             ? get().items
             : [
               ...get().items,
               {
-                requestedQuantity: 1,
-                quantity: 1,
-                id: product!.id,
-                titleEn: product!.titleEn,
-                titleAr: product!.titleAr,
-                price: product!.price,
-                mainImage: product!.mainImage,
-                preparation: product!.preparation,
-
-              },
+                id: product.id,
+                quantity: product.quantity ?? initialQuantity,
+                stock: product.stock,
+                titleAr: product.titleAr,
+                titleEn: product.titleEn,
+                price: product.price,
+                mainImage: product.mainImage,
+                unit,
+              } as CartItem,
             ],
         })
-        if (existingProduct) {
-          toast.error("المنتج موجود سابقا في السلة")
-        } else {
-          toast.success('تم إضافة المنتج الى السلة بنجاح.')
-        }
       },
 
       /* ----------------------------- removeFromCart ----------------------------- */
@@ -62,17 +64,34 @@ export const useCartStore = create<CartState>()(
 
       },
 
-      /* ----------------------------- updateQuantity ----------------------------- */
-      updateQuantity: (type, id) => {
+      /* -------------------------- updateQuantityByHalf -------------------------- */
+      updateQuantityByHalf: (type, id) => {
         set({
           items: get().items.map((item) =>
             item.id === id
               ? {
                 ...item,
-                requestedQuantity:
+                quantity:
                   type === "increment"
-                    ? item.requestedQuantity + 1
-                    : Math.max(1, item.requestedQuantity - 1), // preventing the quantity from going below 1 when decrementing.
+                    ? item.quantity + .5
+                    : Math.max(.5, item.quantity - .5), // preventing the quantity from going below .5 when decrementing.
+              }
+              : item
+          ),
+        })
+      },
+
+      /* -------------------------- updateQuantityByOnes -------------------------- */
+      updateQuantityByOnes: (type, id) => {
+        set({
+          items: get().items.map((item) =>
+            item.id === id
+              ? {
+                ...item,
+                quantity:
+                  type === "increment"
+                    ? item.quantity + 1
+                    : Math.max(1, item.quantity - 1), // preventing the quantity from going below 1 when decrementing.
               }
               : item
           ),

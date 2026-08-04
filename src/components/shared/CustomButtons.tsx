@@ -26,7 +26,7 @@ export function SubmitButton({ title, type = "submit", size = "full", variant, i
 		<>
 			{pending ? (
 				<Button disabled variant={variant} size={size}>
-					<Loader2 className="size-4 animate-spin" />
+					<Loader2 className=" animate-spin" />
 					please wait
 				</Button>
 			) : (

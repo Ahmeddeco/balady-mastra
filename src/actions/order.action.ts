@@ -1,6 +1,6 @@
 "use server"
 
-import { OrderStatus, PaymentMethod, PaymentStatus, Preparation } from "@/generated/prisma/enums"
+import { OrderStatus, PaymentMethod, PaymentStatus, Preparation, } from "@/generated/prisma/enums"
 import prisma from "@/lib/prisma"
 import { CartItem } from "@/store/cartStore"
 
@@ -23,8 +23,8 @@ export async function createOrder({ userId, shippingAddress, customerNotes, item
 
     // 1. حساب المجموع الكلي
     const subTotal = items.reduce((sum, item) => {
-      const qty = item.requestedQuantity ?? item.quantity ?? 1
-      return sum + item.price * qty
+      const qty = item.quantity ?? 1
+      return Number((sum + (item.price * qty)))
     }, 0)
     const total = subTotal + deliveryFee
 
@@ -43,10 +43,10 @@ export async function createOrder({ userId, shippingAddress, customerNotes, item
           paymentMethod: PaymentMethod.visa,
           items: {
             create: items.map((item) => ({
-              quantity: item.requestedQuantity,
-              requestedQuantity: item.requestedQuantity,
-              preparation: item.preparation || Preparation.cubes,
-              price: item.price,
+              requestedQuantity: item.quantity,
+              preparation: Preparation.cubes,
+              quantity: item.quantity,
+              price: Number(item.price),
               product: {
                 connect: {
                   id: item.id,

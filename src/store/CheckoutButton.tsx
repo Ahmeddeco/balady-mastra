@@ -5,6 +5,7 @@ import { createPaymobCheckout } from "@/actions/paymob.action"
 import { Button } from "@/components/ui/button"
 import { authClient } from "@/lib/auth-client"
 import { CartItem, useCartStore } from "@/store/cartStore"
+import { Loader2 } from "lucide-react"
 import { useTransition } from "react"
 
 type Props = {
@@ -16,7 +17,7 @@ type Props = {
 export default function CheckoutButton({
 	shippingAddress = "شبين الكوم - المنوفية",
 	customerNotes,
-	deliveryFee = 0,
+	deliveryFee = Number(process.env.NEXT_PUBLIC_DELIVERY_FEE) ?? 0,
 }: Props) {
 	const [isPending, startTransition] = useTransition()
 	const items: CartItem[] = useCartStore((state) => state.items)
@@ -39,9 +40,9 @@ export default function CheckoutButton({
 					titleEn: item.titleEn,
 					mainImage: item.mainImage,
 					price: item.price,
-					quantity: item.quantity ?? item.requestedQuantity ?? 1,
-					requestedQuantity: item.requestedQuantity ?? item.quantity ?? 1,
-					preparation: item.preparation,
+					quantity: item.quantity,
+					stock: item.stock,
+					unit: item.unit,
 				})),
 			})
 
@@ -50,15 +51,23 @@ export default function CheckoutButton({
 				return
 			}
 
+			/* ---------------- الخطوة الثانية: إرسال الطلب إلى Paymob --------------- */
 			const formattedItems = items.map((item) => ({
 				name: item.titleAr,
-				amount: item.price * 100,
+				amount: Math.round(Number(item.price) * 100 * (item.quantity ?? 1)),
 			}))
-			// الخطوة الثانية: إرسال الطلب إلى Paymob
+
+			const deliveryFeeCents = Math.round(Number(deliveryFee) * 100)
+
+			const paymobItems = [
+				...formattedItems,
+				...(deliveryFeeCents > 0 ? [{ name: "التوصيل", amount: deliveryFeeCents }] : []),
+			]
+
 			await createPaymobCheckout({
-				amount: Math.round(orderResult.order.total * 100),
+				amount: paymobItems.reduce((sum, item) => sum + item.amount, 0),
 				orderId: orderResult.order.id,
-				items: formattedItems,
+				items: paymobItems,
 				user,
 			})
 		})
@@ -66,7 +75,14 @@ export default function CheckoutButton({
 
 	return (
 		<Button type="button" onClick={handlePayment} disabled={isPending || items.length === 0}>
-			{isPending ? "جاري تحويل الصفحة الى Paymob" : "ادفع الآن عبر Paymob "}
+			{isPending ? (
+				<>
+					<Loader2 className="animate-spin" />
+					<span>جاري تحويل الصفحة الى Paymob</span>
+				</>
+			) : (
+				"ادفع الآن عبر Paymob "
+			)}
 		</Button>
 	)
 }

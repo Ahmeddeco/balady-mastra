@@ -27,7 +27,7 @@ export const getAllProductsForProductsPage = async (size: number, page: number, 
         discount: true,
         unit: true,
         slug: true,
-        favorites: { select: { userId: true, productId: true } }
+        favorites: { select: { userId: true, productId: true } },
       },
       orderBy: { createdAt: "desc" },
       take: size,

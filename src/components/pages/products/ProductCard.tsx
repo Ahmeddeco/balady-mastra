@@ -3,11 +3,12 @@ import Image from "next/image"
 import { Eye, ImageOff } from "lucide-react"
 import { Currency, finalPrice } from "@/logic/currency"
 import Link from "next/link"
-import { SingleProductPageType } from "@/types/Product.type"
+import { getAllProductsForProductsPageType, SingleProductPageType } from "@/types/Product.type"
 import { Badge } from "@/components/ui/badge"
 import AddToCart from "@/store/AddToCart"
 import { Button } from "@/components/ui/button"
 import FavoriteButton from "@/components/shared/FavoriteButton"
+import { CartItem } from "@/store/cartStore"
 
 type Props = {
 	product: SingleProductPageType
@@ -17,6 +18,7 @@ type Props = {
 
 export default function ProductCard({ product, authId, locale }: Props) {
 	const isFavorite = product?.favorites?.some((fav) => fav.userId === authId) ?? false
+	// const formattedProduct:CartItem={id:product.id,mainImage:product.mainImage,price:product.price,quantity:product.}
 
 	return (
 		<Card className="overflow-hidden group">
