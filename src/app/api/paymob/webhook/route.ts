@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server"
 import crypto from "crypto"
+import prisma from "@/lib/prisma"
+import { OrderStatus, PaymentStatus } from "@/generated/prisma/enums"
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { obj, type } = body
+    const payload = body?.obj
+    const type = body?.type
 
-    if (type !== "TRANSACTION") {
+    if (type !== "TRANSACTION" || !payload) {
       return NextResponse.json({ received: true })
     }
 
@@ -18,28 +21,27 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "HMAC signature missing" }, { status: 400 })
     }
 
-    // حساب HMAC الخاص بإشعارات הـ Webhook (ترتيب حقول الـ Webhook)
     const concatenatedString = [
-      obj.amount_cents,
-      obj.created_at,
-      obj.currency,
-      obj.error_occured,
-      obj.has_parent_transaction,
-      obj.id,
-      obj.integration_id,
-      obj.is_3d_secure,
-      obj.is_auth,
-      obj.is_capture,
-      obj.is_refunded,
-      obj.is_standalone_payment,
-      obj.is_voided,
-      obj.order.id,
-      obj.owner,
-      obj.pending,
-      obj.source_data.pan,
-      obj.source_data.sub_type,
-      obj.source_data.type,
-      obj.success,
+      payload.amount_cents,
+      payload.created_at,
+      payload.currency,
+      payload.error_occured,
+      payload.has_parent_transaction,
+      payload.id,
+      payload.integration_id,
+      payload.is_3d_secure,
+      payload.is_auth,
+      payload.is_capture,
+      payload.is_refunded,
+      payload.is_standalone_payment,
+      payload.is_voided,
+      payload.order?.id,
+      payload.owner,
+      payload.pending,
+      payload.source_data?.pan,
+      payload.source_data?.sub_type,
+      payload.source_data?.type,
+      payload.success,
     ].join("")
 
     const calculatedHmac = crypto
@@ -51,15 +53,36 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid HMAC" }, { status: 401 })
     }
 
-    const isSuccess = obj.success === true && obj.pending === false
-    const merchantOrderId = obj.order.merchant_order_id // رقم الطلب الخاص بنظامك
+    const isSuccess = payload.success === true && payload.pending === false
+    const merchantOrderId =
+      payload?.order?.merchant_order_id ||
+      payload?.order?.special_reference ||
+      payload?.merchant_order_id ||
+      payload?.special_reference ||
+      payload?.order?.id ||
+      ""
 
-    if (isSuccess) {
-      // 🟢 تحديث حالة الطلب إلى PAID في قاعدة البيانات (Prisma / Database)
-      console.log(`✅ Order ${merchantOrderId} marked as PAID via Webhook.`)
-    } else {
-      // 🔴 تحديث حالة الطلب إلى FAILED
-      console.log(`❌ Order ${merchantOrderId} marked as FAILED via Webhook.`)
+    console.log("[Paymob] webhook payload", {
+      merchantOrderId,
+      transactionId: payload.id,
+      success: payload.success,
+      pending: payload.pending,
+      isSuccess,
+    })
+
+    if (merchantOrderId) {
+      const updateResult = await prisma.order.updateMany({
+        where: { id: merchantOrderId },
+        data: {
+          paymentStatus: isSuccess ? PaymentStatus.success : PaymentStatus.failed,
+          status: isSuccess ? OrderStatus.completed : OrderStatus.cancelled,
+        },
+      })
+
+      console.log("[Paymob] webhook update result", {
+        merchantOrderId,
+        updatedCount: updateResult.count,
+      })
     }
 
     return NextResponse.json({ status: "success" }, { status: 200 })

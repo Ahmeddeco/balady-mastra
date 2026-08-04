@@ -1,4 +1,8 @@
 import { verifyAndProcessPayment } from "@/actions/verify-payment.action"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Home } from "lucide-react"
+import Link from "next/link"
 
 interface SuccessPageProps {
 	searchParams: Promise<Record<string, string>>
@@ -7,7 +11,6 @@ interface SuccessPageProps {
 export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 	const params = await searchParams
 
-	// تنفيذ الـ Server Action وتحديث قاعدة البيانات مباشرة
 	const result = await verifyAndProcessPayment({ searchParams: params })
 
 	if (!result.success) {
@@ -20,19 +23,25 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 	}
 
 	return (
-		<div className="flex flex-col items-center justify-center min-h-[50vh] gap-4">
+		<div className="flex flex-col items-center justify-center min-h-[80vh] gap-6">
 			<div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl font-bold">
 				✓
 			</div>
-			<h1 className="text-2xl font-bold text-green-600">تمت العملية بنجاح!</h1>
-			<div className="bg-slate-50 p-4 rounded-lg border text-sm space-y-1">
-				<p>
+			<h1 className=" text-green-600">تمت العملية بنجاح!</h1>
+			<div className="flex items-center justify-center gap-2">
+				<Badge variant={"outline"}>
 					<strong>رقم الطلب:</strong> {result.orderId}
-				</p>
-				<p>
+				</Badge>
+				<Badge variant={"outline"}>
 					<strong>رقم المعاملة (Transaction ID):</strong> {result.transactionId}
-				</p>
+				</Badge>
 			</div>
+			<h4>{result.message}</h4>
+			<Button asChild variant={"outline"}>
+				<Link href={"/"}>
+					<Home /> go home
+				</Link>
+			</Button>
 		</div>
 	)
 }
