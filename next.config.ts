@@ -21,8 +21,9 @@ const nextConfig: NextConfig = {
     '@mastra/lance',
     // Add the platform-specific binary package explicitly
     '@lancedb/lancedb-win32-x64-msvc',
+    'playwright-core',
+    'playwright'
   ],
-
 
 }
 
