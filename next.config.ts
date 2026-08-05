@@ -23,7 +23,8 @@ const nextConfig: NextConfig = {
     '@lancedb/lancedb-win32-x64-msvc',
     'playwright-core',
     'playwright',
-    'playwright-chromium'
+    'playwright-chromium',
+    '@mastra/*',
   ],
 
 }
