@@ -3,7 +3,6 @@ import { ollama } from "ollama-ai-provider-v2"
 import { Memory } from "@mastra/memory"
 import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
 import { getNonTrendingProductsTool } from "../tools/get-non-trending-products-tool"
-import { webSearchAgent } from "./web-search-agent"
 import { butcherWorkflow } from "@/bot/workflows/butcher-workflow"
 
 export const butcherAgent = new Agent({
@@ -18,7 +17,6 @@ export const butcherAgent = new Agent({
 - يجب ان تكون القطعيات المختارة من احد القطعيات داخل${MeatTypeSchema}
 - لتحديد القطعية المناسبة لذوق العميل استغل خبرتك كشيف لحوم محترف وابدأ بسؤال العميل أسئلة متتالية للوصول الى انسب قطعية له.
 - بعد اختيار بعض القطعيات المناسبة لذوق العميل , عليك بسؤاله ان يختار احد هذه القطعيات .
-- بعد اختيار القطعية , بصفتك خبير وشيف رائع في اللحوم , اقترح عليه وصفة شرقية من المطبخ الشرقي تناسب القطعية التي اختارها المستخدم وكذلك تكون مناسبة لطريقة التسوية التي يفضلها. ويجب عليك استخدام${webSearchAgent} لجلب وصفة حقيقية من احد خبراء الطبخ الشرقي .
 - في نهاية الوصفات يجب ان تذكر المصادر لهذه الوصفة ويفضل ايضا وجود رابط لهذ الوصفة .
 - يجب صياغة جميع الإجابات باللغة العربية.
 - كل الوصفات يجب ان تكون مناسبة لقطعية اللحمة بصفتك خبير وشيف في اللحوم.

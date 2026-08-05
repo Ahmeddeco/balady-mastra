@@ -72,77 +72,7 @@ ${validCuts.join(' | ')}
   },
 })
 
-/* ---------------------------- getRecipeFromWeb --------------------------- */
-const getRecipeFromWeb = createStep({
-  id: 'get-recipe-from-web',
-  description: 'جلب وصفة من الإنترنت تناسب القطعية المستلمة',
-  inputSchema: z.object({
-    recommendation: MeatTypeSchema,
-  }),
-  outputSchema: z.object({
-    recipe: z.string(),
-  }),
-  execute: async ({ mastra, inputData }) => {
-    const agent = mastra.getAgent('webSearchAgent')
-    if (!agent) throw new Error('Agent not found')
 
-    const userQuery = `اقترح وصفة طبخ مناسبة ومثالية جداً لقطعية اللحم المعروفة باسم: (${inputData.recommendation})`
-    const response = await agent.stream([{ role: 'user', content: userQuery }])
-
-    return {
-      recipe: await response.text,
-    }
-  },
-})
-
-/* ------------------------- generateExpertResponse ------------------------- */
-const generateExpertResponse = createStep({
-  id: 'generate-expert-response',
-  description: 'صياغة الوصفة بأسلوب راقي وهيكل بيانات محدد',
-  inputSchema: z.object({ recipe: z.string() }),
-  outputSchema: z.object({
-    finalAnswer: z.string(),
-  }),
-  execute: async ({ inputData, mastra, writer }) => {
-    const { recipe } = inputData
-    if (!recipe) throw new Error('recipe not found')
-
-    const agent = mastra.getAgent('butcherAgent')
-    if (!agent) throw new Error('Agent not found')
-
-    const prompt = `
-      الدور: أنت المهندس أحمد، خبير الإنتاج الحيواني المتخصص. تتحدث بلهجة مصرية "راقية" جداً (أسلوب الطبقات المثقفة).
-      اللغة: العامية المصرية المهذبة (حضرتك، فندم، ذوق حضرتك الرفيع، معايير الجودة).
-
-      البيانات المتاحة:
-      - تفاصيل الوصفة: ${recipe}
-
-      المطلوب منك الآن:
-      تقديم هذه الوصفة للعميل بأسلوبك الاحترافي اليدوي. يجب أن يشمل الرد:
-      1. اسم الوصفة المناسبة للقطعية
-      2. قائمة بالمكونات
-      3. خطوات التحضير (طريقة التحضير)
-
-      هيكل الرد المطلوب:
-      # [اسم الوصفة المقترحة]
-      ## المكونات
-      - [اسم المكون]
-
-      ## طريقة التحضير
-      1. [الخطوة الأولى]
-
-      **القيمة الغذائية لهذه الوصفة مع التركيز على مميزات هذه القطعية بالذات**
-      `
-
-    const response = await agent.stream([{ role: 'user', content: prompt }])
-
-    if (writer) {
-      await response.fullStream.pipeTo(writer)
-    }
-
-    return { finalAnswer: await response.text }
-  }
-})
 
 /* ----------------------------- butcherWorkflow ---------------------------- */
 const butcherWorkflow = createWorkflow({
@@ -154,8 +84,6 @@ const butcherWorkflow = createWorkflow({
 })
   .then(fetchButcherProductsStep)
   .then(analyzeAndRecommendStep)
-  .then(getRecipeFromWeb)
-  .then(generateExpertResponse)
 
 butcherWorkflow.commit()
 
