@@ -41,6 +41,9 @@ importers:
       '@mastra/ai-sdk':
         specifier: ^1.7.0
         version: 1.7.0(@mastra/core@1.55.0(ai@7.0.51(zod@3.25.76))(bufferutil@4.1.0)(express@5.2.1)(zod@3.25.76))(zod@3.25.76)
+      '@mastra/browser-firecrawl':
+        specifier: ^0.2.0
+        version: 0.2.0(@mastra/agent-browser@0.4.1(@mastra/core@1.55.0(ai@7.0.51(zod@3.25.76))(bufferutil@4.1.0)(express@5.2.1)(zod@3.25.76))(bufferutil@4.1.0)(zod@3.25.76))(@mastra/core@1.55.0(ai@7.0.51(zod@3.25.76))(bufferutil@4.1.0)(express@5.2.1)(zod@3.25.76))(agent-browser@0.19.0(bufferutil@4.1.0))
       '@mastra/core':
         specifier: ^1.55.0
         version: 1.55.0(ai@7.0.51(zod@3.25.76))(bufferutil@4.1.0)(express@5.2.1)(zod@3.25.76)
@@ -1925,6 +1928,14 @@ packages:
     peerDependencies:
       '@mastra/core': '>=1.5.0-0 <2.0.0-0'
       zod: ^3.25.0 || ^4.0.0
+
+  '@mastra/browser-firecrawl@0.2.0':
+    resolution: {integrity: sha512-gAjbDspkq7GU8x1owvGnOQDOBm2KSX7fAEDMTPasZjfk1y/FZmM7aFbzEKdbIsFyfHFCPxqBomXp84tdhUyR9w==}
+    engines: {node: '>=22.13.0'}
+    peerDependencies:
+      '@mastra/agent-browser': '>=0.3.0 <1.0.0'
+      '@mastra/core': '>=1.22.0-0 <2.0.0-0'
+      agent-browser: '>=0.19.0'
 
   '@mastra/core@1.55.0':
     resolution: {integrity: sha512-h6Ic64TE3KbmbjUXOxSXfyhAGyT8AzCJgfe8GnC4zQukXhpfz0J7jUgOUr9B+O9sC6EQ1LsHjjsmXBfE0xNSrw==}
@@ -4546,6 +4557,10 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  agent-base@6.0.2:
+    resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
+    engines: {node: '>= 6.0.0'}
+
   agent-base@7.1.4:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
     engines: {node: '>= 14'}
@@ -4757,6 +4772,9 @@ packages:
   axe-core@4.12.1:
     resolution: {integrity: sha512-s7iGf5GaVMxEG0ENN9x+xTr7GFZCb1ZP/1uATUpCEK2X78nDB3RwbtFCo9pGAf9ru+VwoQ464DkaLEeRM08wJA==}
     engines: {node: '>=4'}
+
+  axios@1.18.0:
+    resolution: {integrity: sha512-E32NzpYKp++W7XRe52rHiXV2ehxmh3wbdgO7MHeFM+vqxLBYHzt0ElkiImtOBxtOmyp0yoC8C6uESVV84Y2/hw==}
 
   axobject-query@4.1.0:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
@@ -6196,12 +6214,25 @@ packages:
   find-workspaces@0.3.1:
     resolution: {integrity: sha512-UDkGILGJSA1LN5Aa7McxCid4sqW3/e+UYsVwyxki3dDT0F8+ym0rAfnCkEfkL0rO7M+8/mvkim4t/s3IPHmg+w==}
 
+  firecrawl@4.32.0:
+    resolution: {integrity: sha512-ikm+mKXMoz25plxilUOpgZ5ZXw2rVxtEVsZXvnvzJncirvjyiQDuVG/965iguVfuBlIpUfcUToYqH7NjrykWtw==}
+    engines: {node: '>=22.0.0'}
+
   flat-cache@4.0.1:
     resolution: {integrity: sha512-f7ccFPK3SXFHpx15UIGyRJ/FJQctuKZ0zVuN3frBo4HnK3cay9VEW0R6yPYFHC0AgqhukPzKjq22t5DmAyqGyw==}
     engines: {node: '>=16'}
 
   flatted@3.4.4:
     resolution: {integrity: sha512-5+ybhBZANEJxaH3X5evAFatUxLfEHSr7n6kYJ+1Qd0mUqr4eu9gIf6GDbWHf8RJijHrjjO8G+la14SlL2SeS1Q==}
+
+  follow-redirects@1.16.0:
+    resolution: {integrity: sha512-y5rN/uOsadFT/JfYwhxRS5R7Qce+g3zG97+JrtFZlC9klX/W5hD7iiLzScI4nZqUS7DNUdhPgw4xI8W2LuXlUw==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
 
   for-each@0.3.5:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
@@ -6530,6 +6561,10 @@ packages:
   http-proxy-agent@7.0.2:
     resolution: {integrity: sha512-T1gkAiYYDWYx3V5Bmyu7HcfcvL7mUrTWiM6yOfa3PIphViJ/gFPbvidQ+veqSOHci/PxBcDabeUNCzpOODJZig==}
     engines: {node: '>= 14'}
+
+  https-proxy-agent@5.0.1:
+    resolution: {integrity: sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==}
+    engines: {node: '>= 6'}
 
   https-proxy-agent@7.0.6:
     resolution: {integrity: sha512-vK9P5/iUfdl95AI+JVyUuIcVtd4ofvtrOr3HNtM2yxC9bnMbEdp3x01OhQNnjb8IJYi38VlTE3mBXwcfvywuSw==}
@@ -8296,6 +8331,10 @@ packages:
   proxy-from-env@1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
 
+  proxy-from-env@2.1.0:
+    resolution: {integrity: sha512-cJ+oHTW1VAEa8cJslgmUZrc+sjRKgAKl3Zyse6+PV38hZe/V6Z14TbCuXcan9F9ghlz4QrFr2c92TNF82UkYHA==}
+    engines: {node: '>=10'}
+
   pump@3.0.4:
     resolution: {integrity: sha512-VS7sjc6KR7e1ukRFhQSY5LM2uBWAUPiOPa/A3mkKmiMwSmRFUITt0xuj+/lesgnCv+dPIEYlkzrcyXgquIHMcA==}
 
@@ -9304,6 +9343,9 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
+
+  typescript-event-target@1.1.2:
+    resolution: {integrity: sha512-TvkrTUpv7gCPlcnSoEwUVUBwsdheKm+HF5u2tPAKubkIGMfovdSizCTaZRY/NhR8+Ijy8iZZUapbVQAsNrkFrw==}
 
   typescript-paths@1.5.2:
     resolution: {integrity: sha512-s5iiRIWOSw80dBgPACm0asPQZHHQcbPz69f26eRq01dStusuD11idZ0NDcAbkj6WuUGcRwJediPOsrArIS92eg==}
@@ -11672,6 +11714,16 @@ snapshots:
     dependencies:
       '@mastra/core': 1.55.0(ai@7.0.51(zod@3.25.76))(bufferutil@4.1.0)(express@5.2.1)(zod@3.25.76)
       zod: 3.25.76
+
+  '@mastra/browser-firecrawl@0.2.0(@mastra/agent-browser@0.4.1(@mastra/core@1.55.0(ai@7.0.51(zod@3.25.76))(bufferutil@4.1.0)(express@5.2.1)(zod@3.25.76))(bufferutil@4.1.0)(zod@3.25.76))(@mastra/core@1.55.0(ai@7.0.51(zod@3.25.76))(bufferutil@4.1.0)(express@5.2.1)(zod@3.25.76))(agent-browser@0.19.0(bufferutil@4.1.0))':
+    dependencies:
+      '@mastra/agent-browser': 0.4.1(@mastra/core@1.55.0(ai@7.0.51(zod@3.25.76))(bufferutil@4.1.0)(express@5.2.1)(zod@3.25.76))(bufferutil@4.1.0)(zod@3.25.76)
+      '@mastra/core': 1.55.0(ai@7.0.51(zod@3.25.76))(bufferutil@4.1.0)(express@5.2.1)(zod@3.25.76)
+      agent-browser: 0.19.0(bufferutil@4.1.0)
+      firecrawl: 4.32.0
+    transitivePeerDependencies:
+      - debug
+      - supports-color
 
   '@mastra/core@1.55.0(ai@7.0.51(zod@3.25.76))(bufferutil@4.1.0)(express@5.2.1)(zod@3.25.76)':
     dependencies:
@@ -14526,6 +14578,12 @@ snapshots:
 
   acorn@8.18.0: {}
 
+  agent-base@6.0.2:
+    dependencies:
+      debug: 4.4.3
+    transitivePeerDependencies:
+      - supports-color
+
   agent-base@7.1.4: {}
 
   agent-browser@0.19.0(bufferutil@4.1.0):
@@ -14796,6 +14854,16 @@ snapshots:
     optional: true
 
   axe-core@4.12.1: {}
+
+  axios@1.18.0:
+    dependencies:
+      follow-redirects: 1.16.0
+      form-data: 4.0.6
+      https-proxy-agent: 5.0.1
+      proxy-from-env: 2.1.0
+    transitivePeerDependencies:
+      - debug
+      - supports-color
 
   axobject-query@4.1.0: {}
 
@@ -16435,12 +16503,24 @@ snapshots:
       pkg-types: 1.3.1
       yaml: 2.9.0
 
+  firecrawl@4.32.0:
+    dependencies:
+      axios: 1.18.0
+      typescript-event-target: 1.1.2
+      zod: 3.25.76
+      zod-to-json-schema: 3.25.2(zod@3.25.76)
+    transitivePeerDependencies:
+      - debug
+      - supports-color
+
   flat-cache@4.0.1:
     dependencies:
       flatted: 3.4.4
       keyv: 4.5.4
 
   flatted@3.4.4: {}
+
+  follow-redirects@1.16.0: {}
 
   for-each@0.3.5:
     dependencies:
@@ -16881,6 +16961,13 @@ snapshots:
   http-proxy-agent@7.0.2:
     dependencies:
       agent-base: 7.1.4
+      debug: 4.4.3
+    transitivePeerDependencies:
+      - supports-color
+
+  https-proxy-agent@5.0.1:
+    dependencies:
+      agent-base: 6.0.2
       debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
@@ -18876,6 +18963,8 @@ snapshots:
 
   proxy-from-env@1.1.0: {}
 
+  proxy-from-env@2.1.0: {}
+
   pump@3.0.4:
     dependencies:
       end-of-stream: 1.4.5
@@ -20203,6 +20292,8 @@ snapshots:
       typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
+
+  typescript-event-target@1.1.2: {}
 
   typescript-paths@1.5.2(typescript@5.9.3):
     dependencies:

@@ -1,11 +1,12 @@
 import { Agent } from '@mastra/core/agent'
 import { Memory } from "@mastra/memory"
-import { AgentBrowser } from '@mastra/agent-browser'
 import { ollama } from 'ollama-ai-provider-v2'
+import { FirecrawlBrowser } from '@mastra/browser-firecrawl'
 
-const browser = new AgentBrowser(
-  { headless: true }
-)
+
+const browser = new FirecrawlBrowser({
+  apiKey: process.env.FIRECRAWL_API_KEY,
+})
 
 export const webSearchAgent = new Agent({
   id: 'web-search-agent',
