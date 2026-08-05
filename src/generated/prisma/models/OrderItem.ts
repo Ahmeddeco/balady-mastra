@@ -317,7 +317,7 @@ export type OrderItemScalarWhereWithAggregatesInput = {
 
 export type OrderItemCreateInput = {
   id?: string
-  preparation: $Enums.Preparation
+  preparation?: $Enums.Preparation
   quantity: number
   price: number
   requestedQuantity: number
@@ -328,7 +328,7 @@ export type OrderItemCreateInput = {
 
 export type OrderItemUncheckedCreateInput = {
   id?: string
-  preparation: $Enums.Preparation
+  preparation?: $Enums.Preparation
   quantity: number
   price: number
   requestedQuantity: number
@@ -361,7 +361,7 @@ export type OrderItemUncheckedUpdateInput = {
 
 export type OrderItemCreateManyInput = {
   id?: string
-  preparation: $Enums.Preparation
+  preparation?: $Enums.Preparation
   quantity: number
   price: number
   requestedQuantity: number
@@ -537,7 +537,7 @@ export type EnumPreparationFieldUpdateOperationsInput = {
 
 export type OrderItemCreateWithoutProductInput = {
   id?: string
-  preparation: $Enums.Preparation
+  preparation?: $Enums.Preparation
   quantity: number
   price: number
   requestedQuantity: number
@@ -547,7 +547,7 @@ export type OrderItemCreateWithoutProductInput = {
 
 export type OrderItemUncheckedCreateWithoutProductInput = {
   id?: string
-  preparation: $Enums.Preparation
+  preparation?: $Enums.Preparation
   quantity: number
   price: number
   requestedQuantity: number
@@ -597,7 +597,7 @@ export type OrderItemScalarWhereInput = {
 
 export type OrderItemCreateWithoutOrderInput = {
   id?: string
-  preparation: $Enums.Preparation
+  preparation?: $Enums.Preparation
   quantity: number
   price: number
   requestedQuantity: number
@@ -607,7 +607,7 @@ export type OrderItemCreateWithoutOrderInput = {
 
 export type OrderItemUncheckedCreateWithoutOrderInput = {
   id?: string
-  preparation: $Enums.Preparation
+  preparation?: $Enums.Preparation
   quantity: number
   price: number
   requestedQuantity: number
@@ -643,7 +643,7 @@ export type OrderItemUpdateManyWithWhereWithoutOrderInput = {
 
 export type OrderItemCreateManyProductInput = {
   id?: string
-  preparation: $Enums.Preparation
+  preparation?: $Enums.Preparation
   quantity: number
   price: number
   requestedQuantity: number
@@ -683,7 +683,7 @@ export type OrderItemUncheckedUpdateManyWithoutProductInput = {
 
 export type OrderItemCreateManyOrderInput = {
   id?: string
-  preparation: $Enums.Preparation
+  preparation?: $Enums.Preparation
   quantity: number
   price: number
   requestedQuantity: number
