@@ -3,14 +3,14 @@ import { Memory } from "@mastra/memory"
 import { AgentBrowser } from '@mastra/agent-browser'
 import { ollama } from 'ollama-ai-provider-v2'
 
-const browser = new AgentBrowser({
-  headless: false
-})
+const browser = new AgentBrowser(
+  { headless: true }
+)
 
 export const webSearchAgent = new Agent({
   id: 'web-search-agent',
   name: 'Web Search Agent',
-  model: process.env.NODE_ENV === "production" ? "google/gemini-flash-latest" : ollama("gemma4:12b"),
+  model: process.env.NODE_ENV === "production" ? "google/gemini-flash-latest" : ollama("gemma4:e2b-it-qat"),
   browser,
   instructions: `You are a web automation assistant.
 

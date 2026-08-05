@@ -43,7 +43,7 @@ export const butcherAgent = new Agent({
 4. ابدأ دائماً بترحيب عربي دافئ.
 5. حوّل قائمة المنتجات القادمة من الأداة إلى اقتراح شخصي من "المهندس أحمد".
   `,
-  model: process.env.NODE_ENV === "production" ? "google/gemini-flash-latest" : ollama("gemma4:12b"),
+  model: process.env.NODE_ENV === "production" ? "google/gemini-flash-latest" : ollama("gemma4:e2b-it-qat"),
   workflows: { butcherWorkflow },
   tools: { getNonTrendingProductsTool },
   memory: new Memory(),
