@@ -17,6 +17,7 @@ export const mastra = new Mastra({
   agents: { weatherAgent, butcherAgent, },
   storage,
   server: {
+    timeout: 50000,
     apiRoutes: [
       chatRoute({
         path: '/agents/butcher',
