@@ -20,9 +20,7 @@ export const weatherAgent = new Agent({
 
       Use the weatherTool to fetch current weather data.
 `,
-  model: ollama('llama3.1'),
-
+  model: process.env.NODE_ENV === "production" ? "google/gemini-flash-latest" : ollama("gemma4:12b"),
   tools: { weatherTool },
-
   memory: new Memory(),
 })

@@ -23,10 +23,7 @@ const fetchButcherProductsStep = createStep(getNonTrendingProductsTool)
 const analyzeAndRecommendStep = createStep({
   id: 'analyze-and-recommend',
   description: 'يحلل المنتجات الراكدة ويختار قطعية معينة بناءً على المعايير ليرجعها كـ Schema محدد',
-
-  // ✅ التعديل هنا: جعل المدخل مصفوفة مباشرة (Array) ليتطابق تماماً مع مخرج الأداة السابقة
   inputSchema: nonTrendingProductsSchema,
-
   outputSchema: z.object({
     recommendation: MeatTypeSchema,
   }),
@@ -43,7 +40,6 @@ const analyzeAndRecommendStep = createStep({
 
     const validCuts = MeatTypeSchema.options
 
-    // قمنا بتمرير inputData مباشرة لأنها هي المصفوفة الآن بدلاً من inputData.productsData
     const promptContext = `
 أنت الآن خبير اللحوم المسؤول عن اتخاذ قرار دقيق ومحدد. بناءً على قائمة المنتجات الراكدة التالية:
 ${JSON.stringify(inputData, null, 3)}

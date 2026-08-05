@@ -10,7 +10,7 @@ const browser = new AgentBrowser({
 export const webSearchAgent = new Agent({
   id: 'web-search-agent',
   name: 'Web Search Agent',
-  model: ollama("gemma4:12b"),
+  model: process.env.NODE_ENV === "production" ? "google/gemini-flash-latest" : ollama("gemma4:12b"),
   browser,
   instructions: `You are a web automation assistant.
 

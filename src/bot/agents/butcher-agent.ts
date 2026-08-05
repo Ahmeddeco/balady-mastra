@@ -1,11 +1,10 @@
 import { Agent } from "@mastra/core/agent"
 import { ollama } from "ollama-ai-provider-v2"
 import { Memory } from "@mastra/memory"
-import { butcherWorkflow } from "../workflows/butcher-workflow"
 import MeatTypeSchema from "@/generated/inputTypeSchemas/MeatTypeSchema"
 import { getNonTrendingProductsTool } from "../tools/get-non-trending-products-tool"
-import { stagehandAgent } from "../rag/browser"
 import { webSearchAgent } from "./web-search-agent"
+import { butcherWorkflow } from "@/bot/workflows/butcher-workflow"
 
 export const butcherAgent = new Agent({
   id: 'butcher-agent',
@@ -46,7 +45,6 @@ export const butcherAgent = new Agent({
   `,
   model: process.env.NODE_ENV === "production" ? "google/gemini-flash-latest" : ollama("gemma4:12b"),
   workflows: { butcherWorkflow },
-  agents: { stagehandAgent },
   tools: { getNonTrendingProductsTool },
   memory: new Memory(),
   skills: [
