@@ -7,6 +7,7 @@ allowBuilds:
   esbuild: true
   geckodriver: true
   msgpackr-extract: true
+  playwright-chromium: true
   prisma: true
   protobufjs: true
   sharp: true

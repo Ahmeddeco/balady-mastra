@@ -22,7 +22,8 @@ const nextConfig: NextConfig = {
     // Add the platform-specific binary package explicitly
     '@lancedb/lancedb-win32-x64-msvc',
     'playwright-core',
-    'playwright'
+    'playwright',
+    'playwright-chromium'
   ],
 
 }
